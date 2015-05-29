@@ -1,0 +1,9 @@
+services:
+    phpbb.skeleton.command.create:
+        class: phpbb\skeleton\console\create
+        arguments:
+            - @user
+            - @path_helper
+            - %core.root_path%
+        tags:
+            - { name: console.command }
