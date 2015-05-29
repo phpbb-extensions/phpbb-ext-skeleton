@@ -6,18 +6,14 @@ Copy the extension to phpBB/ext/phpbb/skeleton
 
 Go to "ACP" > "Customise" > "Extensions" and enable the "phpBB Skeleton Extension" extension.
 
-## Tests and Continuous Integration
+## Creating an extension
 
-We use Travis-CI as a continuous integration server and phpunit for our unit testing. See more information on the [phpBB development wiki](https://wiki.phpbb.com/Unit_Tests).
-To run the tests locally, you need to install phpBB from its Git repository. Afterwards run the following command from the phpBB Git repository's root:
+In order to create an extension, you need to open the console of your server.
+Then run the following command in your phpBB root (next to config.php):
 
-Windows:
+    ./bin/phpbbcli.php skeleton:create
 
-    phpBB\vendor\bin\phpunit.bat -c phpBB\ext\phpbb\skeleton\phpunit.xml.dist
-
-others:
-
-    phpBB/vendor/bin/phpunit -c phpBB/ext/phpbb/skeleton/phpunit.xml.dist
+Afterwards copy your extension from `store/tmp-ext/` into the `ext/` folder
 
 ## License
 
