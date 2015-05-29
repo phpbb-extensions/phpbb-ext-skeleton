@@ -1,0 +1,27 @@
+{
+	"name": "phpbb/skeleton",
+	"type": "phpbb-extension",
+	"description": "phpBB Extension creating extension skeletons",
+	"homepage": "https://github.com/nickv-phpbb/phpbb-ext-skeleton",
+	"version": "1.0.0-dev",
+	"time": "2015-05-29",
+	"license": "GPL-2.0",
+	"authors": [{
+			"name": "Joas Schilling",
+			"email": "nickvergessen@gmx.de",
+			"homepage": "https://github.com/nickvergessen/",
+			"role": "Lead Developer"
+		}],
+	"require": {
+		"php": ">=5.3.3"
+	},
+	"require-dev": {
+		"phpbb/epv": "dev-master"
+	},
+	"extra": {
+		"display-name": "phpBB Skeleton Extension",
+		"soft-require": {
+			"phpbb/phpbb": ">=3.1.4,<3.2.*@dev"
+		}
+	}
+}
