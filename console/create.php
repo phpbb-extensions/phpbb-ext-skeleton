@@ -51,9 +51,9 @@ class create extends command
 				'extension_time' => date('Y-m-d'),
 			),
 			'requirements' => array(
-				'php_version' => '5.3.3',
-				'phpbb_version_min' => '3.1.4',
-				'phpbb_version_max' => '3.2.0',
+				'php_version' => '>=5.3.3',
+				'phpbb_version_min' => '>=3.1.4',
+				'phpbb_version_max' => '<3.2.0@dev',
 			)
 		);
 	}
@@ -164,6 +164,7 @@ class create extends command
 	*/
 	protected function configure()
 	{
+		$this->user->add_lang_ext('phpbb/skeleton', 'common');
 		$this
 			->setName('skeleton:create')
 			->setDescription($this->user->lang('CLI_DESCRIPTION_SKELETON_CREATE'))
@@ -353,7 +354,7 @@ class create extends command
 			'license' => 'GPL-2.0',
 			'authors' => array(),
 			'require' => array(
-				'php' => ">={$this->data['requirements']['php_version']}",
+				'php' => "{$this->data['requirements']['php_version']}",
 			),
 			'require-dev' => array(
 				'phpbb/epv' => 'dev-master',
@@ -361,7 +362,7 @@ class create extends command
 			'extra' => array(
 				'display-name' => "{$this->data['extension']['extension_display_name']}",
 				'soft-require' => array(
-					'phpbb/phpbb' => ">={$this->data['requirements']['phpbb_version_min']},<{$this->data['requirements']['phpbb_version_max']}@dev",
+					'phpbb/phpbb' => "{$this->data['requirements']['phpbb_version_min']},{$this->data['requirements']['phpbb_version_max']}",
 				),
 			),
 		);
