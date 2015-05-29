@@ -176,6 +176,7 @@ class create extends \phpbb\console\command\command
 	{
 		/** @var DialogHelper $dialog */
 		$dialog = $this->getHelper('dialog');
+
 		$this->get_composer_data($dialog, $output);
 		$this->get_component_data($dialog, $output);
 
@@ -262,9 +263,6 @@ class create extends \phpbb\console\command\command
 
 		$component_data = $this->get_component_dialog_values();
 		$skeleton_files = array(
-			'README.md',
-			'license.txt',
-
 			// TODO filter by component
 			'acp/main_info.php',
 			'acp/main_module.php',
@@ -275,12 +273,23 @@ class create extends \phpbb\console\command\command
 			'controller/main.php',
 			'event/main_listener.php',
 			'language/en/common.php',
+//			'language/en/info_acp_common.php', // TODO missing
 			'migrations/release_1_0_0.php',
 			'migrations/release_1_0_1.php',
 			'styles/prosilver/template/event/overall_header_navigation_prepend.html',
 			'styles/prosilver/template/demo_body.html',
-
-			// TODO missing tests for now
+			'tests/controller/main_test.php',
+			'tests/dbal/fixtures/config.xml',
+			'tests/dbal/simple_test.php',
+			'tests/functional/demo_test.php',
+			'tests/mock/controller_helper.php',
+			'tests/mock/template.php',
+			'tests/mock/user.php',
+			'travis/prepare-phpbb.sh',
+			'.travis.yml',
+			'license.txt',
+			'phpunit.xml.dist',
+			'README.md',
 		);
 
 //		foreach ($this->data['components'] as $component => $selected)
@@ -293,8 +302,14 @@ class create extends \phpbb\console\command\command
 
 		foreach ($skeleton_files as $file)
 		{
-			$template_engine->set_filenames(array('body' => $file));
-			$filesystem->dumpFile($ext_path . $file, $template_engine->assign_display('body') . "\n");
+			$template_engine->set_filenames(array('body' => $file . '.tpl'));
+			$body = $template_engine->assign_display('body');
+			if (substr($file, -5) === '.html')
+			{
+				$body = str_replace('&lt;', '<', $body);
+				$body = str_replace('&#123;', '{', $body);
+			}
+			$filesystem->dumpFile($ext_path . $file, trim($body) . "\n\n");
 		}
 
 		$filesystem->dumpFile($ext_path . 'composer.json', $this->get_composer_json_from_data());
