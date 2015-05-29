@@ -3,7 +3,7 @@ services:
         class: phpbb\skeleton\console\create
         arguments:
             - @user
-            - @path_helper
-            - %core.root_path%
+            - @phpbb.skeleton.helper.packager
+            - @phpbb.skeleton.helper.validator
         tags:
             - { name: console.command }

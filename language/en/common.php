@@ -23,6 +23,7 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, array(
 	'CLI_DESCRIPTION_SKELETON_CREATE'	=> 'A console command to create a basic extension',
+	'PHPBB_SKELETON_EXT'				=> 'Create skeleton extension',
 
 	'SKELETON_QUESTION_VENDOR_NAME'		=> 'Please enter the vendor name (starting with a letter, letters and numbers only): ',
 	'SKELETON_QUESTION_EXTENSION_DISPLAY_NAME'		=> 'Please enter the display (readable) name of your extension: ',
@@ -47,6 +48,7 @@ $lang = array_merge($lang, array(
 	'SKELETON_QUESTION_COMPONENT_ACP'				=> 'Should we add a sample for a administration module (default: y) [y/n]: ',
 	'SKELETON_QUESTION_COMPONENT_MIGRATION'			=> 'Should we add a sample for a database migration (default: y) [y/n]: ',
 	'SKELETON_QUESTION_COMPONENT_SERVICE'			=> 'Should we add a sample for a service (default: y) [y/n]: ',
+	'SKELETON_QUESTION_COMPONENT_CONTROLLER'		=> 'Should we add a sample for a controller (default: y) [y/n]: ',
 	'SKELETON_QUESTION_COMPONENT_TESTS'				=> 'Should we add a sample for a phpunit tests (default: y) [y/n]: ',
 	'SKELETON_QUESTION_COMPONENT_TRAVIS'			=> 'Should we add a sample for test execution on Travis CI (default: y) [y/n]: ',
 	'SKELETON_QUESTION_COMPONENT_BUILD'				=> 'Should we add a sample script for building packages for the customisation database (default: n) [y/n]: ',

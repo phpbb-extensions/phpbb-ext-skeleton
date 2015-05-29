@@ -1,2 +1,17 @@
 imports:
     - { resource: console.yml }
+    - { resource: skeletons.yml }
+
+services:
+    phpbb.skeleton.helper.packager:
+        class: phpbb\skeleton\helper\packager
+        arguments:
+            - @user
+            - @path_helper
+            - @phpbb.skeleton.collection
+            - %core.root_path%
+
+    phpbb.skeleton.helper.validator:
+        class: phpbb\skeleton\helper\validator
+        arguments:
+            - @user
