@@ -26,8 +26,13 @@ class main_listener implements EventSubscriberInterface
 	static public function getSubscribedEvents()
 	{
 		return array(
+<!-- IF COMPONENT.phplistener -->
+			'core.display_forums_after'				=> 'display_forums_after',
+<!-- ENDIF -->
+<!-- IF COMPONENT.controller -->
 			'core.user_setup'						=> 'load_language_on_setup',
 			'core.page_header'						=> 'add_page_header_link',
+<!-- ENDIF -->
 		);
 	}
 
@@ -48,10 +53,18 @@ class main_listener implements EventSubscriberInterface
 		$this->helper = $helper;
 		$this->template = $template;
 	}
+<!-- IF COMPONENT.phplistener -->
+
+	public function display_forums_after($event)
+	{
+		var_dump('hello event after displaying forums');
+		var_dump($event['display_moderators']);
+	}
+<!-- ENDIF -->
+<!-- IF COMPONENT.controller -->
 
 	public function load_language_on_setup($event)
 	{
-		var_dump('hello event');
 		$lang_set_ext = $event['lang_set_ext'];
 		$lang_set_ext[] = array(
 			'ext_name' => '{EXTENSION.vendor_name}/{EXTENSION.extension_name}',
@@ -66,4 +79,5 @@ class main_listener implements EventSubscriberInterface
 			'U_DEMO_PAGE'	=> $this->helper->route('{EXTENSION.vendor_name}_{EXTENSION.extension_name}_controller', array('name' => 'world')),
 		));
 	}
+<!-- ENDIF -->
 }
