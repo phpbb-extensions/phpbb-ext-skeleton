@@ -180,7 +180,7 @@ class packager
 			),
 		);
 
-		if ($data['components']['build'])
+		if (!empty($data['components']['build']))
 		{
 			$composer['require-dev']['phing/phing'] = '2.4.*';
 		}

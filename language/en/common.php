@@ -52,4 +52,10 @@ $lang = array_merge($lang, array(
 	'SKELETON_QUESTION_COMPONENT_TESTS'				=> 'Should we add a sample for a phpunit tests (default: y) [y/n]: ',
 	'SKELETON_QUESTION_COMPONENT_TRAVIS'			=> 'Should we add a sample for test execution on Travis CI (default: y) [y/n]: ',
 	'SKELETON_QUESTION_COMPONENT_BUILD'				=> 'Should we add a sample script for building packages for the customisation database (default: n) [y/n]: ',
+
+	'SKELETON_INVALID_EXTENSION_NAME'	=> 'The extension name you provided is invalid',
+	'SKELETON_INVALID_EXTENSION_TIME'	=> 'The extension date you provided is invalid',
+	'SKELETON_INVALID_EXTENSION_VERSION'	=> 'The extension version you provided is invalid',
+	'SKELETON_INVALID_NUM_AUTHORS'	=> 'The number of authors you provided is invalid',
+	'SKELETON_INVALID_VENDOR_NAME'	=> 'The vendor name you provided is invalid',
 ));
