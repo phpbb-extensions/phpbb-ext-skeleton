@@ -57,7 +57,7 @@ class validator
 
 	public function validate_extension_version($value)
 	{
-		if (preg_match('#^\d+(\.\d){1,3}(?:-((?:a|b|RC|pl)\d+)|dev)?$#', $value))
+		if (preg_match('#^\d+(\.\d){1,3}(\-(((?:a|b|RC|pl)\d+)|dev))?$#', $value))
 		{
 			return $value;
 		}

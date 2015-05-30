@@ -20,6 +20,7 @@ use phpbb\template\context;
 use phpbb\template\twig\twig;
 use phpbb\user;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Finder\Finder;
 
 class packager
 {
@@ -149,6 +150,37 @@ class packager
 		}
 
 		$filesystem->dumpFile($ext_path . 'composer.json', $this->get_composer_json_from_data($data));
+	}
+
+	/**
+	 * @param array $data
+	 * @return string
+	 */
+	public function create_zip($data)
+	{
+		$zip_path = $this->root_path . 'store/tmp-ext/' . "{$data['extension']['vendor_name']}_{$data['extension']['extension_name']}-{$data['extension']['extension_version']}.zip";
+		$ext_path = $this->root_path . 'store/tmp-ext/' . "{$data['extension']['vendor_name']}/{$data['extension']['extension_name']}/";
+
+		$zip_archive = new \ZipArchive();
+		$zip_archive->open($zip_path, \ZipArchive::OVERWRITE);
+
+		$finder = new Finder();
+		$finder->ignoreDotFiles(false)
+			->ignoreVCS(false)
+			->files()
+			->in($ext_path);
+
+		foreach ($finder as $file)
+		{
+			$zip_archive->addFile(
+				$file->getRealPath(),
+				$file->getRelativePath() . '/' . $file->getFilename()
+			);
+		}
+
+		$zip_archive->close();
+
+		return $zip_path;
 	}
 
 	/**

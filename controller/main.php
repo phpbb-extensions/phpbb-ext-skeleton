@@ -15,12 +15,12 @@ namespace phpbb\skeleton\controller;
 
 use phpbb\config\config;
 use phpbb\controller\helper;
-use phpbb\exception\runtime_exception;
 use phpbb\request\request;
 use phpbb\skeleton\helper\packager;
 use phpbb\skeleton\helper\validator;
 use phpbb\template\template;
 use phpbb\user;
+use Symfony\Component\HttpFoundation\Response;
 
 class main
 {
@@ -79,7 +79,7 @@ class main
 	*/
 	public function handle()
 	{
-		if (TRUE)//$this->request->is_set_post('submit'))
+		if ($this->request->is_set_post('submit'))
 		{
 			try
 			{
@@ -87,8 +87,16 @@ class main
 				$this->get_component_data();
 
 				$this->packager->create_extension($this->data);
+				$filename = $this->packager->create_zip($this->data);
 
-				return $this->helper->message('EXTENSION_SKELETON_SUCCESS');
+				$response = new Response($filename);
+				$response->headers->set('Content-type', 'application/octet-stream');
+				$response->headers->set('Content-Disposition', 'attachment; filename="' . basename($filename) . '";');
+				$response->headers->set('Content-length', filesize($filename));
+				$response->sendHeaders();
+				$response->setContent(readfile($filename));
+
+				return $response;
 			}
 			catch (\Exception $e)
 			{
@@ -96,7 +104,52 @@ class main
 			}
 		}
 
-		return $this->helper->render('skeleton_body.html');
+		$dialog_questions = $this->packager->get_composer_dialog_values();
+		foreach ($dialog_questions['extension'] as $value => $default)
+		{
+			$this->template->assign_block_vars('extension', array(
+				'NAME'			=> $value,
+				'DESC'			=> $this->user->lang('SKELETON_QUESTION_' . strtoupper($value) . '_UI'),
+				'DESC_EXPLAIN'	=> isset($this->user->lang['SKELETON_QUESTION_' . strtoupper($value) . '_EXPLAIN']) ? $this->user->lang('SKELETON_QUESTION_' . strtoupper($value) . '_EXPLAIN') : '',
+				'VALUE'			=> $this->request->variable($value, (string) $default),
+			));
+		}
+
+		// TODO we need JS magic for multi author support
+		foreach ($dialog_questions['author'] as $value => $default)
+		{
+			$this->template->assign_block_vars('author', array(
+				'NAME'			=> $value,
+				'DESC'			=> $this->user->lang('SKELETON_QUESTION_' . strtoupper($value) . '_UI'),
+				'DESC_EXPLAIN'	=> isset($this->user->lang['SKELETON_QUESTION_' . strtoupper($value) . '_EXPLAIN']) ? $this->user->lang('SKELETON_QUESTION_' . strtoupper($value) . '_EXPLAIN') : '',
+				'VALUE'			=> $this->request->variable($value, (string) $default),
+			));
+		}
+
+		foreach ($dialog_questions['requirements'] as $value => $default)
+		{
+			$this->template->assign_block_vars('requirement', array(
+				'NAME'			=> $value,
+				'DESC'			=> $this->user->lang('SKELETON_QUESTION_' . strtoupper($value) . '_UI'),
+				'DESC_EXPLAIN'	=> isset($this->user->lang['SKELETON_QUESTION_' . strtoupper($value) . '_EXPLAIN']) ? $this->user->lang('SKELETON_QUESTION_' . strtoupper($value) . '_EXPLAIN') : '',
+				'VALUE'			=> $this->request->variable($value, (string) $default),
+			));
+		}
+
+		$components = $this->packager->get_component_dialog_values();
+		foreach ($components as $component => $details)
+		{
+			$this->template->assign_block_vars('component', array(
+				'NAME'			=> $component,
+				'DESC'			=> $this->user->lang('SKELETON_QUESTION_COMPONENT_' . strtoupper($component) . '_UI'),
+				'DESC_EXPLAIN'	=> isset($this->user->lang['SKELETON_QUESTION_COMPONENT_' . strtoupper($component) . '_EXPLAIN']) ? $this->user->lang('SKELETON_QUESTION_COMPONENT_' . strtoupper($component) . '_EXPLAIN') : '',
+				'VALUE'			=> $this->request->variable('component_' . $component, $details['default']),
+			));
+
+			$this->data['components'][$component] = $this->get_user_input('component_' . $component, $details['default']);
+		}
+
+		return $this->helper->render('skeleton_body.html', $this->user->lang('PHPBB_SKELETON_EXT'));
 	}
 
 	/**

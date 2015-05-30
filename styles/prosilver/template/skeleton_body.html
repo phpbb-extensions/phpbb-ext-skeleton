@@ -1,16 +1,78 @@
 <!-- INCLUDE overall_header.html -->
 
-<h2>{L_SKELETON}</h2>
+<h2>{L_PHPBB_SKELETON_EXT}</h2>
 
+<form id="postform" method="post" action="{S_POST_ACTION}">
+<!-- IF ERROR -->
 <div class="panel">
-	<fieldset class="fields1">
-		<!-- IF ERROR --><p class="error">{ERROR}</p><!-- ENDIF -->
-
-		<dl>
-			<dt><label for="username">{L_ICON}{L_COLON}</label></dt>
-			<dd><input type="text" tabindex="1" name="username" id="username" size="25" value="{USERNAME}" class="inputbox autowidth" /></dd>
-		</dl>
-	</fieldset>
+	<div class="inner">
+		<p class="error">{ERROR}</p>
+	</div>
 </div>
+<!-- ENDIF -->
+
+<div class="panel bg1">
+	<div class="inner">
+		<!-- BEGIN extension -->
+			<div class="<!-- IF extension.S_ROW_COUNT is even -->column1<!-- ELSE -->column2<!-- ENDIF -->">
+				<fieldset class="fields2">
+			<dl>
+				<dt><label for="{extension.NAME}">{extension.DESC}{L_COLON}</label><!-- IF extension.DESC_EXPLAIN --><br /><span>{extension.DESC_EXPLAIN}</span><!-- ENDIF --></dt>
+				<dd><input type="text" tabindex="1" name="{extension.NAME}" id="{extension.NAME}" size="32" value="{extension.VALUE}" class="inputbox autowidth" /></dd>
+			</dl>
+				</fieldset>
+			</div>
+		<!-- END extension -->
+	</div>
+</div>
+
+<div class="panel bg2">
+	<div class="inner">
+		<!-- BEGIN author -->
+			<div class="<!-- IF author.S_ROW_COUNT is even -->column1<!-- ELSE -->column2<!-- ENDIF -->">
+				<fieldset class="fields2">
+			<dl>
+				<dt><label for="{author.NAME}">{author.DESC}{L_COLON}</label><!-- IF author.DESC_EXPLAIN --><br /><span>{author.DESC_EXPLAIN}</span><!-- ENDIF --></dt>
+				<dd><input type="text" tabindex="1" name="{author.NAME}" id="{author.NAME}" size="32" value="{author.VALUE}" class="inputbox autowidth" /></dd>
+			</dl>
+				</fieldset>
+			</div>
+		<!-- END author -->
+	</div>
+</div>
+
+<div class="panel bg1">
+	<div class="inner">
+		<!-- BEGIN requirement -->
+			<div class="<!-- IF requirement.S_ROW_COUNT is even -->column1<!-- ELSE -->column2<!-- ENDIF -->">
+				<fieldset class="fields2">
+			<dl>
+				<dt><label for="{requirement.NAME}">{requirement.DESC}{L_COLON}</label><!-- IF requirement.DESC_EXPLAIN --><br /><span>{requirement.DESC_EXPLAIN}</span><!-- ENDIF --></dt>
+				<dd><input type="text" tabindex="1" name="{requirement.NAME}" id="{requirement.NAME}" size="32" value="{requirement.VALUE}" class="inputbox autowidth" /></dd>
+			</dl>
+				</fieldset>
+			</div>
+		<!-- END requirement -->
+	</div>
+</div>
+
+<div class="panel bg2">
+	<div class="inner">
+		<!-- BEGIN component -->
+			<div class="<!-- IF component.S_ROW_COUNT is even -->column1<!-- ELSE -->column2<!-- ENDIF -->">
+				<fieldset class="fields2">
+					<div><label for="{component.NAME}"><input type="checkbox" name="{component.NAME}" id="{component.NAME}"<!-- IF component.VALUE --> checked="checked"<!-- ENDIF --> /> <strong>{component.DESC}</strong></label></div>
+				</fieldset>
+			</div>
+		<!-- END component -->
+	</div>
+</div>
+
+	<fieldset class="submit-buttons">
+		{S_HIDDEN_FIELDS}
+		<input type="submit" accesskey="s" name="submit" value="{L_SUBMIT}" class="button1" />
+	</fieldset>
+
+</form>
 
 <!-- INCLUDE overall_footer.html -->

@@ -78,6 +78,8 @@ class create extends command
 		$this->get_component_data($dialog, $output);
 
 		$this->packager->create_extension($this->data);
+
+		$output->writeln($this->user->lang('EXTENSION_SKELETON_SUCCESS'));
 	}
 
 	/**
