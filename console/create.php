@@ -53,7 +53,7 @@ class create extends command
 	{
 		$this->user->add_lang_ext('phpbb/skeleton', 'common');
 		$this
-			->setName('skeleton:create')
+			->setName('extension:create')
 			->setDescription($this->user->lang('CLI_DESCRIPTION_SKELETON_CREATE'))
 		;
 	}
