@@ -106,7 +106,7 @@ class packager
 	{
 		$ext_path = $this->root_path . 'store/tmp-ext/' . "{$data['extension']['vendor_name']}/{$data['extension']['extension_name']}/";
 		$filesystem = new Filesystem();
-		$filesystem->remove($this->root_path . 'store/tmp-ext/');
+		$filesystem->remove($this->root_path . 'store/tmp-ext');
 		$filesystem->mkdir($ext_path);
 
 		$template_engine = new twig($this->path_helper, new config(array(
@@ -162,7 +162,7 @@ class packager
 		$ext_path = $this->root_path . 'store/tmp-ext/' . "{$data['extension']['vendor_name']}/{$data['extension']['extension_name']}/";
 
 		$zip_archive = new \ZipArchive();
-		$zip_archive->open($zip_path, \ZipArchive::OVERWRITE);
+		$zip_archive->open($zip_path, \ZipArchive::CREATE | \ZipArchive::OVERWRITE);
 
 		$finder = new Finder();
 		$finder->ignoreDotFiles(false)
@@ -230,6 +230,10 @@ class packager
 			}
 		}
 
-		return json_encode($composer, JSON_PRETTY_PRINT + JSON_UNESCAPED_SLASHES);
+		$body = json_encode($composer, JSON_PRETTY_PRINT + JSON_UNESCAPED_SLASHES);
+		$body = str_replace('&lt;', '<', $body);
+		$body = str_replace('&gt;', '>', $body);
+
+		return $body;
 	}
 }
