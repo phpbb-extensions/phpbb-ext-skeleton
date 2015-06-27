@@ -26,6 +26,7 @@ $lang = array_merge($lang, array(
 	'PHPBB_SKELETON_EXT'				=> 'Create skeleton extension',
 	'EXTENSION_SKELETON_SUCCESS'		=> 'Extension created successfully',
 
+	'SKELETON_ADD_AUTHOR'						=> 'Add author',
 	'SKELETON_QUESTION_VENDOR_NAME'				=> 'Please enter the vendor name',
 	'SKELETON_QUESTION_VENDOR_NAME_UI'			=> 'Vendor name',
 	'SKELETON_QUESTION_VENDOR_NAME_EXPLAIN'		=> 'Starting with a letter, letters and numbers only',
