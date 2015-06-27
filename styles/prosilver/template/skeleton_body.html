@@ -1,4 +1,5 @@
 <!-- INCLUDE overall_header.html -->
+<!-- INCLUDEJS @phpbb_skeleton/editor.js -->
 
 <h2>{L_PHPBB_SKELETON_EXT}</h2>
 
@@ -28,16 +29,25 @@
 
 <div class="panel bg2">
 	<div class="inner">
+		<div class="skeleton-author">
 		<!-- BEGIN author -->
 			<div class="<!-- IF author.S_ROW_COUNT is even -->column1<!-- ELSE -->column2<!-- ENDIF -->">
 				<fieldset class="fields2">
 			<dl>
 				<dt><label for="{author.NAME}">{author.DESC}{L_COLON}</label><!-- IF author.DESC_EXPLAIN --><br /><span>{author.DESC_EXPLAIN}</span><!-- ENDIF --></dt>
-				<dd><input type="text" tabindex="1" name="{author.NAME}" id="{author.NAME}" size="32" value="{author.VALUE}" class="inputbox autowidth" /></dd>
+				<dd><input type="text" tabindex="1" name="{author.NAME}[]" id="{author.NAME}" size="32" value="{author.VALUE}" class="inputbox autowidth" /></dd>
 			</dl>
 				</fieldset>
 			</div>
+	<!-- IF author.S_ROW_COUNT % 4 == 3 and not author.S_LAST_ROW -->
+		</div>
+		<hr />
+		<div class="skeleton-author">
+	<!-- ENDIF -->
 		<!-- END author -->
+		</div>
+
+		<input type="button" class="button1" id="skeleton-new-author" value="{L_SKELETON_ADD_AUTHOR}" />
 	</div>
 </div>
 
