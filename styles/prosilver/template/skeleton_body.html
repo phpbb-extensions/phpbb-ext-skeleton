@@ -19,7 +19,7 @@
 				<fieldset class="fields2">
 			<dl>
 				<dt><label for="{extension.NAME}">{extension.DESC}{L_COLON}</label><!-- IF extension.DESC_EXPLAIN --><br /><span>{extension.DESC_EXPLAIN}</span><!-- ENDIF --></dt>
-				<dd><input type="text" tabindex="1" name="{extension.NAME}[]" id="{extension.NAME}" size="32" value="{extension.VALUE}" class="inputbox autowidth" /></dd>
+				<dd><input type="text" tabindex="1" name="{extension.NAME}" id="{extension.NAME}" size="32" value="{extension.VALUE}" class="inputbox autowidth" /></dd>
 			</dl>
 				</fieldset>
 			</div>
@@ -35,14 +35,19 @@
 				<fieldset class="fields2">
 			<dl>
 				<dt><label for="{author.NAME}">{author.DESC}{L_COLON}</label><!-- IF author.DESC_EXPLAIN --><br /><span>{author.DESC_EXPLAIN}</span><!-- ENDIF --></dt>
-				<dd><input type="text" tabindex="1" name="{author.NAME}" id="{author.NAME}" size="32" value="{author.VALUE}" class="inputbox autowidth" /></dd>
+				<dd><input type="text" tabindex="1" name="{author.NAME}[]" id="{author.NAME}" size="32" value="{author.VALUE}" class="inputbox autowidth" /></dd>
 			</dl>
 				</fieldset>
 			</div>
+	<!-- IF author.S_ROW_COUNT % 4 == 3 and not author.S_LAST_ROW -->
+		</div>
+		<hr />
+		<div class="skeleton-author">
+	<!-- ENDIF -->
 		<!-- END author -->
 		</div>
 
-		<input type="button" class="button1" id="skeleton-new-author" value="{L_ADD_AUTHOR}" />
+		<input type="button" class="button1" id="skeleton-new-author" value="{L_SKELETON_ADD_AUTHOR}" />
 	</div>
 </div>
 

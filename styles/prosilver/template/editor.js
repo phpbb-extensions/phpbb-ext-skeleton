@@ -5,7 +5,7 @@
 	var authorTpl;
 
 	$(function() {
-		authorTpl = $('.skeleton-author').clone();
+		authorTpl = $('.skeleton-author').first().clone();
 	});
 
 	$('#skeleton-new-author').click(function() {

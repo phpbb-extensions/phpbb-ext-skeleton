@@ -115,15 +115,24 @@ class main
 			));
 		}
 
-		// TODO we need JS magic for multi author support
+		$author_values = array();
 		foreach ($dialog_questions['author'] as $value => $default)
 		{
-			$this->template->assign_block_vars('author', array(
-				'NAME'			=> $value,
-				'DESC'			=> $this->user->lang('SKELETON_QUESTION_' . strtoupper($value) . '_UI'),
-				'DESC_EXPLAIN'	=> isset($this->user->lang['SKELETON_QUESTION_' . strtoupper($value) . '_EXPLAIN']) ? $this->user->lang('SKELETON_QUESTION_' . strtoupper($value) . '_EXPLAIN') : '',
-				'VALUE'			=> $this->request->variable($value, (string) $default),
-			));
+			$author_values[$value] = $this->request->variable($value, array((string) $default));
+		}
+
+		$num_authors = max(1, sizeof($author_values['author_name']));
+		for ($i = 0; $i < $num_authors; $i++)
+		{
+			foreach ($dialog_questions['author'] as $value => $default)
+			{
+				$this->template->assign_block_vars('author', array(
+					'NAME'			=> $value,
+					'DESC'			=> $this->user->lang('SKELETON_QUESTION_' . strtoupper($value) . '_UI'),
+					'DESC_EXPLAIN'	=> isset($this->user->lang['SKELETON_QUESTION_' . strtoupper($value) . '_EXPLAIN']) ? $this->user->lang('SKELETON_QUESTION_' . strtoupper($value) . '_EXPLAIN') : '',
+					'VALUE'			=> isset($author_values[$value][$i]) ? $author_values[$value][$i] : '',
+				));
+			}
 		}
 
 		foreach ($dialog_questions['requirements'] as $value => $default)
@@ -163,10 +172,13 @@ class main
 			$this->data['extension'][$value] = $this->get_user_input($value, $default);
 		}
 
-		// TODO we need JS magic for multi author support
-		foreach ($dialog_questions['author'] as $value => $default)
+		$num_authors = max(1, sizeof($this->request->variable('author_name', array(''))));
+		for ($i = 0; $i < $num_authors; $i++)
 		{
-			$this->data['authors'][0][$value] = $this->get_user_input($value, $default);
+			foreach ($dialog_questions['author'] as $value => $default)
+			{
+				$this->data['authors'][$i][$value] = $this->get_user_input($value, $default, $i);
+			}
 		}
 
 		foreach ($dialog_questions['requirements'] as $value => $default)
@@ -199,25 +211,60 @@ class main
 	/**
 	 * @param string $value
 	 * @param mixed $default
+	 * @param null|int $array_key for multi user support
 	 * @return mixed|string
 	 * @throws \Exception
 	 */
-	protected function get_user_input($value, $default)
+	protected function get_user_input($value, $default, $array_key = null)
 	{
 		if (method_exists($this->validator, 'validate_' . $value))
 		{
-			$return_value = $this->request->variable($value, (string) $default);
+			$return_value = $this->get_request_variable($value, $default, $array_key);
 			$return_value = call_user_func(array($this->validator, 'validate_' . $value), $return_value);
 		}
 		else if (is_bool($default))
 		{
-			$return_value = $this->request->variable($value, $default);
+			$return_value = $this->get_request_variable($value, $default, $array_key);
 		}
 		else
 		{
-			$return_value = $this->request->variable($value, (string) $default);
+			$return_value = $this->get_request_variable($value, $default, $array_key);
 		}
 
 		return $return_value;
+	}
+
+	/**
+	 * @param string $value
+	 * @param mixed $default
+	 * @param null|int $array_key for multi user support
+	 * @return mixed|string
+	 * @throws \Exception
+	 */
+	protected function get_request_variable($value, $default, $array_key = null)
+	{
+		if (is_bool($default)) {
+			if ($array_key !== null)
+			{
+				$return_value = $this->request->variable($value, array($default));
+				return isset($return_value[$array_key]) ? $return_value[$array_key] : $default;
+			}
+			else
+			{
+				return $this->request->variable($value, $default);
+			}
+		}
+		else
+		{
+			if ($array_key !== null)
+			{
+				$return_value = $this->request->variable($value, array((string) $default));
+				return isset($return_value[$array_key]) ? (string) $return_value[$array_key] : (string) $default;
+			}
+			else
+			{
+				return $this->request->variable($value, (string) $default);
+			}
+		}
 	}
 }
