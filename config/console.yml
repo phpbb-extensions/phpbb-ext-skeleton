@@ -2,8 +2,8 @@ services:
     phpbb.skeleton.command.create:
         class: phpbb\skeleton\console\create
         arguments:
-            - @user
-            - @phpbb.skeleton.helper.packager
-            - @phpbb.skeleton.helper.validator
+            - '@user'
+            - '@phpbb.skeleton.helper.packager'
+            - '@phpbb.skeleton.helper.validator'
         tags:
             - { name: console.command }

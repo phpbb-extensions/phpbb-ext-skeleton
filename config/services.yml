@@ -6,31 +6,31 @@ services:
     phpbb.skeleton.controller:
         class: phpbb\skeleton\controller\main
         arguments:
-            - @config
-            - @controller.helper
-            - @request
-            - @phpbb.skeleton.helper.packager
-            - @phpbb.skeleton.helper.validator
-            - @template
-            - @user
+            - '@config'
+            - '@controller.helper'
+            - '@request'
+            - '@phpbb.skeleton.helper.packager'
+            - '@phpbb.skeleton.helper.validator'
+            - '@template'
+            - '@user'
 
     phpbb.skeleton.helper.packager:
         class: phpbb\skeleton\helper\packager
         arguments:
-            - @user
-            - @path_helper
-            - @phpbb.skeleton.collection
-            - %core.root_path%
+            - '@user'
+            - '@path_helper'
+            - '@phpbb.skeleton.collection'
+            - '%core.root_path%'
 
     phpbb.skeleton.helper.validator:
         class: phpbb\skeleton\helper\validator
         arguments:
-            - @user
+            - '@user'
 
     phpbb.skeleton.listener:
         class: phpbb\skeleton\event\main_listener
         arguments:
-            - @controller.helper
-            - @template
+            - '@controller.helper'
+            - '@template'
         tags:
             - { name: event.listener }

@@ -2,7 +2,7 @@ services:
     phpbb.skeleton.collection:
         class: phpbb\di\service_collection
         arguments:
-            - @service_container
+            - '@service_container'
         tags:
             - { name: service_collection, tag: phpbb.skeleton.ext.skeleton }
 
