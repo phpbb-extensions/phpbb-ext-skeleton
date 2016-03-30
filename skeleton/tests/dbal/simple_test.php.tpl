@@ -13,6 +13,9 @@
 
 namespace {EXTENSION.vendor_name}\{EXTENSION.extension_name}\tests\dbal;
 
+// Need to include functions.php to use phpbb_version_compare in this test
+require_once dirname(__FILE__) . '/../../../../../includes/functions.php';
+
 class simple_test extends \phpbb_database_test_case
 {
 	static protected function setup_extensions()
@@ -31,7 +34,8 @@ class simple_test extends \phpbb_database_test_case
 	public function test_column()
 	{
 		$this->db = $this->new_dbal();
-		$db_tools = new \phpbb\db\tools($this->db);
+		$tools = (phpbb_version_compare(PHPBB_VERSION, '3.2.0-dev', '<') ? '\phpbb\db\tools' : '\phpbb\db\tools\tools');
+		$db_tools = new $tools($this->db);
 		$this->assertTrue($db_tools->sql_column_exists(USERS_TABLE, 'user_acme'), 'Asserting that column "user_acme" exists');
 		$this->assertFalse($db_tools->sql_column_exists(USERS_TABLE, 'user_acme_demo'), 'Asserting that column "user_acme_demo" does not exist');
 	}

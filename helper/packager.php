@@ -15,10 +15,12 @@ namespace phpbb\skeleton\helper;
 
 use phpbb\config\config;
 use phpbb\di\service_collection;
-use phpbb\path_helper;
 use phpbb\template\context;
+use phpbb\template\twig\environment;
+use phpbb\template\twig\loader;
 use phpbb\template\twig\twig;
 use phpbb\user;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 
@@ -29,8 +31,8 @@ class packager
 	/** @var user */
 	protected $user;
 
-	/** @var path_helper */
-	protected $path_helper;
+	/** @var ContainerInterface */
+	protected $phpbb_container;
 
 	/** @var service_collection */
 	protected $collection;
@@ -39,14 +41,14 @@ class packager
 	 * Constructor
 	 *
 	 * @param user $user User instance (mostly for translation)
-	 * @param path_helper $path_helper The filesystem object
+	 * @param ContainerInterface $phpbb_container
 	 * @param service_collection $collection
 	 * @param string $root_path
 	 */
-	public function __construct(user $user, path_helper $path_helper, service_collection $collection, $root_path)
+	public function __construct(user $user, ContainerInterface $phpbb_container, service_collection $collection, $root_path)
 	{
 		$this->user = $user;
-		$this->path_helper = $path_helper;
+		$this->phpbb_container = $phpbb_container;
 		$this->collection = $collection;
 		$this->root_path = $root_path;
 	}
@@ -109,11 +111,41 @@ class packager
 		$filesystem->remove($this->root_path . 'store/tmp-ext');
 		$filesystem->mkdir($ext_path);
 
-		$template_engine = new twig($this->path_helper, new config(array(
-			'load_tplcompile' => true,
-			'tpl_allow_php' => false,
-			'assets_version' => null,
-		)), $this->user, new context());
+		if (phpbb_version_compare(PHPBB_VERSION, '3.2.0-dev', '<'))
+		{
+			$template_engine = new twig($this->phpbb_container->get('path_helper'), new config(array(
+				'load_tplcompile' => true,
+				'tpl_allow_php' => false,
+				'assets_version' => null,
+			)), $this->user, new context());
+		}
+		else
+		{
+			$config = new config(array(
+				'load_tplcompile' => true,
+				'tpl_allow_php' => false,
+				'assets_version' => null,
+			));
+			$template_engine = new twig(
+				$this->phpbb_container->get('path_helper'),
+				$config,
+				new context(),
+				new environment(
+					$config,
+					$this->phpbb_container->get('filesystem'),
+					$this->phpbb_container->get('path_helper'),
+					$this->phpbb_container,
+					$this->phpbb_container->getParameter('core.cache_dir'),
+					$this->phpbb_container->get('ext.manager'),
+					new loader(
+						new \phpbb\filesystem\filesystem()
+					)
+				),
+				$this->phpbb_container->getParameter('core.cache_dir'),
+				$this->phpbb_container->get('user')
+			);
+		}
+
 		$template_engine->set_custom_style('skeletonextension', $this->root_path . 'ext/phpbb/skeleton/skeleton');
 
 		$template_engine->assign_vars(array(
