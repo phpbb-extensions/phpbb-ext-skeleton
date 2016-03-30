@@ -235,9 +235,6 @@ class packager
 			'require' => array(
 				'php' => "{$data['requirements']['php_version']}",
 			),
-			'require-dev' => array(
-				'phpbb/epv' => 'dev-master',
-			),
 			'extra' => array(
 				'display-name' => "{$data['extension']['extension_display_name']}",
 				'soft-require' => array(
