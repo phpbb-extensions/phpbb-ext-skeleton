@@ -57,8 +57,8 @@ class main_listener implements EventSubscriberInterface
 
 	public function display_forums_after($event)
 	{
-		var_dump('hello event after displaying forums');
-		var_dump($event['display_moderators']);
+		//var_dump('hello event after displaying forums');
+		//var_dump($event['display_moderators']);
 	}
 <!-- ENDIF -->
 <!-- IF COMPONENT.controller -->

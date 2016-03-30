@@ -72,7 +72,7 @@ services:
             - 'tests'
             - true
             - []
-            - ['tests/controller/main_test.php', 'tests/dbal/fixtures/config.xml', 'tests/dbal/simple_test.php', 'tests/functional/demo_test.php', 'tests/mock/controller_helper.php', 'tests/mock/template.php', 'tests/mock/user.php', 'phpunit.xml.dist']
+            - ['tests/controller/main_test.php', 'tests/dbal/fixtures/config.xml', 'tests/dbal/simple_test.php', 'tests/functional/demo_test.php', 'phpunit.xml.dist']
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
 
