@@ -125,6 +125,7 @@ class packager
 
 		$component_data = $this->get_component_dialog_values();
 		$skeleton_files = array(
+			'ext.php',
 			'license.txt',
 			'README.md',
 		);
