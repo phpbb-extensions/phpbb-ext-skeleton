@@ -42,7 +42,7 @@ services:
             - 'migration'
             - true
             - []
-            - ['migrations/release_1_0_0.php', 'migrations/release_1_0_1.php']
+            - ['migrations/install_module.php', 'migrations/install_user_schema.php']
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
 

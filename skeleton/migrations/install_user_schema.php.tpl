@@ -13,7 +13,7 @@
 
 namespace {EXTENSION.vendor_name}\{EXTENSION.extension_name}\migrations;
 
-class release_1_0_1 extends \phpbb\db\migration\migration
+class install_user_schema extends \phpbb\db\migration\migration
 {
 	public function effectively_installed()
 	{
@@ -22,7 +22,7 @@ class release_1_0_1 extends \phpbb\db\migration\migration
 
 	static public function depends_on()
 	{
-		return array('\{EXTENSION.vendor_name}\{EXTENSION.extension_name}\migrations\release_1_0_0');
+		return array('\{EXTENSION.vendor_name}\{EXTENSION.extension_name}\migrations\install_module');
 	}
 
 	public function update_schema()

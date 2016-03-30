@@ -13,7 +13,7 @@
 
 namespace {EXTENSION.vendor_name}\{EXTENSION.extension_name}\migrations;
 
-class release_1_0_0 extends \phpbb\db\migration\migration
+class install_module extends \phpbb\db\migration\migration
 {
 	public function effectively_installed()
 	{
