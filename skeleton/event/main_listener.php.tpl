@@ -27,11 +27,11 @@ class main_listener implements EventSubscriberInterface
 	{
 		return array(
 <!-- IF COMPONENT.phplistener -->
-			'core.display_forums_after'				=> 'display_forums_after',
+			'core.display_forums_after'		=> 'display_forums_after',
 <!-- ENDIF -->
 <!-- IF COMPONENT.controller -->
-			'core.user_setup'						=> 'load_language_on_setup',
-			'core.page_header'						=> 'add_page_header_link',
+			'core.user_setup'				=> 'load_language_on_setup',
+			'core.page_header'				=> 'add_page_header_link',
 <!-- ENDIF -->
 		);
 	}

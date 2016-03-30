@@ -18,4 +18,5 @@
 		&#123;S_FORM_TOKEN}
 	</fieldset>
 </form>
+
 &lt;!-- INCLUDE overall_footer.html -->

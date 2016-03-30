@@ -19,7 +19,7 @@ class main_module
 
 	function main($id, $mode)
 	{
-		global $user, $template, $request, $config;
+		global $config, $request, $template, $user;
 
 		$user->add_lang('acp/common');
 		$this->tpl_name = 'demo_body';
