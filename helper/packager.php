@@ -111,21 +111,23 @@ class packager
 		$filesystem->remove($this->root_path . 'store/tmp-ext');
 		$filesystem->mkdir($ext_path);
 
+		$config = new config(array(
+			'load_tplcompile' => true,
+			'tpl_allow_php' => false,
+			'assets_version' => null,
+		));
+
 		if (phpbb_version_compare(PHPBB_VERSION, '3.2.0-dev', '<'))
 		{
-			$template_engine = new twig($this->phpbb_container->get('path_helper'), new config(array(
-				'load_tplcompile' => true,
-				'tpl_allow_php' => false,
-				'assets_version' => null,
-			)), $this->user, new context());
+			$template_engine = new twig(
+				$this->phpbb_container->get('path_helper'),
+				$config,
+				$this->user,
+				new context()
+			);
 		}
 		else
 		{
-			$config = new config(array(
-				'load_tplcompile' => true,
-				'tpl_allow_php' => false,
-				'assets_version' => null,
-			));
 			$template_engine = new twig(
 				$this->phpbb_container->get('path_helper'),
 				$config,
