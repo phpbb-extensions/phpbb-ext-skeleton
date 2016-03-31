@@ -17,6 +17,7 @@
 		"symfony/finder": "2.8.*"
 	},
 	"require-dev": {
+		"phing/phing": "2.4.*",
 		"phpbb/epv": "dev-master"
 	},
 	"extra": {
