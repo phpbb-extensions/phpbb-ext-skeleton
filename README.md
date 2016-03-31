@@ -2,7 +2,10 @@
 
 ## Installation
 
-Copy the extension to `phpBB/ext/phpbb/skeleton`
+To install the source code from this repository, clone this extension repository to `phpBB/ext/phpbb/skeleton`:
+
+	$ git clone https://github.com/phpbb-extensions/phpbb-ext-skeleton.git
+	$ php composer.phar install
 
 Go to "ACP" > "Customise" > "Extensions" and enable the "phpBB Skeleton Extension" extension.
 
@@ -21,7 +24,7 @@ The `.zip` is then offered as a download. Additionally it can be found at
 In order to create an extension, you need to open the console of your server.
 Then run the following command in your phpBB root (next to config.php):
 
-    ./bin/phpbbcli.php extension:create
+    $ ./bin/phpbbcli.php extension:create
 
 Afterwards copy your extension from `store/tmp-ext/` into the `ext/` folder
 
