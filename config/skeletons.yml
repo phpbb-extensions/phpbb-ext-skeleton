@@ -32,7 +32,7 @@ services:
             - 'acp'
             - true
             - []
-            - ['acp/main_info.php', 'acp/main_module.php', 'adm/style/demo_body.html', 'language/en/info_acp_demo.php']
+            - ['acp/main_info.php', 'acp/main_module.php', 'adm/style/acp_demo_body.html', 'language/en/info_acp_demo.php']
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
 
