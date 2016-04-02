@@ -151,7 +151,6 @@ class main
 			$this->template->assign_block_vars('component', array(
 				'NAME'			=> 'component_' . $component,
 				'DESC'			=> $this->user->lang('SKELETON_QUESTION_COMPONENT_' . strtoupper($component) . '_UI'),
-				'DESC_EXPLAIN'	=> isset($this->user->lang['SKELETON_QUESTION_COMPONENT_' . strtoupper($component) . '_EXPLAIN']) ? $this->user->lang('SKELETON_QUESTION_COMPONENT_' . strtoupper($component) . '_EXPLAIN') : '',
 				'VALUE'			=> $this->request->variable('component_' . $component, $details['default']),
 			));
 
