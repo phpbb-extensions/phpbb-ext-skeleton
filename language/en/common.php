@@ -61,13 +61,13 @@ $lang = array_merge($lang, array(
 
 	'SKELETON_QUESTION_PHP_VERSION'					=> 'Please enter the php requirement of your extension',
 	'SKELETON_QUESTION_PHP_VERSION_UI'				=> 'php requirement of your extension',
-	'SKELETON_QUESTION_PHP_VERSION_EXPLAIN'			=> 'default: >=5.3.3',
+	'SKELETON_QUESTION_PHP_VERSION_EXPLAIN'			=> 'default: &gt;=5.3.3',
 	'SKELETON_QUESTION_PHPBB_VERSION_MIN'			=> 'Please enter the minimum phpBB requirement of your extension',
 	'SKELETON_QUESTION_PHPBB_VERSION_MIN_UI'		=> 'Minimum phpBB requirement of your extension',
-	'SKELETON_QUESTION_PHPBB_VERSION_MIN_EXPLAIN'	=> 'default: >=3.1.4',
+	'SKELETON_QUESTION_PHPBB_VERSION_MIN_EXPLAIN'	=> 'default: &gt;=3.1.4',
 	'SKELETON_QUESTION_PHPBB_VERSION_MAX'			=> 'Please enter the maximum phpBB requirement of your extension',
 	'SKELETON_QUESTION_PHPBB_VERSION_MAX_UI'		=> 'Maximum phpBB requirement of your extension',
-	'SKELETON_QUESTION_PHPBB_VERSION_MAX_EXPLAIN'	=> 'default: <3.2.0@dev',
+	'SKELETON_QUESTION_PHPBB_VERSION_MAX_EXPLAIN'	=> 'default: &lt;3.2.0@dev',
 
 	'SKELETON_QUESTION_COMPONENT_PHPLISTENER'		=> 'Should we add a sample for php listeners',
 	'SKELETON_QUESTION_COMPONENT_PHPLISTENER_UI'	=> 'php listeners',
