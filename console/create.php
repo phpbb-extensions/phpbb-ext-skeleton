@@ -59,9 +59,9 @@ class create extends command
 	}
 
 	/**
-	* Executes the command config:delete.
+	* Executes the command extension:create.
 	*
-	* Removes a configuration option
+	* Creates an extension skeleton
 	*
 	* @param InputInterface  $input  An InputInterface instance
 	* @param OutputInterface $output An OutputInterface instance
@@ -71,15 +71,27 @@ class create extends command
 	*/
 	protected function execute(InputInterface $input, OutputInterface $output)
 	{
+		$this->packager->create_extension($this->data);
+
+		$output->writeln($this->user->lang('EXTENSION_CLI_SKELETON_SUCCESS'));
+	}
+
+	/**
+	 * Interacts with the user.
+	 *
+	 * @param InputInterface  $input  An InputInterface instance
+	 * @param OutputInterface $output An OutputInterface instance
+	 */
+	protected function interact(InputInterface $input, OutputInterface $output)
+	{
 		/** @var DialogHelper $dialog */
 		$dialog = $this->getHelper('dialog');
 
+		$output->writeln($this->user->lang('SKELETON_CLI_COMPOSER_QUESTIONS'));
 		$this->get_composer_data($dialog, $output);
+
+		$output->writeln($this->user->lang('SKELETON_CLI_COMPONENT_QUESTIONS'));
 		$this->get_component_data($dialog, $output);
-
-		$this->packager->create_extension($this->data);
-
-		$output->writeln($this->user->lang('EXTENSION_SKELETON_SUCCESS'));
 	}
 
 	/**
@@ -96,7 +108,7 @@ class create extends command
 
 		$num_authors = $dialog->askAndValidate(
 			$output,
-			$this->user->lang('SKELETON_QUESTION_NUM_AUTHORS'),
+			$this->user->lang('SKELETON_QUESTION_NUM_AUTHORS') . $this->user->lang('COLON'),
 			array($this->validator, 'validate_num_authors'),
 			false,
 			1
@@ -152,7 +164,7 @@ class create extends command
 		{
 			$return_value = $dialog->askAndValidate(
 				$output,
-				$this->user->lang('SKELETON_QUESTION_' . strtoupper($value)),
+				$this->user->lang('SKELETON_QUESTION_' . strtoupper($value)) . $this->user->lang('COLON'),
 				array($this->validator, 'validate_' . $value),
 				false,
 				$default
@@ -162,7 +174,7 @@ class create extends command
 		{
 			$return_value = $dialog->askConfirmation(
 				$output,
-				$this->user->lang('SKELETON_QUESTION_' . strtoupper($value)),
+				$this->user->lang('SKELETON_QUESTION_' . strtoupper($value)) . $this->user->lang('COLON'),
 				$default
 			);
 		}
@@ -170,7 +182,7 @@ class create extends command
 		{
 			$return_value = $dialog->ask(
 				$output,
-				$this->user->lang('SKELETON_QUESTION_' . strtoupper($value)),
+				$this->user->lang('SKELETON_QUESTION_' . strtoupper($value)) . $this->user->lang('COLON'),
 				$default
 			);
 		}
