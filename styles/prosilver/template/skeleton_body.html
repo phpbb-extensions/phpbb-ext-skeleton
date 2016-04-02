@@ -14,6 +14,7 @@
 
 <div class="panel bg1">
 	<div class="inner">
+		<h2 class="solo">{L_SKELETON_TITLE_EXTENSION_INFO}</h2>
 		<!-- BEGIN extension -->
 			<div class="<!-- IF extension.S_ROW_COUNT is even -->column1<!-- ELSE -->column2<!-- ENDIF -->">
 				<fieldset class="fields2">
@@ -29,6 +30,7 @@
 
 <div class="panel bg2">
 	<div class="inner">
+		<h2 class="solo">{L_SKELETON_TITLE_AUTHOR_INFO}</h2>
 		<div class="skeleton-author" style="overflow: hidden;">
 		<!-- BEGIN author -->
 			<div class="<!-- IF author.S_ROW_COUNT is even -->column1<!-- ELSE -->column2<!-- ENDIF -->">
@@ -53,6 +55,7 @@
 
 <div class="panel bg1">
 	<div class="inner">
+		<h2 class="solo">{L_SKELETON_TITLE_REQUIREMENT_INFO}</h2>
 		<!-- BEGIN requirement -->
 		<div class="<!-- IF requirement.S_ROW_COUNT is even -->column1<!-- ELSE -->column2<!-- ENDIF -->">
 			<fieldset class="fields2">
@@ -68,6 +71,7 @@
 
 <div class="panel bg2">
 	<div class="inner">
+		<h2 class="solo">{L_SKELETON_TITLE_COMPONENT_INFO}</h2>
 		<!-- BEGIN component -->
 		<div class="<!-- IF component.S_ROW_COUNT is even -->column1<!-- ELSE -->column2<!-- ENDIF -->">
 			<fieldset class="fields2">
@@ -78,10 +82,14 @@
 	</div>
 </div>
 
-	<fieldset class="submit-buttons">
-		{S_HIDDEN_FIELDS}
-		<input type="submit" accesskey="s" name="submit" value="{L_SUBMIT}" class="button1" />
-	</fieldset>
+<div class="panel">
+	<div class="inner">
+		<fieldset class="submit-buttons">
+			{S_HIDDEN_FIELDS}
+			<input type="submit" accesskey="s" name="submit" value="{L_SUBMIT}" class="button1" />
+		</fieldset>
+	</div>
+</div>
 
 </form>
 

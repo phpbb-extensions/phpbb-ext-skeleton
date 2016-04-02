@@ -97,6 +97,11 @@ $lang = array_merge($lang, array(
 	'SKELETON_QUESTION_COMPONENT_BUILD_UI'			=> 'Script to building packages for the customisation database',
 	'SKELETON_QUESTION_COMPONENT_BUILD_EXPLAIN'		=> 'default: n; [y/n]',
 
+	'SKELETON_TITLE_EXTENSION_INFO'		=> 'Extension packaging',
+	'SKELETON_TITLE_AUTHOR_INFO'		=> 'Authors',
+	'SKELETON_TITLE_REQUIREMENT_INFO'	=> 'Requirements',
+	'SKELETON_TITLE_COMPONENT_INFO'		=> 'Components',
+
 	'SKELETON_INVALID_EXTENSION_NAME'	=> 'The extension name you provided is invalid',
 	'SKELETON_INVALID_EXTENSION_TIME'	=> 'The extension date you provided is invalid',
 	'SKELETON_INVALID_EXTENSION_VERSION'	=> 'The extension version you provided is invalid',
