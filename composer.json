@@ -13,9 +13,11 @@
 			"role": "Lead Developer"
 		}],
 	"require": {
-		"php": ">=5.3.3"
+		"php": ">=5.3.3",
+		"symfony/finder": "2.8.*"
 	},
 	"require-dev": {
+		"phing/phing": "2.4.*",
 		"phpbb/epv": "dev-master"
 	},
 	"extra": {
