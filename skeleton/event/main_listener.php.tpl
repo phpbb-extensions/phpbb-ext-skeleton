@@ -27,7 +27,7 @@ class main_listener implements EventSubscriberInterface
 	{
 		return array(
 <!-- IF COMPONENT.phplistener -->
-			'core.display_forums_after'		=> 'display_forums_after',
+			'core.display_forums_modify_template_vars'	=> 'display_forums_modify_template_vars',
 <!-- ENDIF -->
 <!-- IF COMPONENT.controller -->
 			'core.user_setup'				=> 'load_language_on_setup',
@@ -55,10 +55,17 @@ class main_listener implements EventSubscriberInterface
 	}
 <!-- IF COMPONENT.phplistener -->
 
-	public function display_forums_after($event)
+	/**
+	* A sample PHP event
+	* Modifies the names of the forums on index
+	*
+	* @param \phpbb\event\data	$event	Event object
+	*/
+	public function display_forums_modify_template_vars($event)
 	{
-		//var_dump('hello event after displaying forums');
-		//var_dump($event['display_moderators']);
+		$forum_row = $event['forum_row'];
+		$forum_row['FORUM_NAME'] .= ' << Acme Event >>';
+		$event['forum_row'] = $forum_row;
 	}
 <!-- ENDIF -->
 <!-- IF COMPONENT.controller -->
