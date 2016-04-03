@@ -70,6 +70,11 @@ class main_listener implements EventSubscriberInterface
 <!-- ENDIF -->
 <!-- IF COMPONENT.controller -->
 
+	/**
+	* Load common language files during user setup
+	*
+	* @param \phpbb\event\data	$event	Event object
+	*/
 	public function load_language_on_setup($event)
 	{
 		$lang_set_ext = $event['lang_set_ext'];
@@ -80,6 +85,9 @@ class main_listener implements EventSubscriberInterface
 		$event['lang_set_ext'] = $lang_set_ext;
 	}
 
+	/**
+	* Add a link to the controller in the forum navbar
+	*/
 	public function add_page_header_link($event)
 	{
 		$this->template->assign_vars(array(
