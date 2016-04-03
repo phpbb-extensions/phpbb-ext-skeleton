@@ -32,7 +32,7 @@ services:
             - 'acp'
             - true
             - []
-            - ['acp/main_info.php', 'acp/main_module.php', 'adm/style/demo_body.html', 'language/en/info_acp_demo.php']
+            - ['acp/main_info.php', 'acp/main_module.php', 'adm/style/acp_demo_body.html', 'language/en/info_acp_demo.php']
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
 
@@ -42,7 +42,7 @@ services:
             - 'migration'
             - true
             - []
-            - ['migrations/release_1_0_0.php', 'migrations/release_1_0_1.php']
+            - ['migrations/install_module.php', 'migrations/install_user_schema.php']
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
 
@@ -66,13 +66,23 @@ services:
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
 
+    phpbb.skeleton.ext.skeleton.ext:
+        class: phpbb\skeleton\skeleton
+        arguments:
+            - 'ext'
+            - true
+            - []
+            - ['ext.php']
+        tags:
+            - { name: phpbb.skeleton.ext.skeleton }
+
     phpbb.skeleton.ext.skeleton.tests:
         class: phpbb\skeleton\skeleton
         arguments:
             - 'tests'
             - true
             - []
-            - ['tests/controller/main_test.php', 'tests/dbal/fixtures/config.xml', 'tests/dbal/simple_test.php', 'tests/functional/demo_test.php', 'tests/mock/controller_helper.php', 'tests/mock/template.php', 'tests/mock/user.php', 'phpunit.xml.dist']
+            - ['tests/controller/main_test.php', 'tests/dbal/fixtures/config.xml', 'tests/dbal/simple_test.php', 'tests/functional/demo_test.php', 'phpunit.xml.dist']
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
 

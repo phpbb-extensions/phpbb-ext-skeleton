@@ -27,11 +27,11 @@ class main_listener implements EventSubscriberInterface
 	{
 		return array(
 <!-- IF COMPONENT.phplistener -->
-			'core.display_forums_after'				=> 'display_forums_after',
+			'core.display_forums_modify_template_vars'	=> 'display_forums_modify_template_vars',
 <!-- ENDIF -->
 <!-- IF COMPONENT.controller -->
-			'core.user_setup'						=> 'load_language_on_setup',
-			'core.page_header'						=> 'add_page_header_link',
+			'core.user_setup'				=> 'load_language_on_setup',
+			'core.page_header'				=> 'add_page_header_link',
 <!-- ENDIF -->
 		);
 	}
@@ -55,14 +55,26 @@ class main_listener implements EventSubscriberInterface
 	}
 <!-- IF COMPONENT.phplistener -->
 
-	public function display_forums_after($event)
+	/**
+	* A sample PHP event
+	* Modifies the names of the forums on index
+	*
+	* @param \phpbb\event\data	$event	Event object
+	*/
+	public function display_forums_modify_template_vars($event)
 	{
-		var_dump('hello event after displaying forums');
-		var_dump($event['display_moderators']);
+		$forum_row = $event['forum_row'];
+		$forum_row['FORUM_NAME'] .= ' << Acme Event >>';
+		$event['forum_row'] = $forum_row;
 	}
 <!-- ENDIF -->
 <!-- IF COMPONENT.controller -->
 
+	/**
+	* Load common language files during user setup
+	*
+	* @param \phpbb\event\data	$event	Event object
+	*/
 	public function load_language_on_setup($event)
 	{
 		$lang_set_ext = $event['lang_set_ext'];
@@ -73,6 +85,9 @@ class main_listener implements EventSubscriberInterface
 		$event['lang_set_ext'] = $lang_set_ext;
 	}
 
+	/**
+	* Add a link to the controller in the forum navbar
+	*/
 	public function add_page_header_link($event)
 	{
 		$this->template->assign_vars(array(

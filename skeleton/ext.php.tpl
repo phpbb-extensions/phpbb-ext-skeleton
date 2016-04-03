@@ -11,20 +11,14 @@
  *
  */
 
-namespace {EXTENSION.vendor_name}\{EXTENSION.extension_name}\tests\mock;
+namespace {EXTENSION.vendor_name}\{EXTENSION.extension_name};
 
 /**
-* User Mock
-* @package phpBB3
-*/
-class user extends \phpbb\user
+ * Class ext
+ *
+ * It is recommended to remove this file from
+ * an extension if it is not going to be used.
+ */
+class ext extends \phpbb\extension\base
 {
-	public function __construct()
-	{
-	}
-
-	public function lang()
-	{
-		return implode(' ', func_get_args());
-	}
 }

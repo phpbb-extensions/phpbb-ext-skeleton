@@ -14,13 +14,14 @@
 
 <div class="panel bg1">
 	<div class="inner">
+		<h2 class="solo">{L_SKELETON_TITLE_EXTENSION_INFO}</h2>
 		<!-- BEGIN extension -->
 			<div class="<!-- IF extension.S_ROW_COUNT is even -->column1<!-- ELSE -->column2<!-- ENDIF -->">
 				<fieldset class="fields2">
-			<dl>
-				<dt><label for="{extension.NAME}">{extension.DESC}{L_COLON}</label><!-- IF extension.DESC_EXPLAIN --><br /><span>{extension.DESC_EXPLAIN}</span><!-- ENDIF --></dt>
-				<dd><input type="text" tabindex="1" name="{extension.NAME}" id="{extension.NAME}" size="32" value="{extension.VALUE}" class="inputbox autowidth" /></dd>
-			</dl>
+					<dl>
+						<dt><label for="{extension.NAME}">{extension.DESC}{L_COLON}</label><!-- IF extension.DESC_EXPLAIN --><br /><span>{extension.DESC_EXPLAIN}</span><!-- ENDIF --></dt>
+						<dd><input type="text" tabindex="1" name="{extension.NAME}" id="{extension.NAME}" size="32" value="{extension.VALUE}" class="inputbox" /></dd>
+					</dl>
 				</fieldset>
 			</div>
 		<!-- END extension -->
@@ -29,14 +30,15 @@
 
 <div class="panel bg2">
 	<div class="inner">
-		<div class="skeleton-author">
+		<h2 class="solo">{L_SKELETON_TITLE_AUTHOR_INFO}</h2>
+		<div class="skeleton-author" style="overflow: hidden;">
 		<!-- BEGIN author -->
 			<div class="<!-- IF author.S_ROW_COUNT is even -->column1<!-- ELSE -->column2<!-- ENDIF -->">
 				<fieldset class="fields2">
-			<dl>
-				<dt><label for="{author.NAME}">{author.DESC}{L_COLON}</label><!-- IF author.DESC_EXPLAIN --><br /><span>{author.DESC_EXPLAIN}</span><!-- ENDIF --></dt>
-				<dd><input type="text" tabindex="1" name="{author.NAME}[]" id="{author.NAME}" size="32" value="{author.VALUE}" class="inputbox autowidth" /></dd>
-			</dl>
+					<dl>
+						<dt><label for="{author.NAME}">{author.DESC}{L_COLON}</label><!-- IF author.DESC_EXPLAIN --><br /><span>{author.DESC_EXPLAIN}</span><!-- ENDIF --></dt>
+						<dd><input type="text" tabindex="1" name="{author.NAME}[]" id="{author.NAME}" size="32" value="{author.VALUE}" class="inputbox" /></dd>
+					</dl>
 				</fieldset>
 			</div>
 	<!-- IF author.S_ROW_COUNT % 4 == 3 and not author.S_LAST_ROW -->
@@ -53,35 +55,41 @@
 
 <div class="panel bg1">
 	<div class="inner">
+		<h2 class="solo">{L_SKELETON_TITLE_REQUIREMENT_INFO}</h2>
 		<!-- BEGIN requirement -->
-			<div class="<!-- IF requirement.S_ROW_COUNT is even -->column1<!-- ELSE -->column2<!-- ENDIF -->">
-				<fieldset class="fields2">
-			<dl>
-				<dt><label for="{requirement.NAME}">{requirement.DESC}{L_COLON}</label><!-- IF requirement.DESC_EXPLAIN --><br /><span>{requirement.DESC_EXPLAIN}</span><!-- ENDIF --></dt>
-				<dd><input type="text" tabindex="1" name="{requirement.NAME}" id="{requirement.NAME}" size="32" value="{requirement.VALUE}" class="inputbox autowidth" /></dd>
-			</dl>
-				</fieldset>
-			</div>
+		<div class="<!-- IF requirement.S_ROW_COUNT is even -->column1<!-- ELSE -->column2<!-- ENDIF -->">
+			<fieldset class="fields2">
+				<dl>
+					<dt><label for="{requirement.NAME}">{requirement.DESC}{L_COLON}</label><!-- IF requirement.DESC_EXPLAIN --><br /><span>{requirement.DESC_EXPLAIN}</span><!-- ENDIF --></dt>
+					<dd><input type="text" tabindex="1" name="{requirement.NAME}" id="{requirement.NAME}" size="32" value="{requirement.VALUE}" class="inputbox" /></dd>
+				</dl>
+			</fieldset>
+		</div>
 		<!-- END requirement -->
 	</div>
 </div>
 
 <div class="panel bg2">
 	<div class="inner">
+		<h2 class="solo">{L_SKELETON_TITLE_COMPONENT_INFO}</h2>
 		<!-- BEGIN component -->
-			<div class="<!-- IF component.S_ROW_COUNT is even -->column1<!-- ELSE -->column2<!-- ENDIF -->">
-				<fieldset class="fields2">
-					<div><label for="{component.NAME}"><input type="checkbox" name="{component.NAME}" id="{component.NAME}"<!-- IF component.VALUE --> checked="checked"<!-- ENDIF --> /> <strong>{component.DESC}</strong></label></div>
-				</fieldset>
-			</div>
+		<div class="<!-- IF component.S_ROW_COUNT is even -->column1<!-- ELSE -->column2<!-- ENDIF -->">
+			<fieldset class="fields2">
+				<div><label for="{component.NAME}"><input type="checkbox" name="{component.NAME}" id="{component.NAME}"<!-- IF component.VALUE --> checked="checked"<!-- ENDIF --> /> <strong>{component.DESC}</strong></label></div>
+			</fieldset>
+		</div>
 		<!-- END component -->
 	</div>
 </div>
 
-	<fieldset class="submit-buttons">
-		{S_HIDDEN_FIELDS}
-		<input type="submit" accesskey="s" name="submit" value="{L_SUBMIT}" class="button1" />
-	</fieldset>
+<div class="panel">
+	<div class="inner">
+		<fieldset class="submit-buttons">
+			{S_HIDDEN_FIELDS}
+			<input type="submit" accesskey="s" name="submit" value="{L_SUBMIT}" class="button1" />
+		</fieldset>
+	</div>
+</div>
 
 </form>
 

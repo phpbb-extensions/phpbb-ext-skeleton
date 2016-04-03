@@ -11,7 +11,7 @@
  *
  */
 
-namespace a{EXTENSION.vendor_name}\{EXTENSION.extension_name}\tests\functional;
+namespace {EXTENSION.vendor_name}\{EXTENSION.extension_name}\tests\functional;
 
 /**
  * @group functional

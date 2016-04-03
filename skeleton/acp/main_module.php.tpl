@@ -19,10 +19,10 @@ class main_module
 
 	function main($id, $mode)
 	{
-		global $user, $template, $request, $config;
+		global $config, $request, $template, $user;
 
 		$user->add_lang('acp/common');
-		$this->tpl_name = 'demo_body';
+		$this->tpl_name = 'acp_demo_body';
 		$this->page_title = $user->lang('ACP_DEMO_TITLE');
 		add_form_key('acme/demo');
 
