@@ -4,7 +4,7 @@ phpBB's Skeleton Extension is a tool for extension authors to help speed up and 
 
 ## Installation
 
-- [Download the latest release](releases).
+- [Download the latest release](https://github.com/phpbb-extensions/phpbb-ext-skeleton/releases).
 - Unzip and install to your phpBB `ext/` folder
 - Go to "ACP" > "Customise" > "Extensions" and enable the "phpBB Skeleton Extension" extension.
 
