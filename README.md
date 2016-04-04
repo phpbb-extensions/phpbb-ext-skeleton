@@ -1,27 +1,34 @@
-# phpBB Skeleton Extension
+# phpBB Skeleton Extension 
+
+phpBB's Skeleton Extension is a tool for extension authors to help speed up and simplify the task of starting a new extension project. It generates sample starter files and directories in a skeleton package that you can use to begin building your extension.
 
 ## Installation
 
-To install the source code from this repository, clone this extension repository to `phpBB/ext/phpbb/skeleton`:
+- [Download the latest release](releases).
+- Unzip and install to your phpBB `ext/` folder
+- Go to "ACP" > "Customise" > "Extensions" and enable the "phpBB Skeleton Extension" extension.
 
-	$ git clone https://github.com/phpbb-extensions/phpbb-ext-skeleton.git
+## Contributing
+
+To install the source code from this repository, clone the contents of this repository to `phpBB/ext/phpbb/skeleton`, then run Composer from the extension's directory:
+
 	$ php composer.phar install
 
-Go to "ACP" > "Customise" > "Extensions" and enable the "phpBB Skeleton Extension" extension.
+## Create an Extension Skeleton
 
-## Creating an extension via web UI
+### Web-based user interface
 
 In order to create an extension via the web UI just open your board an visit the
-"Create skeleton extension" link at the top left:
+"Create skeleton extension" link in the forum's navigation bar:
 
     https://localhost/phpBB/app.php/skeleton
 
-The `.zip` is then offered as a download. Additionally it can be found at
+A packaged ZIP file is then offered as a download. Additionally it can be found in
 `store/tmp-ext/`.
 
-## Creating an extension via console
+### Command line interface
 
-In order to create an extension, you need to open the console of your server.
+In order to create an extension via the CLI, you need to open the console of your server.
 Then run the following command in your phpBB root (next to config.php):
 
     $ ./bin/phpbbcli.php extension:create
