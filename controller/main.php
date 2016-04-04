@@ -157,6 +157,8 @@ class main
 			$this->data['components'][$component] = $this->get_user_input('component_' . $component, $details['default']);
 		}
 
+		$this->template->assign_var('S_POST_ACTION', $this->helper->route('phpbb_skeleton_controller'));
+
 		return $this->helper->render('skeleton_body.html', $this->user->lang('PHPBB_SKELETON_EXT'));
 	}
 
