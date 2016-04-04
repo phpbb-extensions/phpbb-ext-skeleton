@@ -32,3 +32,12 @@ services:
             - { name: event.listener }
 
 <!-- ENDIF -->
+<!-- IF COMPONENT.console -->
+    {EXTENSION.vendor_name}.{EXTENSION.extension_name}.command.demo:
+        class: {EXTENSION.vendor_name}\{EXTENSION.extension_name}\console\command\demo
+        arguments:
+            - '@user'
+        tags:
+            - { name: console.command }
+
+<!-- ENDIF -->
