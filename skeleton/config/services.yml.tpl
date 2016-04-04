@@ -41,3 +41,14 @@ services:
             - { name: console.command }
 
 <!-- ENDIF -->
+<!-- IF COMPONENT.cron -->
+    {EXTENSION.vendor_name}.{EXTENSION.extension_name}.cron.task.demo:
+        class: {EXTENSION.vendor_name}\{EXTENSION.extension_name}\cron\task\demo
+        arguments:
+            - '@config'
+        calls:
+            - [set_name, [cron.task.demo]]
+        tags:
+            - { name: cron.task }
+
+<!-- ENDIF -->

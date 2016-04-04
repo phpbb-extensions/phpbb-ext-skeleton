@@ -86,6 +86,16 @@ services:
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
 
+    phpbb.skeleton.ext.skeleton.cron:
+        class: phpbb\skeleton\skeleton
+        arguments:
+            - 'cron'
+            - true
+            - []
+            - ['config/services.yml', 'cron/task/demo.php', 'migrations/install_cron.php']
+        tags:
+            - { name: phpbb.skeleton.ext.skeleton }
+
     phpbb.skeleton.ext.skeleton.tests:
         class: phpbb\skeleton\skeleton
         arguments:
