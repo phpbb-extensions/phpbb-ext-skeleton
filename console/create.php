@@ -17,19 +17,31 @@ use phpbb\console\command\command;
 use phpbb\skeleton\helper\packager;
 use phpbb\skeleton\helper\validator;
 use phpbb\user;
-use Symfony\Component\Console\Helper\DialogHelper;
+use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\ConfirmationQuestion;
+use Symfony\Component\Console\Question\Question;
 
 class create extends command
 {
+	/** @var array user input data array */
 	protected $data = array();
 
-	/** @var validator */
-	protected $validator;
+	/** @var QuestionHelper $helper */
+	protected $helper;
+
+	/** @var InputInterface */
+	protected $input;
+
+	/** @var OutputInterface */
+	protected $output;
 
 	/** @var packager */
 	protected $packager;
+
+	/** @var validator */
+	protected $validator;
 
 	/**
 	 * Constructor
@@ -84,56 +96,52 @@ class create extends command
 	 */
 	protected function interact(InputInterface $input, OutputInterface $output)
 	{
-		/** @var DialogHelper $dialog */
-		$dialog = $this->getHelper('dialog');
+		$this->input  = $input;
+		$this->output = $output;
+
+		$this->helper = $this->getHelper('question');
 
 		$output->writeln($this->user->lang('SKELETON_CLI_COMPOSER_QUESTIONS'));
-		$this->get_composer_data($dialog, $output);
+		$this->get_composer_data();
 
 		$output->writeln($this->user->lang('SKELETON_CLI_COMPONENT_QUESTIONS'));
-		$this->get_component_data($dialog, $output);
+		$this->get_component_data();
 	}
 
 	/**
-	 * @param DialogHelper $dialog
-	 * @param OutputInterface $output
+	 * Get composer data from the user
 	 */
-	protected function get_composer_data(DialogHelper $dialog, OutputInterface $output)
+	protected function get_composer_data()
 	{
 		$dialog_questions = $this->packager->get_composer_dialog_values();
 		foreach ($dialog_questions['extension'] as $value => $default)
 		{
-			$this->data['extension'][$value] = $this->get_user_input($dialog, $output, $value, $default);
+			$this->data['extension'][$value] = $this->get_user_input($value, $default);
 		}
 
-		$num_authors = $dialog->askAndValidate(
-			$output,
-			$this->user->lang('SKELETON_QUESTION_NUM_AUTHORS') . $this->user->lang('COLON'),
-			array($this->validator, 'validate_num_authors'),
-			false,
-			1
-		);
+		$question = new Question($this->user->lang('SKELETON_QUESTION_NUM_AUTHORS') . $this->user->lang('COLON'), 1);
+		$question->setValidator(array($this->validator, 'validate_num_authors'));
+		$num_authors = $this->helper->ask($this->input, $this->output, $question);
 
 		$this->data['authors'] = array();
 		for ($i = 0; $i < $num_authors; $i++)
 		{
 			foreach ($dialog_questions['author'] as $value => $default)
 			{
-				$this->data['authors'][$i][$value] = $this->get_user_input($dialog, $output, $value, $default);
+				$this->data['authors'][$i][$value] = $this->get_user_input($value, $default);
 			}
 		}
 
 		foreach ($dialog_questions['requirements'] as $value => $default)
 		{
-			$this->data['requirements'][$value] = $this->get_user_input($dialog, $output, $value, $default);
+			$this->data['requirements'][$value] = $this->get_user_input($value, $default);
 		}
 	}
 
 	/**
-	 * @param DialogHelper $dialog
-	 * @param OutputInterface $output
+	 * Get component data from the user
 	 */
-	protected function get_component_data(DialogHelper $dialog, OutputInterface $output)
+	protected function get_component_data()
 	{
 		$components = $this->packager->get_component_dialog_values();
 		foreach ($components as $component => $details)
@@ -147,44 +155,36 @@ class create extends command
 				}
 			}
 
-			$this->data['components'][$component] = $this->get_user_input($dialog, $output, 'component_' . $component, $details['default']);
+			$this->data['components'][$component] = $this->get_user_input('component_' . $component, $details['default']);
 		}
 	}
 
 	/**
-	 * @param DialogHelper $dialog
-	 * @param OutputInterface $output
+	 * Helper for getting user input
+	 *
 	 * @param string $value
 	 * @param mixed $default
 	 * @return mixed|string
 	 */
-	protected function get_user_input(DialogHelper $dialog, OutputInterface $output, $value, $default)
+	protected function get_user_input($value, $default)
 	{
+		$dialog = $this->user->lang('SKELETON_QUESTION_' . strtoupper($value)) . $this->user->lang('COLON');
+
 		if (method_exists($this->validator, 'validate_' . $value))
 		{
-			$return_value = $dialog->askAndValidate(
-				$output,
-				$this->user->lang('SKELETON_QUESTION_' . strtoupper($value)) . $this->user->lang('COLON'),
-				array($this->validator, 'validate_' . $value),
-				false,
-				$default
-			);
+			$question = new Question($dialog, $default);
+			$question->setValidator(array($this->validator, 'validate_' . $value));
+			$return_value = $this->helper->ask($this->input, $this->output, $question);
 		}
 		else if (is_bool($default))
 		{
-			$return_value = $dialog->askConfirmation(
-				$output,
-				$this->user->lang('SKELETON_QUESTION_' . strtoupper($value)) . $this->user->lang('COLON'),
-				$default
-			);
+			$question = new ConfirmationQuestion($dialog, $default);
+			$return_value = $this->helper->ask($this->input, $this->output, $question);
 		}
 		else
 		{
-			$return_value = $dialog->ask(
-				$output,
-				$this->user->lang('SKELETON_QUESTION_' . strtoupper($value)) . $this->user->lang('COLON'),
-				$default
-			);
+			$question = new Question($dialog, $default);
+			$return_value = $this->helper->ask($this->input, $this->output, $question);
 		}
 
 		return $return_value;
