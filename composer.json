@@ -1,10 +1,10 @@
 {
 	"name": "phpbb/skeleton",
 	"type": "phpbb-extension",
-	"description": "phpBB Extension creating extension skeletons",
-	"homepage": "https://github.com/nickv-phpbb/phpbb-ext-skeleton",
 	"version": "1.0.0-dev",
 	"time": "2015-05-29",
+	"description": "A phpBB Extension for creating extension skeletons",
+	"homepage": "https://github.com/phpbb-extensions/phpbb-ext-skeleton",
 	"license": "GPL-2.0",
 	"authors": [
 		{
