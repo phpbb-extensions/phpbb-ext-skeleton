@@ -6,12 +6,19 @@
 	"version": "1.0.0-dev",
 	"time": "2015-05-29",
 	"license": "GPL-2.0",
-	"authors": [{
+	"authors": [
+		{
 			"name": "Joas Schilling",
 			"email": "nickvergessen@gmx.de",
 			"homepage": "https://github.com/nickvergessen/",
 			"role": "Lead Developer"
-		}],
+		},
+		{
+			"name": "Matt Friedman",
+			"homepage": "http://mattfriedman.me",
+			"role": "Extensions Development Team Lead"
+		}
+	],
 	"require": {
 		"php": ">=5.3.3",
 		"symfony/finder": "2.8.*"
