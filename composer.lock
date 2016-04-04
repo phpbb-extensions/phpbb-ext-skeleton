@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e43b8840cadb884d46569b0fa639a4dd",
-    "content-hash": "1d03d1083ea3b4162c5743a44ce9b951",
+    "hash": "424afdee4bbc9592969d0ba22e0a8bdb",
+    "content-hash": "62d66a67f9815328953b8f151110b69d",
     "packages": [
         {
             "name": "symfony/finder",
@@ -209,56 +209,6 @@
                 "tool"
             ],
             "time": "2012-11-29 21:23:47"
-        },
-        {
-            "name": "phpbb/epv",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpbb/epv.git",
-                "reference": "20988361847a65198f2ac15a225e3f4d9ca3030c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpbb/epv/zipball/20988361847a65198f2ac15a225e3f4d9ca3030c",
-                "reference": "20988361847a65198f2ac15a225e3f4d9ca3030c",
-                "shasum": ""
-            },
-            "require": {
-                "gitonomy/gitlib": "0.1.*@dev",
-                "nikic/php-parser": "0.9.*@dev",
-                "php": ">=5.3.3",
-                "sensiolabs/ansi-to-html": "~1.1",
-                "symfony/console": "~2.3",
-                "symfony/finder": "~2.3",
-                "symfony/process": "~2.3",
-                "symfony/yaml": "~2.3"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "4.4.*",
-                "phpunit/phpunit-mock-objects": "2.3.*"
-            },
-            "bin": [
-                "src/EPV.php"
-            ],
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Phpbb\\Epv\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "Paul Sohier",
-                    "email": "paul@phpbb.com"
-                }
-            ],
-            "description": "A extension validator for phpBB extensions. Extensions are required to pass the validator when submitted to the extension database.",
-            "time": "2016-01-31 18:06:43"
         },
         {
             "name": "sensiolabs/ansi-to-html",
@@ -524,9 +474,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "phpbb/epv": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
