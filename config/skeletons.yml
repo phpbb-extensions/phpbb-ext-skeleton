@@ -115,3 +115,13 @@ services:
             - ['travis/prepare-phpbb.sh', '.travis.yml']
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
+
+    phpbb.skeleton.ext.skeleton.build:
+        class: phpbb\skeleton\skeleton
+        arguments:
+            - 'build'
+            - true
+            - []
+            - ['build.xml']
+        tags:
+            - { name: phpbb.skeleton.ext.skeleton }

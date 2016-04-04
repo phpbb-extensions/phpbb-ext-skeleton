@@ -94,8 +94,8 @@ $lang = array_merge($lang, array(
 	'SKELETON_QUESTION_COMPONENT_TESTS_UI'			=> 'PHPUnit tests',
 	'SKELETON_QUESTION_COMPONENT_TRAVIS'			=> 'Create a sample for test execution on Travis-CI?',
 	'SKELETON_QUESTION_COMPONENT_TRAVIS_UI'			=> 'Test execution on Travis-CI',
-	'SKELETON_QUESTION_COMPONENT_BUILD'				=> 'Create a sample script to build packages for the customisation database?',
-	'SKELETON_QUESTION_COMPONENT_BUILD_UI'			=> 'Script to build packages for the customisation database',
+	'SKELETON_QUESTION_COMPONENT_BUILD'				=> 'Create a sample build script for phing?',
+	'SKELETON_QUESTION_COMPONENT_BUILD_UI'			=> 'Build script (phing)',
 
 	'SKELETON_TITLE_EXTENSION_INFO'		=> 'Extension packaging',
 	'SKELETON_TITLE_AUTHOR_INFO'		=> 'Authors',
