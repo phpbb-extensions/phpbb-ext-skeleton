@@ -52,7 +52,7 @@ services:
             - 'migration'
             - false
             - []
-            - ['migrations/install_module.php', 'migrations/install_user_schema.php']
+            - ['migrations/install_acp_module.php', 'migrations/install_ucp_module.php', 'migrations/install_user_schema.php']
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
 

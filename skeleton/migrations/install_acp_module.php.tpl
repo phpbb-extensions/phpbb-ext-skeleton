@@ -13,7 +13,7 @@
 
 namespace {EXTENSION.vendor_name}\{EXTENSION.extension_name}\migrations;
 
-class install_module extends \phpbb\db\migration\migration
+class install_acp_module extends \phpbb\db\migration\migration
 {
 	public function effectively_installed()
 	{
