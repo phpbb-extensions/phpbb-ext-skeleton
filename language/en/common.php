@@ -26,8 +26,8 @@ $lang = array_merge($lang, array(
 	'PHPBB_SKELETON_EXT'				=> 'Create skeleton extension',
 
 	'EXTENSION_CLI_SKELETON_SUCCESS'	=> "<info>Extension created successfully.\nCopy the extension from `store/tmp-ext/` into the `ext/` folder.</info>",
-	'SKELETON_CLI_COMPOSER_QUESTIONS'	=> '<comment>Enter the composer.json details (hit enter to leave an option empty)</comment>',
-	'SKELETON_CLI_COMPONENT_QUESTIONS'	=> '<comment>Choose the components you’d like installed. Default: y; [y/n]</comment>',
+	'SKELETON_CLI_COMPOSER_QUESTIONS'	=> '<comment>Enter composer.json details (hit enter to leave an option empty)</comment>',
+	'SKELETON_CLI_COMPONENT_QUESTIONS'	=> '<comment>Install optional components. Default: No; [y/n]</comment>',
 
 	'SKELETON_ADD_AUTHOR'						=> 'Add author',
 	'SKELETON_QUESTION_VENDOR_NAME'				=> 'Please enter the vendor name',
@@ -83,7 +83,7 @@ $lang = array_merge($lang, array(
 	'SKELETON_QUESTION_COMPONENT_SERVICE'			=> 'Create a sample service?',
 	'SKELETON_QUESTION_COMPONENT_SERVICE_UI'		=> 'Service',
 	'SKELETON_QUESTION_COMPONENT_CONTROLLER'		=> 'Create a sample controller?',
-	'SKELETON_QUESTION_COMPONENT_CONTROLLER_UI'		=> 'Controller (frontpage)',
+	'SKELETON_QUESTION_COMPONENT_CONTROLLER_UI'		=> 'Controller (front page)',
 	'SKELETON_QUESTION_COMPONENT_EXT'				=> 'Create a sample ext.php?',
 	'SKELETON_QUESTION_COMPONENT_EXT_UI'			=> 'Extension base (ext.php)',
 	'SKELETON_QUESTION_COMPONENT_TESTS'				=> 'Create sample PHPUnit tests?',
