@@ -10,7 +10,7 @@ services:
         class: phpbb\skeleton\skeleton
         arguments:
             - 'phplistener'
-            - true
+            - false
             - []
             - ['config/services.yml', 'event/main_listener.php']
         tags:
@@ -20,7 +20,7 @@ services:
         class: phpbb\skeleton\skeleton
         arguments:
             - 'htmllistener'
-            - true
+            - false
             - []
             - ['styles/prosilver/template/event/overall_header_navigation_prepend.html']
         tags:
@@ -30,7 +30,7 @@ services:
         class: phpbb\skeleton\skeleton
         arguments:
             - 'acp'
-            - true
+            - false
             - []
             - ['acp/main_info.php', 'acp/main_module.php', 'adm/style/acp_demo_body.html', 'language/en/info_acp_demo.php']
         tags:
@@ -40,7 +40,7 @@ services:
         class: phpbb\skeleton\skeleton
         arguments:
             - 'migration'
-            - true
+            - false
             - []
             - ['migrations/install_module.php', 'migrations/install_user_schema.php']
         tags:
@@ -50,7 +50,7 @@ services:
         class: phpbb\skeleton\skeleton
         arguments:
             - 'service'
-            - true
+            - false
             - []
             - ['service.php', 'config/services.yml', 'config/parameters.yml']
         tags:
@@ -60,7 +60,7 @@ services:
         class: phpbb\skeleton\skeleton
         arguments:
             - 'controller'
-            - true
+            - false
             - []
             - ['config/routing.yml', 'config/services.yml', 'event/main_listener.php', 'language/en/common.php', 'controller/main.php', 'styles/prosilver/template/demo_body.html']
         tags:
@@ -70,7 +70,7 @@ services:
         class: phpbb\skeleton\skeleton
         arguments:
             - 'ext'
-            - true
+            - false
             - []
             - ['ext.php']
         tags:
@@ -80,7 +80,7 @@ services:
         class: phpbb\skeleton\skeleton
         arguments:
             - 'tests'
-            - true
+            - false
             - []
             - ['tests/controller/main_test.php', 'tests/dbal/fixtures/config.xml', 'tests/dbal/simple_test.php', 'tests/functional/demo_test.php', 'phpunit.xml.dist']
         tags:
@@ -90,7 +90,7 @@ services:
         class: phpbb\skeleton\skeleton
         arguments:
             - 'travis'
-            - true
+            - false
             - ['tests']
             - ['travis/prepare-phpbb.sh', '.travis.yml']
         tags:

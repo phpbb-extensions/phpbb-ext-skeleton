@@ -196,7 +196,6 @@ class main
 		$components = $this->packager->get_component_dialog_values();
 		foreach ($components as $component => $details)
 		{
-			$details['default'] = false;
 			foreach ($details['dependencies'] as $depends)
 			{
 				if (empty($this->data['components'][$depends]))
