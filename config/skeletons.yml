@@ -40,7 +40,7 @@ services:
         class: phpbb\skeleton\skeleton
         arguments:
             - 'ucp'
-            - true
+            - false
             - []
             - ['ucp/main_info.php', 'ucp/main_module.php', 'styles/prosilver/template/ucp_demo_body.html', 'language/en/info_ucp_demo.php']
         tags:
@@ -90,7 +90,7 @@ services:
         class: phpbb\skeleton\skeleton
         arguments:
             - 'console'
-            - true
+            - false
             - []
             - ['config/services.yml', 'console/command/demo.php', 'language/en/cli.php']
         tags:
@@ -100,7 +100,7 @@ services:
         class: phpbb\skeleton\skeleton
         arguments:
             - 'cron'
-            - true
+            - false
             - []
             - ['config/services.yml', 'cron/task/demo.php', 'migrations/install_cron.php']
         tags:
@@ -130,7 +130,7 @@ services:
         class: phpbb\skeleton\skeleton
         arguments:
             - 'build'
-            - true
+            - false
             - []
             - ['build.xml']
         tags:
