@@ -36,6 +36,16 @@ services:
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
 
+    phpbb.skeleton.ext.skeleton.ucp:
+        class: phpbb\skeleton\skeleton
+        arguments:
+            - 'ucp'
+            - true
+            - []
+            - ['ucp/main_info.php', 'ucp/main_module.php', 'styles/prosilver/template/ucp_demo_body.html', 'language/en/info_ucp_demo.php']
+        tags:
+            - { name: phpbb.skeleton.ext.skeleton }
+
     phpbb.skeleton.ext.skeleton.migration:
         class: phpbb\skeleton\skeleton
         arguments:
