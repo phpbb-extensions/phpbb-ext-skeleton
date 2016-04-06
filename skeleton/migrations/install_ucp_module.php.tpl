@@ -22,10 +22,10 @@ class install_ucp_module extends \phpbb\db\migration\migration
 			WHERE module_class = 'ucp'
 				AND module_langname = 'UCP_DEMO_TITLE'";
 		$result = $this->db->sql_query($sql);
-		$module_id = (int) $this->db->sql_fetchfield('module_id');
+		$module_id = $this->db->sql_fetchfield('module_id');
 		$this->db->sql_freeresult($result);
 
-		return !$module_id;
+		return $module_id !== false;
 	}
 
 	static public function depends_on()
