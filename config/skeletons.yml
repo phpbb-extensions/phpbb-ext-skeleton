@@ -36,6 +36,16 @@ services:
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
 
+    phpbb.skeleton.ext.skeleton.mcp:
+        class: phpbb\skeleton\skeleton
+        arguments:
+            - 'mcp'
+            - false
+            - []
+            - ['mcp/main_info.php', 'mcp/main_module.php', 'styles/prosilver/template/mcp_demo_body.html', 'language/en/info_mcp_demo.php']
+        tags:
+            - { name: phpbb.skeleton.ext.skeleton }
+
     phpbb.skeleton.ext.skeleton.ucp:
         class: phpbb\skeleton\skeleton
         arguments:
@@ -52,7 +62,7 @@ services:
             - 'migration'
             - false
             - []
-            - ['migrations/install_acp_module.php', 'migrations/install_ucp_module.php', 'migrations/install_user_schema.php']
+            - ['migrations/install_acp_module.php', 'migrations/install_mcp_module.php', 'migrations/install_ucp_module.php', 'migrations/install_user_schema.php']
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
 
