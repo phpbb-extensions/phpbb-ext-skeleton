@@ -15,6 +15,7 @@ namespace phpbb\skeleton\controller;
 
 use phpbb\config\config;
 use phpbb\controller\helper;
+use phpbb\exception\http_exception;
 use phpbb\request\request;
 use phpbb\skeleton\helper\packager;
 use phpbb\skeleton\helper\validator;
@@ -76,9 +77,15 @@ class main
 	* Demo controller for route /skeleton
 	*
 	* @return \Symfony\Component\HttpFoundation\Response A Symfony Response object
+	* @throws http_exception
 	*/
 	public function handle()
 	{
+		if ($this->user->data['is_bot'])
+		{
+			throw new http_exception(403, 'NOT_AUTHORISED');
+		}
+
 		if ($this->request->is_set_post('submit'))
 		{
 			try

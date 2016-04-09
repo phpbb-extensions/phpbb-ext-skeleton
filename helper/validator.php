@@ -25,6 +25,16 @@ class validator
 		$this->user = $user;
 	}
 
+	public function validate_author_name($value)
+	{
+		if (strlen($value))
+		{
+			return $value;
+		}
+
+		throw new \RuntimeException($this->user->lang('SKELETON_INVALID_AUTHOR_NAME'));
+	}
+
 	public function validate_num_authors($value)
 	{
 		if (preg_match('#^\d+$#', $value) && $value > 0 && $value <= 20)
@@ -38,6 +48,16 @@ class validator
 	public function validate_extension_name($value)
 	{
 		if (preg_match('#^[a-zA-Z][a-zA-Z0-9]*$#', $value))
+		{
+			return $value;
+		}
+
+		throw new \RuntimeException($this->user->lang('SKELETON_INVALID_EXTENSION_NAME'));
+	}
+
+	public function validate_extension_display_name($value)
+	{
+		if (strlen($value))
 		{
 			return $value;
 		}
