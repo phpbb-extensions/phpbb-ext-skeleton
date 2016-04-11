@@ -30,7 +30,7 @@ class install_ucp_module extends \phpbb\db\migration\migration
 
 	static public function depends_on()
 	{
-		return array('\{EXTENSION.vendor_name}\{EXTENSION.extension_name}\migration\install_user_schema');
+		return array('\{EXTENSION.vendor_name}\{EXTENSION.extension_name}\migrations\install_user_schema');
 	}
 
 	public function update_data()
