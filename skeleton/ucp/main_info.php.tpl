@@ -11,19 +11,19 @@
  *
  */
 
-namespace {EXTENSION.vendor_name}\{EXTENSION.extension_name}\ucp;
+namespace {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\ucp;
 
 class main_info
 {
 	function module()
 	{
 		return array(
-			'filename'	=> '\{EXTENSION.vendor_name}\{EXTENSION.extension_name}\ucp\main_module',
+			'filename'	=> '\{{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\ucp\main_module',
 			'title'		=> 'UCP_DEMO_TITLE',
 			'modes'		=> array(
 				'settings'	=> array(
 					'title'	=> 'UCP_DEMO',
-					'auth'	=> 'ext_{EXTENSION.vendor_name}/{EXTENSION.extension_name}',
+					'auth'	=> 'ext_{{ EXTENSION.vendor_name }}/{{ EXTENSION.extension_name }}',
 					'cat'	=> array('UCP_DEMO_TITLE')
 				),
 			),

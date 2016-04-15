@@ -11,7 +11,7 @@
  *
  */
 
-namespace {EXTENSION.vendor_name}\{EXTENSION.extension_name}\tests\functional;
+namespace {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\tests\functional;
 
 /**
  * @group functional
@@ -20,7 +20,7 @@ class demo_test extends \phpbb_functional_test_case
 {
 	static protected function setup_extensions()
 	{
-		return array('{EXTENSION.vendor_name}/{EXTENSION.extension_name}');
+		return array('{{ EXTENSION.vendor_name }}/{{ EXTENSION.extension_name }}');
 	}
 
 	public function test_demo_acme()
@@ -28,7 +28,7 @@ class demo_test extends \phpbb_functional_test_case
 		$crawler = self::request('GET', 'app.php/demo/acme');
 		$this->assertContains('acme', $crawler->filter('h2')->text());
 
-		$this->add_lang_ext('{EXTENSION.vendor_name}/{EXTENSION.extension_name}', 'common');
+		$this->add_lang_ext('{{ EXTENSION.vendor_name }}/{{ EXTENSION.extension_name }}', 'common');
 		$this->assertContains($this->lang('DEMO_HELLO', 'acme'), $crawler->filter('h2')->text());
 		$this->assertNotContains($this->lang('DEMO_GOODBYE', 'acme'), $crawler->filter('h2')->text());
 

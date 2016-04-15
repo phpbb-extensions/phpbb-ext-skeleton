@@ -11,7 +11,7 @@
  *
  */
 
-namespace {EXTENSION.vendor_name}\{EXTENSION.extension_name}\cron\task;
+namespace {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\cron\task;
 
 /**
  * Acme demo cron task.

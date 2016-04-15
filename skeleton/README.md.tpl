@@ -1,10 +1,10 @@
-# {EXTENSION.extension_display_name}
+# {{ EXTENSION.extension_display_name }}
 
 ## Installation
 
-Copy the extension to phpBB/ext/{EXTENSION.vendor_name}/{EXTENSION.extension_name}
+Copy the extension to phpBB/ext/{{ EXTENSION.vendor_name }}/{{ EXTENSION.extension_name }}
 
-Go to "ACP" > "Customise" > "Extensions" and enable the "{EXTENSION.extension_display_name}" extension.
+Go to "ACP" > "Customise" > "Extensions" and enable the "{{ EXTENSION.extension_display_name }}" extension.
 
 ## Tests and Continuous Integration
 
@@ -13,11 +13,11 @@ To run the tests locally, you need to install phpBB from its Git repository. Aft
 
 Windows:
 
-    phpBB\vendor\bin\phpunit.bat -c phpBB\ext\{EXTENSION.vendor_name}\{EXTENSION.extension_name}\phpunit.xml.dist
+    phpBB\vendor\bin\phpunit.bat -c phpBB\ext\{{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\phpunit.xml.dist
 
 others:
 
-    phpBB/vendor/bin/phpunit -c phpBB/ext/{EXTENSION.vendor_name}/{EXTENSION.extension_name}/phpunit.xml.dist
+    phpBB/vendor/bin/phpunit -c phpBB/ext/{{ EXTENSION.vendor_name }}/{{ EXTENSION.extension_name }}/phpunit.xml.dist
 
 ## License
 

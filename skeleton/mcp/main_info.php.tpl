@@ -11,19 +11,19 @@
  *
  */
 
-namespace {EXTENSION.vendor_name}\{EXTENSION.extension_name}\mcp;
+namespace {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\mcp;
 
 class main_info
 {
 	function module()
 	{
 		return array(
-			'filename'	=> '\{EXTENSION.vendor_name}\{EXTENSION.extension_name}\mcp\main_module',
+			'filename'	=> '\{{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\mcp\main_module',
 			'title'		=> 'MCP_DEMO_TITLE',
 			'modes'		=> array(
 				'front'	=> array(
 					'title'	=> 'MCP_DEMO',
-					'auth'	=> 'ext_{EXTENSION.vendor_name}/{EXTENSION.extension_name}',
+					'auth'	=> 'ext_{{ EXTENSION.vendor_name }}/{{ EXTENSION.extension_name }}',
 					'cat'	=> array('MCP_DEMO_TITLE')
 				),
 			),

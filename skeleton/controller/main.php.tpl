@@ -11,7 +11,7 @@
  *
  */
 
-namespace {EXTENSION.vendor_name}\{EXTENSION.extension_name}\controller;
+namespace {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\controller;
 
 class main
 {

@@ -11,7 +11,7 @@
  *
  */
 
-namespace {EXTENSION.vendor_name}\{EXTENSION.extension_name}\migrations;
+namespace {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\migrations;
 
 class install_ucp_module extends \phpbb\db\migration\migration
 {
@@ -30,7 +30,7 @@ class install_ucp_module extends \phpbb\db\migration\migration
 
 	static public function depends_on()
 	{
-		return array('\{EXTENSION.vendor_name}\{EXTENSION.extension_name}\migrations\install_user_schema');
+		return array('\{{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\migrations\install_user_schema');
 	}
 
 	public function update_data()
@@ -45,7 +45,7 @@ class install_ucp_module extends \phpbb\db\migration\migration
 				'ucp',
 				'UCP_DEMO_TITLE',
 				array(
-					'module_basename'	=> '\{EXTENSION.vendor_name}\{EXTENSION.extension_name}\ucp\main_module',
+					'module_basename'	=> '\{{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\ucp\main_module',
 					'modes'				=> array('settings'),
 				),
 			)),

@@ -11,7 +11,7 @@
  *
  */
 
-namespace {EXTENSION.vendor_name}\{EXTENSION.extension_name}\migrations;
+namespace {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\migrations;
 
 class install_mcp_module extends \phpbb\db\migration\migration
 {
@@ -45,7 +45,7 @@ class install_mcp_module extends \phpbb\db\migration\migration
 				'mcp',
 				'MCP_DEMO_TITLE',
 				array(
-					'module_basename'	=> '\{EXTENSION.vendor_name}\{EXTENSION.extension_name}\mcp\main_module',
+					'module_basename'	=> '\{{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\mcp\main_module',
 					'modes'				=> array('front'),
 				),
 			)),

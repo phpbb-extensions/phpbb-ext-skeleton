@@ -11,7 +11,7 @@
  *
  */
 
-namespace {EXTENSION.vendor_name}\{EXTENSION.extension_name};
+namespace {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }};
 
 /**
  * Class ext

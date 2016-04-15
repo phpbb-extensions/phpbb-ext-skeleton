@@ -11,7 +11,7 @@
  *
  */
 
-namespace {EXTENSION.vendor_name}\{EXTENSION.extension_name}\event;
+namespace {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\event;
 
 /**
 * @ignore
@@ -26,13 +26,13 @@ class main_listener implements EventSubscriberInterface
 	static public function getSubscribedEvents()
 	{
 		return array(
-<!-- IF COMPONENT.phplistener -->
+{% if COMPONENT.phplistener %}
 			'core.display_forums_modify_template_vars'	=> 'display_forums_modify_template_vars',
-<!-- ENDIF -->
-<!-- IF COMPONENT.controller -->
+{% endif %}
+{% if COMPONENT.controller %}
 			'core.user_setup'				=> 'load_language_on_setup',
 			'core.page_header'				=> 'add_page_header_link',
-<!-- ENDIF -->
+{% endif %}
 		);
 	}
 
@@ -53,7 +53,7 @@ class main_listener implements EventSubscriberInterface
 		$this->helper = $helper;
 		$this->template = $template;
 	}
-<!-- IF COMPONENT.phplistener -->
+{% if COMPONENT.phplistener %}
 
 	/**
 	* A sample PHP event
@@ -67,8 +67,8 @@ class main_listener implements EventSubscriberInterface
 		$forum_row['FORUM_NAME'] .= ' << Acme Event >>';
 		$event['forum_row'] = $forum_row;
 	}
-<!-- ENDIF -->
-<!-- IF COMPONENT.controller -->
+{% endif %}
+{% if COMPONENT.controller %}
 
 	/**
 	* Load common language files during user setup
@@ -79,7 +79,7 @@ class main_listener implements EventSubscriberInterface
 	{
 		$lang_set_ext = $event['lang_set_ext'];
 		$lang_set_ext[] = array(
-			'ext_name' => '{EXTENSION.vendor_name}/{EXTENSION.extension_name}',
+			'ext_name' => '{{ EXTENSION.vendor_name }}/{{ EXTENSION.extension_name }}',
 			'lang_set' => 'common',
 		);
 		$event['lang_set_ext'] = $lang_set_ext;
@@ -91,8 +91,8 @@ class main_listener implements EventSubscriberInterface
 	public function add_page_header_link($event)
 	{
 		$this->template->assign_vars(array(
-			'U_DEMO_PAGE'	=> $this->helper->route('{EXTENSION.vendor_name}_{EXTENSION.extension_name}_controller', array('name' => 'world')),
+			'U_DEMO_PAGE'	=> $this->helper->route('{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }}_controller', array('name' => 'world')),
 		));
 	}
-<!-- ENDIF -->
+{% endif %}
 }

@@ -11,7 +11,7 @@
  *
  */
 
-namespace {EXTENSION.vendor_name}\{EXTENSION.extension_name}\ucp;
+namespace {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\ucp;
 
 class main_module
 {
