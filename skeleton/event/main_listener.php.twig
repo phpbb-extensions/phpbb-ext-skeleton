@@ -64,7 +64,7 @@ class main_listener implements EventSubscriberInterface
 	public function display_forums_modify_template_vars($event)
 	{
 		$forum_row = $event['forum_row'];
-		$forum_row['FORUM_NAME'] .= ' << Acme Event >>';
+		$forum_row['FORUM_NAME'] .= ' :: Acme Event ::';
 		$event['forum_row'] = $forum_row;
 	}
 {% endif %}
