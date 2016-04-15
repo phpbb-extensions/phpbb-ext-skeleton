@@ -32,3 +32,23 @@ services:
             - { name: event.listener }
 
 <!-- ENDIF -->
+<!-- IF COMPONENT.console -->
+    {EXTENSION.vendor_name}.{EXTENSION.extension_name}.command.demo:
+        class: {EXTENSION.vendor_name}\{EXTENSION.extension_name}\console\command\demo
+        arguments:
+            - '@user'
+        tags:
+            - { name: console.command }
+
+<!-- ENDIF -->
+<!-- IF COMPONENT.cron -->
+    {EXTENSION.vendor_name}.{EXTENSION.extension_name}.cron.task.demo:
+        class: {EXTENSION.vendor_name}\{EXTENSION.extension_name}\cron\task\demo
+        arguments:
+            - '@config'
+        calls:
+            - [set_name, [cron.task.demo]]
+        tags:
+            - { name: cron.task }
+
+<!-- ENDIF -->

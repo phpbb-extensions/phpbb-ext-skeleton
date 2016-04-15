@@ -36,13 +36,33 @@ services:
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
 
+    phpbb.skeleton.ext.skeleton.mcp:
+        class: phpbb\skeleton\skeleton
+        arguments:
+            - 'mcp'
+            - false
+            - []
+            - ['mcp/main_info.php', 'mcp/main_module.php', 'styles/prosilver/template/mcp_demo_body.html', 'language/en/info_mcp_demo.php']
+        tags:
+            - { name: phpbb.skeleton.ext.skeleton }
+
+    phpbb.skeleton.ext.skeleton.ucp:
+        class: phpbb\skeleton\skeleton
+        arguments:
+            - 'ucp'
+            - false
+            - []
+            - ['ucp/main_info.php', 'ucp/main_module.php', 'styles/prosilver/template/ucp_demo_body.html', 'language/en/info_ucp_demo.php']
+        tags:
+            - { name: phpbb.skeleton.ext.skeleton }
+
     phpbb.skeleton.ext.skeleton.migration:
         class: phpbb\skeleton\skeleton
         arguments:
             - 'migration'
             - false
             - []
-            - ['migrations/install_module.php', 'migrations/install_user_schema.php']
+            - ['migrations/install_acp_module.php', 'migrations/install_mcp_module.php', 'migrations/install_ucp_module.php', 'migrations/install_user_schema.php']
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
 
@@ -76,6 +96,26 @@ services:
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
 
+    phpbb.skeleton.ext.skeleton.console:
+        class: phpbb\skeleton\skeleton
+        arguments:
+            - 'console'
+            - false
+            - []
+            - ['config/services.yml', 'console/command/demo.php', 'language/en/cli.php']
+        tags:
+            - { name: phpbb.skeleton.ext.skeleton }
+
+    phpbb.skeleton.ext.skeleton.cron:
+        class: phpbb\skeleton\skeleton
+        arguments:
+            - 'cron'
+            - false
+            - []
+            - ['config/services.yml', 'cron/task/demo.php', 'migrations/install_cron.php']
+        tags:
+            - { name: phpbb.skeleton.ext.skeleton }
+
     phpbb.skeleton.ext.skeleton.tests:
         class: phpbb\skeleton\skeleton
         arguments:
@@ -93,5 +133,15 @@ services:
             - false
             - ['tests']
             - ['travis/prepare-phpbb.sh', '.travis.yml']
+        tags:
+            - { name: phpbb.skeleton.ext.skeleton }
+
+    phpbb.skeleton.ext.skeleton.build:
+        class: phpbb\skeleton\skeleton
+        arguments:
+            - 'build'
+            - false
+            - []
+            - ['build.xml']
         tags:
             - { name: phpbb.skeleton.ext.skeleton }

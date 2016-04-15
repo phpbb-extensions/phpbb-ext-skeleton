@@ -13,11 +13,11 @@
 
 namespace {EXTENSION.vendor_name}\{EXTENSION.extension_name}\migrations;
 
-class install_module extends \phpbb\db\migration\migration
+class install_cron extends \phpbb\db\migration\migration
 {
 	public function effectively_installed()
 	{
-		return isset($this->config['acme_demo_goodbye']);
+		return isset($this->config['acme_cron_last_run']);
 	}
 
 	static public function depends_on()
@@ -28,21 +28,7 @@ class install_module extends \phpbb\db\migration\migration
 	public function update_data()
 	{
 		return array(
-			array('config.add', array('acme_demo_goodbye', 0)),
-
-			array('module.add', array(
-				'acp',
-				'ACP_CAT_DOT_MODS',
-				'ACP_DEMO_TITLE'
-			)),
-			array('module.add', array(
-				'acp',
-				'ACP_DEMO_TITLE',
-				array(
-					'module_basename'	=> '\{EXTENSION.vendor_name}\{EXTENSION.extension_name}\acp\main_module',
-					'modes'				=> array('settings'),
-				),
-			)),
+			array('config.add', array('acme_cron_last_run', 0)),
 		);
 	}
 }

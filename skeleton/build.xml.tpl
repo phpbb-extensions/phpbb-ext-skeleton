@@ -1,0 +1,120 @@
+{% set dir = '${' ~ 'dir}' %}
+{% set buildDir = '${' ~ 'build-directory}' %}
+{% set packageDir = '${' ~ 'package-directory}' %}
+{% set vendor = '${' ~ 'vendor-name}' %}
+{% set extension = '${' ~ 'extension-name}' %}
+{% set buildVersion = '${' ~ 'version}' %}
+{% set packageVersion = '${' ~ 'package-version}' %}
+{% set archiveVersion = '${' ~ 'archive-version}' %}
+{% set destination = '${' ~ 'destination-filename}' %}
+{% set dependencies = '${' ~ 'has-dependencies}' %}
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Skeleton Extension Builder" description="Builds an extension.zip from a git repository" default="all">
+	<property name="vendor-name" value="{{ EXTENSION.vendor_name }}" />
+	<property name="extension-name" value="{{ EXTENSION.extension_name }}" />
+	<!--
+	Only set this to "true" if you have dependencies in the composer.json,
+	otherwise use "false".
+	-->
+	<property name="has-dependencies" value="false" />
+
+	<target name="clean-package">
+		<!--
+		Remove some unnecessary files/directories
+		{{ dir }}/ is the folder of your extension, e.g. ext/acme/demo/
+		-->
+		<delete dir="{{ dir }}/tests" />
+		<delete dir="{{ dir }}/travis" />
+
+		<delete file="{{ dir }}/.gitignore" />
+		<delete file="{{ dir }}/.gitattributes" />
+		<delete file="{{ dir }}/.travis.yml" />
+		<delete file="{{ dir }}/build.xml" />
+		<delete file="{{ dir }}/composer.lock" />
+		<delete file="{{ dir }}/composer.phar" />
+		<delete file="{{ dir }}/phpunit.xml.dist" />
+		<delete file="{{ dir }}/README.md" />
+	</target>
+
+	<!--
+	TODO: DO NOT EDIT BELOW THIS LINE!!!!
+	-->
+
+	<property name="version" value="HEAD" override="true" />
+	<property name="build-directory" value="build" override="true" />
+	<property name="package-directory" value="{{ buildDir }}/package/{{ vendor }}/{{ extension }}" />
+
+	<!-- These are the main targets which you will probably want to use -->
+	<target name="all" depends="prepare-structure,package" />
+
+	<!--
+	Clean up the build directory
+	-->
+	<target name="clean">
+		<delete dir="{{ buildDir }}" />
+	</target>
+
+	<!--
+	Recreate the necessary folders
+	-->
+	<target name="prepare-structure" depends="clean">
+		<mkdir dir="{{ buildDir }}" />
+		<mkdir dir="{{ buildDir }}/checkout" />
+		<mkdir dir="{{ buildDir }}/package" />
+		<mkdir dir="{{ buildDir }}/package/{{ vendor }}" />
+		<mkdir dir="{{ buildDir }}/package/{{ vendor }}/{{ extension }}" />
+		<mkdir dir="{{ buildDir }}/upload" />
+	</target>
+
+	<!--
+	The real packaging
+	-->
+	<target name="package">
+		<echo msg="Extracting {{ buildVersion }}" />
+
+		<phingcall target="git-checkout">
+			<property name="archive-version" value="{{ buildVersion }}" />
+		</phingcall>
+
+		<if>
+			<equals arg1="{{ dependencies }}" arg2="1" />
+			<then>
+				<exec dir="{{ packageDir }}" command="php composer.phar install --no-dev"
+					  checkreturn="true" />
+			</then>
+		</if>
+
+		<phingcall target="clean-package">
+			<property name="dir" value="{{ packageDir }}" />
+		</phingcall>
+
+		<!-- Try setting the package version property from composer.json -->
+		<exec dir="{{ packageDir }}"
+			  command='php -r "\$j = json_decode(file_get_contents(\"composer.json\")); echo (isset(\$j->version) ? \$j->version : \"{{ buildVersion }}\");"'
+			  checkreturn="true"
+			  outputProperty='package-version' />
+
+		<phingcall target="wrap-package">
+			<property name="destination-filename" value="{{ buildDir }}/upload/{{ vendor }}_{{ extension }}_{{ packageVersion }}" />
+		</phingcall>
+	</target>
+
+	<!--
+	Checkout a given version and install/clean the dependencies
+	-->
+	<target name="git-checkout">
+		<echo msg="Getting archive for {{ archiveVersion }}" />
+
+		<exec command="git archive {{ archiveVersion }} --format zip --output {{ buildDir }}/checkout/{{ archiveVersion }}.zip"
+			  checkreturn="true" />
+		<unzip file="{{ buildDir }}/checkout/{{ archiveVersion }}.zip" todir="{{ packageDir }}" />
+	</target>
+
+	<!--
+	Create the zip and tar ball
+	-->
+	<target name="wrap-package">
+		<echo msg="Creating archives ({{ vendor }}/{{ extension }} {{ buildVersion }})" />
+		<zip basedir="{{ buildDir }}/package/" destfile="{{ destination }}.zip" />
+	</target>
+</project>

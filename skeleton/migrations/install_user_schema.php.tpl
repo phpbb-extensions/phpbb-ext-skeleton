@@ -22,7 +22,7 @@ class install_user_schema extends \phpbb\db\migration\migration
 
 	static public function depends_on()
 	{
-		return array('\{EXTENSION.vendor_name}\{EXTENSION.extension_name}\migrations\install_module');
+		return array('\phpbb\db\migration\data\v31x\v314');
 	}
 
 	public function update_schema()
