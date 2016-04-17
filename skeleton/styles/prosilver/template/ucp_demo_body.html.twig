@@ -1,0 +1,27 @@
+{{ '<' }}!-- INCLUDE ucp_header.html -->
+
+<form id="ucp" method="post" action="{{ '{' }}S_UCP_ACTION}">
+<h2>{{ '{' }}L_SETTINGS}</h2>
+	<div class="panel">
+		<div class="inner">
+			<fieldset>
+				<dl>
+					<dt><label for="user_acme0">{{ '{' }}L_UCP_DEMO_USER}{{ '{' }}L_COLON}</label><br /><span>{{ '{' }}L_UCP_DEMO_USER_EXPLAIN}</span></dt>
+					<dd><label for="user_acme1"><input type="radio" name="user_acme" id="user_acme1" value="1"{{ '<' }}!-- IF S_USER_ACME --> checked="checked"{{ '<' }}!-- ENDIF --> /> {{ '{' }}L_YES}</label>
+						<label for="user_acme0"><input type="radio" name="user_acme" id="user_acme0" value="0"{{ '<' }}!-- IF not S_USER_ACME --> checked="checked"{{ '<' }}!-- ENDIF --> /> {{ '{' }}L_NO}</label></dd>
+				</dl>
+			</fieldset>
+		</div>
+	</div>
+	<fieldset>
+		<dl>
+			<dt>&nbsp;</dt>
+			<dd><input type="submit" name="submit" id="submit" class="button1" value="{{ '{' }}L_SUBMIT}" tabindex="2" />&nbsp;
+				<input type="reset" value="{{ '{' }}L_RESET}" name="reset" class="button2" /></dd>
+		</dl>
+		{{ '{' }}S_HIDDEN_FIELDS}
+		{{ '{' }}S_FORM_TOKEN}
+	</fieldset>
+</form>
+
+{{ '<' }}!-- INCLUDE ucp_footer.html -->

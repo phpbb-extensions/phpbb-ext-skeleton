@@ -11,7 +11,7 @@
  *
  */
 
-namespace {EXTENSION.vendor_name}\{EXTENSION.extension_name}\migrations;
+namespace {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\migrations;
 
 class install_cron extends \phpbb\db\migration\migration
 {

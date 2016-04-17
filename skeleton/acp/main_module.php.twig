@@ -11,7 +11,7 @@
  *
  */
 
-namespace {EXTENSION.vendor_name}\{EXTENSION.extension_name}\acp;
+namespace {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\acp;
 
 class main_module
 {

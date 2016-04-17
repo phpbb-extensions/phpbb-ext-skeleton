@@ -11,7 +11,7 @@
  *
  */
 
-namespace {EXTENSION.vendor_name}\{EXTENSION.extension_name}\migrations;
+namespace {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\migrations;
 
 class install_acp_module extends \phpbb\db\migration\migration
 {
@@ -39,7 +39,7 @@ class install_acp_module extends \phpbb\db\migration\migration
 				'acp',
 				'ACP_DEMO_TITLE',
 				array(
-					'module_basename'	=> '\{EXTENSION.vendor_name}\{EXTENSION.extension_name}\acp\main_module',
+					'module_basename'	=> '\{{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\acp\main_module',
 					'modes'				=> array('settings'),
 				),
 			)),

@@ -11,7 +11,7 @@
  *
  */
 
-namespace {EXTENSION.vendor_name}\{EXTENSION.extension_name}\tests\controller;
+namespace {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\tests\controller;
 
 class main_test extends \phpbb_test_case
 {
@@ -56,7 +56,7 @@ class main_test extends \phpbb_test_case
 			});
 
 		// Instantiate the acme demo controller
-		$controller = new \{EXTENSION.vendor_name}\{EXTENSION.extension_name}\controller\main(
+		$controller = new \{{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\controller\main(
 			new \phpbb\config\config(array()),
 			$controller_helper,
 			$template,

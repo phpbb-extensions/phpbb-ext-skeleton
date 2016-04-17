@@ -11,7 +11,7 @@
  *
  */
 
-namespace {EXTENSION.vendor_name}\{EXTENSION.extension_name}\mcp;
+namespace {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\mcp;
 
 class main_module
 {

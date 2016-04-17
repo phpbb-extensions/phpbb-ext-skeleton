@@ -11,7 +11,7 @@
  *
  */
 
-namespace {EXTENSION.vendor_name}\{EXTENSION.extension_name}\console\command;
+namespace {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\console\command;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -38,7 +38,7 @@ class demo extends \phpbb\console\command\command
 	*/
 	protected function configure()
 	{
-		$this->user->add_lang_ext('{EXTENSION.vendor_name}/{EXTENSION.extension_name}', 'cli');
+		$this->user->add_lang_ext('{{ EXTENSION.vendor_name }}/{{ EXTENSION.extension_name }}', 'cli');
 		$this
 			->setName('acme:demo')
 			->setDescription($this->user->lang('CLI_DEMO'))

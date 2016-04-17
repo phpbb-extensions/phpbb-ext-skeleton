@@ -176,13 +176,8 @@ class packager
 
 		foreach ($skeleton_files as $file)
 		{
-			$template_engine->set_filenames(array('body' => $file . '.tpl'));
+			$template_engine->set_filenames(array('body' => $file . '.twig'));
 			$body = $template_engine->assign_display('body');
-			if (substr($file, -5) === '.html')
-			{
-				$body = str_replace('&lt;', '<', $body);
-				$body = str_replace('&#123;', '{', $body);
-			}
 			$filesystem->dumpFile($ext_path . $file, trim($body) . "\n");
 		}
 

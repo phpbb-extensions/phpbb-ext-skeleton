@@ -11,7 +11,7 @@
  *
  */
 
-namespace {EXTENSION.vendor_name}\{EXTENSION.extension_name}\tests\dbal;
+namespace {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\tests\dbal;
 
 // Need to include functions.php to use phpbb_version_compare in this test
 require_once dirname(__FILE__) . '/../../../../../includes/functions.php';
@@ -20,7 +20,7 @@ class simple_test extends \phpbb_database_test_case
 {
 	static protected function setup_extensions()
 	{
-		return array('{EXTENSION.vendor_name}/{EXTENSION.extension_name}');
+		return array('{{ EXTENSION.vendor_name }}/{{ EXTENSION.extension_name }}');
 	}
 
 	/** @var \phpbb\db\driver\driver_interface */
