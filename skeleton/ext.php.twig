@@ -21,4 +21,86 @@ namespace {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }};
  */
 class ext extends \phpbb\extension\base
 {
+{% if COMPONENT.notification %}
+	/**
+	* Enable notifications for the extension
+	*
+	* @param mixed $old_state State returned by previous call of this method
+	* @return mixed Returns false after last step, otherwise temporary state
+	* @access public
+	*/
+	public function enable_step($old_state)
+	{
+		switch ($old_state)
+		{
+			case '': // Empty means nothing has run yet
+
+				$phpbb_notifications = $this->container->get('notification_manager');
+				$phpbb_notifications->enable_notifications('dev.dev.notification.type.demo');
+				return 'notification';
+
+			break;
+
+			default:
+
+				return parent::enable_step($old_state);
+
+			break;
+		}
+	}
+
+	/**
+	* Disable notifications for the extension
+	*
+	* @param mixed $old_state State returned by previous call of this method
+	* @return mixed Returns false after last step, otherwise temporary state
+	* @access public
+	*/
+	public function disable_step($old_state)
+	{
+		switch ($old_state)
+		{
+			case '': // Empty means nothing has run yet
+
+				$phpbb_notifications = $this->container->get('notification_manager');
+				$phpbb_notifications->disable_notifications('dev.dev.notification.type.demo');
+				return 'notification';
+
+			break;
+
+			default:
+
+				return parent::disable_step($old_state);
+
+			break;
+		}
+	}
+
+	/**
+	* Purge notifications for the extension
+	*
+	* @param mixed $old_state State returned by previous call of this method
+	* @return mixed Returns false after last step, otherwise temporary state
+	* @access public
+	*/
+	public function purge_step($old_state)
+	{
+		switch ($old_state)
+		{
+			case '': // Empty means nothing has run yet
+
+				$phpbb_notifications = $this->container->get('notification_manager');
+				$phpbb_notifications->purge_notifications('dev.dev.notification.type.demo');
+				return 'notification';
+
+			break;
+
+			default:
+
+				return parent::purge_step($old_state);
+
+			break;
+		}
+	}
+{% endif %}
 }

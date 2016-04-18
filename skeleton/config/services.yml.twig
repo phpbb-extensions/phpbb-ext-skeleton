@@ -52,3 +52,29 @@ services:
             - { name: cron.task }
 
 {% endif %}
+{% if COMPONENT.notification %}
+    {{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.notification.type.demo:
+        class: {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\notification\type\notification
+        shared: false # service MUST not be shared for this to work!
+        {% if REQUIREMENTS.phpbb_version_min matches '/^[\\D]*3\\.1.*$/' %}
+                arguments:
+                    - @user_loader
+                    - @dbal.conn
+                    - @cache.driver
+                    - @user
+                    - @auth
+                    - @config
+                    - %core.root_path%
+                    - %core.php_ext%
+                    - %tables.notification_types%
+                    - %tables.notifications%
+                    - %tables.user_notifications%
+        {% else %}
+                parent: notification.type.base
+        {% endif %}
+                calls:
+                    - [set_controller_helper, [@controller.helper]]
+                tags:
+                    - { name: notification.type }
+
+{% endif %}
