@@ -113,6 +113,14 @@ services:
             - false
             - []
             - ['config/services.yml', 'cron/task/demo.php', 'migrations/install_cron.php']
+
+    phpbb.skeleton.ext.skeleton.notification:
+        class: phpbb\skeleton\skeleton
+        arguments:
+            - 'notification'
+            - false
+            - []
+            - ['ext.php', 'config/services.yml', 'notification/type/demo.php', 'language/en/common.php', 'language/en/info_ucp_demo.php']
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
 
