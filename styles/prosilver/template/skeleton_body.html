@@ -75,11 +75,14 @@
 		<!-- BEGIN component -->
 		<div class="<!-- IF component.S_ROW_COUNT is even -->column1<!-- ELSE -->column2<!-- ENDIF -->">
 			<fieldset class="fields2">
-				<div><label for="{component.NAME}"><input type="checkbox" name="{component.NAME}" id="{component.NAME}"<!-- IF component.VALUE --> checked="checked"<!-- ENDIF --> /> <strong>{component.DESC}</strong></label></div>
+				<div><label for="{component.NAME}"><input class="components" type="checkbox" name="{component.NAME}" id="{component.NAME}"<!-- IF component.VALUE --> checked="checked"<!-- ENDIF --> /> <strong>{component.DESC}</strong></label></div>
 			</fieldset>
 		</div>
 		<!-- END component -->
 	</div>
+	<fieldset class="display-actions">
+		<div><a href="#" class="skeleton-marklist markall">{L_MARK_ALL}</a> :: <a href="#" class="skeleton-marklist">{L_UNMARK_ALL}</a></div>
+	</fieldset>
 </div>
 
 <div class="panel">

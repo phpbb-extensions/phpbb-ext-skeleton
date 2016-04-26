@@ -23,4 +23,9 @@
 		$(this).before($('<hr />')).before($author);
 	});
 
+	$('.skeleton-marklist').on('click', function(e) {
+		e.preventDefault();
+		$('.components').prop('checked', $(this).hasClass('markall'));
+	});
+
 })(jQuery); // Avoid conflicts with other libraries
