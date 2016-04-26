@@ -40,6 +40,16 @@ class notification extends \phpbb\notification\type\base
 	}
 
 	/**
+	* Notification option data (for outputting to the user)
+	*
+	* @var bool|array False if the service should use it's default data
+	* 					Array of data (including keys 'id', 'lang', and 'group')
+	*/
+	public static $notification_option = array(
+		'lang'	=> 'NOTIFICATION_TYPE_DEMO',
+	);
+
+	/**
 	* Is this type available to the current user (defines whether or not it will be shown in the UCP Edit notification options)
 	*
 	* @return bool True/False whether or not this is available to the user
