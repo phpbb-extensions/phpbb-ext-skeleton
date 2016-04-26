@@ -54,7 +54,7 @@ services:
 {% endif %}
 {% if COMPONENT.notification %}
     {{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.notification.type.demo:
-        class: {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\notification\type\notification
+        class: {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\notification\type\demo
         shared: false # service MUST not be shared for this to work!
 {% if REQUIREMENTS.phpbb_version_min matches '/^[\\D]*3\\.1.*$/' %}
         arguments:

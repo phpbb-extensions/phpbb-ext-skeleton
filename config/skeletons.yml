@@ -120,7 +120,7 @@ services:
             - 'notification'
             - false
             - []
-            - ['ext.php', 'config/services.yml', 'notification/type/notification.php', 'language/en/common.php', 'language/en/info_ucp_demo.php']
+            - ['ext.php', 'config/services.yml', 'notification/type/demo.php', 'language/en/common.php', 'language/en/info_ucp_demo.php']
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
 
