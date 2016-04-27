@@ -19,7 +19,7 @@
 			<div class="{% if extension.S_ROW_COUNT is even %}column1{% else %}column2{% endif %}">
 				<fieldset class="fields2">
 					<dl>
-						<dt><label for="{{ extension.NAME }}">{{ extension.DESC }}{{ lang('COLON') }}</label>{% if extension.DESC_EXPLAIN %}<br /><span>{{ extension.DESC_EXPLAIN }}</span>{% endif %}</dt>
+						<dt><label for="{{ extension.NAME }}">{{ extension.DESC ~ lang('COLON') }}</label>{% if extension.DESC_EXPLAIN %}<br /><span>{{ extension.DESC_EXPLAIN }}</span>{% endif %}</dt>
 						<dd><input type="text" tabindex="1" name="{{ extension.NAME }}" id="{{ extension.NAME }}" size="32" value="{{ extension.VALUE }}" class="inputbox" /></dd>
 					</dl>
 				</fieldset>
@@ -36,7 +36,7 @@
 			<div class="{% if author.S_ROW_COUNT is even %}column1{% else %}column2{% endif %}">
 				<fieldset class="fields2">
 					<dl>
-						<dt><label for="{{ author.NAME }}">{{ author.DESC }}{{ lang('COLON') }}</label>{% if author.DESC_EXPLAIN %}<br /><span>{{ author.DESC_EXPLAIN }}</span>{% endif %}</dt>
+						<dt><label for="{{ author.NAME }}">{{ author.DESC ~ lang('COLON') }}</label>{% if author.DESC_EXPLAIN %}<br /><span>{{ author.DESC_EXPLAIN }}</span>{% endif %}</dt>
 						<dd><input type="text" tabindex="1" name="{{ author.NAME }}[]" id="{{ author.NAME }}" size="32" value="{{ author.VALUE }}" class="inputbox" /></dd>
 					</dl>
 				</fieldset>
@@ -60,7 +60,7 @@
 		<div class="{% if requirement.S_ROW_COUNT is even %}column1{% else %}column2{% endif %}">
 			<fieldset class="fields2">
 				<dl>
-					<dt><label for="{{ requirement.NAME }}">{{ requirement.DESC }}{{ lang('COLON') }}</label>{% if requirement.DESC_EXPLAIN %}<br /><span>{{ requirement.DESC_EXPLAIN }}</span>{% endif %}</dt>
+					<dt><label for="{{ requirement.NAME }}">{{ requirement.DESC ~ lang('COLON') }}</label>{% if requirement.DESC_EXPLAIN %}<br /><span>{{ requirement.DESC_EXPLAIN }}</span>{% endif %}</dt>
 					<dd><input type="text" tabindex="1" name="{{ requirement.NAME }}" id="{{ requirement.NAME }}" size="32" value="{{ requirement.VALUE }}" class="inputbox" /></dd>
 				</dl>
 			</fieldset>
