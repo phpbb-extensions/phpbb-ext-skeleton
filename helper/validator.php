@@ -25,16 +25,6 @@ class validator
 		$this->user = $user;
 	}
 
-	public function validate_author_name($value)
-	{
-		if (strlen($value))
-		{
-			return $value;
-		}
-
-		throw new \RuntimeException($this->user->lang('SKELETON_INVALID_AUTHOR_NAME'));
-	}
-
 	public function validate_num_authors($value)
 	{
 		if (preg_match('#^\d+$#', $value) && $value > 0 && $value <= 20)
