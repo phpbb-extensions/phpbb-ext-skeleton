@@ -78,7 +78,7 @@ class packager
 				'php_version' => '>=5.3.3',
 				'phpbb_version_min' => '>=3.1.4',
 				'phpbb_version_max' => '<3.2.0@dev',
-			)
+			),
 		);
 	}
 
