@@ -227,7 +227,7 @@ class packager
 	}
 
 	/**
-	 * @return \phpbb\template\twig\twig
+	 * @return twig
 	 */
 	protected function get_template_engine()
 	{
