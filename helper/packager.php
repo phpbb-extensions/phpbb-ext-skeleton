@@ -78,7 +78,7 @@ class packager
 				'php_version' => '>=5.3.3',
 				'phpbb_version_min' => '>=3.1.4',
 				'phpbb_version_max' => '<3.2.0@dev',
-			)
+			),
 		);
 	}
 
@@ -111,48 +111,8 @@ class packager
 		$filesystem->remove($this->root_path . 'store/tmp-ext');
 		$filesystem->mkdir($ext_path);
 
-		$config = new config(array(
-			'load_tplcompile' => true,
-			'tpl_allow_php' => false,
-			'assets_version' => null,
-		));
-
-		if (phpbb_version_compare(PHPBB_VERSION, '3.2.0-dev', '<'))
-		{
-			$template_engine = new twig(
-				$this->phpbb_container->get('path_helper'),
-				$config,
-				$this->user,
-				new context()
-			);
-		}
-		else
-		{
-			// Work-around for bug in phpBB 3.2.0-dev-3.2.0-b2
-			$cache_dir = ($this->phpbb_container->hasParameter('core.cache_dir')) ? $this->phpbb_container->getParameter('core.cache_dir') : $this->phpbb_container->getParameter('core.root_path') . 'cache/';
-
-			$template_engine = new twig(
-				$this->phpbb_container->get('path_helper'),
-				$config,
-				new context(),
-				new environment(
-					$config,
-					$this->phpbb_container->get('filesystem'),
-					$this->phpbb_container->get('path_helper'),
-					$this->phpbb_container,
-					$cache_dir,
-					$this->phpbb_container->get('ext.manager'),
-					new loader(
-						new \phpbb\filesystem\filesystem()
-					)
-				),
-				$cache_dir,
-				$this->phpbb_container->get('user')
-			);
-		}
-
+		$template_engine = $this->get_template_engine();
 		$template_engine->set_custom_style('skeletonextension', $this->root_path . 'ext/phpbb/skeleton/skeleton');
-
 		$template_engine->assign_vars(array(
 			'COMPONENT' => $data['components'],
 			'EXTENSION' => $data['extension'],
@@ -261,5 +221,73 @@ class packager
 		$body = str_replace('&gt;', '>', $body);
 
 		return $body;
+	}
+
+	/**
+	 * @return twig
+	 */
+	protected function get_template_engine()
+	{
+		$config = new config(array(
+			'load_tplcompile' => true,
+			'tpl_allow_php' => false,
+			'assets_version' => null,
+		));
+
+		if (phpbb_version_compare(PHPBB_VERSION, '3.2.0-dev', '<'))
+		{
+			$template_engine = new twig(
+				$this->phpbb_container->get('path_helper'),
+				$config,
+				$this->user,
+				new context()
+			);
+		}
+		else
+		{
+			// TODO: Remove these hacks once 3.2.x is stable
+			if ($this->phpbb_container->hasParameter('core.cache_dir'))
+			{
+				// Set up for phpBB > 3.2.0-b3
+				$cache_dir = $this->phpbb_container->getParameter('core.cache_dir');
+				$environment = new environment(
+					$config,
+					$this->phpbb_container->get('filesystem'),
+					$this->phpbb_container->get('path_helper'),
+					$cache_dir,
+					$this->phpbb_container->get('ext.manager'),
+					new loader(
+						new \phpbb\filesystem\filesystem()
+					)
+				);
+			}
+			else
+			{
+				// Set up for phpBB 3.2.0-dev to 3.2.0-b2
+				$cache_dir = $this->phpbb_container->getParameter('core.root_path') . 'cache/';
+				$environment = new environment(
+					$config,
+					$this->phpbb_container->get('filesystem'),
+					$this->phpbb_container->get('path_helper'),
+					$this->phpbb_container,
+					$cache_dir,
+					$this->phpbb_container->get('ext.manager'),
+					new loader(
+						new \phpbb\filesystem\filesystem()
+					)
+				);
+			}
+
+			$template_engine = new twig(
+				$this->phpbb_container->get('path_helper'),
+				$config,
+				new context(),
+				$environment,
+				$cache_dir,
+				$this->phpbb_container->get('user')
+			);
+		}
+
+		return $template_engine;
 	}
 }
