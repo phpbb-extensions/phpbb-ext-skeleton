@@ -1,99 +1,99 @@
-<!-- INCLUDE overall_header.html -->
-<!-- INCLUDEJS @phpbb_skeleton/editor.js -->
+{% include 'overall_header.html' %}
+{% INCLUDEJS '@phpbb_skeleton/editor.js' %}
 
-<h2>{L_PHPBB_SKELETON_EXT}</h2>
+<h2>{{ lang('PHPBB_SKELETON_EXT') }}</h2>
 
-<form id="postform" method="post" action="{S_POST_ACTION}">
-<!-- IF ERROR -->
+<form id="postform" method="post" action="{{ S_POST_ACTION }}">
+{% if ERROR %}
 <div class="panel">
 	<div class="inner">
-		<p class="error">{ERROR}</p>
+		<p class="error">{{ ERROR }}</p>
 	</div>
 </div>
-<!-- ENDIF -->
+{% endif %}
 
 <div class="panel bg1">
 	<div class="inner">
-		<h2 class="solo">{L_SKELETON_TITLE_EXTENSION_INFO}</h2>
-		<!-- BEGIN extension -->
-			<div class="<!-- IF extension.S_ROW_COUNT is even -->column1<!-- ELSE -->column2<!-- ENDIF -->">
+		<h2 class="solo">{{ lang('SKELETON_TITLE_EXTENSION_INFO') }}</h2>
+		{% for extension in loops.extension %}
+			<div class="{% if extension.S_ROW_COUNT is even %}column1{% else %}column2{% endif %}">
 				<fieldset class="fields2">
 					<dl>
-						<dt><label for="{extension.NAME}">{extension.DESC}{L_COLON}</label><!-- IF extension.DESC_EXPLAIN --><br /><span>{extension.DESC_EXPLAIN}</span><!-- ENDIF --></dt>
-						<dd><input type="text" tabindex="1" name="{extension.NAME}" id="{extension.NAME}" size="32" value="{extension.VALUE}" class="inputbox" /></dd>
+						<dt><label for="{{ extension.NAME }}">{{ extension.DESC }}{{ lang('COLON') }}</label>{% if extension.DESC_EXPLAIN %}<br /><span>{{ extension.DESC_EXPLAIN }}</span>{% endif %}</dt>
+						<dd><input type="text" tabindex="1" name="{{ extension.NAME }}" id="{{ extension.NAME }}" size="32" value="{{ extension.VALUE }}" class="inputbox" /></dd>
 					</dl>
 				</fieldset>
 			</div>
-		<!-- END extension -->
+		{% endfor %}
 	</div>
 </div>
 
 <div class="panel bg2">
 	<div class="inner">
-		<h2 class="solo">{L_SKELETON_TITLE_AUTHOR_INFO}</h2>
+		<h2 class="solo">{{ lang('SKELETON_TITLE_AUTHOR_INFO') }}</h2>
 		<div class="skeleton-author" style="overflow: hidden;">
-		<!-- BEGIN author -->
-			<div class="<!-- IF author.S_ROW_COUNT is even -->column1<!-- ELSE -->column2<!-- ENDIF -->">
+		{% for author in loops.author %}
+			<div class="{% if author.S_ROW_COUNT is even %}column1{% else %}column2{% endif %}">
 				<fieldset class="fields2">
 					<dl>
-						<dt><label for="{author.NAME}">{author.DESC}{L_COLON}</label><!-- IF author.DESC_EXPLAIN --><br /><span>{author.DESC_EXPLAIN}</span><!-- ENDIF --></dt>
-						<dd><input type="text" tabindex="1" name="{author.NAME}[]" id="{author.NAME}" size="32" value="{author.VALUE}" class="inputbox" /></dd>
+						<dt><label for="{{ author.NAME }}">{{ author.DESC }}{{ lang('COLON') }}</label>{% if author.DESC_EXPLAIN %}<br /><span>{{ author.DESC_EXPLAIN }}</span>{% endif %}</dt>
+						<dd><input type="text" tabindex="1" name="{{ author.NAME }}[]" id="{{ author.NAME }}" size="32" value="{{ author.VALUE }}" class="inputbox" /></dd>
 					</dl>
 				</fieldset>
 			</div>
-	<!-- IF author.S_ROW_COUNT % 4 == 3 and not author.S_LAST_ROW -->
+	{% if loop.index3 and not loop.last %}
 		</div>
 		<hr />
 		<div class="skeleton-author">
-	<!-- ENDIF -->
-		<!-- END author -->
+	{% endif %}
+		{% endfor %}
 		</div>
 
-		<input type="button" class="button1" id="skeleton-new-author" value="{L_SKELETON_ADD_AUTHOR}" />
+		<input type="button" class="button1" id="skeleton-new-author" value="{{ lang('SKELETON_ADD_AUTHOR') }}" />
 	</div>
 </div>
 
 <div class="panel bg1">
 	<div class="inner">
-		<h2 class="solo">{L_SKELETON_TITLE_REQUIREMENT_INFO}</h2>
-		<!-- BEGIN requirement -->
-		<div class="<!-- IF requirement.S_ROW_COUNT is even -->column1<!-- ELSE -->column2<!-- ENDIF -->">
+		<h2 class="solo">{{ lang('SKELETON_TITLE_REQUIREMENT_INFO') }}</h2>
+		{% for requirement in loops.requirement %}
+		<div class="{% if requirement.S_ROW_COUNT is even %}column1{% else %}column2{% endif %}">
 			<fieldset class="fields2">
 				<dl>
-					<dt><label for="{requirement.NAME}">{requirement.DESC}{L_COLON}</label><!-- IF requirement.DESC_EXPLAIN --><br /><span>{requirement.DESC_EXPLAIN}</span><!-- ENDIF --></dt>
-					<dd><input type="text" tabindex="1" name="{requirement.NAME}" id="{requirement.NAME}" size="32" value="{requirement.VALUE}" class="inputbox" /></dd>
+					<dt><label for="{{ requirement.NAME }}">{{ requirement.DESC }}{{ lang('COLON') }}</label>{% if requirement.DESC_EXPLAIN %}<br /><span>{{ requirement.DESC_EXPLAIN }}</span>{% endif %}</dt>
+					<dd><input type="text" tabindex="1" name="{{ requirement.NAME }}" id="{{ requirement.NAME }}" size="32" value="{{ requirement.VALUE }}" class="inputbox" /></dd>
 				</dl>
 			</fieldset>
 		</div>
-		<!-- END requirement -->
+		{% endfor %}
 	</div>
 </div>
 
 <div class="panel bg2">
 	<div class="inner">
-		<h2 class="solo">{L_SKELETON_TITLE_COMPONENT_INFO}</h2>
-		<!-- BEGIN component -->
-		<div class="<!-- IF component.S_ROW_COUNT is even -->column1<!-- ELSE -->column2<!-- ENDIF -->">
+		<h2 class="solo">{{ lang('SKELETON_TITLE_COMPONENT_INFO') }}</h2>
+		{% for component in loops.component %}
+		<div class="{% if component.S_ROW_COUNT is even %}column1{% else %}column2{% endif %}">
 			<fieldset class="fields2">
-				<div><label for="{component.NAME}"><input class="components" type="checkbox" name="{component.NAME}" id="{component.NAME}"<!-- IF component.VALUE --> checked="checked"<!-- ENDIF --> /> <strong>{component.DESC}</strong></label></div>
+				<div><label for="{{ component.NAME }}"><input class="components" type="checkbox" name="{{ component.NAME }}" id="{{ component.NAME }}"{% if component.VALUE %} checked="checked"{% endif %} /> <strong>{{ component.DESC }}</strong></label></div>
 			</fieldset>
 		</div>
-		<!-- END component -->
+		{% endfor %}
 	</div>
 	<fieldset class="display-actions">
-		<div><a href="#" class="skeleton-marklist markall">{L_MARK_ALL}</a> :: <a href="#" class="skeleton-marklist">{L_UNMARK_ALL}</a></div>
+		<div><a href="#" class="skeleton-marklist markall">{{ lang('MARK_ALL') }}</a> :: <a href="#" class="skeleton-marklist">{{ lang('UNMARK_ALL') }}</a></div>
 	</fieldset>
 </div>
 
 <div class="panel">
 	<div class="inner">
 		<fieldset class="submit-buttons">
-			{S_HIDDEN_FIELDS}
-			<input type="submit" accesskey="s" name="submit" value="{L_SUBMIT}" class="button1" />
+			{{ S_HIDDEN_FIELDS }}
+			<input type="submit" accesskey="s" name="submit" value="{{ lang('SUBMIT') }}" class="button1" />
 		</fieldset>
 	</div>
 </div>
 
 </form>
 
-<!-- INCLUDE overall_footer.html -->
+{% include 'overall_footer.html' %}
