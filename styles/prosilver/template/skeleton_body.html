@@ -16,7 +16,7 @@
 	<div class="inner">
 		<h2 class="solo">{{ lang('SKELETON_TITLE_EXTENSION_INFO') }}</h2>
 		{% for extension in loops.extension %}
-			<div class="{% if extension.S_ROW_COUNT is even %}column1{% else %}column2{% endif %}">
+			<div class="{% if loop.index is odd %}column1{% else %}column2{% endif %}">
 				<fieldset class="fields2">
 					<dl>
 						<dt><label for="{{ extension.NAME }}">{{ extension.DESC ~ lang('COLON') }}</label>{% if extension.DESC_EXPLAIN %}<br /><span>{{ extension.DESC_EXPLAIN }}</span>{% endif %}</dt>
@@ -33,7 +33,7 @@
 		<h2 class="solo">{{ lang('SKELETON_TITLE_AUTHOR_INFO') }}</h2>
 		<div class="skeleton-author" style="overflow: hidden;">
 		{% for author in loops.author %}
-			<div class="{% if author.S_ROW_COUNT is even %}column1{% else %}column2{% endif %}">
+			<div class="{% if loop.index is odd %}column1{% else %}column2{% endif %}">
 				<fieldset class="fields2">
 					<dl>
 						<dt><label for="{{ author.NAME }}">{{ author.DESC ~ lang('COLON') }}</label>{% if author.DESC_EXPLAIN %}<br /><span>{{ author.DESC_EXPLAIN }}</span>{% endif %}</dt>
@@ -41,7 +41,7 @@
 					</dl>
 				</fieldset>
 			</div>
-	{% if loop.index3 and not loop.last %}
+	{% if loop.index == 4 and not loop.last %}
 		</div>
 		<hr />
 		<div class="skeleton-author">
@@ -57,7 +57,7 @@
 	<div class="inner">
 		<h2 class="solo">{{ lang('SKELETON_TITLE_REQUIREMENT_INFO') }}</h2>
 		{% for requirement in loops.requirement %}
-		<div class="{% if requirement.S_ROW_COUNT is even %}column1{% else %}column2{% endif %}">
+		<div class="{% if loop.index is odd %}column1{% else %}column2{% endif %}">
 			<fieldset class="fields2">
 				<dl>
 					<dt><label for="{{ requirement.NAME }}">{{ requirement.DESC ~ lang('COLON') }}</label>{% if requirement.DESC_EXPLAIN %}<br /><span>{{ requirement.DESC_EXPLAIN }}</span>{% endif %}</dt>
@@ -73,7 +73,7 @@
 	<div class="inner">
 		<h2 class="solo">{{ lang('SKELETON_TITLE_COMPONENT_INFO') }}</h2>
 		{% for component in loops.component %}
-		<div class="{% if component.S_ROW_COUNT is even %}column1{% else %}column2{% endif %}">
+		<div class="{% if loop.index is odd %}column1{% else %}column2{% endif %}">
 			<fieldset class="fields2">
 				<div><label for="{{ component.NAME }}"><input class="components" type="checkbox" name="{{ component.NAME }}" id="{{ component.NAME }}"{% if component.VALUE %} checked="checked"{% endif %} /> <strong>{{ component.DESC }}</strong></label></div>
 			</fieldset>
