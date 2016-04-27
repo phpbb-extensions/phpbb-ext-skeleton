@@ -41,10 +41,10 @@
 					</dl>
 				</fieldset>
 			</div>
-	{% if loop.index == 4 and not loop.last %}
+	{% if loop.index is divisible by(4) and not loop.last %}
 		</div>
 		<hr />
-		<div class="skeleton-author">
+		<div class="skeleton-author" style="overflow: hidden;">
 	{% endif %}
 		{% endfor %}
 		</div>
