@@ -128,14 +128,27 @@ class packager
 		}
 		else
 		{
-			// Work-around for bug in phpBB 3.2.0-dev-3.2.0-b2
-			$cache_dir = ($this->phpbb_container->hasParameter('core.cache_dir')) ? $this->phpbb_container->getParameter('core.cache_dir') : $this->phpbb_container->getParameter('core.root_path') . 'cache/';
-
-			$template_engine = new twig(
-				$this->phpbb_container->get('path_helper'),
-				$config,
-				new context(),
-				new environment(
+			// TODO: Remove these hacks once 3.2.x is stable
+			if ($this->phpbb_container->hasParameter('core.cache_dir'))
+			{
+				// Set up for phpBB > 3.2.0-b3
+				$cache_dir = $this->phpbb_container->getParameter('core.cache_dir');
+				$environment = new environment(
+					$config,
+					$this->phpbb_container->get('filesystem'),
+					$this->phpbb_container->get('path_helper'),
+					$cache_dir,
+					$this->phpbb_container->get('ext.manager'),
+					new loader(
+						new \phpbb\filesystem\filesystem()
+					)
+				);
+			}
+			else
+			{
+				// Set up for phpBB 3.2.0-dev to 3.2.0-b2
+				$cache_dir = $this->phpbb_container->getParameter('core.root_path') . 'cache/';
+				$environment = new environment(
 					$config,
 					$this->phpbb_container->get('filesystem'),
 					$this->phpbb_container->get('path_helper'),
@@ -145,7 +158,14 @@ class packager
 					new loader(
 						new \phpbb\filesystem\filesystem()
 					)
-				),
+				);
+			}
+
+			$template_engine = new twig(
+				$this->phpbb_container->get('path_helper'),
+				$config,
+				new context(),
+				$environment,
 				$cache_dir,
 				$this->phpbb_container->get('user')
 			);
