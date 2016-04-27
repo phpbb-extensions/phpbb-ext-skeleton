@@ -108,7 +108,6 @@ $lang = array_merge($lang, array(
 	'SKELETON_TITLE_REQUIREMENT_INFO'	=> 'Requirements',
 	'SKELETON_TITLE_COMPONENT_INFO'		=> 'Components',
 
-	'SKELETON_INVALID_AUTHOR_NAME'		=> 'The author name is required',
 	'SKELETON_INVALID_EXTENSION_NAME'	=> 'The extension name you provided is invalid',
 	'SKELETON_INVALID_EXTENSION_TIME'	=> 'The extension date you provided is invalid',
 	'SKELETON_INVALID_EXTENSION_VERSION'=> 'The extension version you provided is invalid',

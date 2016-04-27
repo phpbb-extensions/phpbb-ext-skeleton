@@ -248,15 +248,12 @@ class packager
 
 		foreach ($data['authors'] as $i => $author_data)
 		{
-			if ($data['authors'][$i]['author_name'] !== '')
-			{
-				$composer['authors'][] = array(
-					'name' => "{$data['authors'][$i]['author_name']}",
-					'email' => "{$data['authors'][$i]['author_email']}",
-					'homepage' => "{$data['authors'][$i]['author_homepage']}",
-					'role' => "{$data['authors'][$i]['author_role']}",
-				);
-			}
+			$composer['authors'][] = array(
+				'name' => "{$data['authors'][$i]['author_name']}",
+				'email' => "{$data['authors'][$i]['author_email']}",
+				'homepage' => "{$data['authors'][$i]['author_homepage']}",
+				'role' => "{$data['authors'][$i]['author_role']}",
+			);
 		}
 
 		$body = json_encode($composer, JSON_PRETTY_PRINT + JSON_UNESCAPED_SLASHES);
