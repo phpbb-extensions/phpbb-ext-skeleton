@@ -2,14 +2,20 @@
 
 	'use strict';
 
-	var authorTpl;
+	var authorTpl,
+		$elem = {
+			author: $('.skeleton-author'),
+			addAuthor: $('#skeleton-new-author'),
+			components: $('.components'),
+			marklist: $('.skeleton-marklist')
+		};
 
 	$(function() {
-		authorTpl = $('.skeleton-author').first().clone();
+		authorTpl = $elem.author.first().clone();
 	});
 
-	$('#skeleton-new-author').click(function() {
-		var count = $('.skeleton-author').length,
+	$elem.addAuthor.on('click', function() {
+		var count = $elem.author.length,
 			$author = authorTpl.clone();
 
 		$author.find('label').each(function() {
@@ -23,9 +29,9 @@
 		$(this).before($('<hr />')).before($author);
 	});
 
-	$('.skeleton-marklist').on('click', function(e) {
+	$elem.marklist.on('click', function(e) {
 		e.preventDefault();
-		$('.components').prop('checked', $(this).hasClass('markall'));
+		$elem.components.prop('checked', $(this).hasClass('markall'));
 	});
 
 })(jQuery); // Avoid conflicts with other libraries
