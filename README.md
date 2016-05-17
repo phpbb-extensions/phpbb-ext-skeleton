@@ -2,8 +2,14 @@
 
 phpBB's Skeleton Extension is a tool for extension authors to help speed up and simplify the task of starting a new extension project. It generates sample starter files and directories in a skeleton package that you can use to begin building your extension.
 
+## Requirements
+
+- phpBB version 3.1.4 or later.
+- PHP module `ZipArchive` enabled.
+
 ## Installation
 
+- Ensure your phpBB and PHP installations meet the Skeleton Extension requirements.
 - [Download the latest release](https://github.com/phpbb-extensions/phpbb-ext-skeleton/releases).
 - Unzip and install to your phpBB `ext/` folder
 - Go to "ACP" > "Customise" > "Extensions" and enable the "phpBB Skeleton Extension" extension.
