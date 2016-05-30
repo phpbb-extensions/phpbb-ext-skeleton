@@ -251,28 +251,23 @@ class main
 	 */
 	protected function get_request_variable($value, $default, $array_key = null)
 	{
-		if (is_bool($default)) {
+		if (is_bool($default))
+		{
 			if ($array_key !== null)
 			{
 				$return_value = $this->request->variable($value, array($default));
 				return isset($return_value[$array_key]) ? $return_value[$array_key] : $default;
 			}
-			else
-			{
-				return $this->request->variable($value, $default);
-			}
+
+			return $this->request->variable($value, $default);
 		}
-		else
+
+		if ($array_key !== null)
 		{
-			if ($array_key !== null)
-			{
-				$return_value = $this->request->variable($value, array((string) $default));
-				return isset($return_value[$array_key]) ? (string) $return_value[$array_key] : (string) $default;
-			}
-			else
-			{
-				return $this->request->variable($value, (string) $default);
-			}
+			$return_value = $this->request->variable($value, array((string) $default));
+			return isset($return_value[$array_key]) ? (string) $return_value[$array_key] : (string) $default;
 		}
+
+		return $this->request->variable($value, (string) $default);
 	}
 }
