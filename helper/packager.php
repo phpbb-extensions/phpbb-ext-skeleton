@@ -121,7 +121,7 @@ class packager
 		));
 
 		$component_data = $this->get_component_dialog_values();
-		$skeleton_files = array(
+		$skeleton_files[] = array(
 			'license.txt',
 			'README.md',
 		);
@@ -130,9 +130,10 @@ class packager
 		{
 			if ($selected && !empty($component_data[$component]['files']))
 			{
-				$skeleton_files = array_merge($skeleton_files, $component_data[$component]['files']);
+				$skeleton_files[] = $component_data[$component]['files'];
 			}
 		}
+		$skeleton_files = call_user_func_array('array_merge', $skeleton_files);
 
 		foreach ($skeleton_files as $file)
 		{
