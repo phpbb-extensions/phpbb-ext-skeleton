@@ -21,7 +21,7 @@ class main_module
 	{
 		global $config, $request, $template, $user;
 
-		$user->add_lang('acp/common');
+		$user->add_lang_ext('{{ EXTENSION.vendor_name }}/{{ EXTENSION.extension_name }}', 'common');
 		$this->tpl_name = 'acp_demo_body';
 		$this->page_title = $user->lang('ACP_DEMO_TITLE');
 		add_form_key('acme/demo');
