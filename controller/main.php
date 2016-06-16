@@ -117,7 +117,7 @@ class main
 			$this->template->assign_block_vars('extension', array(
 				'NAME'			=> $value,
 				'DESC'			=> $this->user->lang('SKELETON_QUESTION_' . strtoupper($value) . '_UI'),
-				'DESC_EXPLAIN'	=> isset($this->user->lang['SKELETON_QUESTION_' . strtoupper($value) . '_EXPLAIN']) ? $this->user->lang('SKELETON_QUESTION_' . strtoupper($value) . '_EXPLAIN') : '',
+				'DESC_EXPLAIN'	=> array_key_exists('SKELETON_QUESTION_' . strtoupper($value) . '_EXPLAIN', $this->user->lang) ? $this->user->lang('SKELETON_QUESTION_' . strtoupper($value) . '_EXPLAIN') : '',
 				'VALUE'			=> $this->request->variable($value, (string) $default),
 			));
 		}
@@ -136,7 +136,7 @@ class main
 				$this->template->assign_block_vars('author', array(
 					'NAME'			=> $value,
 					'DESC'			=> $this->user->lang('SKELETON_QUESTION_' . strtoupper($value) . '_UI'),
-					'DESC_EXPLAIN'	=> isset($this->user->lang['SKELETON_QUESTION_' . strtoupper($value) . '_EXPLAIN']) ? $this->user->lang('SKELETON_QUESTION_' . strtoupper($value) . '_EXPLAIN') : '',
+					'DESC_EXPLAIN'	=> array_key_exists('SKELETON_QUESTION_' . strtoupper($value) . '_EXPLAIN', $this->user->lang) ? $this->user->lang('SKELETON_QUESTION_' . strtoupper($value) . '_EXPLAIN') : '',
 					'VALUE'			=> isset($author_values[$value][$i]) ? $author_values[$value][$i] : '',
 				));
 			}
@@ -147,7 +147,7 @@ class main
 			$this->template->assign_block_vars('requirement', array(
 				'NAME'			=> $value,
 				'DESC'			=> $this->user->lang('SKELETON_QUESTION_' . strtoupper($value) . '_UI'),
-				'DESC_EXPLAIN'	=> isset($this->user->lang['SKELETON_QUESTION_' . strtoupper($value) . '_EXPLAIN']) ? $this->user->lang('SKELETON_QUESTION_' . strtoupper($value) . '_EXPLAIN') : '',
+				'DESC_EXPLAIN'	=> array_key_exists('SKELETON_QUESTION_' . strtoupper($value) . '_EXPLAIN', $this->user->lang) ? $this->user->lang('SKELETON_QUESTION_' . strtoupper($value) . '_EXPLAIN') : '',
 				'VALUE'			=> $this->request->variable($value, (string) $default),
 			));
 		}
