@@ -28,7 +28,7 @@ class validator
 
 	public function validate_num_authors($value)
 	{
-		if (preg_match('#^\d+$#', $value) && $value > 0 && $value <= 20)
+		if ($value > 0 && $value <= 20 && ctype_digit($value))
 		{
 			return $value;
 		}
@@ -48,7 +48,7 @@ class validator
 
 	public function validate_extension_display_name($value)
 	{
-		if (strlen($value))
+		if ($value !== '')
 		{
 			return $value;
 		}
