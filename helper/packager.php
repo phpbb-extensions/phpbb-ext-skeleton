@@ -218,8 +218,7 @@ class packager
 		}
 
 		$body = json_encode($composer, JSON_PRETTY_PRINT + JSON_UNESCAPED_SLASHES);
-		$body = str_replace('&lt;', '<', $body);
-		$body = str_replace('&gt;', '>', $body);
+		$body = str_replace(array('&lt;', '&gt;'), array('<', '>'), $body);
 
 		return $body;
 	}
