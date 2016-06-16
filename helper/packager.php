@@ -137,8 +137,9 @@ class packager
 
 		foreach ($skeleton_files as $file)
 		{
-			$template_engine->set_filenames(array('body' => $file . '.twig'));
-			$body = $template_engine->assign_display('body');
+			$body = $template_engine
+				->set_filenames(array('body' => $file . '.twig'))
+				->assign_display('body');
 			$filesystem->dumpFile($ext_path . $file, trim($body) . "\n");
 		}
 
