@@ -32,7 +32,7 @@ services:
             - 'acp'
             - false
             - []
-            - ['acp/main_info.php', 'acp/main_module.php', 'adm/style/acp_demo_body.html', 'language/en/info_acp_demo.php']
+            - ['acp/main_info.php', 'acp/main_module.php', 'adm/style/acp_demo_body.html', 'language/en/common.php', 'language/en/info_acp_demo.php', 'migrations/install_acp_module.php']
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
 
@@ -42,7 +42,7 @@ services:
             - 'mcp'
             - false
             - []
-            - ['mcp/main_info.php', 'mcp/main_module.php', 'styles/prosilver/template/mcp_demo_body.html', 'language/en/info_mcp_demo.php']
+            - ['mcp/main_info.php', 'mcp/main_module.php', 'styles/prosilver/template/mcp_demo_body.html', 'language/en/info_mcp_demo.php', 'migrations/install_mcp_module.php']
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
 
@@ -52,7 +52,7 @@ services:
             - 'ucp'
             - false
             - []
-            - ['ucp/main_info.php', 'ucp/main_module.php', 'styles/prosilver/template/ucp_demo_body.html', 'language/en/info_ucp_demo.php']
+            - ['ucp/main_info.php', 'ucp/main_module.php', 'styles/prosilver/template/ucp_demo_body.html', 'language/en/info_ucp_demo.php', 'migrations/install_ucp_module.php']
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
 
