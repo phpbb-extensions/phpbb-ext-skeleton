@@ -121,7 +121,7 @@ class packager
 		));
 
 		$component_data = $this->get_component_dialog_values();
-		$skeleton_files = array(
+		$skeleton_files[] = array(
 			'license.txt',
 			'README.md',
 		);
@@ -130,14 +130,16 @@ class packager
 		{
 			if ($selected && !empty($component_data[$component]['files']))
 			{
-				$skeleton_files = array_merge($skeleton_files, $component_data[$component]['files']);
+				$skeleton_files[] = $component_data[$component]['files'];
 			}
 		}
+		$skeleton_files = call_user_func_array('array_merge', $skeleton_files);
 
 		foreach ($skeleton_files as $file)
 		{
-			$template_engine->set_filenames(array('body' => $file . '.twig'));
-			$body = $template_engine->assign_display('body');
+			$body = $template_engine
+				->set_filenames(array('body' => $file . '.twig'))
+				->assign_display('body');
 			$filesystem->dumpFile($ext_path . $file, trim($body) . "\n");
 		}
 
@@ -217,8 +219,7 @@ class packager
 		}
 
 		$body = json_encode($composer, JSON_PRETTY_PRINT + JSON_UNESCAPED_SLASHES);
-		$body = str_replace('&lt;', '<', $body);
-		$body = str_replace('&gt;', '>', $body);
+		$body = str_replace(array('&lt;', '&gt;'), array('<', '>'), $body);
 
 		return $body;
 	}

@@ -33,7 +33,7 @@ class main_module
 		{
 			if (!check_form_key('acme/demo'))
 			{
-				trigger_error('FORM_INVALID');
+				trigger_error($user->lang('FORM_INVALID'));
 			}
 
 			$sql = 'UPDATE ' . USERS_TABLE . '

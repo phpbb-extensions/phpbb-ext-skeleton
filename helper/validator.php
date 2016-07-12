@@ -13,6 +13,7 @@
 
 namespace phpbb\skeleton\helper;
 
+use phpbb\exception\runtime_exception;
 use phpbb\user;
 
 class validator
@@ -27,12 +28,12 @@ class validator
 
 	public function validate_num_authors($value)
 	{
-		if (preg_match('#^\d+$#', $value) && $value > 0 && $value <= 20)
+		if ($value > 0 && $value <= 20 && ctype_digit($value))
 		{
 			return $value;
 		}
 
-		throw new \RuntimeException($this->user->lang('SKELETON_INVALID_NUM_AUTHORS'));
+		throw new runtime_exception($this->user->lang('SKELETON_INVALID_NUM_AUTHORS'));
 	}
 
 	public function validate_extension_name($value)
@@ -42,17 +43,17 @@ class validator
 			return $value;
 		}
 
-		throw new \RuntimeException($this->user->lang('SKELETON_INVALID_EXTENSION_NAME'));
+		throw new runtime_exception($this->user->lang('SKELETON_INVALID_EXTENSION_NAME'));
 	}
 
 	public function validate_extension_display_name($value)
 	{
-		if (strlen($value))
+		if ($value !== '')
 		{
 			return $value;
 		}
 
-		throw new \RuntimeException($this->user->lang('SKELETON_INVALID_EXTENSION_NAME'));
+		throw new runtime_exception($this->user->lang('SKELETON_INVALID_EXTENSION_NAME'));
 	}
 
 	public function validate_extension_time($value)
@@ -62,7 +63,7 @@ class validator
 			return $value;
 		}
 
-		throw new \RuntimeException($this->user->lang('SKELETON_INVALID_EXTENSION_TIME'));
+		throw new runtime_exception($this->user->lang('SKELETON_INVALID_EXTENSION_TIME'));
 	}
 
 	public function validate_extension_version($value)
@@ -72,7 +73,7 @@ class validator
 			return $value;
 		}
 
-		throw new \RuntimeException($this->user->lang('SKELETON_INVALID_EXTENSION_VERSION'));
+		throw new runtime_exception($this->user->lang('SKELETON_INVALID_EXTENSION_VERSION'));
 	}
 
 	public function validate_vendor_name($value)
@@ -82,6 +83,6 @@ class validator
 			return $value;
 		}
 
-		throw new \RuntimeException($this->user->lang('SKELETON_INVALID_VENDOR_NAME'));
+		throw new runtime_exception($this->user->lang('SKELETON_INVALID_VENDOR_NAME'));
 	}
 }
