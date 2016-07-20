@@ -14,7 +14,7 @@
 namespace {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\tests\dbal;
 
 // Need to include functions.php to use phpbb_version_compare in this test
-require_once dirname(__FILE__) . '/../../../../../includes/functions.php';
+require_once __DIR__ . '/../../../../../includes/functions.php';
 
 class simple_test extends \phpbb_database_test_case
 {
@@ -28,14 +28,14 @@ class simple_test extends \phpbb_database_test_case
 
 	public function getDataSet()
 	{
-		return $this->createXMLDataSet(dirname(__FILE__) . '/fixtures/config.xml');
+		return $this->createXMLDataSet(__DIR__ . '/fixtures/config.xml');
 	}
 
 	public function test_column()
 	{
 		$this->db = $this->new_dbal();
 
-		if (phpbb_version_compare(PHPBB_VERSION, '3.2.0-dev', '<')
+		if (phpbb_version_compare(PHPBB_VERSION, '3.2.0-dev', '<'))
 		{
 			// This is how to instantiate db_tools in phpBB 3.1
 			$db_tools = new \phpbb\db\tools($this->db);
