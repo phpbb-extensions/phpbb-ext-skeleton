@@ -246,24 +246,21 @@ class packager
 		}
 		else
 		{
-			$cache_dir = $this->phpbb_container->getParameter('core.cache_dir');
-			$environment = new environment(
-				$config,
-				$this->phpbb_container->get('filesystem'),
-				$this->phpbb_container->get('path_helper'),
-				$cache_dir,
-				$this->phpbb_container->get('ext.manager'),
-				new loader(
-					new \phpbb\filesystem\filesystem()
-				)
-			);
-
 			$template_engine = new twig(
 				$this->phpbb_container->get('path_helper'),
 				$config,
 				new context(),
-				$environment,
-				$cache_dir,
+				new environment(
+					$config,
+					$this->phpbb_container->get('filesystem'),
+					$this->phpbb_container->get('path_helper'),
+					$this->phpbb_container->getParameter('core.cache_dir'),
+					$this->phpbb_container->get('ext.manager'),
+					new loader(
+						new \phpbb\filesystem\filesystem()
+					)
+				),
+				$this->phpbb_container->getParameter('core.cache_dir'),
 				$this->phpbb_container->get('user')
 			);
 		}
