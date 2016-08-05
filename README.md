@@ -4,14 +4,14 @@ phpBB's Skeleton Extension is a tool for extension authors to help speed up and 
 
 ## Requirements
 
-- phpBB version 3.1.4 or later.
+- phpBB version 3.1.4 or later (also compatible with phpBB 3.2.0-b3 or newer).
 - PHP version 5.3.3 or later.
 - PHP module `ZipArchive` enabled.
 
 ## Installation
 
 - Ensure your phpBB and PHP installations meet the Skeleton Extension requirements.
-- [Download the latest release](https://github.com/phpbb-extensions/phpbb-ext-skeleton/releases).
+- [Download the latest release](https://www.phpbb.com/customise/db/official_tool/ext_skeleton/).
 - Unzip and install to your phpBB `ext/` folder
 - Go to "ACP" > "Customise" > "Extensions" and enable the "phpBB Skeleton Extension" extension.
 
@@ -25,8 +25,7 @@ To install the source code from this repository, clone the contents of this repo
 
 ### Web-based user interface
 
-In order to create an extension via the web UI just open your board an visit the
-"Create skeleton extension" link in the forum's navigation bar:
+In order to create an extension via the web UI just open your local development board and visit the "Create skeleton extension" link in the forum's navigation bar:
 
     https://localhost/phpBB/app.php/skeleton
 
@@ -40,7 +39,7 @@ Then run the following command in your phpBB root (next to config.php):
 
     $ ./bin/phpbbcli.php extension:create
 
-Afterwards copy your extension from `store/tmp-ext/` into the `ext/` folder
+A packaged ZIP file can be found in `store/tmp-ext/`.
 
 ## License
 
