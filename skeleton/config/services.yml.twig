@@ -73,7 +73,7 @@ services:
         parent: notification.type.base
 {% endif %}
         calls:
-            - [set_controller_helper, [@controller.helper]]
+            - [set_controller_helper, ['@controller.helper']]
         tags:
             - { name: notification.type }
 
