@@ -14,7 +14,7 @@
 namespace {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }};
 
 /**
- * Class ext
+ * {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }} Extension base
  *
  * It is recommended to remove this file from
  * an extension if it is not going to be used.
@@ -23,12 +23,12 @@ class ext extends \phpbb\extension\base
 {
 {% if COMPONENT.notification %}
 	/**
-	* Enable notifications for the extension
-	*
-	* @param mixed $old_state State returned by previous call of this method
-	* @return mixed Returns false after last step, otherwise temporary state
-	* @access public
-	*/
+	 * Enable notifications for the extension
+	 *
+	 * @param mixed $old_state State returned by previous call of this method
+	 *
+	 * @return mixed Returns false after last step, otherwise temporary state
+	 */
 	public function enable_step($old_state)
 	{
 		switch ($old_state)
@@ -50,12 +50,12 @@ class ext extends \phpbb\extension\base
 	}
 
 	/**
-	* Disable notifications for the extension
-	*
-	* @param mixed $old_state State returned by previous call of this method
-	* @return mixed Returns false after last step, otherwise temporary state
-	* @access public
-	*/
+	 * Disable notifications for the extension
+	 *
+	 * @param mixed $old_state State returned by previous call of this method
+	 *
+	 * @return mixed Returns false after last step, otherwise temporary state
+	 */
 	public function disable_step($old_state)
 	{
 		switch ($old_state)
@@ -77,12 +77,12 @@ class ext extends \phpbb\extension\base
 	}
 
 	/**
-	* Purge notifications for the extension
-	*
-	* @param mixed $old_state State returned by previous call of this method
-	* @return mixed Returns false after last step, otherwise temporary state
-	* @access public
-	*/
+	 * Purge notifications for the extension
+	 *
+	 * @param mixed $old_state State returned by previous call of this method
+	 *
+	 * @return mixed Returns false after last step, otherwise temporary state
+	 */
 	public function purge_step($old_state)
 	{
 		switch ($old_state)

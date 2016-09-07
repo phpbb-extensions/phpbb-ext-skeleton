@@ -14,13 +14,13 @@
 namespace {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\event;
 
 /**
-* @ignore
-*/
+ * @ignore
+ */
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
-* Event listener
-*/
+ * {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }} Event listener.
+ */
 class main_listener implements EventSubscriberInterface
 {
 	static public function getSubscribedEvents()
@@ -43,11 +43,11 @@ class main_listener implements EventSubscriberInterface
 	protected $template;
 
 	/**
-	* Constructor
-	*
-	* @param \phpbb\controller\helper	$helper		Controller helper object
-	* @param \phpbb\template\template	$template	Template object
-	*/
+	 * Constructor
+	 *
+	 * @param \phpbb\controller\helper	$helper		Controller helper object
+	 * @param \phpbb\template\template	$template	Template object
+	 */
 	public function __construct(\phpbb\controller\helper $helper, \phpbb\template\template $template)
 	{
 		$this->helper = $helper;
@@ -56,11 +56,11 @@ class main_listener implements EventSubscriberInterface
 {% if COMPONENT.phplistener %}
 
 	/**
-	* A sample PHP event
-	* Modifies the names of the forums on index
-	*
-	* @param \phpbb\event\data	$event	Event object
-	*/
+	 * A sample PHP event
+	 * Modifies the names of the forums on index
+	 *
+	 * @param \phpbb\event\data	$event	Event object
+	 */
 	public function display_forums_modify_template_vars($event)
 	{
 		$forum_row = $event['forum_row'];
@@ -71,10 +71,10 @@ class main_listener implements EventSubscriberInterface
 {% if COMPONENT.controller %}
 
 	/**
-	* Load common language files during user setup
-	*
-	* @param \phpbb\event\data	$event	Event object
-	*/
+	 * Load common language files during user setup
+	 *
+	 * @param \phpbb\event\data	$event	Event object
+	 */
 	public function load_language_on_setup($event)
 	{
 		$lang_set_ext = $event['lang_set_ext'];
@@ -86,9 +86,9 @@ class main_listener implements EventSubscriberInterface
 	}
 
 	/**
-	* Add a link to the controller in the forum navbar
-	*/
-	public function add_page_header_link($event)
+	 * Add a link to the controller in the forum navbar
+	 */
+	public function add_page_header_link()
 	{
 		$this->template->assign_vars(array(
 			'U_DEMO_PAGE'	=> $this->helper->route('{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }}_controller', array('name' => 'world')),

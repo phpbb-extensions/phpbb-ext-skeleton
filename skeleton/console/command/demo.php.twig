@@ -16,16 +16,19 @@ namespace {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\console\com
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }} console command.
+ */
 class demo extends \phpbb\console\command\command
 {
 	/** @var \phpbb\user */
 	protected $user;
 
 	/**
-	* Constructor
-	*
-	* @param \phpbb\user $user User instance (mostly for translation)
-	*/
+	 * Constructor
+	 *
+	 * @param \phpbb\user $user User instance (mostly for translation)
+	 */
 	public function __construct(\phpbb\user $user)
 	{
 		parent::__construct($user);
@@ -34,8 +37,8 @@ class demo extends \phpbb\console\command\command
 	}
 
 	/**
-	* Configures the current command.
-	*/
+	 * Configures the current command.
+	 */
 	protected function configure()
 	{
 		$this->user->add_lang_ext('{{ EXTENSION.vendor_name }}/{{ EXTENSION.extension_name }}', 'cli');
@@ -46,13 +49,11 @@ class demo extends \phpbb\console\command\command
 	}
 
 	/**
-	* Executes the command acme:demo.
-	*
-	* @param InputInterface  $input  An InputInterface instance
-	* @param OutputInterface $output An OutputInterface instance
-	*
-	* @return null
-	*/
+	 * Executes the command acme:demo.
+	 *
+	 * @param InputInterface  $input  An InputInterface instance
+	 * @param OutputInterface $output An OutputInterface instance
+	 */
 	protected function execute(InputInterface $input, OutputInterface $output)
 	{
 		$output->writeln($this->user->lang('CLI_DEMO_HELLO'));
