@@ -5,7 +5,7 @@ phpBB's Skeleton Extension is a tool for extension authors to help speed up and 
 ## Requirements
 
 - phpBB version 3.1.4 or later (also compatible with phpBB 3.2.0-b3 or newer).
-- PHP version 5.3.3 or later.
+- PHP version 5.3.9 or later.
 - PHP module `ZipArchive` enabled.
 
 ## Installation
