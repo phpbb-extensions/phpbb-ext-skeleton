@@ -26,8 +26,6 @@ use Symfony\Component\Finder\Finder;
 
 class packager
 {
-	protected $data = array();
-
 	/** @var user */
 	protected $user;
 
