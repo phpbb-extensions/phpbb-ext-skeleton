@@ -40,10 +40,10 @@ class packager
 	/**
 	 * Constructor
 	 *
-	 * @param user $user User instance (mostly for translation)
-	 * @param ContainerInterface $phpbb_container
-	 * @param service_collection $collection
-	 * @param string $root_path
+	 * @param user               $user            User instance (mostly for translation)
+	 * @param ContainerInterface $phpbb_container Container
+	 * @param service_collection $collection      Service collection
+	 * @param string             $root_path       phpBB root path
 	 */
 	public function __construct(user $user, ContainerInterface $phpbb_container, service_collection $collection, $root_path)
 	{
@@ -54,6 +54,8 @@ class packager
 	}
 
 	/**
+	 * Get composer dialog values
+	 *
 	 * @return array
 	 */
 	public function get_composer_dialog_values()
@@ -83,6 +85,8 @@ class packager
 	}
 
 	/**
+	 * Get components dialog values
+	 *
 	 * @return array
 	 */
 	public function get_component_dialog_values()
@@ -102,7 +106,9 @@ class packager
 	}
 
 	/**
-	 * @param array $data
+	 * Create the extension
+	 *
+	 * @param array $data Extension data
 	 */
 	public function create_extension($data)
 	{
@@ -147,7 +153,10 @@ class packager
 	}
 
 	/**
-	 * @param array $data
+	 * Create the zip archive
+	 *
+	 * @param array $data Extension data
+	 *
 	 * @return string
 	 */
 	public function create_zip($data)
@@ -178,7 +187,10 @@ class packager
 	}
 
 	/**
-	 * @param array $data
+	 * Get composer JSON info from extension data
+	 *
+	 * @param array $data Extension data
+	 *
 	 * @return string
 	 */
 	public function get_composer_json_from_data($data)
@@ -225,7 +237,10 @@ class packager
 	}
 
 	/**
-	 * @return twig
+	 * Get the template engine to use for parsing skeleton templates.
+	 * Will get the appropriate engine based on the current phpBB version.
+	 *
+	 * @return twig Template object
 	 */
 	protected function get_template_engine()
 	{

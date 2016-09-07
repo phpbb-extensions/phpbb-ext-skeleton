@@ -14,13 +14,13 @@
 namespace phpbb\skeleton\event;
 
 /**
-* @ignore
-*/
+ * @ignore
+ */
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
-* Event listener
-*/
+ * Event listener
+ */
 class main_listener implements EventSubscriberInterface
 {
 	static public function getSubscribedEvents()
@@ -38,17 +38,22 @@ class main_listener implements EventSubscriberInterface
 	protected $template;
 
 	/**
-	* Constructor
-	*
-	* @param \phpbb\controller\helper	$helper		Controller helper object
-	* @param \phpbb\template\template	$template	Template object
-	*/
+	 * Constructor
+	 *
+	 * @param \phpbb\controller\helper $helper   Controller helper object
+	 * @param \phpbb\template\template $template Template object
+	 */
 	public function __construct(\phpbb\controller\helper $helper, \phpbb\template\template $template)
 	{
 		$this->helper = $helper;
 		$this->template = $template;
 	}
 
+	/**
+	 * Load language files
+	 *
+	 * @param \phpbb\event\data $event
+	 */
 	public function load_language_on_setup($event)
 	{
 		$lang_set_ext = $event['lang_set_ext'];
@@ -59,6 +64,9 @@ class main_listener implements EventSubscriberInterface
 		$event['lang_set_ext'] = $lang_set_ext;
 	}
 
+	/**
+	 * Add the page header link
+	 */
 	public function add_page_header_link()
 	{
 		$this->template->assign_vars(array(

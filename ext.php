@@ -13,12 +13,6 @@
 
 namespace phpbb\skeleton;
 
-/**
- * Class ext
- *
- * It is recommended to remove this file from
- * an extension if it is not going to be used.
- */
 class ext extends \phpbb\extension\base
 {
 	/**
@@ -29,7 +23,6 @@ class ext extends \phpbb\extension\base
 	 * Requires phpBB 3.1.4
 	 *
 	 * @return bool
-	 * @access public
 	 */
 	public function is_enableable()
 	{
