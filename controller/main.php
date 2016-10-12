@@ -50,16 +50,16 @@ class main
 	protected $user;
 
 	/**
-	* Constructor
-	*
-	* @param config		$config
-	* @param helper		$helper
-	* @param request	$request
-	* @param packager	$packager
-	* @param validator	$validator
-	* @param template	$template
-	* @param user		$user
-	*/
+	 * Constructor
+	 *
+	 * @param config    $config
+	 * @param helper    $helper
+	 * @param request   $request
+	 * @param packager  $packager
+	 * @param validator $validator
+	 * @param template  $template
+	 * @param user      $user
+	 */
 	public function __construct(config $config, helper $helper, request $request, packager $packager, validator $validator, template $template, user $user)
 	{
 		$this->config = $config;
@@ -74,11 +74,12 @@ class main
 	}
 
 	/**
-	* Demo controller for route /skeleton
-	*
-	* @return \Symfony\Component\HttpFoundation\Response A Symfony Response object
-	* @throws http_exception
-	*/
+	 * Demo controller for route /skeleton
+	 *
+	 * @throws http_exception
+	 *
+	 * @return \Symfony\Component\HttpFoundation\Response A Symfony Response object
+	 */
 	public function handle()
 	{
 		if ($this->user->data['is_bot'])
@@ -170,7 +171,7 @@ class main
 	}
 
 	/**
-	 *
+	 * Get composer data
 	 */
 	protected function get_composer_data()
 	{
@@ -196,7 +197,7 @@ class main
 	}
 
 	/**
-	 *
+	 * Get components data
 	 */
 	protected function get_component_data()
 	{
@@ -217,11 +218,15 @@ class main
 	}
 
 	/**
-	 * @param string $value
-	 * @param mixed $default
+	 * Get user input values
+	 *
+	 * @param string   $value
+	 * @param mixed    $default
 	 * @param null|int $array_key for multi user support
-	 * @return mixed|string
+	 *
 	 * @throws \Exception
+	 *
+	 * @return mixed|string
 	 */
 	protected function get_user_input($value, $default, $array_key = null)
 	{
@@ -243,11 +248,15 @@ class main
 	}
 
 	/**
-	 * @param string $value
-	 * @param mixed $default
+	 * Get request variables
+	 *
+	 * @param string   $value
+	 * @param mixed    $default
 	 * @param null|int $array_key for multi user support
-	 * @return mixed|string
+	 *
 	 * @throws \Exception
+	 *
+	 * @return mixed|string
 	 */
 	protected function get_request_variable($value, $default, $array_key = null)
 	{

@@ -1,20 +1,17 @@
 <?php
 /**
  *
- * This file is part of the phpBB Forum Software package.
+ * {{ EXTENSION.extension_display_name }}. An extension for the phpBB Forum Software package.
  *
- * @copyright (c) phpBB Limited <https://www.phpbb.com>
+ * @copyright (c) {{ "now"|date("Y") }}{{ AUTHORS.0.author_name ? ', ' ~ AUTHORS.0.author_name }}{{ AUTHORS.0.author_homepage ? ', ' ~ AUTHORS.0.author_homepage }}
  * @license GNU General Public License, version 2 (GPL-2.0)
- *
- * For full copyright and license information, please see
- * the docs/CREDITS.txt file.
  *
  */
 
 namespace {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\cron\task;
 
 /**
- * Acme demo cron task.
+ * {{ EXTENSION.extension_display_name }} cron task.
  */
 class demo extends \phpbb\cron\task\base
 {
@@ -28,20 +25,20 @@ class demo extends \phpbb\cron\task\base
 	protected $config;
 
 	/**
-	* Constructor
-	*
-	* @param \phpbb\config\config $config Config object
-	*/
+	 * Constructor
+	 *
+	 * @param \phpbb\config\config $config Config object
+	 */
 	public function __construct(\phpbb\config\config $config)
 	{
 		$this->config = $config;
 	}
 
 	/**
-	* Runs this cron task.
-	*
-	* @return null
-	*/
+	 * Runs this cron task.
+	 *
+	 * @return void
+	 */
 	public function run()
 	{
 		// Run your cron actions here...
@@ -52,24 +49,24 @@ class demo extends \phpbb\cron\task\base
 	}
 
 	/**
-	* Returns whether this cron task can run, given current board configuration.
-	*
-	* For example, a cron task that prunes forums can only run when
-	* forum pruning is enabled.
-	*
-	* @return bool
-	*/
+	 * Returns whether this cron task can run, given current board configuration.
+	 *
+	 * For example, a cron task that prunes forums can only run when
+	 * forum pruning is enabled.
+	 *
+	 * @return bool
+	 */
 	public function is_runnable()
 	{
 		return true;
 	}
 
 	/**
-	* Returns whether this cron task should run now, because enough time
-	* has passed since it was last run.
-	*
-	* @return bool
-	*/
+	 * Returns whether this cron task should run now, because enough time
+	 * has passed since it was last run.
+	 *
+	 * @return bool
+	 */
 	public function should_run()
 	{
 		return $this->config['acme_cron_last_run'] < time() - $this->cron_frequency;

@@ -59,8 +59,8 @@ class create extends command
 	}
 
 	/**
-	* {@inheritdoc}
-	*/
+	 * {@inheritdoc}
+	 */
 	protected function configure()
 	{
 		$this->user->add_lang_ext('phpbb/skeleton', 'common');
@@ -71,16 +71,16 @@ class create extends command
 	}
 
 	/**
-	* Executes the command extension:create.
-	*
-	* Creates an extension skeleton
-	*
-	* @param InputInterface  $input  An InputInterface instance
-	* @param OutputInterface $output An OutputInterface instance
-	*
-	* @return null
-	* @see \phpbb\config\config::delete()
-	*/
+	 * Executes the command extension:create.
+	 *
+	 * Creates an extension skeleton
+	 *
+	 * @param InputInterface  $input  An InputInterface instance
+	 * @param OutputInterface $output An OutputInterface instance
+	 *
+	 * @see \phpbb\config\config::delete()
+	 * @return void
+	 */
 	protected function execute(InputInterface $input, OutputInterface $output)
 	{
 		$this->packager->create_extension($this->data);
@@ -163,7 +163,7 @@ class create extends command
 	 * Helper for getting user input
 	 *
 	 * @param string $value
-	 * @param mixed $default
+	 * @param mixed  $default
 	 * @return mixed|string
 	 */
 	protected function get_user_input($value, $default)

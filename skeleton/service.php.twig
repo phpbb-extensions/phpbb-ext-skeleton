@@ -1,18 +1,18 @@
 <?php
 /**
  *
- * This file is part of the phpBB Forum Software package.
+ * {{ EXTENSION.extension_display_name }}. An extension for the phpBB Forum Software package.
  *
- * @copyright (c) phpBB Limited <https://www.phpbb.com>
+ * @copyright (c) {{ "now"|date("Y") }}{{ AUTHORS.0.author_name ? ', ' ~ AUTHORS.0.author_name }}{{ AUTHORS.0.author_homepage ? ', ' ~ AUTHORS.0.author_homepage }}
  * @license GNU General Public License, version 2 (GPL-2.0)
- *
- * For full copyright and license information, please see
- * the docs/CREDITS.txt file.
  *
  */
 
 namespace {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }};
 
+/**
+ * {{ EXTENSION.extension_display_name }} Service info.
+ */
 class service
 {
 	/** @var \phpbb\user */
@@ -21,12 +21,23 @@ class service
 	/** @var string */
 	protected $table_name;
 
+	/**
+	 * Constructor
+	 *
+	 * @param \phpbb\user $user       User object
+	 * @param string      $table_name The name of a db table
+	 */
 	public function __construct(\phpbb\user $user, $table_name)
 	{
 		$this->user = $user;
 		$this->table_name = $table_name;
 	}
 
+	/**
+	 * Get user demo
+	 *
+	 * @return \phpbb\user $user User object
+	 */
 	public function get_user()
 	{
 		var_dump($this->table_name);

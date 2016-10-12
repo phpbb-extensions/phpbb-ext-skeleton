@@ -26,8 +26,6 @@ use Symfony\Component\Finder\Finder;
 
 class packager
 {
-	protected $data = array();
-
 	/** @var user */
 	protected $user;
 
@@ -40,10 +38,10 @@ class packager
 	/**
 	 * Constructor
 	 *
-	 * @param user $user User instance (mostly for translation)
-	 * @param ContainerInterface $phpbb_container
-	 * @param service_collection $collection
-	 * @param string $root_path
+	 * @param user               $user            User instance (mostly for translation)
+	 * @param ContainerInterface $phpbb_container Container
+	 * @param service_collection $collection      Service collection
+	 * @param string             $root_path       phpBB root path
 	 */
 	public function __construct(user $user, ContainerInterface $phpbb_container, service_collection $collection, $root_path)
 	{
@@ -54,28 +52,30 @@ class packager
 	}
 
 	/**
+	 * Get composer dialog values
+	 *
 	 * @return array
 	 */
 	public function get_composer_dialog_values()
 	{
 		return array(
-			'author' => array(
-				'author_name' => null,
-				'author_email' => null,
+			'author'       => array(
+				'author_name'     => null,
+				'author_email'    => null,
 				'author_homepage' => null,
-				'author_role' => null,
+				'author_role'     => null,
 			),
-			'extension' => array(
-				'vendor_name' => null,
+			'extension'    => array(
+				'vendor_name'            => null,
 				'extension_display_name' => null,
-				'extension_name' => null,
-				'extension_description' => null,
-				'extension_version' => '1.0.0-dev',
-				'extension_homepage' => null,
-				'extension_time' => date('Y-m-d'),
+				'extension_name'         => null,
+				'extension_description'  => null,
+				'extension_version'      => '1.0.0-dev',
+				'extension_homepage'     => null,
+				'extension_time'         => date('Y-m-d'),
 			),
 			'requirements' => array(
-				'php_version' => '>=5.3.3',
+				'php_version'       => '>=5.3.3',
 				'phpbb_version_min' => '>=3.1.4',
 				'phpbb_version_max' => '<3.2.0@dev',
 			),
@@ -83,6 +83,8 @@ class packager
 	}
 
 	/**
+	 * Get components dialog values
+	 *
 	 * @return array
 	 */
 	public function get_component_dialog_values()
@@ -92,9 +94,9 @@ class packager
 		{
 			/** @var \phpbb\skeleton\skeleton $service */
 			$components[$service->get_name()] = array(
-				'default' => $service->get_default(),
+				'default'      => $service->get_default(),
 				'dependencies' => $service->get_dependencies(),
-				'files' => $service->get_files(),
+				'files'        => $service->get_files(),
 			);
 		}
 
@@ -102,7 +104,9 @@ class packager
 	}
 
 	/**
-	 * @param array $data
+	 * Create the extension
+	 *
+	 * @param array $data Extension data
 	 */
 	public function create_extension($data)
 	{
@@ -114,10 +118,10 @@ class packager
 		$template_engine = $this->get_template_engine();
 		$template_engine->set_custom_style('skeletonextension', $this->root_path . 'ext/phpbb/skeleton/skeleton');
 		$template_engine->assign_vars(array(
-			'COMPONENT' => $data['components'],
-			'EXTENSION' => $data['extension'],
+			'COMPONENT'    => $data['components'],
+			'EXTENSION'    => $data['extension'],
 			'REQUIREMENTS' => $data['requirements'],
-			'AUTHORS' => $data['authors'],
+			'AUTHORS'      => $data['authors'],
 		));
 
 		$component_data = $this->get_component_dialog_values();
@@ -147,7 +151,10 @@ class packager
 	}
 
 	/**
-	 * @param array $data
+	 * Create the zip archive
+	 *
+	 * @param array $data Extension data
+	 *
 	 * @return string
 	 */
 	public function create_zip($data)
@@ -178,24 +185,27 @@ class packager
 	}
 
 	/**
-	 * @param array $data
+	 * Get composer JSON info from extension data
+	 *
+	 * @param array $data Extension data
+	 *
 	 * @return string
 	 */
 	public function get_composer_json_from_data($data)
 	{
 		$composer = array(
-			'name' => "{$data['extension']['vendor_name']}/{$data['extension']['extension_name']}",
-			'type' => 'phpbb-extension',
+			'name'        => "{$data['extension']['vendor_name']}/{$data['extension']['extension_name']}",
+			'type'        => 'phpbb-extension',
 			'description' => "{$data['extension']['extension_description']}",
-			'homepage' => "{$data['extension']['extension_homepage']}",
-			'version' => "{$data['extension']['extension_version']}",
-			'time' => "{$data['extension']['extension_time']}",
-			'license' => 'GPL-2.0',
-			'authors' => array(),
-			'require' => array(
+			'homepage'    => "{$data['extension']['extension_homepage']}",
+			'version'     => "{$data['extension']['extension_version']}",
+			'time'        => "{$data['extension']['extension_time']}",
+			'license'     => 'GPL-2.0',
+			'authors'     => array(),
+			'require'     => array(
 				'php' => "{$data['requirements']['php_version']}",
 			),
-			'extra' => array(
+			'extra'       => array(
 				'display-name' => "{$data['extension']['extension_display_name']}",
 				'soft-require' => array(
 					'phpbb/phpbb' => "{$data['requirements']['phpbb_version_min']},{$data['requirements']['phpbb_version_max']}",
@@ -211,10 +221,10 @@ class packager
 		foreach ($data['authors'] as $i => $author_data)
 		{
 			$composer['authors'][] = array(
-				'name' => "{$data['authors'][$i]['author_name']}",
-				'email' => "{$data['authors'][$i]['author_email']}",
+				'name'     => "{$data['authors'][$i]['author_name']}",
+				'email'    => "{$data['authors'][$i]['author_email']}",
 				'homepage' => "{$data['authors'][$i]['author_homepage']}",
-				'role' => "{$data['authors'][$i]['author_role']}",
+				'role'     => "{$data['authors'][$i]['author_role']}",
 			);
 		}
 
@@ -225,14 +235,17 @@ class packager
 	}
 
 	/**
-	 * @return twig
+	 * Get the template engine to use for parsing skeleton templates.
+	 * Will get the appropriate engine based on the current phpBB version.
+	 *
+	 * @return twig Template object
 	 */
 	protected function get_template_engine()
 	{
 		$config = new config(array(
 			'load_tplcompile' => true,
-			'tpl_allow_php' => false,
-			'assets_version' => null,
+			'tpl_allow_php'   => false,
+			'assets_version'  => null,
 		));
 
 		if (phpbb_version_compare(PHPBB_VERSION, '3.2.0-dev', '<'))
