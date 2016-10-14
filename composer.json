@@ -2,7 +2,7 @@
 	"name": "phpbb/skeleton",
 	"type": "phpbb-extension",
 	"description": "A phpBB Extension for creating extension skeletons",
-	"homepage": "https://github.com/phpbb-extensions/phpbb-ext-skeleton",
+	"homepage": "https://www.phpbb.com/customise/db/official_tool/ext_skeleton/",
 	"version": "1.0.2-dev",
 	"time": "2016-10-13",
 	"license": "GPL-2.0",
