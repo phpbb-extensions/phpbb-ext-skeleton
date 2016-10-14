@@ -3,8 +3,8 @@
 	"type": "phpbb-extension",
 	"description": "A phpBB Extension for creating extension skeletons",
 	"homepage": "https://github.com/phpbb-extensions/phpbb-ext-skeleton",
-	"version": "1.0.1-dev",
-	"time": "2016-08-04",
+	"version": "1.0.2-dev",
+	"time": "2016-10-13",
 	"license": "GPL-2.0",
 	"authors": [
 		{
@@ -33,9 +33,9 @@
 			"phpbb/phpbb": ">=3.1.4,<3.3.0@dev"
 		},
 		"version-check": {
-			"host": "version.phpbb.com",
-			"directory": "/phpbb-extensions",
-			"filename": "skeleton_versions.json"
+			"host": "www.phpbb.com",
+			"directory": "/customise/db/official_tool/ext_skeleton",
+			"filename": "version_check"
 		}
 	}
 }
