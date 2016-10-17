@@ -75,7 +75,7 @@
 		{% for component in loops.component %}
 		<div class="{% if loop.index is odd %}column1{% else %}column2{% endif %}">
 			<fieldset class="fields2">
-				<div><label for="{{ component.NAME }}"><input class="components" type="checkbox" name="{{ component.NAME }}" id="{{ component.NAME }}"{% if component.VALUE %} checked="checked"{% endif %} /> <strong>{{ component.DESC }}</strong></label></div>
+				<div><label for="{{ component.NAME }}" title="{{ component.DESC_EXPLAIN }}"><input class="components" type="checkbox" name="{{ component.NAME }}" id="{{ component.NAME }}"{% if component.VALUE %} checked="checked"{% endif %} /> <strong>{{ component.DESC }}</strong></label></div>
 			</fieldset>
 		</div>
 		{% endfor %}
