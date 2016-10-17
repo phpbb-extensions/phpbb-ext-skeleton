@@ -24,6 +24,7 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	'CLI_DESCRIPTION_SKELETON_CREATE'	=> 'Create a basic skeleton extension',
 	'PHPBB_SKELETON_EXT'				=> 'Create skeleton extension',
+	'PHPBB_SKELETON_EXT_DOCS'			=> '<a href="https://github.com/phpbb-extensions/phpbb-ext-skeleton/wiki">View the documentation for more information</a>.',
 
 	'EXTENSION_CLI_SKELETON_SUCCESS'	=> "<info>Extension created successfully.\nCopy the extension from `store/tmp-ext/` into the `ext/` folder.</info>",
 	'SKELETON_CLI_COMPOSER_QUESTIONS'	=> '<comment>Enter composer.json details (hit enter to leave an option empty)</comment>',
