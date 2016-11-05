@@ -22,7 +22,7 @@ services:
             - '%{{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.tables.demo_table%'
 
 {% endif %}
-{% if COMPONENT.phplistener %}
+{% if COMPONENT.phplistener or COMPONENT.controller %}{# controller component uses the phplistener too #}
     {{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.listener:
         class: {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\event\main_listener
         arguments:
