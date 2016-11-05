@@ -55,8 +55,8 @@ services:
 {% if COMPONENT.notification %}
     {{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.notification.type.demo:
         class: {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\notification\type\demo
-        shared: false # service MUST not be shared for this to work!
-{% if REQUIREMENTS.phpbb_version_min matches '/^[\\D]*3\\.1.*$/' %}
+{% if REQUIREMENTS.phpbb_version_min matches '/^[\\D]*3\\.1.*$/' %}{# for phpBB 3.1.x #}
+        scope: prototype # scope MUST be prototype for this to work!
         arguments:
             - '@user_loader'
             - '@dbal.conn'
@@ -69,7 +69,8 @@ services:
             - '%tables.notification_types%'
             - '%tables.notifications%'
             - '%tables.user_notifications%'
-{% else %}
+{% else %}{# for phpBB > 3.2.x #}
+        shared: false # service MUST not be shared for this to work!
         parent: notification.type.base
 {% endif %}
         calls:
