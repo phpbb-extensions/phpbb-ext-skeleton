@@ -15,6 +15,7 @@
 		authorTpl = $elem.author.first().clone();
 	});
 
+	// Add Authors button
 	$elem.addAuthor.on('click', function() {
 		var count = $elem.author.length,
 			$author = authorTpl.clone();
@@ -30,6 +31,7 @@
 		$(this).before($('<hr />')).before($author);
 	});
 
+	// Mark all / unmark all components
 	$elem.marklist.on('click', function(e) {
 		e.preventDefault();
 		$elem.components.prop('checked', $(this).hasClass('markall'));
