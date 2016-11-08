@@ -30,6 +30,8 @@ $lang = array_merge($lang, array(
 	'SKELETON_CLI_COMPOSER_QUESTIONS'	=> '<comment>Enter composer.json details (hit enter to leave an option empty)</comment>',
 	'SKELETON_CLI_COMPONENT_QUESTIONS'	=> '<comment>Install optional components. Default: No; [y/n]</comment>',
 
+	'SKELETON_RESERVED_NAME_WARNING_UI'	=> 'Warning: The name entered is not allowed.',
+
 	'SKELETON_ADD_AUTHOR'						=> 'Add author',
 	'SKELETON_QUESTION_VENDOR_NAME'				=> 'Please enter the vendor name',
 	'SKELETON_QUESTION_VENDOR_NAME_UI'			=> 'Vendor name',

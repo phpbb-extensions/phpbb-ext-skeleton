@@ -4,6 +4,7 @@
 
 	var authorTpl,
 		$elem = {
+			form: $('#postform'),
 			author: $('.skeleton-author'),
 			addAuthor: $('#skeleton-new-author'),
 			components: $('.components'),
@@ -32,6 +33,18 @@
 	$elem.marklist.on('click', function(e) {
 		e.preventDefault();
 		$elem.components.prop('checked', $(this).hasClass('markall'));
+	});
+
+	// Validate vendor/extension names
+	$elem.form.on('blur', '#vendor_name, #extension_name', function() {
+		var $value = $(this).val(),
+			$warning = $('<div/>').css('color', 'red').text(warningMsg);
+
+		$(this).next($warning).remove();
+
+		if ($value === 'phpbb' || $value === 'core') {
+			$(this).after($warning);
+		}
 	});
 
 })(jQuery); // Avoid conflicts with other libraries
