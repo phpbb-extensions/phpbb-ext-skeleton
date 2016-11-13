@@ -168,7 +168,7 @@ class main
 
 		$this->template->assign_var('S_POST_ACTION', $this->helper->route('phpbb_skeleton_controller'));
 
-		return $this->helper->render('skeleton_body.html', $this->user->lang('PHPBB_SKELETON_EXT'));
+		return $this->helper->render('skeleton_body.html', $this->user->lang('PHPBB_CREATE_SKELETON_EXT'));
 	}
 
 	/**
