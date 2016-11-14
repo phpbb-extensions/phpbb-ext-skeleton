@@ -37,16 +37,28 @@
 		$elem.components.prop('checked', $(this).hasClass('markall'));
 	});
 
-	// Validate vendor/extension names
+	// Validate vendor/extension names on field blur
 	$elem.form.on('blur', '#vendor_name, #extension_name', function() {
-		var $value = $(this).val(),
-			$warning = $('<div/>').css('color', 'red').text(warningMsg);
-
-		$(this).next($warning).remove();
-
-		if ($value === 'phpbb' || $value === 'core') {
-			$(this).after($warning);
-		}
+		$(this).checkNames();
 	});
+
+	// Validate vendor/extension names on document ready
+	$(document).ready(function(){
+		$('#vendor_name, #extension_name').checkNames();
+	});
+
+	/*global warningMsg */
+	$.fn.checkNames = function() {
+		return this.each(function() {
+			var $value = $(this).val(),
+				$warning = $('<div/>').css('color', 'red').text(warningMsg);
+
+			$(this).next($warning).remove();
+
+			if ($value === 'phpbb' || $value === 'core') {
+				$(this).after($warning);
+			}
+		});
+	};
 
 })(jQuery); // Avoid conflicts with other libraries
