@@ -25,9 +25,13 @@ services:
 {% if COMPONENT.phplistener or COMPONENT.controller %}{# controller component uses the phplistener too #}
     {{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.listener:
         class: {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\event\main_listener
+{% if COMPONENT.controller %}
         arguments:
             - '@controller.helper'
             - '@template'
+            - '@user'
+            - '%core.php_ext%'
+{% endif %}
         tags:
             - { name: event.listener }
 
