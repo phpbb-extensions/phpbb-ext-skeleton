@@ -32,6 +32,7 @@ class main_listener implements EventSubscriberInterface
 {% endif %}
 		);
 	}
+{% if COMPONENT.controller %}
 
 	/* @var \phpbb\controller\helper */
 	protected $helper;
@@ -50,22 +51,6 @@ class main_listener implements EventSubscriberInterface
 		$this->helper = $helper;
 		$this->template = $template;
 	}
-{% if COMPONENT.phplistener %}
-
-	/**
-	 * A sample PHP event
-	 * Modifies the names of the forums on index
-	 *
-	 * @param \phpbb\event\data	$event	Event object
-	 */
-	public function display_forums_modify_template_vars($event)
-	{
-		$forum_row = $event['forum_row'];
-		$forum_row['FORUM_NAME'] .= ' :: Acme Event ::';
-		$event['forum_row'] = $forum_row;
-	}
-{% endif %}
-{% if COMPONENT.controller %}
 
 	/**
 	 * Load common language files during user setup
@@ -90,6 +75,21 @@ class main_listener implements EventSubscriberInterface
 		$this->template->assign_vars(array(
 			'U_DEMO_PAGE'	=> $this->helper->route('{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }}_controller', array('name' => 'world')),
 		));
+	}
+{% endif %}
+{% if COMPONENT.phplistener %}
+
+	/**
+	 * A sample PHP event
+	 * Modifies the names of the forums on index
+	 *
+	 * @param \phpbb\event\data	$event	Event object
+	 */
+	public function display_forums_modify_template_vars($event)
+	{
+		$forum_row = $event['forum_row'];
+		$forum_row['FORUM_NAME'] .= ' :: Acme Event ::';
+		$event['forum_row'] = $forum_row;
 	}
 {% endif %}
 }
