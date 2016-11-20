@@ -23,12 +23,15 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, array(
 	'CLI_DESCRIPTION_SKELETON_CREATE'	=> 'Create a basic skeleton extension',
-	'PHPBB_SKELETON_EXT'				=> 'Create skeleton extension',
-	'PHPBB_SKELETON_EXT_DOCS'			=> '<a href="https://area51.phpbb.com/docs/dev/31x/extensions/skeleton_extension.html">View the documentation for more information</a>.',
+	'PHPBB_SKELETON_EXT'				=> 'Skeleton Extension',
+	'PHPBB_CREATE_SKELETON_EXT'			=> 'Create skeleton extension',
+	'PHPBB_SKELETON_EXT_DOCS'			=> '<a href="https://area51.phpbb.com/docs/dev/31x/extensions/skeleton_extension.html" target="_blank">Read the Documentation</a>',
 
 	'EXTENSION_CLI_SKELETON_SUCCESS'	=> "<info>Extension created successfully.\nCopy the extension from `store/tmp-ext/` into the `ext/` folder.</info>",
 	'SKELETON_CLI_COMPOSER_QUESTIONS'	=> '<comment>Enter composer.json details (hit enter to leave an option empty)</comment>',
 	'SKELETON_CLI_COMPONENT_QUESTIONS'	=> '<comment>Install optional components. Default: No; [y/n]</comment>',
+
+	'SKELETON_RESERVED_NAME_WARNING_UI'	=> 'Warning: The name entered is not allowed.',
 
 	'SKELETON_ADD_AUTHOR'						=> 'Add author',
 	'SKELETON_QUESTION_VENDOR_NAME'				=> 'Please enter the vendor name',
