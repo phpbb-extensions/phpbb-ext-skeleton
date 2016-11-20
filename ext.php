@@ -17,28 +17,25 @@ class ext extends \phpbb\extension\base
 {
 	/**
 	 * Check whether or not the extension can be enabled.
-	 * The current phpBB version should meet or exceed
-	 * the minimum version required by this extension:
-	 *
-	 * Requires phpBB 3.1.4
 	 *
 	 * @return bool
 	 */
 	public function is_enableable()
 	{
-		return class_exists('ZipArchive') && ($this->phpbb_legacy_compatibility() || $this->phpbb_current_compatibility());
+		return $this->php_requirements() && ($this->phpbb_31x_compatible() || $this->phpbb_current_compatible());
 	}
 
 	/**
-	 * Check phpBB 3.1 compatibility
+	 * Check PHP requirements
 	 *
-	 * Requires phpBB 3.1.4 or greater
+	 * Requires PHP 5.3.9 or greater
+	 * Requires PHP ZipArchive binary
 	 *
 	 * @return bool
 	 */
-	protected function phpbb_legacy_compatibility()
+	protected function php_requirements()
 	{
-		return phpbb_version_compare(PHPBB_VERSION, '3.1.4', '>=') && phpbb_version_compare(PHPBB_VERSION, '3.2.0-dev', '<');
+		return phpbb_version_compare(PHP_VERSION, '5.3.9', '>=') && class_exists('ZipArchive');
 	}
 
 	/**
@@ -48,9 +45,21 @@ class ext extends \phpbb\extension\base
 	 *
 	 * @return bool
 	 */
-	protected function phpbb_current_compatibility()
+	protected function phpbb_current_compatible()
 	{
 		return phpbb_version_compare(PHPBB_VERSION, '3.2.0-b3', '>=');
+	}
+
+	/**
+	 * Check phpBB 3.1 compatibility
+	 *
+	 * Requires phpBB 3.1.4 or greater
+	 *
+	 * @return bool
+	 */
+	protected function phpbb_31x_compatible()
+	{
+		return phpbb_version_compare(PHPBB_VERSION, '3.1.4', '>=') && phpbb_version_compare(PHPBB_VERSION, '3.2.0-dev', '<');
 	}
 }
 
