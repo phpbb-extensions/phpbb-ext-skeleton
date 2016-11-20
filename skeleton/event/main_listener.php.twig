@@ -29,9 +29,11 @@ class main_listener implements EventSubscriberInterface
 {% if COMPONENT.controller %}
 			'core.user_setup'				=> 'load_language_on_setup',
 			'core.page_header'				=> 'add_page_header_link',
+			'core.viewonline_overwrite_location'	=> 'viewonline_page',
 {% endif %}
 		);
 	}
+{% if COMPONENT.controller %}
 
 	/* @var \phpbb\controller\helper */
 	protected $helper;
@@ -39,33 +41,27 @@ class main_listener implements EventSubscriberInterface
 	/* @var \phpbb\template\template */
 	protected $template;
 
+	/* @var \phpbb\user */
+	protected $user;
+
+	/** @var string phpEx */
+	protected $php_ext;
+
 	/**
 	 * Constructor
 	 *
 	 * @param \phpbb\controller\helper	$helper		Controller helper object
 	 * @param \phpbb\template\template	$template	Template object
+	 * @param \phpbb\user               $user       User object
+	 * @param string                    $php_ext    phpEx
 	 */
-	public function __construct(\phpbb\controller\helper $helper, \phpbb\template\template $template)
+	public function __construct(\phpbb\controller\helper $helper, \phpbb\template\template $template, \phpbb\user $user, $php_ext)
 	{
-		$this->helper = $helper;
+		$this->helper   = $helper;
 		$this->template = $template;
+		$this->user     = $user;
+		$this->php_ext  = $php_ext;
 	}
-{% if COMPONENT.phplistener %}
-
-	/**
-	 * A sample PHP event
-	 * Modifies the names of the forums on index
-	 *
-	 * @param \phpbb\event\data	$event	Event object
-	 */
-	public function display_forums_modify_template_vars($event)
-	{
-		$forum_row = $event['forum_row'];
-		$forum_row['FORUM_NAME'] .= ' :: Acme Event ::';
-		$event['forum_row'] = $forum_row;
-	}
-{% endif %}
-{% if COMPONENT.controller %}
 
 	/**
 	 * Load common language files during user setup
@@ -90,6 +86,35 @@ class main_listener implements EventSubscriberInterface
 		$this->template->assign_vars(array(
 			'U_DEMO_PAGE'	=> $this->helper->route('{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }}_controller', array('name' => 'world')),
 		));
+	}
+
+	/**
+	 * Show users viewing Acme Demo on the Who Is Online page
+	 *
+	 * @param \phpbb\event\data	$event	Event object
+	 */
+	public function viewonline_page($event)
+	{
+		if ($event['on_page'][1] === 'app' && strrpos($event['row']['session_page'], 'app.' . $this->php_ext . '/demo') === 0)
+		{
+			$event['location'] = $this->user->lang('VIEWING_ACME_DEMO');
+			$event['location_url'] = $this->helper->route('{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }}_controller', array('name' => 'world'));
+		}
+	}
+{% endif %}
+{% if COMPONENT.phplistener %}
+
+	/**
+	 * A sample PHP event
+	 * Modifies the names of the forums on index
+	 *
+	 * @param \phpbb\event\data	$event	Event object
+	 */
+	public function display_forums_modify_template_vars($event)
+	{
+		$forum_row = $event['forum_row'];
+		$forum_row['FORUM_NAME'] .= ' :: Acme Event ::';
+		$event['forum_row'] = $forum_row;
 	}
 {% endif %}
 }

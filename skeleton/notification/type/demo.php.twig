@@ -63,7 +63,7 @@ class demo extends \phpbb\notification\type\base
 	/**
 	 * Get the id of the notification
 	 *
-	 * @param array $data The data for the updated rules
+	 * @param array $data The type specific data
 	 *
 	 * @return int Id of the notification
 	 */
@@ -75,7 +75,7 @@ class demo extends \phpbb\notification\type\base
 	/**
 	 * Get the id of the parent
 	 *
-	 * @param array $data The data for the updated rules
+	 * @param array $data The type specific data
 	 *
 	 * @return int Id of the parent
 	 */
@@ -155,7 +155,7 @@ class demo extends \phpbb\notification\type\base
 	 * Function for preparing the data for insertion in an SQL query
 	 * (The service handles insertion)
 	 *
-	 * @param array $data The data for the updated rules
+	 * @param array $data The type specific data
 	 * @param array $pre_create_data Data from pre_create_insert_array()
 	 *
 	 * @return array Array of data ready to be inserted into the database
