@@ -67,12 +67,12 @@ class packager
 			),
 			'extension'    => array(
 				'vendor_name'            => null,
-				'extension_display_name' => null,
 				'extension_name'         => null,
+				'extension_display_name' => null,
 				'extension_description'  => null,
 				'extension_version'      => '1.0.0-dev',
-				'extension_homepage'     => null,
 				'extension_time'         => date('Y-m-d'),
+				'extension_homepage'     => null,
 			),
 			'requirements' => array(
 				'php_version'       => '>=5.3.3',
