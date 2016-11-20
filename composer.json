@@ -3,8 +3,8 @@
 	"type": "phpbb-extension",
 	"description": "A phpBB Extension for creating extension skeletons",
 	"homepage": "https://www.phpbb.com/customise/db/official_tool/ext_skeleton/",
-	"version": "1.0.2-dev",
-	"time": "2016-10-13",
+	"version": "1.0.2",
+	"time": "2016-11-19",
 	"license": "GPL-2.0",
 	"authors": [
 		{
