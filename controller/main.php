@@ -129,7 +129,7 @@ class main
 			$author_values[$value] = $this->request->variable($value, array((string) $default));
 		}
 
-		$num_authors = max(1, sizeof($author_values['author_name']));
+		$num_authors = max(1, count($author_values['author_name']));
 		for ($i = 0; $i < $num_authors; $i++)
 		{
 			foreach ($dialog_questions['author'] as $value => $default)
@@ -182,7 +182,7 @@ class main
 			$this->data['extension'][$value] = $this->get_user_input($value, $default);
 		}
 
-		$num_authors = max(1, sizeof($this->request->variable('author_name', array(''))));
+		$num_authors = max(1, count($this->request->variable('author_name', array(''))));
 		for ($i = 0; $i < $num_authors; $i++)
 		{
 			foreach ($dialog_questions['author'] as $value => $default)
