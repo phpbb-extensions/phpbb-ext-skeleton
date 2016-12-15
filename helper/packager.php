@@ -230,6 +230,7 @@ class packager
 
 		$body = json_encode($composer, JSON_PRETTY_PRINT + JSON_UNESCAPED_SLASHES);
 		$body = str_replace(array('&lt;', '&gt;'), array('<', '>'), $body);
+		$body .= PHP_EOL;
 
 		return $body;
 	}
