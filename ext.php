@@ -28,14 +28,14 @@ class ext extends \phpbb\extension\base
 	/**
 	 * Check PHP requirements
 	 *
-	 * Requires PHP 5.3.9 or greater
+	 * Requires PHP 5.4.0 or greater
 	 * Requires PHP ZipArchive binary
 	 *
 	 * @return bool
 	 */
 	protected function php_requirements()
 	{
-		return phpbb_version_compare(PHP_VERSION, '5.3.9', '>=') && class_exists('ZipArchive');
+		return phpbb_version_compare(PHP_VERSION, '5.4.0', '>=') && class_exists('ZipArchive');
 	}
 
 	/**
