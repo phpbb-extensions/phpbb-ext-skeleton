@@ -228,8 +228,9 @@ class packager
 			);
 		}
 
-		$body = json_encode($composer, JSON_PRETTY_PRINT + JSON_UNESCAPED_SLASHES);
+		$body = json_encode($composer, JSON_PRETTY_PRINT + JSON_UNESCAPED_SLASHES + JSON_UNESCAPED_UNICODE);
 		$body = str_replace(array('&lt;', '&gt;'), array('<', '>'), $body);
+		$body .= PHP_EOL;
 
 		return $body;
 	}

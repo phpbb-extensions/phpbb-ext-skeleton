@@ -119,17 +119,17 @@ class main
 				'NAME'			=> $value,
 				'DESC'			=> $this->user->lang('SKELETON_QUESTION_' . strtoupper($value) . '_UI'),
 				'DESC_EXPLAIN'	=> array_key_exists('SKELETON_QUESTION_' . strtoupper($value) . '_EXPLAIN', $this->user->lang) ? $this->user->lang('SKELETON_QUESTION_' . strtoupper($value) . '_EXPLAIN') : '',
-				'VALUE'			=> $this->request->variable($value, (string) $default),
+				'VALUE'			=> $this->request->variable($value, (string) $default, true),
 			));
 		}
 
 		$author_values = array();
 		foreach ($dialog_questions['author'] as $value => $default)
 		{
-			$author_values[$value] = $this->request->variable($value, array((string) $default));
+			$author_values[$value] = $this->request->variable($value, array((string) $default), true);
 		}
 
-		$num_authors = max(1, sizeof($author_values['author_name']));
+		$num_authors = max(1, count($author_values['author_name']));
 		for ($i = 0; $i < $num_authors; $i++)
 		{
 			foreach ($dialog_questions['author'] as $value => $default)
@@ -182,7 +182,7 @@ class main
 			$this->data['extension'][$value] = $this->get_user_input($value, $default);
 		}
 
-		$num_authors = max(1, sizeof($this->request->variable('author_name', array(''))));
+		$num_authors = max(1, count($this->request->variable('author_name', array(''))));
 		for ($i = 0; $i < $num_authors; $i++)
 		{
 			foreach ($dialog_questions['author'] as $value => $default)
@@ -274,10 +274,10 @@ class main
 
 		if ($array_key !== null)
 		{
-			$return_value = $this->request->variable($value, array((string) $default));
+			$return_value = $this->request->variable($value, array((string) $default), true);
 			return isset($return_value[$array_key]) ? (string) $return_value[$array_key] : (string) $default;
 		}
 
-		return $this->request->variable($value, (string) $default);
+		return $this->request->variable($value, (string) $default, true);
 	}
 }
