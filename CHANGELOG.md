@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.3 - 2017-01-12
+
+- Add support for UTF-8 characters in fields (extension full name, description, author info, etc).
+- Only add information about unit testing to the README when testing components are selected.
+- Fix the extension name used in the generated build script component.
+- Fix undeclared class properties generated in the ACP module component.
+- Fix missing empty new line at the end of the generated composer.json file.
+- Increased minimum PHP requirement to PHP 5.4 to support proper JSON file generation (such as UTF-8 support).
+
 ## 1.0.2 - 2016-11-19
 
 - Re-organized some of the "Extension packaging" fields with clearer names and ordering.
