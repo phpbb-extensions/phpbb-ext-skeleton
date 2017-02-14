@@ -203,7 +203,8 @@ class packager
 			'license'     => 'GPL-2.0',
 			'authors'     => array(),
 			'require'     => array(
-				'php' => "{$data['requirements']['php_version']}",
+				'php'     => "{$data['requirements']['php_version']}",
+				'composer/installers' => '~1.0',
 			),
 			'extra'       => array(
 				'display-name' => "{$data['extension']['extension_display_name']}",

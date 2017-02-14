@@ -63,7 +63,7 @@ class validator
 			return $value;
 		}
 
-		throw new runtime_exception($this->user->lang('SKELETON_INVALID_EXTENSION_NAME'));
+		throw new runtime_exception($this->user->lang('SKELETON_INVALID_PACKAGE_NAME'));
 	}
 
 	/**
@@ -80,7 +80,7 @@ class validator
 			return $value;
 		}
 
-		throw new runtime_exception($this->user->lang('SKELETON_INVALID_EXTENSION_NAME'));
+		throw new runtime_exception($this->user->lang('SKELETON_INVALID_DISPLAY_NAME'));
 	}
 
 	/**
