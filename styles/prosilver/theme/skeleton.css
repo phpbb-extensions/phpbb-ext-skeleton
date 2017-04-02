@@ -1,4 +1,20 @@
-.icon-phpbb-skeleton {
-	background-image: url('./images/skeleton.png');
-	background-size: 16px 14px;
+.icon-phpbb-skeleton svg {
+	position: relative;
+	top: 1px;
+	width: 13px;
+	height: 13px;
+	padding: 0 3px;
+	fill: currentColor;
+}
+
+.rtl .icon-phpbb-skeleton svg {
+	padding: 0 0 0 3px;
+}
+
+.dropdown .icon-phpbb-skeleton svg {
+	padding: 0 5px 0 0;
+}
+
+.rtl .dropdown .icon-phpbb-skeleton svg {
+	padding: 0 0 0 5px;
 }
