@@ -32,7 +32,7 @@ class main_module
 		{
 			if (!check_form_key('acme/demo'))
 			{
-				trigger_error('FORM_INVALID');
+				trigger_error('FORM_INVALID', E_USER_WARNING);
 			}
 
 			$config->set('acme_demo_goodbye', $request->variable('acme_demo_goodbye', 0));
