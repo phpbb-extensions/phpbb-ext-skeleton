@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.4 - 2017-05-04
+
+- Updated generated composer.json files to include the composer/installers requirement.
+- Updated generated acp_demo_body.html template to follow a more correct ACP layout configuration.
+- Updated generated acp main_module.php to generate use the correct error flags in trigger_errors.
+- Switched skeleton's nav-bar icon to an SVG image for better style & retina display compatibility.
+
 ## 1.0.3 - 2017-01-12
 
 - Add support for UTF-8 characters in fields (extension full name, description, author info, etc).
