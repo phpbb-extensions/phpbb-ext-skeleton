@@ -1,17 +1,17 @@
 {
 	"name": "phpbb/skeleton",
 	"type": "phpbb-extension",
-	"description": "A phpBB Extension for creating extension skeletons",
+	"description": "The official phpBB skeleton extension generator.",
 	"homepage": "https://www.phpbb.com/customise/db/official_tool/ext_skeleton/",
-	"version": "1.0.3",
-	"time": "2017-01-12",
+	"version": "1.0.4",
+	"time": "2017-05-04",
 	"license": "GPL-2.0",
 	"authors": [
 		{
 			"name": "Joas Schilling",
 			"email": "nickvergessen@gmx.de",
 			"homepage": "https://github.com/nickvergessen/",
-			"role": "Lead Developer"
+			"role": "Former Lead Developer"
 		},
 		{
 			"name": "Matt Friedman",
