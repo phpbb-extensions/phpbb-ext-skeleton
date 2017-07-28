@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.5 - 2017-07-28
+
+- Updated generated .travis.yml configuration to comply with recent changes to Travis and EPV. The Travis configuration file will also be generated appropriately for 3.1.x or 3.2.x environments based on the extension's minimum phpBB version.
+
 ## 1.0.4 - 2017-05-04
 
 - Updated generated composer.json files to include the composer/installers requirement.
