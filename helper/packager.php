@@ -35,6 +35,9 @@ class packager
 	/** @var service_collection */
 	protected $collection;
 
+	/** @var string */
+	protected $root_path;
+
 	/**
 	 * Constructor
 	 *
