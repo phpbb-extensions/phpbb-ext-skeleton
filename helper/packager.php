@@ -203,7 +203,7 @@ class packager
 			'homepage'    => "{$data['extension']['extension_homepage']}",
 			'version'     => "{$data['extension']['extension_version']}",
 			'time'        => "{$data['extension']['extension_time']}",
-			'license'     => 'GPL-2.0',
+			'license'     => 'GPL-2.0-only',
 			'authors'     => array(),
 			'require'     => array(
 				'php'     => "{$data['requirements']['php_version']}",
