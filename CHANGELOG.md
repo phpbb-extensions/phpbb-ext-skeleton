@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.7 - 2018-03-14
+
+- The generated composer.json will now have the standard "GPL-2.0-only" license identifier.
+- The generated .travis.yml has a more up-to-date test configuration for phpBB 3.2.x environment.
+
 ## 1.0.6 - 2017-09-07
 
 - Updated generated .travis.yml configuration with fixes for setting up EPV testing.
