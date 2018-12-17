@@ -6,7 +6,7 @@
 		<div class="inner">
 			<fieldset>
 				<dl>
-					<dt><label for="user_acme0">{{ '{{' }} lang('UCP_DEMO_USER') }}</label><br /><span>{{ '{{' }} lang('UCP_DEMO_USER_EXPLAIN') }}</span></dt>
+					<dt><label for="user_acme0">{{ '{{' }} lang('UCP_DEMO_USER') ~ lang('COLON') }}</label><br /><span>{{ '{{' }} lang('UCP_DEMO_USER_EXPLAIN') }}</span></dt>
 					<dd><label for="user_acme1"><input type="radio" name="user_acme" id="user_acme1" value="1"{{ '{' }}% if S_USER_ACME %} checked="checked"{{ '{' }}% endif %} /> {{ '{{' }} lang('YES') }}</label>
 						<label for="user_acme0"><input type="radio" name="user_acme" id="user_acme0" value="0"{{ '{' }}% if not S_USER_ACME %} checked="checked"{{ '{' }}% endif %} /> {{ '{{' }} lang('NO') }}</label></dd>
 				</dl>
