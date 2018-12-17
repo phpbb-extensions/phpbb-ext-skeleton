@@ -13,7 +13,7 @@ namespace {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\notificatio
 /**
  * {{ EXTENSION.extension_display_name }} Notification class.
  */
-class demo extends \phpbb\notification\type\base
+class {{ EXTENSION.extension_name }} extends \phpbb\notification\type\base
 {
 	/** @var \phpbb\controller\helper */
 	protected $helper;
@@ -37,7 +37,7 @@ class demo extends \phpbb\notification\type\base
 	 */
 	public function get_type()
 	{
-		return '{{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.notification.type.demo';
+		return '{{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.notification.type.{{ EXTENSION.extension_name|lower }}';
 	}
 
 	/**
@@ -47,7 +47,7 @@ class demo extends \phpbb\notification\type\base
 	 * 					Array of data (including keys 'id', 'lang', and 'group')
 	 */
 	public static $notification_option = array(
-		'lang'	=> 'NOTIFICATION_TYPE_DEMO',
+		'lang'	=> 'NOTIFICATION_TYPE_{{ EXTENSION.extension_name|upper }}',
 	);
 
 	/**
@@ -118,7 +118,7 @@ class demo extends \phpbb\notification\type\base
 	 */
 	public function get_title()
 	{
-		return $this->user->lang('ACME_DEMO_NOTIFICATION');
+		return $this->user->lang('{{ EXTENSION.vendor_name|upper }}_{{ EXTENSION.extension_name|upper }}_NOTIFICATION');
 	}
 
 	/**

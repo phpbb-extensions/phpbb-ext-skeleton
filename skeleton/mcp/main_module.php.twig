@@ -21,9 +21,9 @@ class main_module
 	{
 		global $template, $user;
 
-		$this->tpl_name = 'mcp_demo_body';
-		$this->page_title = $user->lang('MCP_DEMO_TITLE');
-		add_form_key('acme/demo');
+		$this->tpl_name = 'mcp_{{ EXTENSION.extension_name|lower }}_body';
+		$this->page_title = $user->lang('MCP_{{ EXTENSION.extension_name|upper }}_TITLE');
+		add_form_key('{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}');
 
 		$template->assign_var('U_POST_ACTION', $this->u_action);
 	}

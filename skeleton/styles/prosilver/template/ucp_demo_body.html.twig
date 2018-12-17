@@ -1,14 +1,14 @@
 {{ '<' }}!-- INCLUDE ucp_header.html -->
 
-<form id="ucp" method="post" action="{{ '{' }}S_UCP_ACTION}">
+<form id="{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}" name="{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}" method="post" action="{{ '{' }}S_UCP_ACTION}">
 <h2>{{ '{' }}L_SETTINGS}</h2>
 	<div class="panel">
 		<div class="inner">
 			<fieldset>
 				<dl>
-					<dt><label for="user_acme0">{{ '{' }}L_UCP_DEMO_USER}{{ '{' }}L_COLON}</label><br /><span>{{ '{' }}L_UCP_DEMO_USER_EXPLAIN}</span></dt>
-					<dd><label for="user_acme1"><input type="radio" name="user_acme" id="user_acme1" value="1"{{ '<' }}!-- IF S_USER_ACME --> checked="checked"{{ '<' }}!-- ENDIF --> /> {{ '{' }}L_YES}</label>
-						<label for="user_acme0"><input type="radio" name="user_acme" id="user_acme0" value="0"{{ '<' }}!-- IF not S_USER_ACME --> checked="checked"{{ '<' }}!-- ENDIF --> /> {{ '{' }}L_NO}</label></dd>
+					<dt><label for="user_{{ EXTENSION.extension_name|lower }}0">{{ '{' }}L_UCP_{{ EXTENSION.extension_name|upper }}_USER}{{ '{' }}L_COLON}</label><br /><span>{{ '{' }}L_UCP_{{ EXTENSION.extension_name|upper }}_USER_EXPLAIN}</span></dt>
+					<dd><label for="user_{{ EXTENSION.extension_name|lower }}1"><input type="radio" name="user_{{ EXTENSION.extension_name|lower }}" id="user_{{ EXTENSION.extension_name|lower }}1" value="1"{{ '<' }}!-- IF S_USER_{{ EXTENSION.extension_name|upper }} --> checked="checked"{{ '<' }}!-- ENDIF --> /> {{ '{' }}L_YES}</label>
+						<label for="user_{{ EXTENSION.extension_name|lower }}0"><input type="radio" name="user_{{ EXTENSION.extension_name|lower }}" id="user_{{ EXTENSION.extension_name|lower }}0" value="0"{{ '<' }}!-- IF not S_USER_{{ EXTENSION.extension_name|upper }} --> checked="checked"{{ '<' }}!-- ENDIF --> /> {{ '{' }}L_NO}</label></dd>
 				</dl>
 			</fieldset>
 		</div>

@@ -13,7 +13,7 @@ namespace {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\cron\task;
 /**
  * {{ EXTENSION.extension_display_name }} cron task.
  */
-class demo extends \phpbb\cron\task\base
+class {{ EXTENSION.extension_name|lower }} extends \phpbb\cron\task\base
 {
 	/**
 	 * How often we run the cron (in seconds).

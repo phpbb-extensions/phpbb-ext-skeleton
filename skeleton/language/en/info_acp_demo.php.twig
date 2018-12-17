@@ -19,5 +19,5 @@ if (empty($lang) || !is_array($lang))
 }
 
 $lang = array_merge($lang, array(
-	'ACP_DEMO_TITLE'			=> 'Demo Module',
+	'ACP_{{ EXTENSION.extension_name|upper }}_TITLE'			=> '{{ EXTENSION.extension_name|capitalize }} Module',
 ));

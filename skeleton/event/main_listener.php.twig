@@ -84,12 +84,12 @@ class main_listener implements EventSubscriberInterface
 	public function add_page_header_link()
 	{
 		$this->template->assign_vars(array(
-			'U_DEMO_PAGE'	=> $this->helper->route('{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }}_controller', array('name' => 'world')),
+			'U_{{ EXTENSION.extension_name|upper }}_PAGE'	=> $this->helper->route('{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }}_controller', array('name' => 'world')),
 		));
 	}
 
 	/**
-	 * Show users viewing Acme Demo on the Who Is Online page
+	 * Show users viewing {{ EXTENSION.extension_display_name }} page on the Who Is Online page
 	 *
 	 * @param \phpbb\event\data	$event	Event object
 	 */
@@ -113,7 +113,7 @@ class main_listener implements EventSubscriberInterface
 	public function display_forums_modify_template_vars($event)
 	{
 		$forum_row = $event['forum_row'];
-		$forum_row['FORUM_NAME'] .= ' :: Acme Event ::';
+		$forum_row['FORUM_NAME'] .= ' :: {{ EXTENSION.extension_name|capitalize }} Event ::';
 		$event['forum_row'] = $forum_row;
 	}
 {% endif %}

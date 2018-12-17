@@ -1,8 +1,8 @@
 {{ '<' }}!-- INCLUDE mcp_header.html -->
 
-<form method="post" id="mcp" action="{{ '{' }}U_POST_ACTION}">
+<form method="post" id="{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}" name="{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}" action="{{ '{' }}U_POST_ACTION}">
 
-	<h2>{{ '{' }}L_MCP_DEMO_TITLE}</h2>
+	<h2>{{ '{' }}L_MCP_{{ EXTENSION.extension_name|upper }}_TITLE}</h2>
 
 	<div class="panel">
 		<div class="inner">

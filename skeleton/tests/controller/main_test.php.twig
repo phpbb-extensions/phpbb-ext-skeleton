@@ -15,7 +15,7 @@ class main_test extends \phpbb_test_case
 	public function handle_data()
 	{
 		return array(
-			array(200, 'demo_body.html'),
+			array(200, '{{ EXTENSION.extension_name|lower }}_body.html'),
 		);
 	}
 
