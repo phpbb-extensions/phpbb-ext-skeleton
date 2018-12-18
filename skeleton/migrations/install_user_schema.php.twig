@@ -26,17 +26,17 @@ class install_user_schema extends \phpbb\db\migration\migration
 	{
 		return array(
 			'add_tables'		=> array(
-				$this->table_prefix . 'acme_demo'	=> array(
+				$this->table_prefix . '{{ EXTENSION.extension_name|lower }}_table'	=> array(
 					'COLUMNS'		=> array(
-						'acme_id'			=> array('UINT', null, 'auto_increment'),
-						'acme_name'			=> array('VCHAR:255', ''),
+						'{{ EXTENSION.extension_name|lower }}_id'			=> array('ULINT', null, 'auto_increment'),
+						'{{ EXTENSION.extension_name|lower }}_name'			=> array('VCHAR:255', ''),
 					),
 					'PRIMARY_KEY'	=> 'acme_id',
 				),
 			),
 			'add_columns'	=> array(
 				$this->table_prefix . 'users'			=> array(
-					'user_{{ EXTENSION.extension_name|lower }}'				=> array('UINT', 0),
+					'user_{{ EXTENSION.extension_name|lower }}'				=> array('ULINT', 0),
 				),
 			),
 		);
@@ -51,7 +51,7 @@ class install_user_schema extends \phpbb\db\migration\migration
 				),
 			),
 			'drop_tables'		=> array(
-				$this->table_prefix . 'acme_demo',
+				$this->table_prefix . '{{ EXTENSION.extension_name|lower }}_table',
 			),
 		);
 	}
