@@ -1,24 +1,25 @@
-{{ '<' }}!-- INCLUDE overall_header.html -->
+{{ '{' }}% include 'overall_header.html' %}
 
-<h1>{{ '{' }}L_ACP_{{ EXTENSION.extension_name|upper }}_TITLE}</h1>
 
-<form id="{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}" name="{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}" method="post" action="{{ '{' }}U_ACTION}">
+<h1>{{ '{{' }} lang('ACP_DEMO_TITLE') }}</h1>
+
+<form id="{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}" name="{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}" method="post" action="{{ '{{' }} U_ACTION }}">
 
 	<fieldset>
-		<legend>{{ '{' }}L_SETTINGS}</legend>
+		<legend>{{ '{{' }} lang('SETTINGS') }}</legend>
 		<dl>
-			<dt><label for="{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}_goodbye">{{ '{' }}L_ACP_{{ EXTENSION.extension_name|upper }}_GOODBYE}{{ '{' }}L_COLON}</label></dt>
-			<dd><label><input type="radio" class="radio" name="{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}_goodbye" value="1" {{ '<' }}!-- IF {{ EXTENSION.vendor_name|upper }}_{{ EXTENSION.extension_name|upper }}_GOODBYE -->checked="checked"{{ '<' }}!-- ENDIF -->/> {{ '{' }}L_YES}</label>
-				<label><input type="radio" class="radio" name="{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}_goodbye" value="0" {{ '<' }}!-- IF not {{ EXTENSION.vendor_name|upper }}_{{ EXTENSION.extension_name|upper }}_GOODBYE -->checked="checked"{{ '<' }}!-- ENDIF --> /> {{ '{' }}L_NO}</label></dd>
+			<dt><label for="{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}_goodbye">{{ '{{' }} lang('ACP_{{ EXTENSION.extension_name|upper }}_GOODBYE') ~ lang('COLON') }}</label></dt>
+			<dd><label><input type="radio" class="radio" name="{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}_goodbye" value="1"{{ '{' }}% if {{ EXTENSION.vendor_name|upper }}_{{ EXTENSION.extension_name|upper }}_GOODBYE %} checked="checked"{{ '{' }}% endif %} /> {{ '{{' }} lang('YES') }}</label>
+				<label><input type="radio" class="radio" name="{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}_goodbye" value="0"{{ '{' }}% if not {{ EXTENSION.vendor_name|upper }}_{{ EXTENSION.extension_name|upper }}_GOODBYE %} checked="checked"{{ '{' }}% endif %} /> {{ '{{' }} lang('NO') }}</label></dd>
 		</dl>
 	</fieldset>
 
 	<fieldset class="submit-buttons">
-		<input class="button1" type="submit" id="submit" name="submit" value="{{ '{' }}L_SUBMIT}" />&nbsp;
-		<input class="button2" type="submit" name="preview" value="{{ '{' }}L_PREVIEW}" />
-		{{ '{' }}S_FORM_TOKEN}
+		<input class="button1" type="submit" id="submit" name="submit" value="{{ '{{' }} lang('SUBMIT') }}" />&nbsp;
+		<input class="button2" type="submit" id="preview" name="preview" value="{{ '{{' }} lang('PREVIEW') }}" />
+		{{ '{{' }} S_FORM_TOKEN }}
 	</fieldset>
 
 </form>
 
-{{ '<' }}!-- INCLUDE overall_footer.html -->
+{{ '{' }}% include 'overall_footer.html' %}

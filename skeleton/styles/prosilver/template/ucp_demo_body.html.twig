@@ -1,14 +1,16 @@
-{{ '<' }}!-- INCLUDE ucp_header.html -->
+{{ '{' }}% include 'ucp_header.html' %}
 
-<form id="{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}" name="{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}" method="post" action="{{ '{' }}S_UCP_ACTION}">
-<h2>{{ '{' }}L_SETTINGS}</h2>
+<form id="{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}" name="{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}" method="post" action="{{ '{{' }} S_UCP_ACTION }}">
+
+	<h2>{{ '{{' }} lang('SETTINGS') }}</h2>
+
 	<div class="panel">
 		<div class="inner">
 			<fieldset>
 				<dl>
-					<dt><label for="user_{{ EXTENSION.extension_name|lower }}0">{{ '{' }}L_UCP_{{ EXTENSION.extension_name|upper }}_USER}{{ '{' }}L_COLON}</label><br /><span>{{ '{' }}L_UCP_{{ EXTENSION.extension_name|upper }}_USER_EXPLAIN}</span></dt>
-					<dd><label for="user_{{ EXTENSION.extension_name|lower }}1"><input type="radio" name="user_{{ EXTENSION.extension_name|lower }}" id="user_{{ EXTENSION.extension_name|lower }}1" value="1"{{ '<' }}!-- IF S_USER_{{ EXTENSION.extension_name|upper }} --> checked="checked"{{ '<' }}!-- ENDIF --> /> {{ '{' }}L_YES}</label>
-						<label for="user_{{ EXTENSION.extension_name|lower }}0"><input type="radio" name="user_{{ EXTENSION.extension_name|lower }}" id="user_{{ EXTENSION.extension_name|lower }}0" value="0"{{ '<' }}!-- IF not S_USER_{{ EXTENSION.extension_name|upper }} --> checked="checked"{{ '<' }}!-- ENDIF --> /> {{ '{' }}L_NO}</label></dd>
+					<dt><label for="user_{{ EXTENSION.extension_name|lower }}0">{{ '{{' }} lang('UCP_{{ EXTENSION.extension_name|upper }}_USER') ~ lang('COLON') }}</label><br /><span>{{ '{{' }} lang('UCP_{{ EXTENSION.extension_name|upper }}_USER_EXPLAIN') }}</span></dt>
+					<dd><label for="user_{{ EXTENSION.extension_name|lower }}1"><input type="radio" name="user_{{ EXTENSION.extension_name|lower }}" id="user_{{ EXTENSION.extension_name|lower }}1" value="1"{{ '{' }}% if S_USER_{{ EXTENSION.extension_name|upper }} %} checked="checked"{{ '{' }}% endif %} /> {{ '{{' }} lang('YES') }}</label>
+						<label for="user_{{ EXTENSION.extension_name|lower }}0"><input type="radio" name="user_{{ EXTENSION.extension_name|lower }}" id="user_{{ EXTENSION.extension_name|lower }}0" value="0"{{ '{' }}% if not S_USER_{{ EXTENSION.extension_name|upper }} %} checked="checked"{{ '{' }}% endif %} /> {{ '{{' }} lang('NO') }}</label></dd>
 				</dl>
 			</fieldset>
 		</div>
@@ -16,12 +18,12 @@
 	<fieldset>
 		<dl>
 			<dt>&nbsp;</dt>
-			<dd><input type="submit" name="submit" id="submit" class="button1" value="{{ '{' }}L_SUBMIT}" tabindex="2" />&nbsp;
-				<input type="reset" value="{{ '{' }}L_RESET}" name="reset" class="button2" /></dd>
+			<dd><input type="submit" name="submit" id="submit" class="button1" value="{{ '{{' }} lang('SUBMIT') }}" tabindex="2" />&nbsp;
+				<input type="reset" name="reset" class="button2" value="{{ '{{' }} lang('RESET') }}" /></dd>
 		</dl>
-		{{ '{' }}S_HIDDEN_FIELDS}
-		{{ '{' }}S_FORM_TOKEN}
+		{{ '{{' }} S_HIDDEN_FIELDS }}
+		{{ '{{' }} S_FORM_TOKEN }}
 	</fieldset>
 </form>
 
-{{ '<' }}!-- INCLUDE ucp_footer.html -->
+{{ '{' }}% include 'ucp_footer.html' %}
