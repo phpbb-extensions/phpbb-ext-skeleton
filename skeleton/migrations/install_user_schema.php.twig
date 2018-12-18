@@ -31,7 +31,7 @@ class install_user_schema extends \phpbb\db\migration\migration
 						'{{ EXTENSION.extension_name|lower }}_id'			=> array('ULINT', null, 'auto_increment'),
 						'{{ EXTENSION.extension_name|lower }}_name'			=> array('VCHAR:255', ''),
 					),
-					'PRIMARY_KEY'	=> 'acme_id',
+					'PRIMARY_KEY'	=> '{{ EXTENSION.extension_name|lower }}_id',
 				),
 			),
 			'add_columns'	=> array(
