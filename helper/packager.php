@@ -178,7 +178,7 @@ class packager
 		{
 			$zip_archive->addFile(
 				$file->getRealPath(),
-				"{$data['extension']['vendor_name']}/{$data['extension']['extension_name']}/" . $file->getRelativePath() . '/' . $file->getFilename()
+				"{$data['extension']['vendor_name']}/{$data['extension']['extension_name']}/" . ($file->getRelativePath() ? $file->getRelativePath() . "/" : "") . $file->getFilename()
 			);
 		}
 
