@@ -1,15 +1,15 @@
-{{ '<' }}!-- INCLUDE mcp_header.html -->
+{{ '{' }}% include 'mcp_header.html' %}
 
-<form method="post" id="mcp" action="{{ '{' }}U_POST_ACTION}">
+<form id="mcp" method="post" action="{{ '{{' }} U_POST_ACTION }}">
 
-	<h2>{{ '{' }}L_MCP_DEMO_TITLE}</h2>
+	<h2>{{ '{{' }} lang('MCP_DEMO_TITLE') }}</h2>
 
 	<div class="panel">
 		<div class="inner">
 
 			<fieldset>
 				<dl>
-					<dt><label for="username">{{ '{' }}L_SELECT_USER}{{ '{' }}L_COLON}</label></dt>
+					<dt><label for="username">{{ '{{' }} lang('SELECT_USER') ~ lang('COLON') }}</label></dt>
 					<dd><input name="username" id="username" type="text" class="inputbox" /></dd>
 				</dl>
 			</fieldset>
@@ -18,10 +18,10 @@
 	</div>
 
 	<fieldset class="submit-buttons">
-		<input type="reset" value="{{ '{' }}L_RESET}" name="reset" class="button2" />&nbsp;
-		<input type="submit" name="submituser" value="{{ '{' }}L_SUBMIT}" class="button1" />
-		{{ '{' }}S_FORM_TOKEN}
+		<input type="reset" name="reset" value="{{ '{{' }} lang('RESET') }}" class="button2" />&nbsp;
+		<input type="submit" name="submituser" value="{{ '{{' }} lang('SUBMIT') }}" class="button1" />
+		{{ '{{' }} S_FORM_TOKEN }}
 	</fieldset>
 </form>
 
-{{ '<' }}!-- INCLUDE mcp_footer.html -->
+{{ '{' }}% include 'mcp_footer.html' %}
