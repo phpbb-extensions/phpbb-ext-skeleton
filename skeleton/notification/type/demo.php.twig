@@ -157,9 +157,11 @@ class {{ EXTENSION.extension_name }} extends \phpbb\notification\type\base
 	 *
 	 * @param array $data The type specific data
 	 * @param array $pre_create_data Data from pre_create_insert_array()
+{% if REQUIREMENTS.phpbb_version_min matches '/^[\\D]*3\\.1.*$/' %}
 	 *
 	 * @return array Array of data ready to be inserted into the database
 	 */
+{% endif %}
 	public function create_insert_array($data, $pre_create_data = array())
 	{
 		$this->set_data('{{ EXTENSION.extension_name|lower }}_sample_name', $data['{{ EXTENSION.extension_name|lower }}_sample_name']);
