@@ -30,7 +30,7 @@ class main_test extends \phpbb_test_case
 			->disableOriginalConstructor()
 			->getMock();
 
-		/** @var \phpbb\user $user Mock the user class */
+		/** @var \phpbb\user $user Mock of the user class */
 		$user = $this->getMockBuilder('\phpbb\user')
 			->disableOriginalConstructor()
 			->getMock();
@@ -52,7 +52,7 @@ class main_test extends \phpbb_test_case
 				return new \Symfony\Component\HttpFoundation\Response($template_file, $status_code);
 			});
 
-		// Instantiate the acme demo controller
+		// Instantiate the {{ EXTENSION.extesion_display_name }} controller
 		$controller = new \{{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\controller\main(
 			new \phpbb\config\config(array()),
 			$controller_helper,

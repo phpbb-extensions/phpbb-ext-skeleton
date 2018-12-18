@@ -128,7 +128,7 @@ class {{ EXTENSION.extension_name }} extends \phpbb\notification\type\base
 	 */
 	public function get_url()
 	{
-		return $this->helper->route('{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }}_controller', $this->get_data('acme_demo'));
+		return $this->helper->route('{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }}_controller', $this->get_data('{{ EXTENSION.extension_name|lower }}_sample_name'));
 	}
 
 	/**
@@ -162,7 +162,7 @@ class {{ EXTENSION.extension_name }} extends \phpbb\notification\type\base
 	 */
 	public function create_insert_array($data, $pre_create_data = array())
 	{
-		$this->set_data('acme_demo', $data['acme_demo']);
+		$this->set_data('{{ EXTENSION.extension_name|lower }}_sample_name', $data['{{ EXTENSION.extension_name|lower }}_sample_name']);
 
 {% if REQUIREMENTS.phpbb_version_min matches '/^[\\D]*3\\.1.*$/' %}
 		return parent::create_insert_array($data, $pre_create_data);

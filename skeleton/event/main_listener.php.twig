@@ -97,7 +97,7 @@ class main_listener implements EventSubscriberInterface
 	{
 		if ($event['on_page'][1] === 'app' && strrpos($event['row']['session_page'], 'app.' . $this->php_ext . '/demo') === 0)
 		{
-			$event['location'] = $this->user->lang('VIEWING_ACME_DEMO');
+			$event['location'] = $this->user->lang('VIEWING_{{ EXTENSION.vendor_name|upper }}_{{ EXTENSION.extension_name|upper }}');
 			$event['location_url'] = $this->helper->route('{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }}_controller', array('name' => 'world'));
 		}
 	}
