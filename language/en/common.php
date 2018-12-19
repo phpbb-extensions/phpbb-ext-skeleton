@@ -123,6 +123,13 @@ $lang = array_merge($lang, array(
 	'SKELETON_QUESTION_COMPONENT_BUILD_UI'			=> 'Build script (phing)',
 	'SKELETON_QUESTION_COMPONENT_BUILD_EXPLAIN'		=> 'A phing build script is generated for your extension which can be used to generate build packages to help simplify the release or deployment processes.',
 
+	'SKELETON_COMPONENT_GROUP_FRONT_END'			=> 'Front End (HTML)',
+	'SKELETON_COMPONENT_GROUP_BACK_END'				=> 'Back End (PHP)',
+	'SKELETON_COMPONENT_GROUP_DATABASE'				=> 'Database',
+	'SKELETON_COMPONENT_GROUP_CONTROL_PANELS'		=> 'Control Panels',
+	'SKELETON_COMPONENT_GROUP_OTHER'				=> 'Extras',
+	'SKELETON_COMPONENT_GROUP_TEST_DEPLOY'			=> 'Testing & Deployment',
+
 	'SKELETON_TITLE_EXTENSION_INFO'		=> 'Extension packaging',
 	'SKELETON_TITLE_AUTHOR_INFO'		=> 'Authors',
 	'SKELETON_TITLE_REQUIREMENT_INFO'	=> 'Requirements',

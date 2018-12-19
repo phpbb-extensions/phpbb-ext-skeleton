@@ -13,6 +13,7 @@ services:
             - false
             - []
             - ['config/services.yml', 'event/main_listener.php']
+            - 'BACK_END'
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
 
@@ -23,6 +24,7 @@ services:
             - false
             - []
             - ['styles/prosilver/template/event/overall_header_navigation_prepend.html']
+            - 'FRONT_END'
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
 
@@ -33,6 +35,7 @@ services:
             - false
             - []
             - ['acp/main_info.php', 'acp/main_module.php', 'adm/style/acp_demo_body.html', 'language/en/common.php', 'language/en/info_acp_demo.php', 'migrations/install_acp_module.php']
+            - 'CONTROL_PANELS'
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
 
@@ -43,6 +46,7 @@ services:
             - false
             - []
             - ['mcp/main_info.php', 'mcp/main_module.php', 'styles/prosilver/template/mcp_demo_body.html', 'language/en/info_mcp_demo.php', 'migrations/install_mcp_module.php']
+            - 'CONTROL_PANELS'
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
 
@@ -53,6 +57,7 @@ services:
             - false
             - []
             - ['ucp/main_info.php', 'ucp/main_module.php', 'styles/prosilver/template/ucp_demo_body.html', 'language/en/info_ucp_demo.php', 'migrations/install_ucp_module.php', 'migrations/install_user_schema.php']
+            - 'CONTROL_PANELS'
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
 
@@ -63,6 +68,7 @@ services:
             - false
             - []
             - ['migrations/install_acp_module.php', 'migrations/install_mcp_module.php', 'migrations/install_ucp_module.php', 'migrations/install_user_schema.php']
+            - 'DATABASE'
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
 
@@ -73,6 +79,7 @@ services:
             - false
             - []
             - ['service.php', 'config/services.yml', 'config/parameters.yml']
+            - 'BACK_END'
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
 
@@ -83,6 +90,7 @@ services:
             - false
             - []
             - ['config/routing.yml', 'config/services.yml', 'event/main_listener.php', 'language/en/common.php', 'controller/main.php', 'styles/prosilver/template/demo_body.html', 'styles/prosilver/template/event/overall_header_navigation_prepend.html']
+            - 'BACK_END'
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
 
@@ -93,6 +101,7 @@ services:
             - false
             - []
             - ['ext.php']
+            - 'BACK_END'
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
 
@@ -103,6 +112,7 @@ services:
             - false
             - []
             - ['config/services.yml', 'console/command/demo.php', 'language/en/cli.php']
+            - 'OTHER'
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
 
@@ -113,6 +123,7 @@ services:
             - false
             - []
             - ['config/services.yml', 'cron/task/demo.php', 'migrations/install_cron.php']
+            - 'OTHER'
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
 
@@ -123,6 +134,7 @@ services:
             - false
             - []
             - ['ext.php', 'config/services.yml', 'notification/type/demo.php', 'language/en/common.php', 'language/en/info_ucp_demo.php']
+            - 'OTHER'
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
 
@@ -133,6 +145,7 @@ services:
             - false
             - []
             - ['tests/controller/main_test.php', 'tests/dbal/fixtures/config.xml', 'tests/dbal/simple_test.php', 'tests/functional/demo_test.php', 'phpunit.xml.dist']
+            - 'TEST_DEPLOY'
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
 
@@ -143,6 +156,7 @@ services:
             - false
             - ['tests']
             - ['travis/prepare-phpbb.sh', '.travis.yml']
+            - 'TEST_DEPLOY'
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
 
@@ -153,5 +167,6 @@ services:
             - false
             - []
             - ['build.xml']
+            - 'TEST_DEPLOY'
         tags:
             - { name: phpbb.skeleton.ext.skeleton }

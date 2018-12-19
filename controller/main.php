@@ -156,7 +156,7 @@ class main
 		$components = $this->packager->get_component_dialog_values();
 		foreach ($components as $component => $details)
 		{
-			$this->template->assign_block_vars('component', array(
+			$this->template->assign_block_vars('component_' . $details['group'], array(
 				'NAME'			=> 'component_' . $component,
 				'DESC'			=> $this->user->lang('SKELETON_QUESTION_COMPONENT_' . strtoupper($component) . '_UI'),
 				'DESC_EXPLAIN'	=> array_key_exists('SKELETON_QUESTION_COMPONENT_' . strtoupper($component) . '_EXPLAIN', $this->user->lang) ? $this->user->lang('SKELETON_QUESTION_COMPONENT_' . strtoupper($component) . '_EXPLAIN') : '',
