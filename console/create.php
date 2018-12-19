@@ -57,11 +57,12 @@ class create extends command
 	 */
 	public function __construct(user $user, language $language, packager $packager, validator $validator)
 	{
-		parent::__construct($user);
-
 		$this->language = $language;
 		$this->packager = $packager;
 		$this->validator = $validator;
+
+		$this->language->add_lang('common', 'phpbb/skeleton');
+		parent::__construct($user);
 	}
 
 	/**
@@ -69,7 +70,6 @@ class create extends command
 	 */
 	protected function configure()
 	{
-		$this->language->add_lang('common', 'phpbb/skeleton');
 		$this
 			->setName('extension:create')
 			->setDescription($this->language->lang('CLI_DESCRIPTION_SKELETON_CREATE'))
