@@ -77,23 +77,17 @@
 <div class="panel bg2">
 	<div class="inner">
 		<h2 class="solo">{{ lang('SKELETON_TITLE_COMPONENT_INFO') }}</h2>
-		<div>
-			{% set groups = ['DATABASE', 'FRONT_END', 'BACK_END', 'CONTROL_PANELS', 'OTHER', 'TEST_DEPLOY'] %}
-			{% for group in groups %}
-				<div class="{% if loop.index is odd %}column1{% else %}column2{% endif %}">
-					<h3 class="skeleton-components">{{ lang('SKELETON_COMPONENT_GROUP_' ~ group) }}</h3>
-					<ul class="topiclist">
-						{% for component in loops['component_' ~ group] %}
-							<li>
-								<fieldset class="fields2">
-									<div><label for="{{ component.NAME }}" title="{{ component.DESC_EXPLAIN }}"><input class="components" type="checkbox" name="{{ component.NAME }}" id="{{ component.NAME }}"{% if component.VALUE %} checked="checked"{% endif %} /> <strong>{{ component.DESC }}</strong></label></div>
-								</fieldset>
-							</li>
-						{% endfor %}
-					</ul>
-				</div>
-			{% endfor %}
-		</div>
+		{% set groups = ['DATABASE', 'FRONT_END', 'BACK_END', 'CONTROL_PANELS', 'OTHER', 'TEST_DEPLOY'] %}
+		{% for group in groups %}
+			<div class="{% if loop.index is odd %}column1{% else %}column2{% endif %}">
+				<h3 class="skeleton-components">{{ lang('SKELETON_COMPONENT_GROUP_' ~ group) }}</h3>
+				{% for component in loops['component_' ~ group] %}
+					<fieldset class="fields2">
+						<div><label for="{{ component.NAME }}" title="{{ component.DESC_EXPLAIN }}"><input class="components" type="checkbox" name="{{ component.NAME }}" id="{{ component.NAME }}"{% if component.VALUE %} checked="checked"{% endif %} /> <strong>{{ component.DESC }}</strong></label></div>
+					</fieldset>
+				{% endfor %}
+			</div>
+		{% endfor %}
 	</div>
 	<fieldset class="display-actions">
 		<div><a href="#" class="skeleton-marklist markall">{{ lang('MARK_ALL') }}</a> :: <a href="#" class="skeleton-marklist">{{ lang('UNMARK_ALL') }}</a></div>
