@@ -71,9 +71,9 @@ class packager
 				'extension_homepage'     => null,
 			),
 			'requirements' => array(
-				'php_version'       => '>=5.3.3',
-				'phpbb_version_min' => '>=3.1.4',
-				'phpbb_version_max' => '<3.2.0@dev',
+				'php_version'       => '>=5.4',
+				'phpbb_version_min' => '>=3.2.0',
+				'phpbb_version_max' => '<3.3.0@dev',
 			),
 		);
 	}
