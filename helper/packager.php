@@ -193,18 +193,18 @@ class packager
 		$composer = array(
 			'name'        => "{$data['extension']['vendor_name']}/{$data['extension']['extension_name']}",
 			'type'        => 'phpbb-extension',
-			'description' => "{$data['extension']['extension_description']}",
-			'homepage'    => "{$data['extension']['extension_homepage']}",
-			'version'     => "{$data['extension']['extension_version']}",
-			'time'        => "{$data['extension']['extension_time']}",
+			'description' => (string) $data['extension']['extension_description'],
+			'homepage'    => (string) $data['extension']['extension_homepage'],
+			'version'     => (string) $data['extension']['extension_version'],
+			'time'        => (string) $data['extension']['extension_time'],
 			'license'     => 'GPL-2.0-only',
 			'authors'     => array(),
 			'require'     => array(
-				'php'     => "{$data['requirements']['php_version']}",
+				'php'     => (string) $data['requirements']['php_version'],
 				'composer/installers' => '~1.0',
 			),
 			'extra'       => array(
-				'display-name' => "{$data['extension']['extension_display_name']}",
+				'display-name' => (string) $data['extension']['extension_display_name'],
 				'soft-require' => array(
 					'phpbb/phpbb' => "{$data['requirements']['phpbb_version_min']},{$data['requirements']['phpbb_version_max']}",
 				),
@@ -219,10 +219,10 @@ class packager
 		foreach ($data['authors'] as $i => $author_data)
 		{
 			$composer['authors'][] = array(
-				'name'     => "{$data['authors'][$i]['author_name']}",
-				'email'    => "{$data['authors'][$i]['author_email']}",
-				'homepage' => "{$data['authors'][$i]['author_homepage']}",
-				'role'     => "{$data['authors'][$i]['author_role']}",
+				'name'     => (string) $data['authors'][$i]['author_name'],
+				'email'    => (string) $data['authors'][$i]['author_email'],
+				'homepage' => (string) $data['authors'][$i]['author_homepage'],
+				'role'     => (string) $data['authors'][$i]['author_role'],
 			);
 		}
 

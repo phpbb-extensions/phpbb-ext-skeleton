@@ -83,6 +83,7 @@ class main
 	 * Demo controller for route /skeleton
 	 *
 	 * @throws http_exception
+	 * @throws \Exception
 	 *
 	 * @return \Symfony\Component\HttpFoundation\Response A Symfony Response object
 	 */
@@ -231,8 +232,6 @@ class main
 	 * @param mixed    $default
 	 * @param null|int $array_key for multi user support
 	 *
-	 * @throws \Exception
-	 *
 	 * @return mixed|string
 	 */
 	protected function get_user_input($value, $default, $array_key = null)
@@ -260,8 +259,6 @@ class main
 	 * @param string   $value
 	 * @param mixed    $default
 	 * @param null|int $array_key for multi user support
-	 *
-	 * @throws \Exception
 	 *
 	 * @return mixed|string
 	 */
