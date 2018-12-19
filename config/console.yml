@@ -3,6 +3,7 @@ services:
         class: phpbb\skeleton\console\create
         arguments:
             - '@user'
+            - '@language'
             - '@phpbb.skeleton.helper.packager'
             - '@phpbb.skeleton.helper.validator'
         tags:
