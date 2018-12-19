@@ -22,7 +22,7 @@ class ext extends \phpbb\extension\base
 	 */
 	public function is_enableable()
 	{
-		return $this->php_requirements() && ($this->phpbb_31x_compatible() || $this->phpbb_current_compatible());
+		return $this->php_requirements() && $this->phpbb_compatible();
 	}
 
 	/**
@@ -39,27 +39,14 @@ class ext extends \phpbb\extension\base
 	}
 
 	/**
-	 * Check phpBB 3.2 (and later) compatibility
+	 * Check phpBB compatibility
 	 *
-	 * Requires phpBB 3.2.0-b3 or greater
-	 *
-	 * @return bool
-	 */
-	protected function phpbb_current_compatible()
-	{
-		return phpbb_version_compare(PHPBB_VERSION, '3.2.0-b3', '>=');
-	}
-
-	/**
-	 * Check phpBB 3.1 compatibility
-	 *
-	 * Requires phpBB 3.1.4 or greater
+	 * Requires phpBB 3.2.0 or greater
 	 *
 	 * @return bool
 	 */
-	protected function phpbb_31x_compatible()
+	protected function phpbb_compatible()
 	{
-		return phpbb_version_compare(PHPBB_VERSION, '3.1.4', '>=') && phpbb_version_compare(PHPBB_VERSION, '3.2.0-dev', '<');
+		return phpbb_version_compare(PHPBB_VERSION, '3.2.0', '>=');
 	}
 }
-

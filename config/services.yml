@@ -18,7 +18,6 @@ services:
     phpbb.skeleton.helper.packager:
         class: phpbb\skeleton\helper\packager
         arguments:
-            - '@user'
             - '@service_container'
             - '@phpbb.skeleton.collection'
             - '%core.root_path%'

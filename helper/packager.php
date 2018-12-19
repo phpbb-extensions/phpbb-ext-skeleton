@@ -19,16 +19,11 @@ use phpbb\template\context;
 use phpbb\template\twig\environment;
 use phpbb\template\twig\loader;
 use phpbb\template\twig\twig;
-use phpbb\user;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Finder\Finder;
 
 class packager
 {
-	/** @var user */
-	protected $user;
-
 	/** @var ContainerInterface */
 	protected $phpbb_container;
 
@@ -41,14 +36,12 @@ class packager
 	/**
 	 * Constructor
 	 *
-	 * @param user               $user            User instance (mostly for translation)
 	 * @param ContainerInterface $phpbb_container Container
 	 * @param service_collection $collection      Service collection
 	 * @param string             $root_path       phpBB root path
 	 */
-	public function __construct(user $user, ContainerInterface $phpbb_container, service_collection $collection, $root_path)
+	public function __construct(ContainerInterface $phpbb_container, service_collection $collection, $root_path)
 	{
-		$this->user = $user;
 		$this->phpbb_container = $phpbb_container;
 		$this->collection = $collection;
 		$this->root_path = $root_path;
@@ -162,23 +155,24 @@ class packager
 	 */
 	public function create_zip($data)
 	{
-		$zip_path = $this->root_path . 'store/tmp-ext/' . "{$data['extension']['vendor_name']}_{$data['extension']['extension_name']}-{$data['extension']['extension_version']}.zip";
-		$ext_path = $this->root_path . 'store/tmp-ext/' . "{$data['extension']['vendor_name']}/{$data['extension']['extension_name']}/";
+		$tmp_path = $this->root_path . 'store/tmp-ext/';
+		$zip_path = $tmp_path . "{$data['extension']['vendor_name']}_{$data['extension']['extension_name']}-{$data['extension']['extension_version']}.zip";
+		$ext_path = $tmp_path . "{$data['extension']['vendor_name']}/{$data['extension']['extension_name']}/";
 
 		$zip_archive = new \ZipArchive();
 		$zip_archive->open($zip_path, \ZipArchive::CREATE | \ZipArchive::OVERWRITE);
 
-		$finder = new Finder();
-		$finder->ignoreDotFiles(false)
-			->ignoreVCS(false)
-			->files()
-			->in($ext_path);
+		$extension_manager = $this->phpbb_container->get('ext.manager');
+		$files = $extension_manager->get_finder()
+			->set_extensions(array())
+			->core_path($ext_path)
+			->find();
 
-		foreach ($finder as $file)
+		foreach ($files as $file => $ext)
 		{
 			$zip_archive->addFile(
-				$file->getRealPath(),
-				"{$data['extension']['vendor_name']}/{$data['extension']['extension_name']}/" . $file->getRelativePath() . '/' . $file->getFilename()
+				$file,
+				substr($file, strlen($tmp_path))
 			);
 		}
 
@@ -241,7 +235,6 @@ class packager
 
 	/**
 	 * Get the template engine to use for parsing skeleton templates.
-	 * Will get the appropriate engine based on the current phpBB version.
 	 *
 	 * @return twig Template object
 	 */
@@ -253,35 +246,23 @@ class packager
 			'assets_version'  => null,
 		));
 
-		if (phpbb_version_compare(PHPBB_VERSION, '3.2.0-dev', '<'))
-		{
-			$template_engine = new twig(
-				$this->phpbb_container->get('path_helper'),
+		$template_engine = new twig(
+			$this->phpbb_container->get('path_helper'),
+			$config,
+			new context(),
+			new environment(
 				$config,
-				$this->user,
-				new context()
-			);
-		}
-		else
-		{
-			$template_engine = new twig(
+				$this->phpbb_container->get('filesystem'),
 				$this->phpbb_container->get('path_helper'),
-				$config,
-				new context(),
-				new environment(
-					$config,
-					$this->phpbb_container->get('filesystem'),
-					$this->phpbb_container->get('path_helper'),
-					$this->phpbb_container->getParameter('core.cache_dir'),
-					$this->phpbb_container->get('ext.manager'),
-					new loader(
-						new \phpbb\filesystem\filesystem()
-					)
-				),
 				$this->phpbb_container->getParameter('core.cache_dir'),
-				$this->phpbb_container->get('user')
-			);
-		}
+				$this->phpbb_container->get('ext.manager'),
+				new loader(
+					new \phpbb\filesystem\filesystem()
+				)
+			),
+			$this->phpbb_container->getParameter('core.cache_dir'),
+			$this->phpbb_container->get('user')
+		);
 
 		return $template_engine;
 	}
