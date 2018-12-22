@@ -113,7 +113,7 @@ class main_listener implements EventSubscriberInterface
 	public function display_forums_modify_template_vars($event)
 	{
 		$forum_row = $event['forum_row'];
-		$forum_row['FORUM_NAME'] .= ' :: {{ EXTENSION.extension_name|capitalize }} Event ::';
+		$forum_row['FORUM_NAME'] .= ' :: ' . $this->user->lang('{{ EXTENSION.extension_name|upper }}_EVENT') . ' :: ';
 		$event['forum_row'] = $forum_row;
 	}
 {% endif %}

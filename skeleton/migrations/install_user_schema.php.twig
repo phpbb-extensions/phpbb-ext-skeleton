@@ -28,7 +28,7 @@ class install_user_schema extends \phpbb\db\migration\migration
 			'add_tables'		=> array(
 				$this->table_prefix . '{{ EXTENSION.extension_name|lower }}_table'	=> array(
 					'COLUMNS'		=> array(
-						'{{ EXTENSION.extension_name|lower }}_id'			=> array('ULINT', null, 'auto_increment'),
+						'{{ EXTENSION.extension_name|lower }}_id'			=> array('UINT', null, 'auto_increment'),
 						'{{ EXTENSION.extension_name|lower }}_name'			=> array('VCHAR:255', ''),
 					),
 					'PRIMARY_KEY'	=> '{{ EXTENSION.extension_name|lower }}_id',
@@ -36,7 +36,7 @@ class install_user_schema extends \phpbb\db\migration\migration
 			),
 			'add_columns'	=> array(
 				$this->table_prefix . 'users'			=> array(
-					'user_{{ EXTENSION.extension_name|lower }}'				=> array('ULINT', 0),
+					'user_{{ EXTENSION.extension_name|lower }}'				=> array('UINT', 0),
 				),
 			),
 		);

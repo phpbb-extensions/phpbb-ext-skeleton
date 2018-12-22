@@ -52,7 +52,7 @@ class main_test extends \phpbb_test_case
 				return new \Symfony\Component\HttpFoundation\Response($template_file, $status_code);
 			});
 
-		// Instantiate the {{ EXTENSION.extesion_display_name }} controller
+		// Instantiate the {{ EXTENSION.extension_display_name }} controller
 		$controller = new \{{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\controller\main(
 			new \phpbb\config\config(array()),
 			$controller_helper,

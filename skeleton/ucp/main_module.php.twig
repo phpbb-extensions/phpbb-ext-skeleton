@@ -23,7 +23,7 @@ class main_module
 
 		$this->tpl_name = 'ucp_{{ EXTENSION.extension_name|lower }}_body';
 		$this->page_title = $user->lang('UCP_{{ EXTENSION.extension_name|upper }}_TITLE');
-		add_form_key('{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}');
+		add_form_key('{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}_ucp');
 
 		$data = array(
 			'user_{{ EXTENSION.extension_name|lower }}' => $request->variable('user_{{ EXTENSION.extension_name|lower }}', $user->data['user_{{ EXTENSION.extension_name|lower }}']),
@@ -31,7 +31,7 @@ class main_module
 
 		if ($request->is_set_post('submit'))
 		{
-			if (!check_form_key('{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}'))
+			if (!check_form_key('{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}_ucp'))
 			{
 				trigger_error($user->lang('FORM_INVALID'));
 			}
