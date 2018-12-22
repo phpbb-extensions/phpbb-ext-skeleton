@@ -51,7 +51,7 @@ services:
         arguments:
             - '@config'
         calls:
-            - [set_name, [cron.task.demo]]
+            - [set_name, [{{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.cron.task.{{ EXTENSION.extension_name|lower }}]]
         tags:
             - { name: cron.task }
 
