@@ -14,7 +14,7 @@ class install_user_schema extends \phpbb\db\migration\migration
 {
 	public function effectively_installed()
 	{
-		return $this->db_tools->sql_column_exists($this->table_prefix . 'users', 'user_{{ EXTENSION.extension_name }}');
+		return $this->db_tools->sql_column_exists($this->table_prefix . 'users', 'user_{{ EXTENSION.extension_name|lower }}');
 	}
 
 	static public function depends_on()
@@ -26,7 +26,7 @@ class install_user_schema extends \phpbb\db\migration\migration
 	{
 		return array(
 			'add_tables'		=> array(
-				$this->table_prefix . '{{ EXTENSION.extension_name|lower }}_table'	=> array(
+				$this->table_prefix . '{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}_table'	=> array(
 					'COLUMNS'		=> array(
 						'{{ EXTENSION.extension_name|lower }}_id'			=> array('UINT', null, 'auto_increment'),
 						'{{ EXTENSION.extension_name|lower }}_name'			=> array('VCHAR:255', ''),
@@ -51,7 +51,7 @@ class install_user_schema extends \phpbb\db\migration\migration
 				),
 			),
 			'drop_tables'		=> array(
-				$this->table_prefix . '{{ EXTENSION.extension_name|lower }}_table',
+				$this->table_prefix . '{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}_table',
 			),
 		);
 	}
