@@ -26,11 +26,11 @@ class main_module
 		$user->add_lang_ext('{{ EXTENSION.vendor_name }}/{{ EXTENSION.extension_name }}', 'common');
 		$this->tpl_name = 'acp_{{ EXTENSION.extension_name|lower }}_body';
 		$this->page_title = $user->lang('ACP_{{ EXTENSION.extension_name|upper }}_TITLE');
-		add_form_key('{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}');
+		add_form_key('{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}_acp');
 
 		if ($request->is_set_post('submit'))
 		{
-			if (!check_form_key('{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}'))
+			if (!check_form_key('{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}_acp'))
 			{
 				trigger_error('FORM_INVALID', E_USER_WARNING);
 			}

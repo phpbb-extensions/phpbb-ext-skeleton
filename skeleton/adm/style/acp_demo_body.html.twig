@@ -1,9 +1,8 @@
 {{ '{' }}% include 'overall_header.html' %}
 
-
 <h1>{{ '{{' }} lang('ACP_{{ EXTENSION.extension_name|upper }}_TITLE') }}</h1>
 
-<form id="{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}" name="{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}" method="post" action="{{ '{{' }} U_ACTION }}">
+<form id="{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}_acp" name="{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}_acp" method="post" action="{{ '{{' }} U_ACTION }}">
 
 	<fieldset>
 		<legend>{{ '{{' }} lang('SETTINGS') }}</legend>
