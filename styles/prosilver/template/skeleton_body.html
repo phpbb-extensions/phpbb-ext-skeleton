@@ -77,8 +77,7 @@
 <div class="panel bg2">
 	<div class="inner">
 		<h2 class="solo">{{ lang('SKELETON_TITLE_COMPONENT_INFO') }}</h2>
-		{% set groups = ['DATABASE', 'FRONT_END', 'BACK_END', 'CONTROL_PANELS', 'OTHER', 'TEST_DEPLOY'] %}
-		{% for group in groups %}
+		{% for group in ['DATABASE', 'FRONT_END', 'BACK_END', 'CONTROL_PANELS', 'OTHER', 'TEST_DEPLOY'] %}
 			<div class="{% if loop.index is odd %}column1{% else %}column2{% endif %}">
 				<h3 class="skeleton-components">{{ lang('SKELETON_COMPONENT_GROUP_' ~ group) }}</h3>
 				{% for component in loops['component_' ~ group] %}
