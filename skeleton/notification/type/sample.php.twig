@@ -13,7 +13,7 @@ namespace {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\notificatio
 /**
  * {{ EXTENSION.extension_display_name }} Notification class.
  */
-class {{ EXTENSION.extension_name }} extends \phpbb\notification\type\base
+class sample extends \phpbb\notification\type\base
 {
 	/** @var \phpbb\controller\helper */
 	protected $helper;
@@ -37,7 +37,7 @@ class {{ EXTENSION.extension_name }} extends \phpbb\notification\type\base
 	 */
 	public function get_type()
 	{
-		return '{{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.notification.type.{{ EXTENSION.extension_name|lower }}';
+		return '{{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.notification.type.sample';
 	}
 
 	/**

@@ -37,7 +37,7 @@ services:
 
 {% endif %}
 {% if COMPONENT.console %}
-    {{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.command.{{ EXTENSION.extension_name|lower }}:
+    {{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.command.sample:
         class: {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\console\command\{{ EXTENSION.extension_name|lower }}
         arguments:
             - '@user'
@@ -46,8 +46,8 @@ services:
 
 {% endif %}
 {% if COMPONENT.cron %}
-    {{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.cron.task.{{ EXTENSION.extension_name|lower }}:
-        class: {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\cron\task\{{ EXTENSION.extension_name|lower }}
+    {{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.cron.task.sample:
+        class: {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\cron\task\sample
         arguments:
             - '@config'
         calls:
@@ -57,8 +57,8 @@ services:
 
 {% endif %}
 {% if COMPONENT.notification %}
-    {{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.notification.type.{{ EXTENSION.extension_name|lower }}:
-        class: {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\notification\type\{{ EXTENSION.extension_name|lower }}
+    {{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.notification.type.sample:
+        class: {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\notification\type\sample
 {% if REQUIREMENTS.phpbb_version_min matches '/^[\\D]*3\\.1.*$/' %}{# for phpBB 3.1.x #}
         scope: prototype # scope MUST be prototype for this to work!
         arguments:

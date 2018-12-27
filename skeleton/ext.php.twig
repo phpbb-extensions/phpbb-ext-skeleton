@@ -33,7 +33,7 @@ class ext extends \phpbb\extension\base
 			case '': // Empty means nothing has run yet
 
 				$phpbb_notifications = $this->container->get('notification_manager');
-				$phpbb_notifications->enable_notifications('{{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.notification.type.{{ EXTENSION.extension_name|lower }}');
+				$phpbb_notifications->enable_notifications('{{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.notification.type.sample');
 				return 'notification';
 
 			break;
@@ -60,7 +60,7 @@ class ext extends \phpbb\extension\base
 			case '': // Empty means nothing has run yet
 
 				$phpbb_notifications = $this->container->get('notification_manager');
-				$phpbb_notifications->disable_notifications('{{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.notification.type.{{ EXTENSION.extension_name|lower }}');
+				$phpbb_notifications->disable_notifications('{{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.notification.type.sample');
 				return 'notification';
 
 			break;
@@ -87,7 +87,7 @@ class ext extends \phpbb\extension\base
 			case '': // Empty means nothing has run yet
 
 				$phpbb_notifications = $this->container->get('notification_manager');
-				$phpbb_notifications->purge_notifications('{{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.notification.type.{{ EXTENSION.extension_name|lower }}');
+				$phpbb_notifications->purge_notifications('{{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.notification.type.sample');
 				return 'notification';
 
 			break;
