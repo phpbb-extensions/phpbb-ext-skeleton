@@ -38,7 +38,7 @@ services:
 {% endif %}
 {% if COMPONENT.console %}
     {{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.command.sample:
-        class: {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\console\command\{{ EXTENSION.extension_name|lower }}
+        class: {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\console\command\sample
         arguments:
             - '@user'
         tags:
@@ -51,7 +51,7 @@ services:
         arguments:
             - '@config'
         calls:
-            - [set_name, [{{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.cron.task.{{ EXTENSION.extension_name|lower }}]]
+            - [set_name, [{{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.cron.task.sample]]
         tags:
             - { name: cron.task }
 
