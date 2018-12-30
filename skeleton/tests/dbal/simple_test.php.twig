@@ -3,7 +3,7 @@
  *
  * {{ EXTENSION.extension_display_name }}. An extension for the phpBB Forum Software package.
  *
- * @copyright (c) {{ "now"|date("Y") }}{{ AUTHORS.0.author_name ? ', ' ~ AUTHORS.0.author_name }}{{ AUTHORS.0.author_homepage ? ', ' ~ AUTHORS.0.author_homepage }}
+ * @copyright (c) {{ "now"|date("Y") ~ (AUTHORS.0.author_name ? ', ' ~ AUTHORS.0.author_name) ~ (AUTHORS.0.author_homepage ? ', ' ~ AUTHORS.0.author_homepage) }}
  * @license GNU General Public License, version 2 (GPL-2.0)
  *
  */
@@ -44,7 +44,7 @@ class simple_test extends \phpbb_database_test_case
 			$db_tools = $factory->get($this->db);
 		}
 
-		$this->assertTrue($db_tools->sql_column_exists(USERS_TABLE, 'user_acme'), 'Asserting that column "user_acme" exists');
-		$this->assertFalse($db_tools->sql_column_exists(USERS_TABLE, 'user_acme_demo'), 'Asserting that column "user_acme_demo" does not exist');
+		$this->assertTrue($db_tools->sql_column_exists(USERS_TABLE, 'user_{{ EXTENSION.extension_name|lower }}'), 'Asserting that column "user_{{ EXTENSION.extension_name|lower }}" exists');
+		$this->assertFalse($db_tools->sql_column_exists(USERS_TABLE, 'user_{{ EXTENSION.extension_name|lower }}_void'), 'Asserting that column "user_{{ EXTENSION.extension_name|lower }}_void" does not exist');
 	}
 }

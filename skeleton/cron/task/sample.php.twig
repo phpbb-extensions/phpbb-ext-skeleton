@@ -3,7 +3,7 @@
  *
  * {{ EXTENSION.extension_display_name }}. An extension for the phpBB Forum Software package.
  *
- * @copyright (c) {{ "now"|date("Y") }}{{ AUTHORS.0.author_name ? ', ' ~ AUTHORS.0.author_name }}{{ AUTHORS.0.author_homepage ? ', ' ~ AUTHORS.0.author_homepage }}
+ * @copyright (c) {{ "now"|date("Y") ~ (AUTHORS.0.author_name ? ', ' ~ AUTHORS.0.author_name) ~ (AUTHORS.0.author_homepage ? ', ' ~ AUTHORS.0.author_homepage) }}
  * @license GNU General Public License, version 2 (GPL-2.0)
  *
  */
@@ -13,7 +13,7 @@ namespace {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\cron\task;
 /**
  * {{ EXTENSION.extension_display_name }} cron task.
  */
-class demo extends \phpbb\cron\task\base
+class sample extends \phpbb\cron\task\base
 {
 	/**
 	 * How often we run the cron (in seconds).
@@ -45,7 +45,7 @@ class demo extends \phpbb\cron\task\base
 
 		// Update the cron task run time here if it hasn't
 		// already been done by your cron actions.
-		$this->config->set('acme_cron_last_run', time(), false);
+		$this->config->set('{{ EXTENSION.extension_name|lower }}_cron_last_run', time(), false);
 	}
 
 	/**
@@ -69,6 +69,6 @@ class demo extends \phpbb\cron\task\base
 	 */
 	public function should_run()
 	{
-		return $this->config['acme_cron_last_run'] < time() - $this->cron_frequency;
+		return $this->config['{{ EXTENSION.extension_name|lower }}_cron_last_run'] < time() - $this->cron_frequency;
 	}
 }

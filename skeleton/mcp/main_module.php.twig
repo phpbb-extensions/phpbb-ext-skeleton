@@ -3,7 +3,7 @@
  *
  * {{ EXTENSION.extension_display_name }}. An extension for the phpBB Forum Software package.
  *
- * @copyright (c) {{ "now"|date("Y") }}{{ AUTHORS.0.author_name ? ', ' ~ AUTHORS.0.author_name }}{{ AUTHORS.0.author_homepage ? ', ' ~ AUTHORS.0.author_homepage }}
+ * @copyright (c) {{ "now"|date("Y") ~ (AUTHORS.0.author_name ? ', ' ~ AUTHORS.0.author_name) ~ (AUTHORS.0.author_homepage ? ', ' ~ AUTHORS.0.author_homepage) }}
  * @license GNU General Public License, version 2 (GPL-2.0)
  *
  */
@@ -21,9 +21,9 @@ class main_module
 	{
 		global $template, $user;
 
-		$this->tpl_name = 'mcp_demo_body';
-		$this->page_title = $user->lang('MCP_DEMO_TITLE');
-		add_form_key('acme/demo');
+		$this->tpl_name = 'mcp_{{ EXTENSION.extension_name|lower }}_body';
+		$this->page_title = $user->lang('MCP_{{ EXTENSION.extension_name|upper }}_TITLE');
+		add_form_key('{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}_mcp');
 
 		$template->assign_var('U_POST_ACTION', $this->u_action);
 	}

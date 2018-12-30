@@ -3,7 +3,7 @@
  *
  * {{ EXTENSION.extension_display_name }}. An extension for the phpBB Forum Software package.
  *
- * @copyright (c) {{ "now"|date("Y") }}{{ AUTHORS.0.author_name ? ', ' ~ AUTHORS.0.author_name }}{{ AUTHORS.0.author_homepage ? ', ' ~ AUTHORS.0.author_homepage }}
+ * @copyright (c) {{ "now"|date("Y") ~ (AUTHORS.0.author_name ? ', ' ~ AUTHORS.0.author_name) ~ (AUTHORS.0.author_homepage ? ', ' ~ AUTHORS.0.author_homepage) }}
  * @license GNU General Public License, version 2 (GPL-2.0)
  *
  */
@@ -13,7 +13,7 @@ namespace {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\notificatio
 /**
  * {{ EXTENSION.extension_display_name }} Notification class.
  */
-class demo extends \phpbb\notification\type\base
+class sample extends \phpbb\notification\type\base
 {
 	/** @var \phpbb\controller\helper */
 	protected $helper;
@@ -37,7 +37,7 @@ class demo extends \phpbb\notification\type\base
 	 */
 	public function get_type()
 	{
-		return '{{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.notification.type.demo';
+		return '{{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.notification.type.sample';
 	}
 
 	/**
@@ -47,7 +47,7 @@ class demo extends \phpbb\notification\type\base
 	 * 					Array of data (including keys 'id', 'lang', and 'group')
 	 */
 	public static $notification_option = array(
-		'lang'	=> 'NOTIFICATION_TYPE_DEMO',
+		'lang'	=> 'NOTIFICATION_TYPE_{{ EXTENSION.extension_name|upper }}',
 	);
 
 	/**
@@ -118,7 +118,7 @@ class demo extends \phpbb\notification\type\base
 	 */
 	public function get_title()
 	{
-		return $this->user->lang('ACME_DEMO_NOTIFICATION');
+		return $this->user->lang('{{ EXTENSION.vendor_name|upper }}_{{ EXTENSION.extension_name|upper }}_NOTIFICATION');
 	}
 
 	/**
@@ -128,7 +128,7 @@ class demo extends \phpbb\notification\type\base
 	 */
 	public function get_url()
 	{
-		return $this->helper->route('{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }}_controller', $this->get_data('acme_demo'));
+		return $this->helper->route('{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }}_controller', $this->get_data('{{ EXTENSION.extension_name|lower }}_sample_name'));
 	}
 
 	/**
@@ -157,12 +157,14 @@ class demo extends \phpbb\notification\type\base
 	 *
 	 * @param array $data The type specific data
 	 * @param array $pre_create_data Data from pre_create_insert_array()
+{% if REQUIREMENTS.phpbb_version_min matches '/^[\\D]*3\\.1.*$/' %}
 	 *
 	 * @return array Array of data ready to be inserted into the database
+{% endif %}
 	 */
 	public function create_insert_array($data, $pre_create_data = array())
 	{
-		$this->set_data('acme_demo', $data['acme_demo']);
+		$this->set_data('{{ EXTENSION.extension_name|lower }}_sample_name', $data['{{ EXTENSION.extension_name|lower }}_sample_name']);
 
 {% if REQUIREMENTS.phpbb_version_min matches '/^[\\D]*3\\.1.*$/' %}
 		return parent::create_insert_array($data, $pre_create_data);

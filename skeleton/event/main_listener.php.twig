@@ -3,7 +3,7 @@
  *
  * {{ EXTENSION.extension_display_name }}. An extension for the phpBB Forum Software package.
  *
- * @copyright (c) {{ "now"|date("Y") }}{{ AUTHORS.0.author_name ? ', ' ~ AUTHORS.0.author_name }}{{ AUTHORS.0.author_homepage ? ', ' ~ AUTHORS.0.author_homepage }}
+ * @copyright (c) {{ "now"|date("Y") ~ (AUTHORS.0.author_name ? ', ' ~ AUTHORS.0.author_name) ~ (AUTHORS.0.author_homepage ? ', ' ~ AUTHORS.0.author_homepage) }}
  * @license GNU General Public License, version 2 (GPL-2.0)
  *
  */
@@ -84,12 +84,12 @@ class main_listener implements EventSubscriberInterface
 	public function add_page_header_link()
 	{
 		$this->template->assign_vars(array(
-			'U_DEMO_PAGE'	=> $this->helper->route('{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }}_controller', array('name' => 'world')),
+			'U_{{ EXTENSION.extension_name|upper }}_PAGE'	=> $this->helper->route('{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }}_controller', array('name' => 'world')),
 		));
 	}
 
 	/**
-	 * Show users viewing Acme Demo on the Who Is Online page
+	 * Show users viewing {{ EXTENSION.extension_display_name }} page on the Who Is Online page
 	 *
 	 * @param \phpbb\event\data	$event	Event object
 	 */
@@ -97,7 +97,7 @@ class main_listener implements EventSubscriberInterface
 	{
 		if ($event['on_page'][1] === 'app' && strrpos($event['row']['session_page'], 'app.' . $this->php_ext . '/demo') === 0)
 		{
-			$event['location'] = $this->user->lang('VIEWING_ACME_DEMO');
+			$event['location'] = $this->user->lang('VIEWING_{{ EXTENSION.vendor_name|upper }}_{{ EXTENSION.extension_name|upper }}');
 			$event['location_url'] = $this->helper->route('{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }}_controller', array('name' => 'world'));
 		}
 	}
@@ -113,7 +113,7 @@ class main_listener implements EventSubscriberInterface
 	public function display_forums_modify_template_vars($event)
 	{
 		$forum_row = $event['forum_row'];
-		$forum_row['FORUM_NAME'] .= ' :: Acme Event ::';
+		$forum_row['FORUM_NAME'] .= ' :: ' . $this->user->lang('{{ EXTENSION.extension_name|upper }}_EVENT') . ' :: ';
 		$event['forum_row'] = $forum_row;
 	}
 {% endif %}

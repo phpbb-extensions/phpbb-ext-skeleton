@@ -3,7 +3,7 @@
  *
  * {{ EXTENSION.extension_display_name }}. An extension for the phpBB Forum Software package.
  *
- * @copyright (c) {{ "now"|date("Y") }}{{ AUTHORS.0.author_name ? ', ' ~ AUTHORS.0.author_name }}{{ AUTHORS.0.author_homepage ? ', ' ~ AUTHORS.0.author_homepage }}
+ * @copyright (c) {{ "now"|date("Y") ~ (AUTHORS.0.author_name ? ', ' ~ AUTHORS.0.author_name) ~ (AUTHORS.0.author_homepage ? ', ' ~ AUTHORS.0.author_homepage) }}
  * @license GNU General Public License, version 2 (GPL-2.0)
  *
  */
@@ -16,7 +16,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * {{ EXTENSION.extension_display_name }} console command.
  */
-class demo extends \phpbb\console\command\command
+class sample extends \phpbb\console\command\command
 {
 	/** @var \phpbb\user */
 	protected $user;
@@ -40,19 +40,19 @@ class demo extends \phpbb\console\command\command
 	{
 		$this->user->add_lang_ext('{{ EXTENSION.vendor_name }}/{{ EXTENSION.extension_name }}', 'cli');
 		$this
-			->setName('acme:demo')
-			->setDescription($this->user->lang('CLI_DEMO'))
+			->setName('{{ EXTENSION.vendor_name|lower }}:{{ EXTENSION.extension_name|lower }}')
+			->setDescription($this->user->lang('CLI_{{ EXTENSION.extension_name|upper }}'))
 		;
 	}
 
 	/**
-	 * Executes the command acme:demo.
+	 * Executes the command {{ EXTENSION.vendor_name|lower }}:{{ EXTENSION.extension_name|lower }}.
 	 *
 	 * @param InputInterface  $input  An InputInterface instance
 	 * @param OutputInterface $output An OutputInterface instance
 	 */
 	protected function execute(InputInterface $input, OutputInterface $output)
 	{
-		$output->writeln($this->user->lang('CLI_DEMO_HELLO'));
+		$output->writeln($this->user->lang('CLI_{{ EXTENSION.extension_name|upper }}_HELLO'));
 	}
 }
