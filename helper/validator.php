@@ -14,21 +14,21 @@
 namespace phpbb\skeleton\helper;
 
 use phpbb\exception\runtime_exception;
-use phpbb\user;
+use phpbb\language\language;
 
 class validator
 {
-	/** @var user */
-	protected $user;
+	/** @var language */
+	protected $language;
 
 	/**
 	 * Constructor
 	 *
-	 * @param \phpbb\user $user
+	 * @param language $language
 	 */
-	public function __construct(user $user)
+	public function __construct(language $language)
 	{
-		$this->user = $user;
+		$this->language = $language;
 	}
 
 	/**
@@ -46,7 +46,7 @@ class validator
 			return $value;
 		}
 
-		throw new runtime_exception($this->user->lang('SKELETON_INVALID_NUM_AUTHORS'));
+		throw new runtime_exception($this->language->lang('SKELETON_INVALID_NUM_AUTHORS'));
 	}
 
 	/**
@@ -63,7 +63,7 @@ class validator
 			return $value;
 		}
 
-		throw new runtime_exception($this->user->lang('SKELETON_INVALID_PACKAGE_NAME'));
+		throw new runtime_exception($this->language->lang('SKELETON_INVALID_PACKAGE_NAME'));
 	}
 
 	/**
@@ -80,7 +80,7 @@ class validator
 			return $value;
 		}
 
-		throw new runtime_exception($this->user->lang('SKELETON_INVALID_DISPLAY_NAME'));
+		throw new runtime_exception($this->language->lang('SKELETON_INVALID_DISPLAY_NAME'));
 	}
 
 	/**
@@ -97,7 +97,7 @@ class validator
 			return $value;
 		}
 
-		throw new runtime_exception($this->user->lang('SKELETON_INVALID_EXTENSION_TIME'));
+		throw new runtime_exception($this->language->lang('SKELETON_INVALID_EXTENSION_TIME'));
 	}
 
 	/**
@@ -114,7 +114,7 @@ class validator
 			return $value;
 		}
 
-		throw new runtime_exception($this->user->lang('SKELETON_INVALID_EXTENSION_VERSION'));
+		throw new runtime_exception($this->language->lang('SKELETON_INVALID_EXTENSION_VERSION'));
 	}
 
 	/**
@@ -131,6 +131,6 @@ class validator
 			return $value;
 		}
 
-		throw new runtime_exception($this->user->lang('SKELETON_INVALID_VENDOR_NAME'));
+		throw new runtime_exception($this->language->lang('SKELETON_INVALID_VENDOR_NAME'));
 	}
 }

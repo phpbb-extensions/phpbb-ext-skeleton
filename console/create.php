@@ -14,6 +14,7 @@
 namespace phpbb\skeleton\console;
 
 use phpbb\console\command\command;
+use phpbb\language\language;
 use phpbb\skeleton\helper\packager;
 use phpbb\skeleton\helper\validator;
 use phpbb\user;
@@ -37,6 +38,9 @@ class create extends command
 	/** @var OutputInterface */
 	protected $output;
 
+	/** @var language */
+	protected $language;
+
 	/** @var packager */
 	protected $packager;
 
@@ -46,16 +50,19 @@ class create extends command
 	/**
 	 * Constructor
 	 *
-	 * @param user $user User instance (mostly for translation)
-	 * @param packager $packager
+	 * @param user      $user
+	 * @param language  $language
+	 * @param packager  $packager
 	 * @param validator $validator
 	 */
-	public function __construct(user $user, packager $packager, validator $validator)
+	public function __construct(user $user, language $language, packager $packager, validator $validator)
 	{
-		parent::__construct($user);
-
+		$this->language = $language;
 		$this->packager = $packager;
 		$this->validator = $validator;
+
+		$this->language->add_lang('common', 'phpbb/skeleton');
+		parent::__construct($user);
 	}
 
 	/**
@@ -63,10 +70,9 @@ class create extends command
 	 */
 	protected function configure()
 	{
-		$this->user->add_lang_ext('phpbb/skeleton', 'common');
 		$this
 			->setName('extension:create')
-			->setDescription($this->user->lang('CLI_DESCRIPTION_SKELETON_CREATE'))
+			->setDescription($this->language->lang('CLI_DESCRIPTION_SKELETON_CREATE'))
 		;
 	}
 
@@ -85,7 +91,7 @@ class create extends command
 	{
 		$this->packager->create_extension($this->data);
 
-		$output->writeln($this->user->lang('EXTENSION_CLI_SKELETON_SUCCESS'));
+		$output->writeln($this->language->lang('EXTENSION_CLI_SKELETON_SUCCESS'));
 	}
 
 	/**
@@ -101,10 +107,10 @@ class create extends command
 
 		$this->helper = $this->getHelper('question');
 
-		$output->writeln($this->user->lang('SKELETON_CLI_COMPOSER_QUESTIONS'));
+		$output->writeln($this->language->lang('SKELETON_CLI_COMPOSER_QUESTIONS'));
 		$this->get_composer_data();
 
-		$output->writeln($this->user->lang('SKELETON_CLI_COMPONENT_QUESTIONS'));
+		$output->writeln($this->language->lang('SKELETON_CLI_COMPONENT_QUESTIONS'));
 		$this->get_component_data();
 	}
 
@@ -119,7 +125,7 @@ class create extends command
 			$this->data['extension'][$value] = $this->get_user_input($value, $default);
 		}
 
-		$question = new Question($this->user->lang('SKELETON_QUESTION_NUM_AUTHORS') . $this->user->lang('COLON'), 1);
+		$question = new Question($this->language->lang('SKELETON_QUESTION_NUM_AUTHORS') . $this->language->lang('COLON'), 1);
 		$question->setValidator(array($this->validator, 'validate_num_authors'));
 		$num_authors = $this->helper->ask($this->input, $this->output, $question);
 
@@ -168,7 +174,7 @@ class create extends command
 	 */
 	protected function get_user_input($value, $default)
 	{
-		$dialog = $this->user->lang('SKELETON_QUESTION_' . strtoupper($value)) . $this->user->lang('COLON');
+		$dialog = $this->language->lang('SKELETON_QUESTION_' . strtoupper($value)) . $this->language->lang('COLON');
 
 		if (method_exists($this->validator, 'validate_' . $value))
 		{

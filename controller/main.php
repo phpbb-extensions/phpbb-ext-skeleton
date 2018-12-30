@@ -16,6 +16,7 @@ namespace phpbb\skeleton\controller;
 use phpbb\config\config;
 use phpbb\controller\helper;
 use phpbb\exception\http_exception;
+use phpbb\language\language;
 use phpbb\request\request;
 use phpbb\skeleton\helper\packager;
 use phpbb\skeleton\helper\validator;
@@ -33,6 +34,9 @@ class main
 
 	/* @var helper */
 	protected $helper;
+
+	/** @var language */
+	protected $language;
 
 	/* @var request */
 	protected $request;
@@ -54,29 +58,32 @@ class main
 	 *
 	 * @param config    $config
 	 * @param helper    $helper
+	 * @param language  $language
 	 * @param request   $request
 	 * @param packager  $packager
 	 * @param validator $validator
 	 * @param template  $template
 	 * @param user      $user
 	 */
-	public function __construct(config $config, helper $helper, request $request, packager $packager, validator $validator, template $template, user $user)
+	public function __construct(config $config, helper $helper, language $language, request $request, packager $packager, validator $validator, template $template, user $user)
 	{
 		$this->config = $config;
 		$this->helper = $helper;
+		$this->language = $language;
 		$this->request = $request;
 		$this->packager = $packager;
 		$this->validator = $validator;
 		$this->template = $template;
 		$this->user = $user;
 
-		$this->user->add_lang_ext('phpbb/skeleton', 'common');
+		$this->language->add_lang('common', 'phpbb/skeleton');
 	}
 
 	/**
 	 * Demo controller for route /skeleton
 	 *
 	 * @throws http_exception
+	 * @throws \Exception
 	 *
 	 * @return \Symfony\Component\HttpFoundation\Response A Symfony Response object
 	 */
@@ -117,8 +124,8 @@ class main
 		{
 			$this->template->assign_block_vars('extension', array(
 				'NAME'			=> $value,
-				'DESC'			=> $this->user->lang('SKELETON_QUESTION_' . strtoupper($value) . '_UI'),
-				'DESC_EXPLAIN'	=> array_key_exists('SKELETON_QUESTION_' . strtoupper($value) . '_EXPLAIN', $this->user->lang) ? $this->user->lang('SKELETON_QUESTION_' . strtoupper($value) . '_EXPLAIN') : '',
+				'DESC'			=> $this->language->lang('SKELETON_QUESTION_' . strtoupper($value) . '_UI'),
+				'DESC_EXPLAIN'	=> $this->language->is_set('SKELETON_QUESTION_' . strtoupper($value) . '_EXPLAIN') ? $this->language->lang('SKELETON_QUESTION_' . strtoupper($value) . '_EXPLAIN') : '',
 				'VALUE'			=> $this->request->variable($value, (string) $default, true),
 			));
 		}
@@ -136,8 +143,8 @@ class main
 			{
 				$this->template->assign_block_vars('author', array(
 					'NAME'			=> $value,
-					'DESC'			=> $this->user->lang('SKELETON_QUESTION_' . strtoupper($value) . '_UI'),
-					'DESC_EXPLAIN'	=> array_key_exists('SKELETON_QUESTION_' . strtoupper($value) . '_EXPLAIN', $this->user->lang) ? $this->user->lang('SKELETON_QUESTION_' . strtoupper($value) . '_EXPLAIN') : '',
+					'DESC'			=> $this->language->lang('SKELETON_QUESTION_' . strtoupper($value) . '_UI'),
+					'DESC_EXPLAIN'	=> $this->language->is_set('SKELETON_QUESTION_' . strtoupper($value) . '_EXPLAIN') ? $this->language->lang('SKELETON_QUESTION_' . strtoupper($value) . '_EXPLAIN') : '',
 					'VALUE'			=> isset($author_values[$value][$i]) ? $author_values[$value][$i] : '',
 				));
 			}
@@ -147,8 +154,8 @@ class main
 		{
 			$this->template->assign_block_vars('requirement', array(
 				'NAME'			=> $value,
-				'DESC'			=> $this->user->lang('SKELETON_QUESTION_' . strtoupper($value) . '_UI'),
-				'DESC_EXPLAIN'	=> array_key_exists('SKELETON_QUESTION_' . strtoupper($value) . '_EXPLAIN', $this->user->lang) ? $this->user->lang('SKELETON_QUESTION_' . strtoupper($value) . '_EXPLAIN') : '',
+				'DESC'			=> $this->language->lang('SKELETON_QUESTION_' . strtoupper($value) . '_UI'),
+				'DESC_EXPLAIN'	=> $this->language->is_set('SKELETON_QUESTION_' . strtoupper($value) . '_EXPLAIN') ? $this->language->lang('SKELETON_QUESTION_' . strtoupper($value) . '_EXPLAIN') : '',
 				'VALUE'			=> $this->request->variable($value, (string) $default),
 			));
 		}
@@ -158,8 +165,8 @@ class main
 		{
 			$this->template->assign_block_vars('component_' . $details['group'], array(
 				'NAME'			=> 'component_' . $component,
-				'DESC'			=> $this->user->lang('SKELETON_QUESTION_COMPONENT_' . strtoupper($component) . '_UI'),
-				'DESC_EXPLAIN'	=> array_key_exists('SKELETON_QUESTION_COMPONENT_' . strtoupper($component) . '_EXPLAIN', $this->user->lang) ? $this->user->lang('SKELETON_QUESTION_COMPONENT_' . strtoupper($component) . '_EXPLAIN') : '',
+				'DESC'			=> $this->language->lang('SKELETON_QUESTION_COMPONENT_' . strtoupper($component) . '_UI'),
+				'DESC_EXPLAIN'	=> $this->language->is_set('SKELETON_QUESTION_COMPONENT_' . strtoupper($component) . '_EXPLAIN') ? $this->language->lang('SKELETON_QUESTION_COMPONENT_' . strtoupper($component) . '_EXPLAIN') : '',
 				'VALUE'			=> $this->request->variable('component_' . $component, $details['default']),
 			));
 
@@ -168,7 +175,7 @@ class main
 
 		$this->template->assign_var('S_POST_ACTION', $this->helper->route('phpbb_skeleton_controller'));
 
-		return $this->helper->render('skeleton_body.html', $this->user->lang('PHPBB_CREATE_SKELETON_EXT'));
+		return $this->helper->render('skeleton_body.html', $this->language->lang('PHPBB_CREATE_SKELETON_EXT'));
 	}
 
 	/**
@@ -225,8 +232,6 @@ class main
 	 * @param mixed    $default
 	 * @param null|int $array_key for multi user support
 	 *
-	 * @throws \Exception
-	 *
 	 * @return mixed|string
 	 */
 	protected function get_user_input($value, $default, $array_key = null)
@@ -254,8 +259,6 @@ class main
 	 * @param string   $value
 	 * @param mixed    $default
 	 * @param null|int $array_key for multi user support
-	 *
-	 * @throws \Exception
 	 *
 	 * @return mixed|string
 	 */
