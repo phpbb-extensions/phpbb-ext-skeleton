@@ -19,7 +19,7 @@ services:
         class: {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\service
         arguments:
             - '@user'
-            - '%{{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.tables.demo_table%'
+            - '%{{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.tables.{{ EXTENSION.extension_name|lower }}_table%'
 
 {% endif %}
 {% if COMPONENT.phplistener or COMPONENT.controller %}{# controller component uses the phplistener too #}
@@ -37,8 +37,8 @@ services:
 
 {% endif %}
 {% if COMPONENT.console %}
-    {{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.command.demo:
-        class: {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\console\command\demo
+    {{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.command.sample:
+        class: {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\console\command\sample
         arguments:
             - '@user'
         tags:
@@ -46,19 +46,19 @@ services:
 
 {% endif %}
 {% if COMPONENT.cron %}
-    {{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.cron.task.demo:
-        class: {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\cron\task\demo
+    {{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.cron.task.sample:
+        class: {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\cron\task\sample
         arguments:
             - '@config'
         calls:
-            - [set_name, [cron.task.demo]]
+            - [set_name, [{{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.cron.task.sample]]
         tags:
             - { name: cron.task }
 
 {% endif %}
 {% if COMPONENT.notification %}
-    {{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.notification.type.demo:
-        class: {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\notification\type\demo
+    {{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.notification.type.sample:
+        class: {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\notification\type\sample
 {% if REQUIREMENTS.phpbb_version_min matches '/^[\\D]*3\\.1.*$/' %}{# for phpBB 3.1.x #}
         scope: prototype # scope MUST be prototype for this to work!
         arguments:

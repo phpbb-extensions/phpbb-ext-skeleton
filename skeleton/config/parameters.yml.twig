@@ -1,2 +1,2 @@
 parameters:
-    {{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.tables.demo_table: '%core.table_prefix%demo_table'
+    {{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.tables.{{ EXTENSION.extension_name|lower }}_table: '%core.table_prefix%{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}_table'

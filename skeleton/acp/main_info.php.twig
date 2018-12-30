@@ -19,12 +19,12 @@ class main_info
 	{
 		return array(
 			'filename'	=> '\{{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\acp\main_module',
-			'title'		=> 'ACP_DEMO_TITLE',
+			'title'		=> 'ACP_{{ EXTENSION.extension_name|upper }}_TITLE',
 			'modes'		=> array(
 				'settings'	=> array(
-					'title'	=> 'ACP_DEMO',
+					'title'	=> 'ACP_{{ EXTENSION.extension_name|upper }}',
 					'auth'	=> 'ext_{{ EXTENSION.vendor_name }}/{{ EXTENSION.extension_name }} && acl_a_board',
-					'cat'	=> array('ACP_DEMO_TITLE')
+					'cat'	=> array('ACP_{{ EXTENSION.extension_name|upper }}_TITLE')
 				),
 			),
 		);

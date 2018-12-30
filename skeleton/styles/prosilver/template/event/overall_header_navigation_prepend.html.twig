@@ -1,9 +1,9 @@
 {% if REQUIREMENTS.phpbb_version_min matches '/^[\\D]*3\\.1.*$/' %}
-<li class="small-icon icon-faq no-bulletin"><a href="{{ '{{' }} U_DEMO_PAGE }}">{{ '{{' }} lang('DEMO_PAGE') }}</a></li>
+<li class="small-icon icon-faq no-bulletin"><a href="{{ '{{' }} U_{{ EXTENSION.extension_name|upper }}_PAGE }}">{{ '{{' }} lang('{{ EXTENSION.extension_name|upper }}_PAGE') }}</a></li>
 {% else %}
-<li>
-	<a href="{{ '{{' }} U_DEMO_PAGE }}" title="{{ '{{' }} lang('DEMO_PAGE') }}" role="menuitem">
-		<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>{{ '{{' }} lang('DEMO_PAGE') }}</span>
+<li data-last-responsive="true">
+	<a href="{{ '{{' }} U_{{ EXTENSION.extension_name|upper }}_PAGE }}" title="{{ '{{' }} lang('{{ EXTENSION.extension_name|upper }}_PAGE') }}" role="menuitem">
+		<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>{{ '{{' }} lang('{{ EXTENSION.extension_name|upper }}_PAGE') }}</span>
 	</a>
 </li>
 {% endif %}

@@ -19,12 +19,12 @@ class main_info
 	{
 		return array(
 			'filename'	=> '\{{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\mcp\main_module',
-			'title'		=> 'MCP_DEMO_TITLE',
+			'title'		=> 'MCP_{{ EXTENSION.extension_name|upper }}_TITLE',
 			'modes'		=> array(
 				'front'	=> array(
-					'title'	=> 'MCP_DEMO',
+					'title'	=> 'MCP_{{ EXTENSION.extension_name|upper }}',
 					'auth'	=> 'ext_{{ EXTENSION.vendor_name }}/{{ EXTENSION.extension_name }}',
-					'cat'	=> array('MCP_DEMO_TITLE')
+					'cat'	=> array('MCP_{{ EXTENSION.extension_name|upper }}_TITLE')
 				),
 			),
 		);

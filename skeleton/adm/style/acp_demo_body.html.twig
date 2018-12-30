@@ -1,15 +1,15 @@
 {{ '{' }}% include 'overall_header.html' %}
 
-<h1>{{ '{{' }} lang('ACP_DEMO_TITLE') }}</h1>
+<h1>{{ '{{' }} lang('ACP_{{ EXTENSION.extension_name|upper }}_TITLE') }}</h1>
 
-<form id="acp_board" method="post" action="{{ '{{' }} U_ACTION }}">
+<form id="{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}_acp" name="{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}_acp" method="post" action="{{ '{{' }} U_ACTION }}">
 
 	<fieldset>
 		<legend>{{ '{{' }} lang('SETTINGS') }}</legend>
 		<dl>
-			<dt><label for="acme_demo_goodbye">{{ '{{' }} lang('ACP_DEMO_GOODBYE') ~ lang('COLON') }}</label></dt>
-			<dd><label><input type="radio" class="radio" name="acme_demo_goodbye" value="1"{{ '{' }}% if ACME_DEMO_GOODBYE %} checked="checked"{{ '{' }}% endif %} /> {{ '{{' }} lang('YES') }}</label>
-				<label><input type="radio" class="radio" name="acme_demo_goodbye" value="0"{{ '{' }}% if not ACME_DEMO_GOODBYE %} checked="checked"{{ '{' }}% endif %} /> {{ '{{' }} lang('NO') }}</label></dd>
+			<dt><label for="{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}_goodbye">{{ '{{' }} lang('ACP_{{ EXTENSION.extension_name|upper }}_GOODBYE') ~ lang('COLON') }}</label></dt>
+			<dd><label><input type="radio" class="radio" name="{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}_goodbye" value="1"{{ '{' }}% if {{ EXTENSION.vendor_name|upper }}_{{ EXTENSION.extension_name|upper }}_GOODBYE %} checked="checked"{{ '{' }}% endif %} /> {{ '{{' }} lang('YES') }}</label>
+				<label><input type="radio" class="radio" name="{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}_goodbye" value="0"{{ '{' }}% if not {{ EXTENSION.vendor_name|upper }}_{{ EXTENSION.extension_name|upper }}_GOODBYE %} checked="checked"{{ '{' }}% endif %} /> {{ '{{' }} lang('NO') }}</label></dd>
 		</dl>
 	</fieldset>
 

@@ -21,7 +21,7 @@
 	<target name="clean-package">
 		<!--
 		Remove some unnecessary files/directories
-		{{ dir }}/ is the folder of your extension, e.g. ext/acme/demo/
+		{{ dir }}/ is the folder of your extension, e.g. ext/{{ EXTENSION.vendor_name }}/{{ EXTENSION.extension_name }}/
 		-->
 		<delete dir="{{ dir }}/tests" />
 		<delete dir="{{ dir }}/travis" />

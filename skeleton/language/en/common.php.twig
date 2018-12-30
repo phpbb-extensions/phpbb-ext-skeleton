@@ -19,15 +19,16 @@ if (empty($lang) || !is_array($lang))
 }
 
 $lang = array_merge($lang, array(
-	'DEMO_PAGE'			=> 'Demo',
-	'DEMO_HELLO'		=> 'Hello %s!',
-	'DEMO_GOODBYE'		=> 'Goodbye %s!',
+	'{{ EXTENSION.extension_name|upper }}_PAGE'			=> '{{ EXTENSION.extension_name|capitalize }} Page',
+	'{{ EXTENSION.extension_name|upper }}_HELLO'		=> 'Hello %s!',
+	'{{ EXTENSION.extension_name|upper }}_GOODBYE'		=> 'Goodbye %s!',
+	'{{ EXTENSION.extension_name|upper }}_EVENT'		=> '{{ EXTENSION.extension_name|capitalize }} Event',
 
-	'ACP_DEMO'					=> 'Settings',
-	'ACP_DEMO_GOODBYE'			=> 'Should say goodbye?',
-	'ACP_DEMO_SETTING_SAVED'	=> 'Settings have been saved successfully!',
+	'ACP_{{ EXTENSION.extension_name|upper }}'					=> 'Settings',
+	'ACP_{{ EXTENSION.extension_name|upper }}_GOODBYE'			=> 'Should say goodbye?',
+	'ACP_{{ EXTENSION.extension_name|upper }}_SETTING_SAVED'	=> 'Settings have been saved successfully!',
 
-	'ACME_DEMO_NOTIFICATION'	=> 'Acme demo notification',
+	'{{ EXTENSION.vendor_name|upper }}_{{ EXTENSION.extension_name|upper }}_NOTIFICATION'	=> '{{ EXTENSION.extension_display_name|e }} notification',
 
-	'VIEWING_ACME_DEMO'			=> 'Viewing Acme Demo',
+	'VIEWING_{{ EXTENSION.vendor_name|upper }}_{{ EXTENSION.extension_name|upper }}'			=> 'Viewing {{ EXTENSION.extension_display_name|e }} page',
 ));
