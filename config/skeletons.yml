@@ -144,7 +144,7 @@ services:
             - 'tests'
             - false
             - []
-            - ['tests/controller/main_test.php', 'tests/dbal/fixtures/config.xml', 'tests/dbal/simple_test.php', 'tests/functional/demo_test.php', 'phpunit.xml.dist']
+            - ['tests/controller/main_test.php', 'tests/dbal/fixtures/config.xml', 'tests/dbal/simple_test.php', 'tests/functional/view_test.php', 'phpunit.xml.dist']
             - 'TEST_DEPLOY'
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
