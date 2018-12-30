@@ -80,7 +80,7 @@ class main
 	}
 
 	/**
-	 * Demo controller for route /skeleton
+	 * Controller for route /skeleton
 	 *
 	 * @throws http_exception
 	 * @throws \Exception
