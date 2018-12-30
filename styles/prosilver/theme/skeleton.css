@@ -14,3 +14,8 @@
 .rtl .dropdown .icon-phpbb-skeleton svg {
 	padding: 0 0 0 5px;
 }
+
+.skeleton-components {
+	border: none;
+	margin: 1em 0 0 !important;
+}

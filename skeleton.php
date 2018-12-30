@@ -27,6 +27,9 @@ class skeleton
 	/** @var array */
 	protected $files;
 
+	/** @var string */
+	protected $group;
+
 	/**
 	 * Constructor
 	 *
@@ -34,13 +37,15 @@ class skeleton
 	 * @param bool   $default
 	 * @param array  $dependencies
 	 * @param array  $files
+	 * @param string $group
 	 */
-	public function __construct($name, $default, array $dependencies, array $files)
+	public function __construct($name, $default, array $dependencies, array $files, $group)
 	{
 		$this->name = $name;
 		$this->default = $default;
 		$this->dependencies = $dependencies;
 		$this->files = $files;
+		$this->group = $group;
 	}
 
 	/**
@@ -81,5 +86,15 @@ class skeleton
 	public function get_files()
 	{
 		return $this->files;
+	}
+
+	/**
+	 * Get group
+	 *
+	 * @return string
+	 */
+	public function get_group()
+	{
+		return $this->group;
 	}
 }

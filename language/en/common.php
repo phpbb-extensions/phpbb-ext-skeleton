@@ -25,7 +25,7 @@ $lang = array_merge($lang, array(
 	'CLI_DESCRIPTION_SKELETON_CREATE'	=> 'Create a basic skeleton extension',
 	'PHPBB_SKELETON_EXT'				=> 'Skeleton Extension',
 	'PHPBB_CREATE_SKELETON_EXT'			=> 'Create skeleton extension',
-	'PHPBB_SKELETON_EXT_DOCS'			=> '<a href="https://area51.phpbb.com/docs/dev/31x/extensions/skeleton_extension.html" target="_blank">Read the Documentation</a>',
+	'PHPBB_SKELETON_EXT_DOCS'			=> 'Read the Documentation',
 
 	'EXTENSION_CLI_SKELETON_SUCCESS'	=> "<info>Extension created successfully.\nCopy the extension from `store/tmp-ext/` into the `ext/` folder.</info>",
 	'SKELETON_CLI_COMPOSER_QUESTIONS'	=> '<comment>Enter composer.json details (hit enter to leave an option empty)</comment>',
@@ -122,6 +122,13 @@ $lang = array_merge($lang, array(
 	'SKELETON_QUESTION_COMPONENT_BUILD'				=> 'Create a sample build script for phing?',
 	'SKELETON_QUESTION_COMPONENT_BUILD_UI'			=> 'Build script (phing)',
 	'SKELETON_QUESTION_COMPONENT_BUILD_EXPLAIN'		=> 'A phing build script is generated for your extension which can be used to generate build packages to help simplify the release or deployment processes.',
+
+	'SKELETON_COMPONENT_GROUP_FRONT_END'			=> 'Front End (HTML)',
+	'SKELETON_COMPONENT_GROUP_BACK_END'				=> 'Back End (PHP)',
+	'SKELETON_COMPONENT_GROUP_DATABASE'				=> 'Database',
+	'SKELETON_COMPONENT_GROUP_CONTROL_PANELS'		=> 'Control Panels',
+	'SKELETON_COMPONENT_GROUP_OTHER'				=> 'Extras',
+	'SKELETON_COMPONENT_GROUP_TEST_DEPLOY'			=> 'Testing & Deployment',
 
 	'SKELETON_TITLE_EXTENSION_INFO'		=> 'Extension packaging',
 	'SKELETON_TITLE_AUTHOR_INFO'		=> 'Authors',

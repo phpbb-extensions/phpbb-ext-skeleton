@@ -18,7 +18,7 @@
 
 <div class="panel bg1">
 	<div class="inner">
-		<p class="rightside">{{ lang('PHPBB_SKELETON_EXT_DOCS') }}</p>
+		<p class="rightside"><a href="https://area51.phpbb.com/docs/dev/31x/extensions/skeleton_extension.html" target="_blank"><i class="icon fa-book fa-fw" aria-hidden="true"></i><span>{{ lang('PHPBB_SKELETON_EXT_DOCS') }}</span></a></p>
 		<h2 class="solo">{{ lang('SKELETON_TITLE_EXTENSION_INFO') }}</h2>
 		{% for extension in loops.extension %}
 			<div class="{% if loop.index is odd %}column1{% else %}column2{% endif %}">
@@ -77,12 +77,15 @@
 <div class="panel bg2">
 	<div class="inner">
 		<h2 class="solo">{{ lang('SKELETON_TITLE_COMPONENT_INFO') }}</h2>
-		{% for component in loops.component %}
-		<div class="{% if loop.index is odd %}column1{% else %}column2{% endif %}">
-			<fieldset class="fields2">
-				<div><label for="{{ component.NAME }}" title="{{ component.DESC_EXPLAIN }}"><input class="components" type="checkbox" name="{{ component.NAME }}" id="{{ component.NAME }}"{% if component.VALUE %} checked="checked"{% endif %} /> <strong>{{ component.DESC }}</strong></label></div>
-			</fieldset>
-		</div>
+		{% for group in ['DATABASE', 'FRONT_END', 'BACK_END', 'CONTROL_PANELS', 'OTHER', 'TEST_DEPLOY'] %}
+			<div class="{% if loop.index is odd %}column1{% else %}column2{% endif %}">
+				<h3 class="skeleton-components">{{ lang('SKELETON_COMPONENT_GROUP_' ~ group) }}</h3>
+				{% for component in loops['component_' ~ group] %}
+					<fieldset class="fields2">
+						<div><label for="{{ component.NAME }}" title="{{ component.DESC_EXPLAIN }}"><input class="components" type="checkbox" name="{{ component.NAME }}" id="{{ component.NAME }}"{% if component.VALUE %} checked="checked"{% endif %} /> <strong>{{ component.DESC }}</strong></label></div>
+					</fieldset>
+				{% endfor %}
+			</div>
 		{% endfor %}
 	</div>
 	<fieldset class="display-actions">
