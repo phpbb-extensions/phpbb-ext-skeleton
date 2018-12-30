@@ -12,6 +12,9 @@ namespace {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\tests\contr
 
 class main_test extends \phpbb_test_case
 {
+	/**
+	 * Dataset for the test_handle() test
+	 */
 	public function handle_data()
 	{
 		return array(
@@ -20,6 +23,12 @@ class main_test extends \phpbb_test_case
 	}
 
 	/**
+	 * A simple test that creates the controller class, and
+	 * checks that its handle() method is working as expected.
+	 *
+	 * Note the @dataProvider is required in this docblock to
+	 * define the data set method this test will be using (above).
+	 *
 	 * @dataProvider handle_data
 	 */
 	public function test_handle($status_code, $page_content)
@@ -52,7 +61,7 @@ class main_test extends \phpbb_test_case
 				return new \Symfony\Component\HttpFoundation\Response($template_file, $status_code);
 			});
 
-		// Instantiate the {{ EXTENSION.extension_display_name }} controller
+		// Instantiate the controller
 		$controller = new \{{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\controller\main(
 			new \phpbb\config\config(array()),
 			$controller_helper,

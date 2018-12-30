@@ -15,6 +15,9 @@ require_once __DIR__ . '/../../../../../includes/functions.php';
 
 class simple_test extends \phpbb_database_test_case
 {
+	/**
+	 * @inheritdoc
+	 */
 	static protected function setup_extensions()
 	{
 		return array('{{ EXTENSION.vendor_name }}/{{ EXTENSION.extension_name }}');
@@ -23,11 +26,17 @@ class simple_test extends \phpbb_database_test_case
 	/** @var \phpbb\db\driver\driver_interface */
 	protected $db;
 
+	/**
+	 * @inheritdoc
+	 */
 	public function getDataSet()
 	{
 		return $this->createXMLDataSet(__DIR__ . '/fixtures/config.xml');
 	}
 
+	/**
+	 * A simple test checking to see if the database users table was correctly updated
+	 */
 	public function test_column()
 	{
 		$this->db = $this->new_dbal();
