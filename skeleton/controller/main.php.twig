@@ -44,7 +44,7 @@ class main
 	}
 
 	/**
-	 * Demo controller for route /demo/{{ '{' ~ 'name}' }}
+	 * {{ EXTENSION.extension_display_name }} controller for route /demo/{{ '{' ~ 'name}' }}
 	 *
 	 * @param string $name
 	 *
@@ -52,9 +52,9 @@ class main
 	 */
 	public function handle($name)
 	{
-		$l_message = !$this->config['acme_demo_goodbye'] ? 'DEMO_HELLO' : 'DEMO_GOODBYE';
-		$this->template->assign_var('DEMO_MESSAGE', $this->user->lang($l_message, $name));
+		$l_message = !$this->config['{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}_goodbye'] ? '{{ EXTENSION.extension_name|upper }}_HELLO' : '{{ EXTENSION.extension_name|upper }}_GOODBYE';
+		$this->template->assign_var('{{ EXTENSION.extension_name|upper }}_MESSAGE', $this->user->lang($l_message, $name));
 
-		return $this->helper->render('demo_body.html', $name);
+		return $this->helper->render('{{ EXTENSION.extension_name|lower }}_body.html', $name);
 	}
 }

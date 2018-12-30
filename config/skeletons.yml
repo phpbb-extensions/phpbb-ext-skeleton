@@ -102,7 +102,7 @@ services:
             - 'console'
             - false
             - []
-            - ['config/services.yml', 'console/command/demo.php', 'language/en/cli.php']
+            - ['config/services.yml', 'console/command/sample.php', 'language/en/cli.php']
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
 
@@ -112,7 +112,7 @@ services:
             - 'cron'
             - false
             - []
-            - ['config/services.yml', 'cron/task/demo.php', 'migrations/install_cron.php']
+            - ['config/services.yml', 'cron/task/sample.php', 'migrations/install_cron.php']
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
 
@@ -122,7 +122,7 @@ services:
             - 'notification'
             - false
             - []
-            - ['ext.php', 'config/services.yml', 'notification/type/demo.php', 'language/en/common.php', 'language/en/info_ucp_demo.php']
+            - ['ext.php', 'config/services.yml', 'notification/type/sample.php', 'language/en/common.php', 'language/en/info_ucp_demo.php']
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
 

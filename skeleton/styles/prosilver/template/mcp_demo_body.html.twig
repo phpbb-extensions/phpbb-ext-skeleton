@@ -1,8 +1,8 @@
 {{ '{' }}% include 'mcp_header.html' %}
 
-<form id="mcp" method="post" action="{{ '{{' }} U_POST_ACTION }}">
+<form id="{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}_mcp" name="{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}_mcp" method="post" action="{{ '{{' }} U_POST_ACTION }}">
 
-	<h2>{{ '{{' }} lang('MCP_DEMO_TITLE') }}</h2>
+	<h2>{{ '{{' }} lang('MCP_{{ EXTENSION.extension_name|upper }}_TITLE') }}</h2>
 
 	<div class="panel">
 		<div class="inner">
@@ -19,7 +19,7 @@
 
 	<fieldset class="submit-buttons">
 		<input type="reset" name="reset" value="{{ '{{' }} lang('RESET') }}" class="button2" />&nbsp;
-		<input type="submit" name="submituser" value="{{ '{{' }} lang('SUBMIT') }}" class="button1" />
+		<input type="submit" name="submit_user" value="{{ '{{' }} lang('SUBMIT') }}" class="button1" />
 		{{ '{{' }} S_FORM_TOKEN }}
 	</fieldset>
 </form>
