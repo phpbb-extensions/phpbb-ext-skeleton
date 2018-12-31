@@ -15,8 +15,8 @@ services:
 
 {% endif %}
 {% if COMPONENT.acp %}
-    {{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.controller.admin:
-        class: {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\controller\admin_controller
+    {{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.controller.acp:
+        class: {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\controller\acp_controller
         arguments:
             - '@config'
             - '@language'

@@ -23,8 +23,8 @@ class main_module
 	{
 		global $phpbb_container;
 
-		/** @var \{{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\controller\admin_controller $admin_controller */
-		$admin_controller = $phpbb_container->get('{{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.controller.admin');
+		/** @var \{{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\controller\acp_controller $acp_controller */
+		$acp_controller = $phpbb_container->get('{{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.controller.acp');
 
 		/** @var \phpbb\language\language $language */
 		$language = $phpbb_container->get('language');
@@ -35,10 +35,10 @@ class main_module
 		// Set the page title for our ACP page
 		$this->page_title = $language->lang('ACP_{{ EXTENSION.extension_name|upper }}_TITLE');
 
-		// Make the $u_action url available in the admin controller
-		$admin_controller->set_page_url($this->u_action);
+		// Make the $u_action url available in our ACP controller
+		$acp_controller->set_page_url($this->u_action);
 
-		// Load the display options handle in the admin controller
-		$admin_controller->display_options();
+		// Load the display options handle in our ACP controller
+		$acp_controller->display_options();
 	}
 }
