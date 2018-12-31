@@ -14,6 +14,18 @@ services:
             - '@user'
 
 {% endif %}
+{% if COMPONENT.acp %}
+    {{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.controller.admin:
+        class: {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\controller\admin_controller
+        arguments:
+            - '@config'
+            - '@language'
+            - '@log'
+            - '@request'
+            - '@template'
+            - '@user'
+
+{% endif %}
 {% if COMPONENT.service %}
     {{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.service:
         class: {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\service

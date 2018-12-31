@@ -34,7 +34,7 @@ services:
             - 'acp'
             - false
             - []
-            - ['acp/main_info.php', 'acp/main_module.php', 'adm/style/acp_demo_body.html', 'language/en/common.php', 'language/en/info_acp_demo.php', 'migrations/install_acp_module.php']
+            - ['acp/main_info.php', 'acp/main_module.php', 'adm/style/acp_demo_body.html', 'config/services.yml', 'controller/admin_controller.php', 'language/en/common.php', 'language/en/info_acp_demo.php', 'migrations/install_acp_module.php']
             - 'CONTROL_PANELS'
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
