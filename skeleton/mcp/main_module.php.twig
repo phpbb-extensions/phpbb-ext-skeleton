@@ -15,16 +15,30 @@ namespace {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\mcp;
  */
 class main_module
 {
-	var $u_action;
+	public $page_title;
+	public $tpl_name;
+	public $u_action;
 
 	function main($id, $mode)
 	{
-		global $template, $user;
+		global $phpbb_container;
 
+		/** @var \{{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\controller\mcp_controller $mcp_controller */
+		$mcp_controller = $phpbb_container->get('{{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.controller.mcp');
+
+		/** @var \phpbb\language\language $language */
+		$language = $phpbb_container->get('language');
+
+		// Load a template for our MCP page
 		$this->tpl_name = 'mcp_{{ EXTENSION.extension_name|lower }}_body';
-		$this->page_title = $user->lang('MCP_{{ EXTENSION.extension_name|upper }}_TITLE');
-		add_form_key('{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}_mcp');
 
-		$template->assign_var('U_POST_ACTION', $this->u_action);
+		// Set the page title for our MCP page
+		$this->page_title = $language->lang('MCP_{{ EXTENSION.extension_name|upper }}_TITLE');
+
+		// Make the $u_action url available in our MCP controller
+		$mcp_controller->set_page_url($this->u_action);
+
+		// Load the display options handle in our MCP controller
+		$mcp_controller->display_options();
 	}
 }

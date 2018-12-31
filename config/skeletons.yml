@@ -45,7 +45,7 @@ services:
             - 'mcp'
             - false
             - []
-            - ['mcp/main_info.php', 'mcp/main_module.php', 'styles/prosilver/template/mcp_demo_body.html', 'language/en/info_mcp_demo.php', 'migrations/install_mcp_module.php']
+            - ['mcp/main_info.php', 'mcp/main_module.php', 'config/services.yml', 'controller/mcp_controller.php', 'styles/prosilver/template/mcp_demo_body.html', 'language/en/info_mcp_demo.php', 'migrations/install_mcp_module.php']
             - 'CONTROL_PANELS'
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
@@ -56,7 +56,7 @@ services:
             - 'ucp'
             - false
             - []
-            - ['ucp/main_info.php', 'ucp/main_module.php', 'styles/prosilver/template/ucp_demo_body.html', 'language/en/info_ucp_demo.php', 'migrations/install_ucp_module.php', 'migrations/install_user_schema.php']
+            - ['ucp/main_info.php', 'ucp/main_module.php', 'config/services.yml', 'controller/ucp_controller.php', 'styles/prosilver/template/ucp_demo_body.html', 'language/en/info_ucp_demo.php', 'migrations/install_ucp_module.php', 'migrations/install_user_schema.php']
             - 'CONTROL_PANELS'
         tags:
             - { name: phpbb.skeleton.ext.skeleton }

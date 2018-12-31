@@ -7,6 +7,10 @@
 	<div class="panel">
 		<div class="inner">
 			<fieldset>
+				{{ '{' }}% if S_ERROR %}
+					<p class="error">{{ '{{' }} ERROR_MSG }}</p>
+				{{ '{' }}% endif %}
+
 				<dl>
 					<dt><label for="user_{{ EXTENSION.extension_name|lower }}0">{{ '{{' }} lang('UCP_{{ EXTENSION.extension_name|upper }}_USER') ~ lang('COLON') }}</label><br /><span>{{ '{{' }} lang('UCP_{{ EXTENSION.extension_name|upper }}_USER_EXPLAIN') }}</span></dt>
 					<dd><label for="user_{{ EXTENSION.extension_name|lower }}1"><input type="radio" name="user_{{ EXTENSION.extension_name|lower }}" id="user_{{ EXTENSION.extension_name|lower }}1" value="1"{{ '{' }}% if S_USER_{{ EXTENSION.extension_name|upper }} %} checked="checked"{{ '{' }}% endif %} /> {{ '{{' }} lang('YES') }}</label>

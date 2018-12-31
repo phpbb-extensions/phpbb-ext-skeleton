@@ -26,6 +26,26 @@ services:
             - '@user'
 
 {% endif %}
+{% if COMPONENT.mcp %}
+    {{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.controller.mcp:
+        class: {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\controller\mcp_controller
+        arguments:
+            - '@language'
+            - '@request'
+            - '@template'
+
+{% endif %}
+{% if COMPONENT.ucp %}
+    {{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.controller.ucp:
+        class: {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\controller\ucp_controller
+        arguments:
+            - '@dbal.conn'
+            - '@language'
+            - '@request'
+            - '@template'
+            - '@user'
+
+{% endif %}
 {% if COMPONENT.service %}
     {{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.service:
         class: {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\service
