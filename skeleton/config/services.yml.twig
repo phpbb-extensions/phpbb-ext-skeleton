@@ -5,8 +5,8 @@ imports:
 
 services:
 {% if COMPONENT.controller %}
-    {{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.controller:
-        class: {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\controller\main
+    {{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.controller.main:
+        class: {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\controller\main_controller
         arguments:
             - '@config'
             - '@controller.helper'

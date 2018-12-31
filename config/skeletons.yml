@@ -89,7 +89,7 @@ services:
             - 'controller'
             - false
             - []
-            - ['config/routing.yml', 'config/services.yml', 'event/main_listener.php', 'language/en/common.php', 'controller/main.php', 'styles/prosilver/template/demo_body.html', 'styles/prosilver/template/event/overall_header_navigation_prepend.html']
+            - ['config/routing.yml', 'config/services.yml', 'event/main_listener.php', 'language/en/common.php', 'controller/main_controller.php', 'styles/prosilver/template/demo_body.html', 'styles/prosilver/template/event/overall_header_navigation_prepend.html']
             - 'BACK_END'
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
