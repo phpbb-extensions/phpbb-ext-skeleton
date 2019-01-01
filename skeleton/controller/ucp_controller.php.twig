@@ -44,18 +44,17 @@ class ucp_controller
 	 */
 	public function __construct(\phpbb\db\driver\driver_interface $db, \phpbb\language\language $lang, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user)
 	{
-		$this->db		= $db;
-		$this->lang		= $lang;
-		$this->request	= $request;
-		$this->template	= $template;
-		$this->user		= $user;
+		$this->db			= $db;
+		$this->lang			= $lang;
+		$this->request		= $request;
+		$this->template		= $template;
+		$this->user			= $user;
 	}
 
 	/**
 	 * Display the options a user can configure for this extension.
 	 *
 	 * @return void
-	 * @access public
 	 */
 	public function display_options()
 	{
@@ -114,7 +113,6 @@ class ucp_controller
 	 *
 	 * @param string	$u_action	Custom form action
 	 * @return void
-	 * @access public
 	 */
 	public function set_page_url($u_action)
 	{

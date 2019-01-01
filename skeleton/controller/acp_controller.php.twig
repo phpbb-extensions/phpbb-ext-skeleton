@@ -39,7 +39,7 @@ class acp_controller
 	/**
 	 * Constructor.
 	 *
-	 * @param \phpbb\config\config		$config		Configuration object
+	 * @param \phpbb\config\config		$config		Config object
 	 * @param \phpbb\language\language	$lang		Language object
 	 * @param \phpbb\log\log			$log		Log object
 	 * @param \phpbb\request\request	$request	Request object
@@ -60,7 +60,6 @@ class acp_controller
 	 * Display the options a user can configure for this extension.
 	 *
 	 * @return void
-	 * @access public
 	 */
 	public function display_options()
 	{
@@ -115,7 +114,6 @@ class acp_controller
 	 *
 	 * @param string	$u_action	Custom form action
 	 * @return void
-	 * @access public
 	 */
 	public function set_page_url($u_action)
 	{

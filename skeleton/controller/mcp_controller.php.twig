@@ -45,7 +45,6 @@ class mcp_controller
 	 * Display the options a moderator can take for this extension.
 	 *
 	 * @return void
-	 * @access public
 	 */
 	public function display_options()
 	{
@@ -67,7 +66,7 @@ class mcp_controller
 			// If no errors, process the form data
 			if (empty($errors))
 			{
-				trigger_error($this->lang->lang('NO_USER_SPECIFIED') . '<br /><br />' . $this->lang->lang('RETURN_PAGE', '<a href="' . $this->u_action . '">', '</a>');
+				// Do your awesome moderator stuff here!			}
 			}
 		}
 
@@ -87,7 +86,6 @@ class mcp_controller
 	 *
 	 * @param string	$u_action	Custom form action
 	 * @return void
-	 * @access public
 	 */
 	public function set_page_url($u_action)
 	{
