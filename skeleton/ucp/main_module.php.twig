@@ -15,40 +15,30 @@ namespace {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\ucp;
  */
 class main_module
 {
-	var $u_action;
+	public $page_title;
+	public $tpl_name;
+	public $u_action;
 
 	function main($id, $mode)
 	{
-		global $db, $request, $template, $user;
+		global $phpbb_container;
 
+		/** @var \{{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\controller\ucp_controller $ucp_controller */
+		$ucp_controller = $phpbb_container->get('{{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.controller.ucp');
+
+		/** @var \phpbb\language\language $language */
+		$language = $phpbb_container->get('language');
+
+		// Load a template for our UCP page
 		$this->tpl_name = 'ucp_{{ EXTENSION.extension_name|lower }}_body';
-		$this->page_title = $user->lang('UCP_{{ EXTENSION.extension_name|upper }}_TITLE');
-		add_form_key('{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}_ucp');
 
-		$data = array(
-			'user_{{ EXTENSION.extension_name|lower }}' => $request->variable('user_{{ EXTENSION.extension_name|lower }}', $user->data['user_{{ EXTENSION.extension_name|lower }}']),
-		);
+		// Set the page title for our UCP page
+		$this->page_title = $language->lang('UCP_{{ EXTENSION.extension_name|upper }}_TITLE');
 
-		if ($request->is_set_post('submit'))
-		{
-			if (!check_form_key('{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}_ucp'))
-			{
-				trigger_error($user->lang('FORM_INVALID'));
-			}
+		// Make the $u_action url available in our UCP controller
+		$ucp_controller->set_page_url($this->u_action);
 
-			$sql = 'UPDATE ' . USERS_TABLE . '
-				SET ' . $db->sql_build_array('UPDATE', $data) . '
-				WHERE user_id = ' . (int) $user->data['user_id'];
-			$db->sql_query($sql);
-
-			meta_refresh(3, $this->u_action);
-			$message = $user->lang('UCP_{{ EXTENSION.extension_name|upper }}_SAVED') . '<br /><br />' . $user->lang('RETURN_UCP', '<a href="' . $this->u_action . '">', '</a>');
-			trigger_error($message);
-		}
-
-		$template->assign_vars(array(
-			'S_USER_{{ EXTENSION.extension_name|upper }}'	=> $data['user_{{ EXTENSION.extension_name|lower }}'],
-			'U_UCP_ACTION'	=> $this->u_action,
-		));
+		// Load the display options handle in our UCP controller
+		$ucp_controller->display_options();
 	}
 }

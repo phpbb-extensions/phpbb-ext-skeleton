@@ -13,34 +13,34 @@ namespace {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\controller;
 /**
  * {{ EXTENSION.extension_display_name }} main controller.
  */
-class main
+class main_controller
 {
-	/* @var \phpbb\config\config */
+	/** @var \phpbb\config\config */
 	protected $config;
 
-	/* @var \phpbb\controller\helper */
+	/** @var \phpbb\controller\helper */
 	protected $helper;
 
-	/* @var \phpbb\template\template */
+	/** @var \phpbb\template\template */
 	protected $template;
 
-	/* @var \phpbb\user */
+	/** @var \phpbb\user */
 	protected $user;
 
 	/**
 	 * Constructor
 	 *
-	 * @param \phpbb\config\config		$config
-	 * @param \phpbb\controller\helper	$helper
-	 * @param \phpbb\template\template	$template
-	 * @param \phpbb\user				$user
+	 * @param \phpbb\config\config		$config		Config object
+	 * @param \phpbb\controller\helper	$helper		Controller helper object
+	 * @param \phpbb\template\template	$template	Template object
+	 * @param \phpbb\user				$user		User object
 	 */
 	public function __construct(\phpbb\config\config $config, \phpbb\controller\helper $helper, \phpbb\template\template $template, \phpbb\user $user)
 	{
-		$this->config = $config;
-		$this->helper = $helper;
-		$this->template = $template;
-		$this->user = $user;
+		$this->config	= $config;
+		$this->helper	= $helper;
+		$this->template	= $template;
+		$this->user		= $user;
 	}
 
 	/**

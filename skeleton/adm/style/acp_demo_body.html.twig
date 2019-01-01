@@ -2,6 +2,13 @@
 
 <h1>{{ '{{' }} lang('ACP_{{ EXTENSION.extension_name|upper }}_TITLE') }}</h1>
 
+{{ '{' }}% if S_ERROR %}
+	<div class="errorbox">
+		<h3>{{ '{{' }} lang('WARNING') }}</h3>
+		<p>{{ '{{' }} ERROR_MSG }}</p>
+	</div>
+{{ '{' }}% endif %}
+
 <form id="{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}_acp" name="{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}_acp" method="post" action="{{ '{{' }} U_ACTION }}">
 
 	<fieldset>
