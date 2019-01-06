@@ -26,7 +26,7 @@ class main_test extends \phpbb_test_case
 	 * A simple test that creates the controller class, and
 	 * checks that its handle() method is working as expected.
 	 *
-	 * Note the @dataProvider is required in this docblock to
+	 * Note the dataProvider is required in this docblock to
 	 * define the data set method this test will be using (above).
 	 *
 	 * @dataProvider handle_data
@@ -39,7 +39,7 @@ class main_test extends \phpbb_test_case
 			->disableOriginalConstructor()
 			->getMock();
 
-		/** @var \phpbb\user $user Mock the user class */
+		/** @var \phpbb\user|\PHPUnit_Framework_MockObject_MockObject $user Mock the user class */
 		$user = $this->getMockBuilder('\phpbb\user')
 			->disableOriginalConstructor()
 			->getMock();
@@ -49,7 +49,7 @@ class main_test extends \phpbb_test_case
 			->method('lang')
 			->will($this->returnArgument(0));
 
-		/** @var \phpbb\controller\helper $controller_helper Mock the controller helper class */
+		/** @var \phpbb\controller\helper|\PHPUnit_Framework_MockObject_MockObject $controller_helper Mock the controller helper class */
 		$controller_helper = $this->getMockBuilder('\phpbb\controller\helper')
 			->disableOriginalConstructor()
 			->getMock();
