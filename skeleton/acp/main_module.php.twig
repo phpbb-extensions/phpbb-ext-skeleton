@@ -26,14 +26,14 @@ class main_module
 		/** @var \{{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\controller\acp_controller $acp_controller */
 		$acp_controller = $phpbb_container->get('{{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.controller.acp');
 
-		/** @var \phpbb\language\language $language */
-		$language = $phpbb_container->get('language');
+		/** @var {{ LANGUAGE.class }} ${{ LANGUAGE.service }} */
+		${{ LANGUAGE.service }} = $phpbb_container->get('{{ LANGUAGE.service }}');
 
 		// Load a template from adm/style for our ACP page
 		$this->tpl_name = 'acp_{{ EXTENSION.extension_name|lower }}_body';
 
 		// Set the page title for our ACP page
-		$this->page_title = $language->lang('ACP_{{ EXTENSION.extension_name|upper }}_TITLE');
+		$this->page_title = ${{ LANGUAGE.service }}->lang('ACP_{{ EXTENSION.extension_name|upper }}_TITLE');
 
 		// Make the $u_action url available in our ACP controller
 		$acp_controller->set_page_url($this->u_action);

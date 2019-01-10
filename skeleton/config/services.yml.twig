@@ -19,7 +19,8 @@ services:
         class: {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\controller\acp_controller
         arguments:
             - '@config'
-            - '@language'
+{% if LANGUAGE.s_32 %}            - '@language'
+{% endif %}
             - '@log'
             - '@request'
             - '@template'

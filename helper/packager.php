@@ -119,6 +119,7 @@ class packager
 			'EXTENSION'    => $data['extension'],
 			'REQUIREMENTS' => $data['requirements'],
 			'AUTHORS'      => $data['authors'],
+			'LANGUAGE'     => $this->get_language_object($data['requirements']['phpbb_version_min']),
 		));
 
 		$component_data = $this->get_component_dialog_values();
@@ -266,5 +267,17 @@ class packager
 		);
 
 		return $template_engine;
+	}
+
+	protected function get_language_object($min_version)
+	{
+		$phpbb31 = (bool) preg_match('/^[\\D]*3\\.1.*$/', $min_version);
+
+		return array(
+			'class'		=> $phpbb31 ? '\phpbb\user' : '\phpbb\language\language',
+			'service'	=> $phpbb31 ? 'user' : 'language',
+			'function'	=> $phpbb31 ? 'add_lang_ext' : 'add_lang',
+			's_32'		=> !$phpbb31,
+		);
 	}
 }
