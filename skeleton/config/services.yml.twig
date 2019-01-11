@@ -32,7 +32,7 @@ services:
     {{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.controller.mcp:
         class: {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\controller\mcp_controller
         arguments:
-            - '@language'
+            - '@{{ LANGUAGE.object }}'
             - '@request'
             - '@template'
 

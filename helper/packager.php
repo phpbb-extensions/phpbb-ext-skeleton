@@ -277,6 +277,10 @@ class packager
 			'class'		=> $phpbb31 ? '\phpbb\user' : '\phpbb\language\language',
 			'object'	=> $phpbb31 ? 'user' : 'language',
 			'function'	=> $phpbb31 ? 'add_lang_ext' : 'add_lang',
+			'indent'	=> array(
+				'class'		=> $phpbb31 ? "\t\t\t" : '',
+				'object'	=> $phpbb31 ? "\t" : '',
+			),
 		);
 	}
 }
