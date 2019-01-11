@@ -41,8 +41,8 @@ class main_listener implements EventSubscriberInterface
 	/* @var \phpbb\template\template */
 	protected $template;
 
-	/* @var \phpbb\user */
-	protected $user;
+	/* @var {{ LANGUAGE.class }} */
+	protected ${{ LANGUAGE.object }};
 
 	/** @var string phpEx */
 	protected $php_ext;
@@ -52,14 +52,14 @@ class main_listener implements EventSubscriberInterface
 	 *
 	 * @param \phpbb\controller\helper	$helper		Controller helper object
 	 * @param \phpbb\template\template	$template	Template object
-	 * @param \phpbb\user               $user       User object
+	 * @param {{ LANGUAGE.class ~ LANGUAGE.indent.class }}	${{ LANGUAGE.object ~ LANGUAGE.indent.object}}	{{ LANGUAGE.object|capitalize }} object
 	 * @param string                    $php_ext    phpEx
 	 */
-	public function __construct(\phpbb\controller\helper $helper, \phpbb\template\template $template, \phpbb\user $user, $php_ext)
+	public function __construct(\phpbb\controller\helper $helper, \phpbb\template\template $template, {{ LANGUAGE.class }} ${{ LANGUAGE.object }}, $php_ext)
 	{
 		$this->helper   = $helper;
 		$this->template = $template;
-		$this->user     = $user;
+		$this->{{ LANGUAGE.object ~ LANGUAGE.indent.object }}    = ${{ LANGUAGE.object }};
 		$this->php_ext  = $php_ext;
 	}
 
@@ -97,7 +97,7 @@ class main_listener implements EventSubscriberInterface
 	{
 		if ($event['on_page'][1] === 'app' && strrpos($event['row']['session_page'], 'app.' . $this->php_ext . '/demo') === 0)
 		{
-			$event['location'] = $this->user->lang('VIEWING_{{ EXTENSION.vendor_name|upper }}_{{ EXTENSION.extension_name|upper }}');
+			$event['location'] = $this->{{ LANGUAGE.object }}->lang('VIEWING_{{ EXTENSION.vendor_name|upper }}_{{ EXTENSION.extension_name|upper }}');
 			$event['location_url'] = $this->helper->route('{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }}_controller', array('name' => 'world'));
 		}
 	}
@@ -113,7 +113,7 @@ class main_listener implements EventSubscriberInterface
 	public function display_forums_modify_template_vars($event)
 	{
 		$forum_row = $event['forum_row'];
-		$forum_row['FORUM_NAME'] .= ' :: ' . $this->user->lang('{{ EXTENSION.extension_name|upper }}_EVENT') . ' :: ';
+		$forum_row['FORUM_NAME'] .= ' :: ' . $this->{{ LANGUAGE.object }}->lang('{{ EXTENSION.extension_name|upper }}_EVENT') . ' :: ';
 		$event['forum_row'] = $forum_row;
 	}
 {% endif %}

@@ -65,7 +65,7 @@ services:
         arguments:
             - '@controller.helper'
             - '@template'
-            - '@user'
+            - '@{{ LANGUAGE.object }}'
             - '%core.php_ext%'
 {% endif %}
         tags:
