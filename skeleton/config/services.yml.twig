@@ -11,7 +11,7 @@ services:
             - '@config'
             - '@controller.helper'
             - '@template'
-            - '@user'
+            - '@{{ LANGUAGE.object }}'
 
 {% endif %}
 {% if COMPONENT.acp %}

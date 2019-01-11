@@ -36,7 +36,7 @@ class mcp_controller
 	 */
 	public function __construct({{ LANGUAGE.class }} ${{ LANGUAGE.object }}, \phpbb\request\request $request, \phpbb\template\template $template)
 	{
-		$this->{{ LANGUAGE.object }}	= ${{ LANGUAGE.object }};
+		$this->{{ LANGUAGE.object ~ LANGUAGE.indent.object }}	= ${{ LANGUAGE.object }};
 		$this->request	= $request;
 		$this->template	= $template;
 	}
