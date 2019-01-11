@@ -39,13 +39,13 @@ class main_test extends \phpbb_test_case
 			->disableOriginalConstructor()
 			->getMock();
 
-		/** @var \phpbb\user|\PHPUnit_Framework_MockObject_MockObject $user Mock the user class */
-		$user = $this->getMockBuilder('\phpbb\user')
+		/** @var {{ LANGUAGE.class }}|\PHPUnit_Framework_MockObject_MockObject ${{ LANGUAGE.object }} Mock the {{ LANGUAGE.object }} class */
+		${{ LANGUAGE.object }} = $this->getMockBuilder('{{ LANGUAGE.class }}')
 			->disableOriginalConstructor()
 			->getMock();
 
-		// Set user->lang() to return any arguments sent to it
-		$user->expects($this->any())
+		// Set {{ LANGUAGE.object }}->lang() to return any arguments sent to it
+		${{ LANGUAGE.object }}->expects($this->any())
 			->method('lang')
 			->will($this->returnArgument(0));
 
@@ -66,7 +66,7 @@ class main_test extends \phpbb_test_case
 			new \phpbb\config\config(array()),
 			$controller_helper,
 			$template,
-			$user
+			${{ LANGUAGE.object }}
 		);
 
 		$response = $controller->handle('test');
