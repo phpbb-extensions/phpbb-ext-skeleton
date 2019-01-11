@@ -17,9 +17,11 @@ class ucp_controller
 {
 	/** @var \phpbb\db\driver\driver_interface */
 	protected $db;
+{% if LANGUAGE.object == 'language' %}
 
 	/** @var \phpbb\language\language */
-	protected $lang;
+	protected $language;
+{% endif %}
 
 	/** @var \phpbb\request\request */
 	protected $request;
@@ -37,15 +39,19 @@ class ucp_controller
 	 * Constructor.
 	 *
 	 * @param \phpbb\db\driver\driver_interface	$db			Database object
-	 * @param \phpbb\language\language			$lang		Language object
+ {% if LANGUAGE.object == 'language' %}
+	 * @param \phpbb\language\language			$language	Language object
+ {% endif %}
 	 * @param \phpbb\request\request			$request	Request object
 	 * @param \phpbb\template\template			$template	Template object
 	 * @param \phpbb\user						$user		User object
 	 */
-	public function __construct(\phpbb\db\driver\driver_interface $db, \phpbb\language\language $lang, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user)
+	public function __construct(\phpbb\db\driver\driver_interface $db, {% if LANGUAGE.object == 'language' %} \phpbb\language\language $language,{% endif %} \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user)
 	{
 		$this->db		= $db;
-		$this->lang		= $lang;
+{% if LANGUAGE.object == 'language' %}
+		$this->language	= $language;
+{% endif %}
 		$this->request	= $request;
 		$this->template	= $template;
 		$this->user		= $user;
@@ -75,7 +81,7 @@ class ucp_controller
 			// Test if the submitted form is valid
 			if (!check_form_key('{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}_ucp'))
 			{
-				$errors[] = $this->lang->lang('FORM_INVALID');
+				$errors[] = $this->{{ LANGUAGE.object }}->lang('FORM_INVALID');
 			}
 
 			// If no errors, process the form data
@@ -90,7 +96,7 @@ class ucp_controller
 				// Option settings have been updated
 				// Confirm this to the user and provide (automated) link back to previous page
 				meta_refresh(3, $this->u_action);
-				$message = $this->lang->lang('UCP_{{ EXTENSION.extension_name|upper }}_SAVED') . '<br /><br />' . $this->lang->lang('RETURN_UCP', '<a href="' . $this->u_action . '">', '</a>');
+				$message = $this->{{ LANGUAGE.object }}->lang('UCP_{{ EXTENSION.extension_name|upper }}_SAVED') . '<br /><br />' . $this->{{ LANGUAGE.object }}->lang('RETURN_UCP', '<a href="' . $this->u_action . '">', '</a>');
 				trigger_error($message);
 			}
 		}

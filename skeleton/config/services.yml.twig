@@ -42,7 +42,9 @@ services:
         class: {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\controller\ucp_controller
         arguments:
             - '@dbal.conn'
+{% if LANGUAGE.object == 'language' %}
             - '@language'
+{% endif %}
             - '@request'
             - '@template'
             - '@user'
