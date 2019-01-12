@@ -168,7 +168,7 @@ class sample extends \phpbb\notification\type\base
 
 {% if S_PHPBB_31 %}{# for phpBB 3.1.x #}
 		return parent::create_insert_array($data, $pre_create_data);
-{% else %}
+{% else %}{# for phpBB > 3.2.x #}
 		parent::create_insert_array($data, $pre_create_data);
 {% endif %}
 	}
