@@ -157,7 +157,7 @@ class sample extends \phpbb\notification\type\base
 	 *
 	 * @param array $data The type specific data
 	 * @param array $pre_create_data Data from pre_create_insert_array()
-{% if REQUIREMENTS.phpbb_version_min matches '/^[\\D]*3\\.1.*$/' %}
+{% if S_PHPBB_31 %}{# for phpBB 3.1.x #}
 	 *
 	 * @return array Array of data ready to be inserted into the database
 {% endif %}
@@ -166,7 +166,7 @@ class sample extends \phpbb\notification\type\base
 	{
 		$this->set_data('{{ EXTENSION.extension_name|lower }}_sample_name', $data['{{ EXTENSION.extension_name|lower }}_sample_name']);
 
-{% if REQUIREMENTS.phpbb_version_min matches '/^[\\D]*3\\.1.*$/' %}
+{% if S_PHPBB_31 %}{# for phpBB 3.1.x #}
 		return parent::create_insert_array($data, $pre_create_data);
 {% else %}
 		parent::create_insert_array($data, $pre_create_data);
