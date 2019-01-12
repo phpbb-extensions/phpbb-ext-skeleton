@@ -24,8 +24,8 @@ class main_controller
 	/** @var \phpbb\template\template */
 	protected $template;
 
-	/** @var \phpbb\user */
-	protected $user;
+	/** @var {{ LANGUAGE.class }} */
+	protected ${{ LANGUAGE.object }};
 
 	/**
 	 * Constructor
@@ -33,14 +33,14 @@ class main_controller
 	 * @param \phpbb\config\config		$config		Config object
 	 * @param \phpbb\controller\helper	$helper		Controller helper object
 	 * @param \phpbb\template\template	$template	Template object
-	 * @param \phpbb\user				$user		User object
+	 * @param {{ LANGUAGE.class ~ LANGUAGE.indent.class }}	${{ LANGUAGE.object ~ LANGUAGE.indent.object}}	{{ LANGUAGE.object|capitalize }} object
 	 */
-	public function __construct(\phpbb\config\config $config, \phpbb\controller\helper $helper, \phpbb\template\template $template, \phpbb\user $user)
+	public function __construct(\phpbb\config\config $config, \phpbb\controller\helper $helper, \phpbb\template\template $template, {{ LANGUAGE.class }} ${{ LANGUAGE.object }})
 	{
 		$this->config	= $config;
 		$this->helper	= $helper;
 		$this->template	= $template;
-		$this->user		= $user;
+		$this->{{ LANGUAGE.object ~ LANGUAGE.indent.object }}	= ${{ LANGUAGE.object }};
 	}
 
 	/**
@@ -53,7 +53,7 @@ class main_controller
 	public function handle($name)
 	{
 		$l_message = !$this->config['{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}_goodbye'] ? '{{ EXTENSION.extension_name|upper }}_HELLO' : '{{ EXTENSION.extension_name|upper }}_GOODBYE';
-		$this->template->assign_var('{{ EXTENSION.extension_name|upper }}_MESSAGE', $this->user->lang($l_message, $name));
+		$this->template->assign_var('{{ EXTENSION.extension_name|upper }}_MESSAGE', $this->{{ LANGUAGE.object }}->lang($l_message, $name));
 
 		return $this->helper->render('{{ EXTENSION.extension_name|lower }}_body.html', $name);
 	}

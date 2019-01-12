@@ -11,7 +11,7 @@ services:
             - '@config'
             - '@controller.helper'
             - '@template'
-            - '@user'
+            - '@{{ LANGUAGE.object }}'
 
 {% endif %}
 {% if COMPONENT.acp %}
@@ -19,7 +19,9 @@ services:
         class: {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\controller\acp_controller
         arguments:
             - '@config'
+{% if LANGUAGE.object == 'language' %}
             - '@language'
+{% endif %}
             - '@log'
             - '@request'
             - '@template'
@@ -30,7 +32,7 @@ services:
     {{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.controller.mcp:
         class: {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\controller\mcp_controller
         arguments:
-            - '@language'
+            - '@{{ LANGUAGE.object }}'
             - '@request'
             - '@template'
 
@@ -40,7 +42,9 @@ services:
         class: {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\controller\ucp_controller
         arguments:
             - '@dbal.conn'
+{% if LANGUAGE.object == 'language' %}
             - '@language'
+{% endif %}
             - '@request'
             - '@template'
             - '@user'
@@ -61,7 +65,7 @@ services:
         arguments:
             - '@controller.helper'
             - '@template'
-            - '@user'
+            - '@{{ LANGUAGE.object }}'
             - '%core.php_ext%'
 {% endif %}
         tags:

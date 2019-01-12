@@ -17,9 +17,11 @@ class acp_controller
 {
 	/** @var \phpbb\config\config */
 	protected $config;
+{% if LANGUAGE.object == 'language' %}
 
 	/** @var \phpbb\language\language */
-	protected $lang;
+	protected $language;
+{% endif %}
 
 	/** @var \phpbb\log\log */
 	protected $log;
@@ -40,16 +42,20 @@ class acp_controller
 	 * Constructor.
 	 *
 	 * @param \phpbb\config\config		$config		Config object
-	 * @param \phpbb\language\language	$lang		Language object
+{% if LANGUAGE.object == 'language' %}
+	 * @param \phpbb\language\language	$language	Language object
+{% endif %}
 	 * @param \phpbb\log\log			$log		Log object
 	 * @param \phpbb\request\request	$request	Request object
 	 * @param \phpbb\template\template	$template	Template object
 	 * @param \phpbb\user				$user		User object
 	 */
-	public function __construct(\phpbb\config\config $config, \phpbb\language\language $lang, \phpbb\log\log $log, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user)
+	public function __construct(\phpbb\config\config $config,{% if LANGUAGE.object == 'language' %} \phpbb\language\language $language,{% endif %} \phpbb\log\log $log, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user)
 	{
 		$this->config	= $config;
-		$this->lang		= $lang;
+{% if LANGUAGE.object == 'language' %}
+		$this->language	= $language;
+{% endif %}
 		$this->log		= $log;
 		$this->request	= $request;
 		$this->template	= $template;
@@ -64,7 +70,11 @@ class acp_controller
 	public function display_options()
 	{
 		// Add our common language file
-		$this->lang->add_lang('common', '{{ EXTENSION.vendor_name }}/{{ EXTENSION.extension_name }}');
+{% if LANGUAGE.object == 'language' %}
+		$this->{{ LANGUAGE.object }}->{{ LANGUAGE.function }}('common', '{{ EXTENSION.vendor_name }}/{{ EXTENSION.extension_name }}');
+{% else %}
+		$this->{{ LANGUAGE.object }}->{{ LANGUAGE.function }}('{{ EXTENSION.vendor_name }}/{{ EXTENSION.extension_name }}', 'common');
+{% endif %}
 
 		// Create a form key for preventing CSRF attacks
 		add_form_key('{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}_acp');
@@ -78,7 +88,7 @@ class acp_controller
 			// Test if the submitted form is valid
 			if (!check_form_key('{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}_acp'))
 			{
-				$errors[] = $this->lang->lang('FORM_INVALID');
+				$errors[] = $this->{{ LANGUAGE.object }}->lang('FORM_INVALID');
 			}
 
 			// If no errors, process the form data
@@ -92,7 +102,7 @@ class acp_controller
 
 				// Option settings have been updated and logged
 				// Confirm this to the user and provide link back to previous page
-				trigger_error($this->lang->lang('ACP_{{ EXTENSION.extension_name|upper }}_SETTING_SAVED') . adm_back_link($this->u_action));
+				trigger_error($this->{{ LANGUAGE.object }}->lang('ACP_{{ EXTENSION.extension_name|upper }}_SETTING_SAVED') . adm_back_link($this->u_action));
 			}
 		}
 
