@@ -272,6 +272,14 @@ class packager
 		return $template_engine;
 	}
 
+	/**
+	 * Get an array of language class and methods depending on 3.1 or 3.2
+	 * compatibility, for use in the skeleton twig templates.
+	 *
+	 * @param bool $phpbb31 Is phpBB 3.1 support requested?
+	 *
+	 * @return array An array of language data
+	 */
 	protected function get_language_version_data($phpbb31)
 	{
 		return array(
