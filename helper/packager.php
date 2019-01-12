@@ -112,7 +112,7 @@ class packager
 		$filesystem->remove($this->root_path . 'store/tmp-ext');
 		$filesystem->mkdir($ext_path);
 
-		$phpbb31 = (bool) preg_match('/^[\\D]*3\\.1.*$/', $data['requirements']['phpbb_version_min']);
+		$phpbb31 = (bool) preg_match('/^[\D]*3\.1.*$/', $data['requirements']['phpbb_version_min']);
 
 		$template_engine = $this->get_template_engine();
 		$template_engine->set_custom_style('skeletonextension', $this->root_path . 'ext/phpbb/skeleton/skeleton');
