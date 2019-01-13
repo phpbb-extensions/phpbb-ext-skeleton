@@ -1,6 +1,6 @@
-{% if REQUIREMENTS.phpbb_version_min matches '/^[\\D]*3\\.1.*$/' %}
+{% if S_PHPBB_31 %}{# for phpBB 3.1.x #}
 <li class="small-icon icon-faq no-bulletin"><a href="{{ '{{' }} U_{{ EXTENSION.extension_name|upper }}_PAGE }}">{{ '{{' }} lang('{{ EXTENSION.extension_name|upper }}_PAGE') }}</a></li>
-{% else %}
+{% else %}{# for phpBB > 3.2.x #}
 <li data-last-responsive="true">
 	<a href="{{ '{{' }} U_{{ EXTENSION.extension_name|upper }}_PAGE }}" title="{{ '{{' }} lang('{{ EXTENSION.extension_name|upper }}_PAGE') }}" role="menuitem">
 		<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>{{ '{{' }} lang('{{ EXTENSION.extension_name|upper }}_PAGE') }}</span>

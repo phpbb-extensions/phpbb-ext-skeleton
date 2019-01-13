@@ -95,7 +95,7 @@ services:
 {% if COMPONENT.notification %}
     {{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.notification.type.sample:
         class: {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\notification\type\sample
-{% if REQUIREMENTS.phpbb_version_min matches '/^[\\D]*3\\.1.*$/' %}{# for phpBB 3.1.x #}
+{% if S_PHPBB_31 %}{# for phpBB 3.1.x #}
         scope: prototype # scope MUST be prototype for this to work!
         arguments:
             - '@user_loader'

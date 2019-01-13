@@ -112,6 +112,8 @@ class packager
 		$filesystem->remove($this->root_path . 'store/tmp-ext');
 		$filesystem->mkdir($ext_path);
 
+		$phpbb31 = (bool) preg_match('/^[\D]*3\.1.*$/', $data['requirements']['phpbb_version_min']);
+
 		$template_engine = $this->get_template_engine();
 		$template_engine->set_custom_style('skeletonextension', $this->root_path . 'ext/phpbb/skeleton/skeleton');
 		$template_engine->assign_vars(array(
@@ -119,7 +121,8 @@ class packager
 			'EXTENSION'    => $data['extension'],
 			'REQUIREMENTS' => $data['requirements'],
 			'AUTHORS'      => $data['authors'],
-			'LANGUAGE'     => $this->get_language_version_data($data['requirements']['phpbb_version_min']),
+			'LANGUAGE'     => $this->get_language_version_data($phpbb31),
+			'S_PHPBB_31'   => $phpbb31,
 		));
 
 		$component_data = $this->get_component_dialog_values();
@@ -269,10 +272,16 @@ class packager
 		return $template_engine;
 	}
 
-	protected function get_language_version_data($min_version)
+	/**
+	 * Get an array of language class and methods depending on 3.1 or 3.2
+	 * compatibility, for use in the skeleton twig templates.
+	 *
+	 * @param bool $phpbb31 Is phpBB 3.1 support requested?
+	 *
+	 * @return array An array of language data
+	 */
+	protected function get_language_version_data($phpbb31)
 	{
-		$phpbb31 = (bool) preg_match('/^[\\D]*3\\.1.*$/', $min_version);
-
 		return array(
 			'class'		=> $phpbb31 ? '\phpbb\user' : '\phpbb\language\language',
 			'object'	=> $phpbb31 ? 'user' : 'language',
