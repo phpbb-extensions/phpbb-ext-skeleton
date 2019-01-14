@@ -46,7 +46,7 @@ class ucp_controller
 	 * @param \phpbb\template\template			$template	Template object
 	 * @param \phpbb\user						$user		User object
 	 */
-	public function __construct(\phpbb\db\driver\driver_interface $db, {% if LANGUAGE.object == 'language' %} \phpbb\language\language $language,{% endif %} \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user)
+	public function __construct(\phpbb\db\driver\driver_interface $db, {% if LANGUAGE.object == 'language' %}\phpbb\language\language $language, {% endif %}\phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user)
 	{
 		$this->db		= $db;
 {% if LANGUAGE.object == 'language' %}

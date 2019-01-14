@@ -22,82 +22,67 @@ class ext extends \phpbb\extension\base
 	/**
 	 * Enable notifications for the extension
 	 *
-	 * @param mixed $old_state State returned by previous call of this method
-	 *
-	 * @return mixed Returns false after last step, otherwise temporary state
+	 * @param	mixed	$old_state	The return value of the previous call
+	 *								of this method, or false on the first call
+	 * @return	mixed				Returns false after last step, otherwise
+	 *								temporary state which is passed as an
+	 *								argument to the next step
 	 */
 	public function enable_step($old_state)
 	{
-		switch ($old_state)
+		if ($old_state === false)
 		{
-			case '': // Empty means nothing has run yet
+			$this->container->get('notification_manager')
+				->enable_notifications('{{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.notification.type.sample');
 
-				$phpbb_notifications = $this->container->get('notification_manager');
-				$phpbb_notifications->enable_notifications('{{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.notification.type.sample');
-				return 'notification';
-
-			break;
-
-			default:
-
-				return parent::enable_step($old_state);
-
-			break;
+			return 'notification';
 		}
+
+		return parent::enable_step($old_state);
 	}
 
 	/**
 	 * Disable notifications for the extension
 	 *
-	 * @param mixed $old_state State returned by previous call of this method
-	 *
-	 * @return mixed Returns false after last step, otherwise temporary state
+	 * @param	mixed	$old_state	The return value of the previous call
+	 *								of this method, or false on the first call
+	 * @return	mixed				Returns false after last step, otherwise
+	 *								temporary state which is passed as an
+	 *								argument to the next step
 	 */
 	public function disable_step($old_state)
 	{
-		switch ($old_state)
+		if ($old_state === false)
 		{
-			case '': // Empty means nothing has run yet
+			$this->container->get('notification_manager')
+				->disable_notifications('{{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.notification.type.sample');
 
-				$phpbb_notifications = $this->container->get('notification_manager');
-				$phpbb_notifications->disable_notifications('{{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.notification.type.sample');
-				return 'notification';
-
-			break;
-
-			default:
-
-				return parent::disable_step($old_state);
-
-			break;
+			return 'notification';
 		}
+
+		return parent::disable_step($old_state);
 	}
 
 	/**
 	 * Purge notifications for the extension
 	 *
-	 * @param mixed $old_state State returned by previous call of this method
-	 *
-	 * @return mixed Returns false after last step, otherwise temporary state
+	 * @param	mixed	$old_state	The return value of the previous call
+	 *								of this method, or false on the first call
+	 * @return	mixed				Returns false after last step, otherwise
+	 *								temporary state which is passed as an
+	 *								argument to the next step
 	 */
 	public function purge_step($old_state)
 	{
-		switch ($old_state)
+		if ($old_state === false)
 		{
-			case '': // Empty means nothing has run yet
+			$this->container->get('notification_manager')
+				->purge_notifications('{{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.notification.type.sample');
 
-				$phpbb_notifications = $this->container->get('notification_manager');
-				$phpbb_notifications->purge_notifications('{{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.notification.type.sample');
-				return 'notification';
-
-			break;
-
-			default:
-
-				return parent::purge_step($old_state);
-
-			break;
+			return 'notification';
 		}
+
+		return parent::purge_step($old_state);
 	}
 {% endif %}
 }
