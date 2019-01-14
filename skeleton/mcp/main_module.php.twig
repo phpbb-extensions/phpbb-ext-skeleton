@@ -19,6 +19,12 @@ class main_module
 	public $tpl_name;
 	public $u_action;
 
+	/**
+	 * Main MCP module
+	 *
+	 * @param int    $id   The module ID
+	 * @param string $mode The module mode (for example: manage or settings)
+	 */
 	public function main($id, $mode)
 	{
 		global $phpbb_container;
