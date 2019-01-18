@@ -12,7 +12,7 @@ services:
             - 'phplistener'
             - false
             - []
-            - ['config/services.yml', 'event/main_listener.php']
+            - ['config/services.yml', 'event/main_listener.php', 'language/en/common.php']
             - 'BACK_END'
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
