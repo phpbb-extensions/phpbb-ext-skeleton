@@ -1,0 +1,105 @@
+<?php
+/**
+ *
+ * {{ EXTENSION.extension_display_name }}. An extension for the phpBB Forum Software package.
+ *
+ * @copyright (c) {{ "now"|date("Y") ~ (AUTHORS.0.author_name ? ', ' ~ AUTHORS.0.author_name) ~ (AUTHORS.0.author_homepage ? ', ' ~ AUTHORS.0.author_homepage) }}
+ * @license GNU General Public License, version 2 (GPL-2.0)
+ *
+ */
+
+namespace {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\migrations;
+
+class install_sample_schema extends \phpbb\db\migration\migration
+{
+	public function effectively_installed()
+	{
+		return $this->db_tools->sql_column_exists($this->table_prefix . 'users', 'user_{{ EXTENSION.extension_name|lower }}');
+	}
+
+	public static function depends_on()
+	{
+		return array('\phpbb\db\migration\data\{% if S_PHPBB_31 %}v31x\v314{% else %}v320\v320{% endif %}');
+	}
+
+	/**
+	 * Update database schema.
+	 *
+	 * https://area51.phpbb.com/docs/dev/3.2.x/migrations/schema_changes.html
+	 *	add_tables: Add tables
+	 *	drop_tables: Drop tables
+	 *	add_columns: Add columns to a table
+	 *	drop_columns: Removing/Dropping columns
+	 *	change_columns: Column changes (only type, not name)
+	 *	add_primary_keys: adding primary keys
+	 *	add_unique_index: adding an unique index
+	 *	add_index: adding an index (can be column:index_size if you need to provide size)
+	 *	drop_keys: Dropping keys
+	 *
+	 * This sample migration adds a new column to the users table.
+{% if COMPONENT.migration %}
+ 	* It also adds an example of a new table that can hold new data.
+{% endif %}
+	 *
+	 * @return array Array of schema changes
+	 */
+	public function update_schema()
+	{
+		return array(
+{% if COMPONENT.migration %}
+			'add_tables'		=> array(
+				$this->table_prefix . '{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}_table'	=> array(
+					'COLUMNS'		=> array(
+						'{{ EXTENSION.extension_name|lower }}_id'			=> array('UINT', null, 'auto_increment'),
+						'{{ EXTENSION.extension_name|lower }}_name'			=> array('VCHAR:255', ''),
+					),
+					'PRIMARY_KEY'	=> '{{ EXTENSION.extension_name|lower }}_id',
+				),
+			),
+{% endif %}
+			'add_columns'	=> array(
+				$this->table_prefix . 'users'			=> array(
+					'user_{{ EXTENSION.extension_name|lower }}'				=> array('UINT', 0),
+				),
+			),
+		);
+	}
+
+	/**
+	 * Revert database schema changes. This method is almost always required
+	 * to revert the changes made above by update_schema.
+	 *
+	 * https://area51.phpbb.com/docs/dev/3.2.x/migrations/schema_changes.html
+	 *	add_tables: Add tables
+	 *	drop_tables: Drop tables
+	 *	add_columns: Add columns to a table
+	 *	drop_columns: Removing/Dropping columns
+	 *	change_columns: Column changes (only type, not name)
+	 *	add_primary_keys: adding primary keys
+	 *	add_unique_index: adding an unique index
+	 *	add_index: adding an index (can be column:index_size if you need to provide size)
+	 *	drop_keys: Dropping keys
+	 *
+	 * This sample migration removes the column that was added the users table in update_schema.
+{% if COMPONENT.migration %}
+	 * It also removes the table that was added in update_schema.
+{% endif %}
+	 *
+	 * @return array Array of schema changes
+	 */
+	public function revert_schema()
+	{
+		return array(
+			'drop_columns'	=> array(
+				$this->table_prefix . 'users'			=> array(
+					'user_{{ EXTENSION.extension_name|lower }}',
+				),
+			),
+{% if COMPONENT.migration %}
+			'drop_tables'		=> array(
+				$this->table_prefix . '{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}_table',
+			),
+{% endif %}
+		);
+	}
+}
