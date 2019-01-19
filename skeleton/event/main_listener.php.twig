@@ -23,44 +23,52 @@ class main_listener implements EventSubscriberInterface
 	public static function getSubscribedEvents()
 	{
 		return array(
-{% if COMPONENT.phplistener %}
-			'core.display_forums_modify_template_vars'	=> 'display_forums_modify_template_vars',
-{% endif %}
-{% if COMPONENT.controller %}
+{% if COMPONENT.controller or COMPONENT.phplistener %}
 			'core.user_setup'							=> 'load_language_on_setup',
+{% if COMPONENT.controller %}
 			'core.page_header'							=> 'add_page_header_link',
 			'core.viewonline_overwrite_location'		=> 'viewonline_page',
 {% endif %}
+{% endif %}
+{% if COMPONENT.phplistener %}
+	'core.display_forums_modify_template_vars'	=> 'display_forums_modify_template_vars',
+{% endif %}
 		);
 	}
-{% if COMPONENT.controller %}
+{% if COMPONENT.controller or COMPONENT.phplistener %}
 
+	/* @var {{ LANGUAGE.class }} */
+	protected ${{ LANGUAGE.object }};
+
+{% if COMPONENT.controller %}
 	/* @var \phpbb\controller\helper */
 	protected $helper;
 
 	/* @var \phpbb\template\template */
 	protected $template;
 
-	/* @var {{ LANGUAGE.class }} */
-	protected ${{ LANGUAGE.object }};
-
 	/** @var string phpEx */
 	protected $php_ext;
 
+{% endif %}
 	/**
 	 * Constructor
 	 *
+	 * @param {{ LANGUAGE.class ~ LANGUAGE.indent.class }}	${{ LANGUAGE.object ~ LANGUAGE.indent.object}}	{{ LANGUAGE.object|capitalize }} object
+{% if COMPONENT.controller %}
 	 * @param \phpbb\controller\helper	$helper		Controller helper object
 	 * @param \phpbb\template\template	$template	Template object
-	 * @param {{ LANGUAGE.class ~ LANGUAGE.indent.class }}	${{ LANGUAGE.object ~ LANGUAGE.indent.object}}	{{ LANGUAGE.object|capitalize }} object
 	 * @param string                    $php_ext    phpEx
+{% endif %}
 	 */
-	public function __construct(\phpbb\controller\helper $helper, \phpbb\template\template $template, {{ LANGUAGE.class }} ${{ LANGUAGE.object }}, $php_ext)
+	public function __construct({{ LANGUAGE.class }} ${{ LANGUAGE.object }}{% if COMPONENT.controller %}, \phpbb\controller\helper $helper, \phpbb\template\template $template, $php_ext{% endif %})
 	{
+		$this->{{ LANGUAGE.object ~ LANGUAGE.indent.object }} = ${{ LANGUAGE.object }};
+{% if COMPONENT.controller %}
 		$this->helper   = $helper;
 		$this->template = $template;
-		$this->{{ LANGUAGE.object ~ LANGUAGE.indent.object }} = ${{ LANGUAGE.object }};
 		$this->php_ext  = $php_ext;
+{% endif %}
 	}
 
 	/**
@@ -77,6 +85,7 @@ class main_listener implements EventSubscriberInterface
 		);
 		$event['lang_set_ext'] = $lang_set_ext;
 	}
+{% if COMPONENT.controller %}
 
 	/**
 	 * Add a link to the controller in the forum navbar
@@ -101,6 +110,7 @@ class main_listener implements EventSubscriberInterface
 			$event['location_url'] = $this->helper->route('{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }}_controller', array('name' => 'world'));
 		}
 	}
+{% endif %}
 {% endif %}
 {% if COMPONENT.phplistener %}
 
