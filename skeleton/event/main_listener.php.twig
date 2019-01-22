@@ -34,7 +34,7 @@ class main_listener implements EventSubscriberInterface
 	'core.display_forums_modify_template_vars'	=> 'display_forums_modify_template_vars',
 {% endif %}
 {% if COMPONENT.permissions %}
-			'core.permissions'	=> 'add_permission',
+			'core.permissions'	=> 'add_permissions',
 {% endif %}
 		);
 	}
@@ -134,14 +134,14 @@ class main_listener implements EventSubscriberInterface
 
 	/**
 	 * Add permissions to the ACP -> Permissions settings page
-	 * This is where we assign language keys to our permissions, and
-	 * we can define where they will appear in the Permissions table:
+	 * This is where permissions are assigned language keys and
+	 * categories (where they will appear in the Permissions table):
 	 * actions|content|forums|misc|permissions|pm|polls|post
 	 * post_actions|posting|profile|settings|topic_actions|user_group
 	 *
 	 * @param \phpbb\event\data	$event	Event object
 	 */
-	public function add_permission($event)
+	public function add_permissions($event)
 	{
 		$permissions = $event['permissions'];
 
