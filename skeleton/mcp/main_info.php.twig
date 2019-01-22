@@ -23,7 +23,7 @@ class main_info
 			'modes'		=> array(
 				'front'	=> array(
 					'title'	=> 'MCP_{{ EXTENSION.extension_name|upper }}',
-					'auth'	=> 'ext_{{ EXTENSION.vendor_name }}/{{ EXTENSION.extension_name }}',
+					'auth'	=> 'ext_{{ EXTENSION.vendor_name }}/{{ EXTENSION.extension_name }}{% if COMPONENT.permissions %} && acl_m_new_{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }}{% endif %}',
 					'cat'	=> array('MCP_{{ EXTENSION.extension_name|upper }}_TITLE')
 				),
 			),
