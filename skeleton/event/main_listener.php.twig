@@ -139,6 +139,12 @@ class main_listener implements EventSubscriberInterface
 	 * actions|content|forums|misc|permissions|pm|polls|post
 	 * post_actions|posting|profile|settings|topic_actions|user_group
 	 *
+	 * Developers note: To control access to ACP, MCP and UCP modules, you
+	 * must assign your permissions in your module_info.php file. For example,
+	 * to allow only users with the a_new_{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }} permission
+	 * access to your ACP module, you would set this in your acp/main_info.php:
+	 *    'auth' => 'ext_{{ EXTENSION.vendor_name }}/{{ EXTENSION.extension_name }} && acl_a_new_{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }}'
+	 *
 	 * @param \phpbb\event\data	$event	Event object
 	 */
 	public function add_permissions($event)
