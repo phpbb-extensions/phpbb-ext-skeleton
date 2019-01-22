@@ -75,9 +75,9 @@ class validator
 	 */
 	public function validate_extension_display_name($value)
 	{
-		if ($value !== '')
+		if ($value !== '' && strpos($value, '&quot;') === false)
 		{
-			return $value;
+			return htmlspecialchars_decode($value, ENT_NOQUOTES);
 		}
 
 		throw new runtime_exception($this->language->lang('SKELETON_INVALID_DISPLAY_NAME'));
