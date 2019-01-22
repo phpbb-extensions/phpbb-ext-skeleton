@@ -33,6 +33,9 @@ class main_listener implements EventSubscriberInterface
 {% if COMPONENT.phplistener %}
 	'core.display_forums_modify_template_vars'	=> 'display_forums_modify_template_vars',
 {% endif %}
+{% if COMPONENT.permissions %}
+			'core.permissions'	=> 'add_permission',
+{% endif %}
 		);
 	}
 {% if COMPONENT.controller or COMPONENT.phplistener %}
@@ -125,6 +128,28 @@ class main_listener implements EventSubscriberInterface
 		$forum_row = $event['forum_row'];
 		$forum_row['FORUM_NAME'] .= $this->{{ LANGUAGE.object }}->lang('{{ EXTENSION.extension_name|upper }}_EVENT');
 		$event['forum_row'] = $forum_row;
+	}
+{% endif %}
+{% if COMPONENT.permissions %}
+
+	/**
+	 * Add permissions to the ACP -> Permissions settings page
+	 * This is where we assign language keys to our permissions, and
+	 * we can define where they will appear in the Permissions table:
+	 * actions|content|forums|misc|permissions|pm|polls|post
+	 * post_actions|posting|profile|settings|topic_actions|user_group
+	 *
+	 * @param \phpbb\event\data	$event	Event object
+	 */
+	public function add_permission($event)
+	{
+		$permissions = $event['permissions'];
+
+		$permissions['a_new_{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }}'] = array('lang' => 'ACL_A_NEW_{{ EXTENSION.vendor_name|upper }}_{{ EXTENSION.extension_name|upper }}', 'cat' => 'misc');
+		$permissions['m_new_{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }}'] = array('lang' => 'ACL_M_NEW_{{ EXTENSION.vendor_name|upper }}_{{ EXTENSION.extension_name|upper }}', 'cat' => 'post_actions');
+		$permissions['u_new_{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }}'] = array('lang' => 'ACL_U_NEW_{{ EXTENSION.vendor_name|upper }}_{{ EXTENSION.extension_name|upper }}', 'cat' => 'post');
+
+		$event['permissions'] = $permissions;
 	}
 {% endif %}
 }
