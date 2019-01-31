@@ -138,6 +138,17 @@ services:
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
 
+    phpbb.skeleton.ext.skeleton.permissions:
+        class: phpbb\skeleton\skeleton
+        arguments:
+            - 'permissions'
+            - false
+            - []
+            - ['migrations/install_sample_data.php', 'event/main_listener.php', 'language/en/permissions_demo.php', 'config/services.yml']
+            - 'OTHER'
+        tags:
+            - { name: phpbb.skeleton.ext.skeleton }
+
     phpbb.skeleton.ext.skeleton.tests:
         class: phpbb\skeleton\skeleton
         arguments:

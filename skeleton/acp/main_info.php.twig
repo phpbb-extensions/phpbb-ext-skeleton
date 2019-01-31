@@ -23,7 +23,7 @@ class main_info
 			'modes'		=> array(
 				'settings'	=> array(
 					'title'	=> 'ACP_{{ EXTENSION.extension_name|upper }}',
-					'auth'	=> 'ext_{{ EXTENSION.vendor_name }}/{{ EXTENSION.extension_name }} && acl_a_board',
+					'auth'	=> 'ext_{{ EXTENSION.vendor_name }}/{{ EXTENSION.extension_name }} && {% if COMPONENT.permissions %}acl_a_new_{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }}{% else %}acl_a_board{% endif %}',
 					'cat'	=> array('ACP_{{ EXTENSION.extension_name|upper }}_TITLE')
 				),
 			),

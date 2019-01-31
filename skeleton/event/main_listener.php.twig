@@ -33,6 +33,9 @@ class main_listener implements EventSubscriberInterface
 {% if COMPONENT.phplistener %}
 	'core.display_forums_modify_template_vars'	=> 'display_forums_modify_template_vars',
 {% endif %}
+{% if COMPONENT.permissions %}
+			'core.permissions'	=> 'add_permissions',
+{% endif %}
 		);
 	}
 {% if COMPONENT.controller or COMPONENT.phplistener %}
@@ -125,6 +128,34 @@ class main_listener implements EventSubscriberInterface
 		$forum_row = $event['forum_row'];
 		$forum_row['FORUM_NAME'] .= $this->{{ LANGUAGE.object }}->lang('{{ EXTENSION.extension_name|upper }}_EVENT');
 		$event['forum_row'] = $forum_row;
+	}
+{% endif %}
+{% if COMPONENT.permissions %}
+
+	/**
+	 * Add permissions to the ACP -> Permissions settings page
+	 * This is where permissions are assigned language keys and
+	 * categories (where they will appear in the Permissions table):
+	 * actions|content|forums|misc|permissions|pm|polls|post
+	 * post_actions|posting|profile|settings|topic_actions|user_group
+	 *
+	 * Developers note: To control access to ACP, MCP and UCP modules, you
+	 * must assign your permissions in your module_info.php file. For example,
+	 * to allow only users with the a_new_{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }} permission
+	 * access to your ACP module, you would set this in your acp/main_info.php:
+	 *    'auth' => 'ext_{{ EXTENSION.vendor_name }}/{{ EXTENSION.extension_name }} && acl_a_new_{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }}'
+	 *
+	 * @param \phpbb\event\data	$event	Event object
+	 */
+	public function add_permissions($event)
+	{
+		$permissions = $event['permissions'];
+
+		$permissions['a_new_{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }}'] = array('lang' => 'ACL_A_NEW_{{ EXTENSION.vendor_name|upper }}_{{ EXTENSION.extension_name|upper }}', 'cat' => 'misc');
+		$permissions['m_new_{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }}'] = array('lang' => 'ACL_M_NEW_{{ EXTENSION.vendor_name|upper }}_{{ EXTENSION.extension_name|upper }}', 'cat' => 'post_actions');
+		$permissions['u_new_{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }}'] = array('lang' => 'ACL_U_NEW_{{ EXTENSION.vendor_name|upper }}_{{ EXTENSION.extension_name|upper }}', 'cat' => 'post');
+
+		$event['permissions'] = $permissions;
 	}
 {% endif %}
 }
