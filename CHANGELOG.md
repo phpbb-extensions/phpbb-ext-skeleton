@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.1.1 - 2019-02-27
+
+- Added a new Permissions component to generate skeleton files that add and use permissions in an extension.
+- Improved the handling of special characters in the Display Name. Now &, < and > are displayed correctly, while double-quotes are strictly invalid.
+- Improved the generated sample migration file with a lot more documented examples of configs, config_text, permissions and custom functions.
+- Improved the depends_on() values in generated migration files.
+- Improved the naming of generated control panel language variables.
+- Improved the generation of skeleton files so that only files for the selected components will be built.
+
 ## 1.1.0 - 2019-01-14
 
 - Interface updates:
