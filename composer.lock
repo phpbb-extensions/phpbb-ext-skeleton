@@ -4,8 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a6d1cd6a17c4229a2a79e8a21b4b89c9",
-    "content-hash": "9e74c23cf229c850f09726a27ada4207",
+    "content-hash": "966e82dcda24f59e7a86c9881d9d4ba9",
     "packages": [
         {
             "name": "symfony/console",
@@ -65,7 +64,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2016-08-19 06:48:01"
+            "time": "2016-08-19T06:48:01+00:00"
         },
         {
             "name": "symfony/finder",
@@ -114,7 +113,7 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
-            "time": "2016-08-26 11:57:43"
+            "time": "2016-08-26T11:57:43+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -173,7 +172,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2016-05-18 14:26:46"
+            "time": "2016-05-18T14:26:46+00:00"
         }
     ],
     "packages-dev": [
@@ -228,7 +227,7 @@
                 "task",
                 "tool"
             ],
-            "time": "2012-11-29 21:23:47"
+            "time": "2012-11-29T21:23:47+00:00"
         }
     ],
     "aliases": [],
@@ -237,7 +236,8 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.3.3"
+        "php": ">=5.4",
+        "ext-zip": "*"
     },
     "platform-dev": []
 }
