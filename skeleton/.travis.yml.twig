@@ -59,6 +59,8 @@ script:
   - sh -c "if [ '$EPV' != '0' -a '$TRAVIS_PHP_VERSION' = '5.5' -a '$DB' = 'mysqli' ]; then phpBB/vendor/bin/EPV.php run --dir='phpBB/ext/$EXTNAME/'; fi"
 {% else %}{# for phpBB > 3.2.x #}
 
+dist: trusty
+
 matrix:
   include:
     - php: 5.5
