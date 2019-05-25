@@ -1,6 +1,6 @@
 language: php
-sudo: required
 {% if S_PHPBB_31 %}{# for phpBB 3.1.x #}
+sudo: required
 dist: precise
 
 matrix:
@@ -58,6 +58,8 @@ script:
   - phpBB/vendor/bin/phpunit --configuration phpBB/ext/$EXTNAME/travis/phpunit-$DB-travis.xml --bootstrap ./tests/bootstrap.php
   - sh -c "if [ '$EPV' != '0' -a '$TRAVIS_PHP_VERSION' = '5.5' -a '$DB' = 'mysqli' ]; then phpBB/vendor/bin/EPV.php run --dir='phpBB/ext/$EXTNAME/'; fi"
 {% else %}{# for phpBB > 3.2.x #}
+
+dist: trusty
 
 matrix:
   include:
