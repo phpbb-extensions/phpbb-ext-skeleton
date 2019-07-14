@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.2 - 2019-07-13
+
+- Updated generated .travis.yml configuration to use the trusty build.
+
 ## 1.1.1 - 2019-02-27
 
 - Added a new Permissions component to generate skeleton files that add and use permissions in an extension.
