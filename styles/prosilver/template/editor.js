@@ -43,7 +43,7 @@
 	});
 
 	// Validate vendor/extension names on document ready
-	$(document).ready(function(){
+	$(function(){
 		$('#vendor_name, #extension_name').checkNames();
 	});
 

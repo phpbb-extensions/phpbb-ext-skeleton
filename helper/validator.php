@@ -92,7 +92,7 @@ class validator
 	 */
 	public function validate_extension_time($value)
 	{
-		if (preg_match('#^\d{4}\-\d{2}\-\d{2}$#', $value))
+		if (preg_match('#^\d{4}-\d{2}-\d{2}$#', $value))
 		{
 			return $value;
 		}
@@ -109,7 +109,7 @@ class validator
 	 */
 	public function validate_extension_version($value)
 	{
-		if (preg_match('#^\d+(\.\d){1,3}(\-(((?:a|b|RC|pl)\d+)|dev))?$#', $value))
+		if (preg_match('#^\d+(\.\d){1,3}(-(((?:a|b|RC|pl)\d+)|dev))?$#', $value))
 		{
 			return $value;
 		}
