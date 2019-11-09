@@ -15,6 +15,7 @@ namespace phpbb\skeleton\helper;
 
 use phpbb\config\config;
 use phpbb\di\service_collection;
+use phpbb\skeleton\template\twig\extension\skeleton_version_compare;
 use phpbb\template\context;
 use phpbb\template\twig\environment;
 use phpbb\template\twig\loader;
@@ -266,7 +267,10 @@ class packager
 				)
 			),
 			$this->phpbb_container->getParameter('core.cache_dir'),
-			$this->phpbb_container->get('user')
+			$this->phpbb_container->get('user'),
+			array(
+				new skeleton_version_compare()
+			)
 		);
 
 		return $template_engine;

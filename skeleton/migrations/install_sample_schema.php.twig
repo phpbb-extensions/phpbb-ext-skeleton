@@ -19,7 +19,7 @@ class install_sample_schema extends \phpbb\db\migration\migration
 
 	public static function depends_on()
 	{
-		return array('\phpbb\db\migration\data\{% if S_PHPBB_31 %}v31x\v314{% else %}v320\v320{% endif %}');
+		return array('\phpbb\db\migration\data\{% if skeleton_version_compare(REQUIREMENTS.phpbb_version_min, "3.2", "<") %}v31x\v314{% else %}v320\v320{% endif %}');
 	}
 
 	/**

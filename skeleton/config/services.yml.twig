@@ -97,7 +97,7 @@ services:
 {% if COMPONENT.notification %}
     {{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.notification.type.sample:
         class: {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\notification\type\sample
-{% if S_PHPBB_31 %}{# for phpBB 3.1.x #}
+{% if skeleton_version_compare(REQUIREMENTS.phpbb_version_max, "3.2", "<") %}{# for phpBB 3.1.x only #}
         scope: prototype # scope MUST be prototype for this to work!
         arguments:
             - '@user_loader'
@@ -111,7 +111,7 @@ services:
             - '%tables.notification_types%'
             - '%tables.notifications%'
             - '%tables.user_notifications%'
-{% else %}{# for phpBB > 3.2.x #}
+{% else %}{# for phpBB >= 3.2.x #}
         shared: false # service MUST not be shared for this to work!
         parent: notification.type.base
 {% endif %}
