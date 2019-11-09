@@ -75,7 +75,7 @@ $lang = array_merge($lang, array(
 	'SKELETON_QUESTION_PHPBB_VERSION_MIN_EXPLAIN'	=> 'default: &gt;=3.2.0',
 	'SKELETON_QUESTION_PHPBB_VERSION_MAX'			=> 'Please enter the maximum phpBB requirement of the extension',
 	'SKELETON_QUESTION_PHPBB_VERSION_MAX_UI'		=> 'Maximum phpBB requirement of the extension',
-	'SKELETON_QUESTION_PHPBB_VERSION_MAX_EXPLAIN'	=> 'default: &lt;3.3.0@dev',
+	'SKELETON_QUESTION_PHPBB_VERSION_MAX_EXPLAIN'	=> 'default: &lt;3.4.0@dev',
 
 	'SKELETON_QUESTION_COMPONENT_PHPLISTENER'		=> 'Create sample PHP event listeners?',
 	'SKELETON_QUESTION_COMPONENT_PHPLISTENER_UI'	=> 'PHP event listeners',
