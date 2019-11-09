@@ -8,7 +8,9 @@
          convertWarningsToExceptions="true"
          processIsolation="false"
          stopOnFailure="false"
+{% if skeleton_version_compare(REQUIREMENTS.phpbb_version_max, "3.3", "<") %}
          syntaxCheck="false"
+{% endif %}
          verbose="true"
          bootstrap="../../../../tests/bootstrap.php"
 >
@@ -18,14 +20,16 @@
 			<exclude>./tests/functional</exclude>
 		</testsuite>
 		<testsuite name="Extension Functional Tests">
-			<directory suffix="_test.php" phpVersion="5.3.19" phpVersionOperator=">=">./tests/functional/</directory>
+			<directory suffix="_test.php"{% if skeleton_version_compare(REQUIREMENTS.phpbb_version_max, "3.3", "<") %} phpVersion="5.3.19" phpVersionOperator=">="{% endif %}>./tests/functional/</directory>
 		</testsuite>
 	</testsuites>
 
 	<filter>
+{% if skeleton_version_compare(REQUIREMENTS.phpbb_version_max, "3.3", "<") %}
 		<blacklist>
 			<directory>./tests/</directory>
 		</blacklist>
+{% endif %}
 		<whitelist processUncoveredFilesFromWhitelist="true">
 			<directory suffix=".php">./</directory>
 			<exclude>
