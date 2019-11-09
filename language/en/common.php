@@ -144,4 +144,8 @@ $lang = array_merge($lang, array(
 	'SKELETON_INVALID_NUM_AUTHORS'		=> 'The number of authors you provided is invalid',
 	'SKELETON_INVALID_PACKAGE_NAME'		=> 'The package name you provided is invalid',
 	'SKELETON_INVALID_VENDOR_NAME'		=> 'The vendor name you provided is invalid',
+
+	'NO_ZIPARCHIVE_ERROR'	=> 'The ZipArchive class is required, but was not found in your PHP configuration.',
+	'PHP_VERSION_ERROR'		=> 'PHP 5.4 or newer is required to use this extension.',
+	'PHPBB_VERSION_ERROR'	=> 'phpBB 3.2.0 or newer is required to use this extension.',
 ));
