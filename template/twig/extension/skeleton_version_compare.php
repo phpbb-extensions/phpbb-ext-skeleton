@@ -52,10 +52,11 @@ class skeleton_version_compare extends \Twig_Extension
 	{
 		$args = func_get_args();
 
+		// Strip out any prefixed junk in front of a version number
 		$regex = '/^[\D]*(\d.*)$/';
-		preg_match($regex, $args[0], $version1);
-		preg_match($regex, $args[1], $version2);
+		preg_match($regex, $args[0], $ver1);
+		preg_match($regex, $args[1], $ver2);
 
-		return ($version1 && $version2) ? phpbb_version_compare($version1[1], $version2[1], $args[2]) : false;
+		return isset($ver1[1], $ver2[1], $args[2]) ? phpbb_version_compare($ver1[1], $ver2[1], $args[2]) : false;
 	}
 }
