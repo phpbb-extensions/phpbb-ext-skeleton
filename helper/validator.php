@@ -58,7 +58,7 @@ class validator
 	 */
 	public function validate_extension_name($value)
 	{
-		if (preg_match('#^[a-zA-Z][a-zA-Z0-9]*$#', $value))
+		if (preg_match('#^[a-z][a-z0-9]*$#', $value))
 		{
 			return $value;
 		}
@@ -126,7 +126,7 @@ class validator
 	 */
 	public function validate_vendor_name($value)
 	{
-		if ($value !== 'core' && preg_match('#^[a-zA-Z][a-zA-Z0-9]*$#', $value))
+		if ($value !== 'core' && preg_match('#^[a-z][a-z0-9]*$#', $value))
 		{
 			return $value;
 		}
