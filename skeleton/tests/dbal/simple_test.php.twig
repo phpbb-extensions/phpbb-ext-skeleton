@@ -10,8 +10,10 @@
 
 namespace {{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\tests\dbal;
 
+{% if skeleton_version_compare(REQUIREMENTS.phpbb_version_max, "3.2", "<") %}{# for phpBB 3.1.x #}
 // Need to include functions.php to use phpbb_version_compare in this test
 require_once __DIR__ . '/../../../../../includes/functions.php';
+{% endif %}
 
 class simple_test extends \phpbb_database_test_case
 {
