@@ -1,4 +1,4 @@
-{% if S_PHPBB_31 %}{# for phpBB 3.1.x #}
+{% if skeleton_version_compare(REQUIREMENTS.phpbb_version_min, "3.2", "<") %}{# for phpBB 3.1.x #}
 <li class="small-icon icon-faq no-bulletin"><a href="{{ '{{' }} U_{{ EXTENSION.extension_name|upper }}_PAGE }}">{{ '{{' }} lang('{{ EXTENSION.extension_name|upper }}_PAGE') }}</a></li>
 {% else %}{# for phpBB > 3.2.x #}
 <li data-last-responsive="true">
