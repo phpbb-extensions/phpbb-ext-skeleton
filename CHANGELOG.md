@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.1.3 - 2019-11-22
+
+- Updated to support phpBB 3.3.x.
+- Will now enforce lowercase-only vendor and extension names.
+- Will now use Twig template namespaces for rendering template files in generated controller files.
+- Will now generate Travis-CI tests to run against phpBB 3.3.x (unless you specify an earlier version of phpBB as a maximum version constraint).
+- Will attempt to do a better job of creating the correct notification files, based on your phpBB version constraints.
+- Removed 3rd party Symfony components previously required in phpBB 3.1 installs, resulting in much faster performance.
+- Loads of additional little code inspection fixes.
+
 ## 1.1.2 - 2019-07-13
 
 - Updated generated .travis.yml configuration to use the trusty build.
