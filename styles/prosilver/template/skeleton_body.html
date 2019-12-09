@@ -1,6 +1,6 @@
 {% include 'overall_header.html' %}
 {% INCLUDEJS '@phpbb_skeleton/editor.js' %}
-{% INCLUDECSS '@phpbb_skeleton/microtip/microtip.min.css' %}
+{% INCLUDECSS '@phpbb_skeleton/primer-tooltips/build/build.css' %}
 
 <script>
 	var warningMsg = '{{ lang('SKELETON_RESERVED_NAME_WARNING_UI') }}';
@@ -83,7 +83,7 @@
 				<h3 class="skeleton-components">{{ lang('SKELETON_COMPONENT_GROUP_' ~ group) }}</h3>
 				{% for component in loops['component_' ~ group] %}
 					<fieldset class="fields2">
-						<div><span aria-label="{{ component.DESC_EXPLAIN }}" data-microtip-position="right" data-microtip-size="large" role="tooltip"><label for="{{ component.NAME }}"><input class="components" type="checkbox" name="{{ component.NAME }}" id="{{ component.NAME }}"{% if component.VALUE %} checked="checked"{% endif %} /> <strong>{{ component.DESC }}</strong></label></span></div>
+						<div><span aria-label="{{ component.DESC_EXPLAIN }}" class="tooltipped tooltipped-e tooltipped-multiline"><label for="{{ component.NAME }}"><input class="components" type="checkbox" name="{{ component.NAME }}" id="{{ component.NAME }}"{% if component.VALUE %} checked="checked"{% endif %} /> <strong>{{ component.DESC }}</strong></label></span></div>
 					</fieldset>
 				{% endfor %}
 			</div>
