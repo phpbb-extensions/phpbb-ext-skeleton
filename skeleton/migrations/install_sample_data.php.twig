@@ -72,6 +72,7 @@ class install_sample_data extends \phpbb\db\migration\migration
 
 			// Set our new permissions
 			array('permission.permission_set', array('ROLE_ADMIN_FULL', 'a_new_{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }}')), // Give ROLE_ADMIN_FULL a_new_{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }} permission
+			array('permission.permission_set', array('ROLE_MOD_FULL', 'm_new_{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }}')), // Give ROLE_MOD_FULL m_new_{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }} permission
 			array('permission.permission_set', array('ROLE_USER_FULL', 'u_new_{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }}')), // Give ROLE_USER_FULL u_new_{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }} permission
 			array('permission.permission_set', array('ROLE_USER_STANDARD', 'u_new_{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }}')), // Give ROLE_USER_STANDARD u_new_{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }} permission
 			array('permission.permission_set', array('REGISTERED', 'u_new_{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }}', 'group')), // Give REGISTERED group u_new_{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }} permission
