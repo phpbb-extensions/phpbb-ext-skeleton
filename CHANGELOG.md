@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.1.4 - 2020-02-13
+
+- Generated permissions now include a Moderator Role.
+- Updated the GPL-2.0 license text file to the most current version.
+- Updated documentation links to correctly point to the 3.3.x branch. 
+- Updated to a fancy tooltip when hovering the mouse over the "Components" options in the web-based interface.
+
 ## 1.1.3 - 2019-11-22
 
 - Updated to support phpBB 3.3.x.
