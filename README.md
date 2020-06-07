@@ -14,4 +14,4 @@ To install the source code from this repository, fork and clone this repository 
 
 ## License
 
-[GPLv2](license.txt)
+[GNU General Public License v2](license.txt)
