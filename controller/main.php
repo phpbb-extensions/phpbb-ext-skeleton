@@ -122,18 +122,18 @@ class main
 		$dialog_questions = $this->packager->get_composer_dialog_values();
 		foreach ($dialog_questions['extension'] as $value => $default)
 		{
-			$this->template->assign_block_vars('extension', array(
+			$this->template->assign_block_vars('extension', [
 				'NAME'			=> $value,
 				'DESC'			=> $this->language->lang('SKELETON_QUESTION_' . strtoupper($value) . '_UI'),
 				'DESC_EXPLAIN'	=> $this->language->is_set('SKELETON_QUESTION_' . strtoupper($value) . '_EXPLAIN') ? $this->language->lang('SKELETON_QUESTION_' . strtoupper($value) . '_EXPLAIN') : '',
 				'VALUE'			=> $this->request->variable($value, (string) $default, true),
-			));
+			]);
 		}
 
-		$author_values = array();
+		$author_values = [];
 		foreach ($dialog_questions['author'] as $value => $default)
 		{
-			$author_values[$value] = $this->request->variable($value, array((string) $default), true);
+			$author_values[$value] = $this->request->variable($value, [(string) $default], true);
 		}
 
 		$num_authors = max(1, count($author_values['author_name']));
@@ -141,34 +141,34 @@ class main
 		{
 			foreach ($dialog_questions['author'] as $value => $default)
 			{
-				$this->template->assign_block_vars('author', array(
+				$this->template->assign_block_vars('author', [
 					'NAME'			=> $value,
 					'DESC'			=> $this->language->lang('SKELETON_QUESTION_' . strtoupper($value) . '_UI'),
 					'DESC_EXPLAIN'	=> $this->language->is_set('SKELETON_QUESTION_' . strtoupper($value) . '_EXPLAIN') ? $this->language->lang('SKELETON_QUESTION_' . strtoupper($value) . '_EXPLAIN') : '',
 					'VALUE'			=> isset($author_values[$value][$i]) ? $author_values[$value][$i] : '',
-				));
+				]);
 			}
 		}
 
 		foreach ($dialog_questions['requirements'] as $value => $default)
 		{
-			$this->template->assign_block_vars('requirement', array(
+			$this->template->assign_block_vars('requirement', [
 				'NAME'			=> $value,
 				'DESC'			=> $this->language->lang('SKELETON_QUESTION_' . strtoupper($value) . '_UI'),
 				'DESC_EXPLAIN'	=> $this->language->is_set('SKELETON_QUESTION_' . strtoupper($value) . '_EXPLAIN') ? $this->language->lang('SKELETON_QUESTION_' . strtoupper($value) . '_EXPLAIN') : '',
 				'VALUE'			=> $this->request->variable($value, (string) $default),
-			));
+			]);
 		}
 
 		$components = $this->packager->get_component_dialog_values();
 		foreach ($components as $component => $details)
 		{
-			$this->template->assign_block_vars('component_' . $details['group'], array(
+			$this->template->assign_block_vars('component_' . $details['group'], [
 				'NAME'			=> 'component_' . $component,
 				'DESC'			=> $this->language->lang('SKELETON_QUESTION_COMPONENT_' . strtoupper($component) . '_UI'),
 				'DESC_EXPLAIN'	=> $this->language->is_set('SKELETON_QUESTION_COMPONENT_' . strtoupper($component) . '_EXPLAIN') ? $this->language->lang('SKELETON_QUESTION_COMPONENT_' . strtoupper($component) . '_EXPLAIN') : '',
 				'VALUE'			=> $this->request->variable('component_' . $component, $details['default']),
-			));
+			]);
 
 			$this->data['components'][$component] = $this->get_user_input('component_' . $component, $details['default']);
 		}
@@ -189,7 +189,7 @@ class main
 			$this->data['extension'][$value] = $this->get_user_input($value, $default);
 		}
 
-		$num_authors = max(1, count($this->request->variable('author_name', array(''))));
+		$num_authors = max(1, count($this->request->variable('author_name', [''])));
 		for ($i = 0; $i < $num_authors; $i++)
 		{
 			foreach ($dialog_questions['author'] as $value => $default)
@@ -239,7 +239,7 @@ class main
 		if (method_exists($this->validator, 'validate_' . $value))
 		{
 			$return_value = $this->get_request_variable($value, $default, $array_key);
-			$return_value = call_user_func(array($this->validator, 'validate_' . $value), $return_value);
+			$return_value = call_user_func([$this->validator, 'validate_' . $value], $return_value);
 		}
 		else if (is_bool($default))
 		{
@@ -268,7 +268,7 @@ class main
 		{
 			if ($array_key !== null)
 			{
-				$return_value = $this->request->variable($value, array($default));
+				$return_value = $this->request->variable($value, [$default]);
 				return isset($return_value[$array_key]) ? $return_value[$array_key] : $default;
 			}
 
@@ -277,7 +277,7 @@ class main
 
 		if ($array_key !== null)
 		{
-			$return_value = $this->request->variable($value, array((string) $default), true);
+			$return_value = $this->request->variable($value, [(string) $default], true);
 			return isset($return_value[$array_key]) ? (string) $return_value[$array_key] : (string) $default;
 		}
 

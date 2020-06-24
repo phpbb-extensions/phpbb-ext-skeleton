@@ -46,9 +46,9 @@ class sample extends \phpbb\notification\type\base
 	 * @var bool|array False if the service should use it's default data
 	 * 					Array of data (including keys 'id', 'lang', and 'group')
 	 */
-	public static $notification_option = array(
+	public static $notification_option = [
 		'lang'	=> 'NOTIFICATION_TYPE_{{ EXTENSION.extension_name|upper }}',
-	);
+	];
 
 	/**
 	 * Is this type available to the current user (defines whether or not it will be shown in the UCP Edit notification options)
@@ -91,14 +91,14 @@ class sample extends \phpbb\notification\type\base
 	 * @param array $data The type specific data
 	 * @param array $options Options for finding users for notification
 	 * 		ignore_users => array of users and user types that should not receive notifications from this type because they've already been notified
-	 * 						e.g.: array(2 => array(''), 3 => array('', 'email'), ...)
+	 * 						e.g.: [2 => [''], 3 => ['', 'email'], ...]
 	 *
 	 * @return array
 	 */
-	public function find_users_for_notification($data, $options = array())
+	public function find_users_for_notification($data, $options = [])
 	{
 		// Return an array of users to be notified, storing the user_ids as the array keys
-		return array();
+		return [];
 	}
 
 	/**
@@ -108,7 +108,7 @@ class sample extends \phpbb\notification\type\base
 	 */
 	public function users_to_query()
 	{
-		return array();
+		return [];
 	}
 
 	/**
@@ -148,7 +148,7 @@ class sample extends \phpbb\notification\type\base
 	 */
 	public function get_email_template_variables()
 	{
-		return array();
+		return [];
 	}
 
 	/**
@@ -162,7 +162,7 @@ class sample extends \phpbb\notification\type\base
 	 * @return array Array of data ready to be inserted into the database
 {% endif %}{# for phpBB >= 3.2.x #}
 	 */
-	public function create_insert_array($data, $pre_create_data = array())
+	public function create_insert_array($data, $pre_create_data = [])
 	{
 		$this->set_data('{{ EXTENSION.extension_name|lower }}_sample_name', $data['{{ EXTENSION.extension_name|lower }}_sample_name']);
 

@@ -19,7 +19,7 @@ class install_sample_schema extends \phpbb\db\migration\migration
 
 	public static function depends_on()
 	{
-		return array('\phpbb\db\migration\data\{% if skeleton_version_compare(REQUIREMENTS.phpbb_version_min, "3.2", "<") %}v31x\v314{% else %}v320\v320{% endif %}');
+		return ['\phpbb\db\migration\data\{% if skeleton_version_compare(REQUIREMENTS.phpbb_version_min, "3.2", "<") %}v31x\v314{% else %}v320\v320{% endif %}'];
 	}
 
 	/**
@@ -45,24 +45,24 @@ class install_sample_schema extends \phpbb\db\migration\migration
 	 */
 	public function update_schema()
 	{
-		return array(
+		return [
 {% if COMPONENT.migration %}
-			'add_tables'		=> array(
-				$this->table_prefix . '{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}_table'	=> array(
-					'COLUMNS'		=> array(
-						'{{ EXTENSION.extension_name|lower }}_id'			=> array('UINT', null, 'auto_increment'),
-						'{{ EXTENSION.extension_name|lower }}_name'			=> array('VCHAR:255', ''),
-					),
+			'add_tables'		=> [
+				$this->table_prefix . '{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}_table'	=> [
+					'COLUMNS'		=> [
+						'{{ EXTENSION.extension_name|lower }}_id'			=> ['UINT', null, 'auto_increment'],
+						'{{ EXTENSION.extension_name|lower }}_name'			=> ['VCHAR:255', ''],
+					],
 					'PRIMARY_KEY'	=> '{{ EXTENSION.extension_name|lower }}_id',
-				),
-			),
+				],
+			],
 {% endif %}
-			'add_columns'	=> array(
-				$this->table_prefix . 'users'			=> array(
-					'user_{{ EXTENSION.extension_name|lower }}'				=> array('UINT', 0),
-				),
-			),
-		);
+			'add_columns'	=> [
+				$this->table_prefix . 'users'			=> [
+					'user_{{ EXTENSION.extension_name|lower }}'				=> ['UINT', 0],
+				],
+			],
+		];
 	}
 
 	/**
@@ -89,17 +89,17 @@ class install_sample_schema extends \phpbb\db\migration\migration
 	 */
 	public function revert_schema()
 	{
-		return array(
-			'drop_columns'	=> array(
-				$this->table_prefix . 'users'			=> array(
+		return [
+			'drop_columns'	=> [
+				$this->table_prefix . 'users'			=> [
 					'user_{{ EXTENSION.extension_name|lower }}',
-				),
-			),
+				],
+			],
 {% if COMPONENT.migration %}
-			'drop_tables'		=> array(
+			'drop_tables'		=> [
 				$this->table_prefix . '{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}_table',
-			),
+			],
 {% endif %}
-		);
+		];
 	}
 }

@@ -68,12 +68,12 @@ class ucp_controller
 		add_form_key('{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}_ucp');
 
 		// Create an array to collect errors that will be output to the user
-		$errors = array();
+		$errors = [];
 
 		// Request the options the user can configure
-		$data = array(
+		$data = [
 			'user_{{ EXTENSION.extension_name|lower }}' => $this->request->variable('user_{{ EXTENSION.extension_name|lower }}', $this->user->data['user_{{ EXTENSION.extension_name|lower }}']),
-		);
+		];
 
 		// Is the form being submitted to us?
 		if ($this->request->is_set_post('submit'))
@@ -104,14 +104,14 @@ class ucp_controller
 		$s_errors = !empty($errors);
 
 		// Set output variables for display in the template
-		$this->template->assign_vars(array(
+		$this->template->assign_vars([
 			'S_ERROR'		=> $s_errors,
 			'ERROR_MSG'		=> $s_errors ? implode('<br />', $errors) : '',
 
 			'U_UCP_ACTION'	=> $this->u_action,
 
 			'S_USER_{{ EXTENSION.extension_name|upper }}'	=> $data['user_{{ EXTENSION.extension_name|lower }}'],
-		));
+		]);
 	}
 
 	/**

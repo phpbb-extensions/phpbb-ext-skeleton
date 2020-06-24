@@ -17,9 +17,9 @@ class main_test extends \phpbb_test_case
 	 */
 	public function handle_data()
 	{
-		return array(
-			array(200, '{{ EXTENSION.extension_name|lower }}_body.html'),
-		);
+		return [
+			[200, '{{ EXTENSION.extension_name|lower }}_body.html'],
+		];
 	}
 
 	/**
@@ -63,7 +63,7 @@ class main_test extends \phpbb_test_case
 
 		// Instantiate the controller
 		$controller = new \{{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\controller\main_controller(
-			new \phpbb\config\config(array()),
+			new \phpbb\config\config([]),
 			$controller_helper,
 			$template,
 			${{ LANGUAGE.object }}

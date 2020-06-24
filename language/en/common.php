@@ -18,10 +18,10 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
-$lang = array_merge($lang, array(
+$lang = array_merge($lang, [
 	'CLI_DESCRIPTION_SKELETON_CREATE'	=> 'Create a basic skeleton extension',
 	'PHPBB_SKELETON_EXT'				=> 'Skeleton Extension',
 	'PHPBB_CREATE_SKELETON_EXT'			=> 'Create skeleton extension',
@@ -148,4 +148,4 @@ $lang = array_merge($lang, array(
 	'NO_ZIPARCHIVE_ERROR'	=> 'The ZipArchive class is required, but was not found in your PHP configuration.',
 	'PHP_VERSION_ERROR'		=> 'PHP 5.4 or newer is required to use this extension.',
 	'PHPBB_VERSION_ERROR'	=> 'phpBB 3.2.0 or newer is required to use this extension.',
-));
+]);

@@ -17,16 +17,16 @@ class main_info
 {
 	public function module()
 	{
-		return array(
+		return [
 			'filename'	=> '\{{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\mcp\main_module',
 			'title'		=> 'MCP_{{ EXTENSION.extension_name|upper }}_TITLE',
-			'modes'		=> array(
-				'front'	=> array(
+			'modes'		=> [
+				'front'	=> [
 					'title'	=> 'MCP_{{ EXTENSION.extension_name|upper }}',
 					'auth'	=> 'ext_{{ EXTENSION.vendor_name }}/{{ EXTENSION.extension_name }}{% if COMPONENT.permissions %} && acl_m_new_{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }}{% endif %}',
-					'cat'	=> array('MCP_{{ EXTENSION.extension_name|upper }}_TITLE')
-				),
-			),
-		);
+					'cat'	=> ['MCP_{{ EXTENSION.extension_name|upper }}_TITLE'],
+				],
+			],
+		];
 	}
 }

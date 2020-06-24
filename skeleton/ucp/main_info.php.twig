@@ -17,16 +17,16 @@ class main_info
 {
 	public function module()
 	{
-		return array(
+		return [
 			'filename'	=> '\{{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\ucp\main_module',
 			'title'		=> 'UCP_{{ EXTENSION.extension_name|upper }}_TITLE',
-			'modes'		=> array(
-				'settings'	=> array(
+			'modes'		=> [
+				'settings'	=> [
 					'title'	=> 'UCP_{{ EXTENSION.extension_name|upper }}',
 					'auth'	=> 'ext_{{ EXTENSION.vendor_name }}/{{ EXTENSION.extension_name }}{% if COMPONENT.permissions %} && acl_u_new_{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }}{% endif %}',
-					'cat'	=> array('UCP_{{ EXTENSION.extension_name|upper }}_TITLE')
-				),
-			),
-		);
+					'cat'	=> ['UCP_{{ EXTENSION.extension_name|upper }}_TITLE'],
+				],
+			],
+		];
 	}
 }

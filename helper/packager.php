@@ -55,14 +55,14 @@ class packager
 	 */
 	public function get_composer_dialog_values()
 	{
-		return array(
-			'author'       => array(
+		return [
+			'author'       => [
 				'author_name'     => null,
 				'author_email'    => null,
 				'author_homepage' => null,
 				'author_role'     => null,
-			),
-			'extension'    => array(
+			],
+			'extension'    => [
 				'vendor_name'            => null,
 				'extension_name'         => null,
 				'extension_display_name' => null,
@@ -70,13 +70,13 @@ class packager
 				'extension_version'      => '1.0.0-dev',
 				'extension_time'         => date('Y-m-d'),
 				'extension_homepage'     => null,
-			),
-			'requirements' => array(
+			],
+			'requirements' => [
 				'php_version'       => '>=5.4',
 				'phpbb_version_min' => '>=3.2.0',
 				'phpbb_version_max' => '<3.4.0@dev',
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -86,16 +86,16 @@ class packager
 	 */
 	public function get_component_dialog_values()
 	{
-		$components = array();
+		$components = [];
 		foreach ($this->collection as $service)
 		{
 			/** @var \phpbb\skeleton\skeleton $service */
-			$components[$service->get_name()] = array(
+			$components[$service->get_name()] = [
 				'default'      => $service->get_default(),
 				'dependencies' => $service->get_dependencies(),
 				'files'        => $service->get_files(),
 				'group'        => $service->get_group(),
-			);
+			];
 		}
 
 		return $components;
@@ -117,20 +117,20 @@ class packager
 
 		$template_engine = $this->get_template_engine();
 		$template_engine->set_custom_style('skeletonextension', $this->root_path . 'ext/phpbb/skeleton/skeleton');
-		$template_engine->assign_vars(array(
+		$template_engine->assign_vars([
 			'COMPONENT'    => $data['components'],
 			'EXTENSION'    => $data['extension'],
 			'REQUIREMENTS' => $data['requirements'],
 			'AUTHORS'      => $data['authors'],
 			'LANGUAGE'     => $this->get_language_version_data($phpbb31),
 			'S_PHPBB_31'   => $phpbb31,
-		));
+		]);
 
 		$component_data = $this->get_component_dialog_values();
-		$skeleton_files[] = array(
+		$skeleton_files[] = [
 			'license.txt',
 			'README.md',
-		);
+		];
 
 		foreach ($data['components'] as $component => $selected)
 		{
@@ -144,7 +144,7 @@ class packager
 		foreach ($skeleton_files as $file)
 		{
 			$body = $template_engine
-				->set_filenames(array('body' => $file . '.twig'))
+				->set_filenames(['body' => $file . '.twig'])
 				->assign_display('body');
 			$filesystem->dumpFile($ext_path . str_replace('demo', strtolower($data['extension']['extension_name']), $file), trim($body) . "\n");
 		}
@@ -170,7 +170,7 @@ class packager
 
 		$extension_manager = $this->phpbb_container->get('ext.manager');
 		$files = $extension_manager->get_finder()
-			->set_extensions(array())
+			->set_extensions([])
 			->core_path($ext_path)
 			->find();
 
@@ -196,7 +196,7 @@ class packager
 	 */
 	public function get_composer_json_from_data($data)
 	{
-		$composer = array(
+		$composer = [
 			'name'        => "{$data['extension']['vendor_name']}/{$data['extension']['extension_name']}",
 			'type'        => 'phpbb-extension',
 			'description' => (string) $data['extension']['extension_description'],
@@ -204,18 +204,18 @@ class packager
 			'version'     => (string) $data['extension']['extension_version'],
 			'time'        => (string) $data['extension']['extension_time'],
 			'license'     => 'GPL-2.0-only',
-			'authors'     => array(),
-			'require'     => array(
+			'authors'     => [],
+			'require'     => [
 				'php'     => (string) $data['requirements']['php_version'],
 				'composer/installers' => '~1.0',
-			),
-			'extra'       => array(
+			],
+			'extra'       => [
 				'display-name' => (string) $data['extension']['extension_display_name'],
-				'soft-require' => array(
+				'soft-require' => [
 					'phpbb/phpbb' => "{$data['requirements']['phpbb_version_min']},{$data['requirements']['phpbb_version_max']}",
-				),
-			),
-		);
+				],
+			],
+		];
 
 		if (!empty($data['components']['build']))
 		{
@@ -224,16 +224,16 @@ class packager
 
 		foreach ($data['authors'] as $i => $author_data)
 		{
-			$composer['authors'][] = array(
+			$composer['authors'][] = [
 				'name'     => (string) $data['authors'][$i]['author_name'],
 				'email'    => (string) $data['authors'][$i]['author_email'],
 				'homepage' => (string) $data['authors'][$i]['author_homepage'],
 				'role'     => (string) $data['authors'][$i]['author_role'],
-			);
+			];
 		}
 
 		$body = json_encode($composer, JSON_PRETTY_PRINT + JSON_UNESCAPED_SLASHES + JSON_UNESCAPED_UNICODE);
-		$body = str_replace(array('&lt;', '&gt;'), array('<', '>'), $body);
+		$body = str_replace(['&lt;', '&gt;'], ['<', '>'], $body);
 		$body .= PHP_EOL;
 
 		return $body;
@@ -246,11 +246,11 @@ class packager
 	 */
 	protected function get_template_engine()
 	{
-		$config = new config(array(
+		$config = new config([
 			'load_tplcompile' => true,
 			'tpl_allow_php'   => false,
 			'assets_version'  => null,
-		));
+		]);
 
 		$template_engine = new twig(
 			$this->phpbb_container->get('path_helper'),
@@ -268,9 +268,9 @@ class packager
 			),
 			$this->phpbb_container->getParameter('core.cache_dir'),
 			$this->phpbb_container->get('user'),
-			array(
+			[
 				new skeleton_version_compare()
-			)
+			]
 		);
 
 		return $template_engine;
@@ -286,14 +286,14 @@ class packager
 	 */
 	protected function get_language_version_data($phpbb31)
 	{
-		return array(
+		return [
 			'class'		=> $phpbb31 ? '\phpbb\user' : '\phpbb\language\language',
 			'object'	=> $phpbb31 ? 'user' : 'language',
 			'function'	=> $phpbb31 ? 'add_lang_ext' : 'add_lang',
-			'indent'	=> array(
+			'indent'	=> [
 				'class'		=> $phpbb31 ? "\t\t\t" : '',
 				'object'	=> $phpbb31 ? "\t" : '',
-			),
-		);
+			],
+		];
 	}
 }
