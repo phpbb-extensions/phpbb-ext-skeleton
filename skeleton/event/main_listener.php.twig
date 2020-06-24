@@ -22,7 +22,7 @@ class main_listener implements EventSubscriberInterface
 {
 	public static function getSubscribedEvents()
 	{
-		return array(
+		return [
 {% if COMPONENT.controller or COMPONENT.phplistener %}
 			'core.user_setup'							=> 'load_language_on_setup',
 {% if COMPONENT.controller %}
@@ -36,7 +36,7 @@ class main_listener implements EventSubscriberInterface
 {% if COMPONENT.permissions %}
 			'core.permissions'	=> 'add_permissions',
 {% endif %}
-		);
+		];
 	}
 {% if COMPONENT.controller or COMPONENT.phplistener %}
 
@@ -82,10 +82,10 @@ class main_listener implements EventSubscriberInterface
 	public function load_language_on_setup($event)
 	{
 		$lang_set_ext = $event['lang_set_ext'];
-		$lang_set_ext[] = array(
+		$lang_set_ext[] = [
 			'ext_name' => '{{ EXTENSION.vendor_name }}/{{ EXTENSION.extension_name }}',
 			'lang_set' => 'common',
-		);
+		];
 		$event['lang_set_ext'] = $lang_set_ext;
 	}
 {% if COMPONENT.controller %}
@@ -95,9 +95,9 @@ class main_listener implements EventSubscriberInterface
 	 */
 	public function add_page_header_link()
 	{
-		$this->template->assign_vars(array(
-			'U_{{ EXTENSION.extension_name|upper }}_PAGE'	=> $this->helper->route('{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }}_controller', array('name' => 'world')),
-		));
+		$this->template->assign_vars([
+			'U_{{ EXTENSION.extension_name|upper }}_PAGE'	=> $this->helper->route('{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }}_controller', ['name' => 'world']),
+		]);
 	}
 
 	/**
@@ -110,7 +110,7 @@ class main_listener implements EventSubscriberInterface
 		if ($event['on_page'][1] === 'app' && strrpos($event['row']['session_page'], 'app.' . $this->php_ext . '/demo') === 0)
 		{
 			$event['location'] = $this->{{ LANGUAGE.object }}->lang('VIEWING_{{ EXTENSION.vendor_name|upper }}_{{ EXTENSION.extension_name|upper }}');
-			$event['location_url'] = $this->helper->route('{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }}_controller', array('name' => 'world'));
+			$event['location_url'] = $this->helper->route('{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }}_controller', ['name' => 'world']);
 		}
 	}
 {% endif %}
@@ -151,9 +151,9 @@ class main_listener implements EventSubscriberInterface
 	{
 		$permissions = $event['permissions'];
 
-		$permissions['a_new_{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }}'] = array('lang' => 'ACL_A_NEW_{{ EXTENSION.vendor_name|upper }}_{{ EXTENSION.extension_name|upper }}', 'cat' => 'misc');
-		$permissions['m_new_{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }}'] = array('lang' => 'ACL_M_NEW_{{ EXTENSION.vendor_name|upper }}_{{ EXTENSION.extension_name|upper }}', 'cat' => 'post_actions');
-		$permissions['u_new_{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }}'] = array('lang' => 'ACL_U_NEW_{{ EXTENSION.vendor_name|upper }}_{{ EXTENSION.extension_name|upper }}', 'cat' => 'post');
+		$permissions['a_new_{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }}'] = ['lang' => 'ACL_A_NEW_{{ EXTENSION.vendor_name|upper }}_{{ EXTENSION.extension_name|upper }}', 'cat' => 'misc'];
+		$permissions['m_new_{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }}'] = ['lang' => 'ACL_M_NEW_{{ EXTENSION.vendor_name|upper }}_{{ EXTENSION.extension_name|upper }}', 'cat' => 'post_actions'];
+		$permissions['u_new_{{ EXTENSION.vendor_name }}_{{ EXTENSION.extension_name }}'] = ['lang' => 'ACL_U_NEW_{{ EXTENSION.vendor_name|upper }}_{{ EXTENSION.extension_name|upper }}', 'cat' => 'post'];
 
 		$event['permissions'] = $permissions;
 	}

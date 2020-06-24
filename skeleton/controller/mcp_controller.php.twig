@@ -52,7 +52,7 @@ class mcp_controller
 		add_form_key('{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}_mcp');
 
 		// Create an array to collect errors that will be output to the user
-		$errors = array();
+		$errors = [];
 
 		// Is the form being submitted to us?
 		if ($this->request->is_set_post('submit'))
@@ -73,12 +73,12 @@ class mcp_controller
 		$s_errors = !empty($errors);
 
 		// Set output variables for display in the template
-		$this->template->assign_vars(array(
+		$this->template->assign_vars([
 			'S_ERROR'		=> $s_errors,
 			'ERROR_MSG'		=> $s_errors ? implode('<br />', $errors) : '',
 
 			'U_MCP_ACTION'	=> $this->u_action,
-		));
+		]);
 	}
 
 	/**

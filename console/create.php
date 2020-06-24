@@ -27,7 +27,7 @@ use Symfony\Component\Console\Question\Question;
 class create extends command
 {
 	/** @var array user input data array */
-	protected $data = array();
+	protected $data = [];
 
 	/** @var QuestionHelper $helper */
 	protected $helper;
@@ -126,10 +126,10 @@ class create extends command
 		}
 
 		$question = new Question($this->language->lang('SKELETON_QUESTION_NUM_AUTHORS') . $this->language->lang('COLON'), 1);
-		$question->setValidator(array($this->validator, 'validate_num_authors'));
+		$question->setValidator([$this->validator, 'validate_num_authors']);
 		$num_authors = $this->helper->ask($this->input, $this->output, $question);
 
-		$this->data['authors'] = array();
+		$this->data['authors'] = [];
 		for ($i = 0; $i < $num_authors; $i++)
 		{
 			foreach ($dialog_questions['author'] as $value => $default)
@@ -179,7 +179,7 @@ class create extends command
 		if (method_exists($this->validator, 'validate_' . $value))
 		{
 			$question = new Question($dialog, $default);
-			$question->setValidator(array($this->validator, 'validate_' . $value));
+			$question->setValidator([$this->validator, 'validate_' . $value]);
 			$return_value = $this->helper->ask($this->input, $this->output, $question);
 		}
 		else if (is_bool($default))

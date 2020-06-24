@@ -27,25 +27,25 @@ class install_ucp_module extends \phpbb\db\migration\migration
 
 	public static function depends_on()
 	{
-		return array('\{{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\migrations\install_sample_schema');
+		return ['\{{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\migrations\install_sample_schema'];
 	}
 
 	public function update_data()
 	{
-		return array(
-			array('module.add', array(
+		return [
+			['module.add', [
 				'ucp',
 				0,
 				'UCP_{{ EXTENSION.extension_name|upper }}_TITLE'
-			)),
-			array('module.add', array(
+			]],
+			['module.add', [
 				'ucp',
 				'UCP_{{ EXTENSION.extension_name|upper }}_TITLE',
-				array(
+				[
 					'module_basename'	=> '\{{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\ucp\main_module',
-					'modes'				=> array('settings'),
-				),
-			)),
-		);
+					'modes'				=> ['settings'],
+				],
+			]],
+		];
 	}
 }

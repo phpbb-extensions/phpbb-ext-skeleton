@@ -32,9 +32,9 @@ class skeleton_version_compare extends \Twig_Extension
 	 */
 	public function getFunctions()
 	{
-		return array(
-			new \Twig_SimpleFunction('skeleton_version_compare', array($this, 'version_compare')),
-		);
+		return [
+			new \Twig_SimpleFunction('skeleton_version_compare', [$this, 'version_compare']),
+		];
 	}
 
 	/**

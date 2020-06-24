@@ -15,7 +15,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -45,8 +45,8 @@ if (empty($lang) || !is_array($lang))
 *	start with 'permissions_', so they are automatically loaded within the ACP.
 */
 
-$lang = array_merge($lang, array(
+$lang = array_merge($lang, [
 	'ACL_A_NEW_{{ EXTENSION.vendor_name|upper }}_{{ EXTENSION.extension_name|upper }}'	=> 'Can use this {{ EXTENSION.extension_display_name|e }} admin feature',
 	'ACL_M_NEW_{{ EXTENSION.vendor_name|upper }}_{{ EXTENSION.extension_name|upper }}'	=> 'Can use this {{ EXTENSION.extension_display_name|e }} moderator feature',
 	'ACL_U_NEW_{{ EXTENSION.vendor_name|upper }}_{{ EXTENSION.extension_name|upper }}'	=> 'Can use this {{ EXTENSION.extension_display_name|e }} user feature',
-));
+]);

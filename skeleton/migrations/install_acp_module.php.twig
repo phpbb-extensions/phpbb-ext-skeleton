@@ -19,27 +19,27 @@ class install_acp_module extends \phpbb\db\migration\migration
 
 	public static function depends_on()
 	{
-		return array('\phpbb\db\migration\data\{% if skeleton_version_compare(REQUIREMENTS.phpbb_version_min, "3.2", "<") %}v31x\v314{% else %}v320\v320{% endif %}');
+		return ['\phpbb\db\migration\data\{% if skeleton_version_compare(REQUIREMENTS.phpbb_version_min, "3.2", "<") %}v31x\v314{% else %}v320\v320{% endif %}'];
 	}
 
 	public function update_data()
 	{
-		return array(
-			array('config.add', array('{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}_goodbye', 0)),
+		return [
+			['config.add', ['{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}_goodbye', 0]],
 
-			array('module.add', array(
+			['module.add', [
 				'acp',
 				'ACP_CAT_DOT_MODS',
 				'ACP_{{ EXTENSION.extension_name|upper }}_TITLE'
-			)),
-			array('module.add', array(
+			]],
+			['module.add', [
 				'acp',
 				'ACP_{{ EXTENSION.extension_name|upper }}_TITLE',
-				array(
+				[
 					'module_basename'	=> '\{{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\acp\main_module',
-					'modes'				=> array('settings'),
-				),
-			)),
-		);
+					'modes'				=> ['settings'],
+				],
+			]],
+		];
 	}
 }
