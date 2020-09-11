@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.1.5 - 2020-09-11
+
+- Make sure config created for cron by migration is dynamic.
+- Updated all PHP arrays to use modern shortened syntax.
+- Updated Travis config files.
+- Updated Read Me files.
+
 ## 1.1.4 - 2020-02-13
 
 - Generated permissions now include a Moderator Role.
