@@ -55,7 +55,7 @@ class simple_test extends \phpbb_database_test_case
 			$db_tools = $factory->get($this->db);
 		}
 
-		$this->assertTrue($db_tools->sql_column_exists(USERS_TABLE, 'user_{{ EXTENSION.extension_name|lower }}'), 'Asserting that column "user_{{ EXTENSION.extension_name|lower }}" exists');
-		$this->assertFalse($db_tools->sql_column_exists(USERS_TABLE, 'user_{{ EXTENSION.extension_name|lower }}_void'), 'Asserting that column "user_{{ EXTENSION.extension_name|lower }}_void" does not exist');
+		self::assertTrue($db_tools->sql_column_exists(USERS_TABLE, 'user_{{ EXTENSION.extension_name|lower }}'), 'Asserting that column "user_{{ EXTENSION.extension_name|lower }}" exists');
+		self::assertFalse($db_tools->sql_column_exists(USERS_TABLE, 'user_{{ EXTENSION.extension_name|lower }}_void'), 'Asserting that column "user_{{ EXTENSION.extension_name|lower }}_void" does not exist');
 	}
 }

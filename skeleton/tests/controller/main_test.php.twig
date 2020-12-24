@@ -55,7 +55,7 @@ class main_test extends \phpbb_test_case
 			->getMock();
 
 		// Set the expected output of the controller_helper->render() method
-		$controller_helper->expects($this->once())
+		$controller_helper->expects(self::once())
 			->method('render')
 			->willReturnCallback(function ($template_file, $page_title = '', $status_code = 200, $display_online_list = false) {
 				return new \Symfony\Component\HttpFoundation\Response($template_file, $status_code);
@@ -70,8 +70,8 @@ class main_test extends \phpbb_test_case
 		);
 
 		$response = $controller->handle('test');
-		$this->assertInstanceOf('\Symfony\Component\HttpFoundation\Response', $response);
-		$this->assertEquals($status_code, $response->getStatusCode());
-		$this->assertEquals($page_content, $response->getContent());
+		self::assertInstanceOf('\Symfony\Component\HttpFoundation\Response', $response);
+		self::assertEquals($status_code, $response->getStatusCode());
+		self::assertEquals($page_content, $response->getContent());
 	}
 }
