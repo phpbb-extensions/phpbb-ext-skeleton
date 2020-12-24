@@ -22,6 +22,7 @@ use phpbb\template\twig\loader;
 use phpbb\template\twig\twig;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Finder\Finder;
 
 class packager
 {
@@ -162,23 +163,23 @@ class packager
 	public function create_zip($data)
 	{
 		$tmp_path = $this->root_path . 'store/tmp-ext/';
+		$ext_path = "{$data['extension']['vendor_name']}/{$data['extension']['extension_name']}/";
 		$zip_path = $tmp_path . "{$data['extension']['vendor_name']}_{$data['extension']['extension_name']}-{$data['extension']['extension_version']}.zip";
-		$ext_path = $tmp_path . "{$data['extension']['vendor_name']}/{$data['extension']['extension_name']}/";
 
 		$zip_archive = new \ZipArchive();
 		$zip_archive->open($zip_path, \ZipArchive::CREATE | \ZipArchive::OVERWRITE);
 
-		$extension_manager = $this->phpbb_container->get('ext.manager');
-		$files = $extension_manager->get_finder()
-			->set_extensions([])
-			->core_path($ext_path)
-			->find();
+		$finder = new Finder();
+		$finder->ignoreDotFiles(false)
+			->ignoreVCS(false)
+			->files()
+			->in($tmp_path . $ext_path);
 
-		foreach ($files as $file => $ext)
+		foreach ($finder as $file)
 		{
 			$zip_archive->addFile(
-				$file,
-				substr($file, strlen($tmp_path))
+				$file->getRealPath(),
+				$ext_path . $file->getRelativePath() . DIRECTORY_SEPARATOR . $file->getFilename()
 			);
 		}
 
