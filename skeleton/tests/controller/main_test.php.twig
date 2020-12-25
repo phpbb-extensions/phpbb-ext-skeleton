@@ -18,7 +18,7 @@ class main_test extends \phpbb_test_case
 	public function handle_data()
 	{
 		return [
-			[200, '{{ EXTENSION.extension_name|lower }}_body.html'],
+			[200, '@{{ EXTENSION.vendor_name|lower }}_{{ EXTENSION.extension_name|lower }}/{{ EXTENSION.extension_name|lower }}_body.html'],
 		];
 	}
 
@@ -45,9 +45,9 @@ class main_test extends \phpbb_test_case
 			->getMock();
 
 		// Set {{ LANGUAGE.object }}->lang() to return any arguments sent to it
-		${{ LANGUAGE.object }}->expects($this->any())
+		${{ LANGUAGE.object }}->expects(self::any())
 			->method('lang')
-			->will($this->returnArgument(0));
+			->will(self::returnArgument(0));
 
 		/** @var \phpbb\controller\helper|\PHPUnit_Framework_MockObject_MockObject $controller_helper Mock the controller helper class */
 		$controller_helper = $this->getMockBuilder('\phpbb\controller\helper')
