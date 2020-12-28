@@ -30,11 +30,11 @@ class view_test extends \phpbb_functional_test_case
 	public function test_view_foo()
 	{
 		$crawler = self::request('GET', 'app.php/demo/foo');
-		$this->assertContains('foo', $crawler->filter('h2')->text());
+		self::assertStringContainsString('foo', $crawler->filter('h2')->text());
 
 		$this->add_lang_ext('{{ EXTENSION.vendor_name }}/{{ EXTENSION.extension_name }}', 'common');
-		$this->assertContains($this->lang('{{ EXTENSION.extension_name|upper }}_HELLO', 'foo'), $crawler->filter('h2')->text());
-		$this->assertNotContains($this->lang('{{ EXTENSION.extension_name|upper }}_GOODBYE', 'foo'), $crawler->filter('h2')->text());
+		self::assertStringContainsString($this->lang('{{ EXTENSION.extension_name|upper }}_HELLO', 'foo'), $crawler->filter('h2')->text());
+		self::assertStringNotContainsString($this->lang('{{ EXTENSION.extension_name|upper }}_GOODBYE', 'foo'), $crawler->filter('h2')->text());
 
 		$this->assertNotContainsLang('ACP_{{ EXTENSION.extension_name|upper }}_GOODBYE', $crawler->filter('h2')->text());
 	}
@@ -46,7 +46,7 @@ class view_test extends \phpbb_functional_test_case
 	public function test_view_bar()
 	{
 		$crawler = self::request('GET', 'app.php/demo/bar');
-		$this->assertNotContains('foo', $crawler->filter('h2')->text());
-		$this->assertContains('bar', $crawler->filter('h2')->text());
+		self::assertStringNotContainsString('foo', $crawler->filter('h2')->text());
+		self::assertStringContainsString('bar', $crawler->filter('h2')->text());
 	}
 }

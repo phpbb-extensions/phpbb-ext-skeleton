@@ -160,6 +160,17 @@ services:
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
 
+    phpbb.skeleton.ext.skeleton.githubactions:
+        class: phpbb\skeleton\skeleton
+        arguments:
+            - 'githubactions'
+            - false
+            - ['tests']
+            - ['.github/workflows/tests.yml']
+            - 'TEST_DEPLOY'
+        tags:
+            - { name: phpbb.skeleton.ext.skeleton }
+
     phpbb.skeleton.ext.skeleton.travis:
         class: phpbb\skeleton\skeleton
         arguments:
