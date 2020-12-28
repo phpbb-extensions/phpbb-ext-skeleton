@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.6 - 2020-12-28
+
+- Added option to generate Github Actions workflow for Continuous Integration testing.
+- Fixed an issue that prevented dot-files and dot-directories from being generated.
+- Updated some syntax in the sample PHPUnit test files.
+
 ## 1.1.5 - 2020-09-11
 
 - Make sure config created for cron by migration is dynamic.
