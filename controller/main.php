@@ -85,7 +85,7 @@ class main
 	 * @throws http_exception
 	 * @throws \Exception
 	 *
-	 * @return \Symfony\Component\HttpFoundation\Response A Symfony Response object
+	 * @return Response A Symfony Response object
 	 */
 	public function handle()
 	{
