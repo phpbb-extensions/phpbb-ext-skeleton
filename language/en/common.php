@@ -141,12 +141,18 @@ $lang = array_merge($lang, [
 	'SKELETON_TITLE_REQUIREMENT_INFO'	=> 'Requirements',
 	'SKELETON_TITLE_COMPONENT_INFO'		=> 'Components',
 
+	'SKELETON_INVALID_AUTHOR_EMAIL'		=> 'An author email is invalid',
+	'SKELETON_INVALID_AUTHOR_URL'		=> 'An author homepage URL is invalid',
 	'SKELETON_INVALID_DISPLAY_NAME'		=> 'The display name you provided is invalid',
 	'SKELETON_INVALID_EXTENSION_TIME'	=> 'The extension date you provided is invalid',
+	'SKELETON_INVALID_EXTENSION_URL'	=> 'The extension homepage URL is invalid',
 	'SKELETON_INVALID_EXTENSION_VERSION'=> 'The extension version you provided is invalid',
 	'SKELETON_INVALID_NUM_AUTHORS'		=> 'The number of authors you provided is invalid',
 	'SKELETON_INVALID_PACKAGE_NAME'		=> 'The package name you provided is invalid',
 	'SKELETON_INVALID_VENDOR_NAME'		=> 'The vendor name you provided is invalid',
+	'SKELETON_INVALID_PHP_VERSION'		=> 'The PHP version requirement is invalid.',
+	'SKELETON_INVALID_PHPBB_MIN_VERSION'=> 'The minimum phpBB version requirement is invalid.',
+	'SKELETON_INVALID_PHPBB_MAX_VERSION'=> 'The maximum phpBB version requirement is invalid.',
 
 	'NO_ZIPARCHIVE_ERROR'	=> 'The ZipArchive class is required, but was not found in your PHP configuration.',
 	'PHP_VERSION_ERROR'		=> 'PHP 5.4 or newer is required to use this extension.',
