@@ -129,6 +129,7 @@ class packager
 
 		$component_data = $this->get_component_dialog_values();
 		$skeleton_files[] = [
+			'composer.json',
 			'license.txt',
 			'README.md',
 		];
@@ -149,8 +150,6 @@ class packager
 				->assign_display('body');
 			$filesystem->dumpFile($ext_path . str_replace('demo', strtolower($data['extension']['extension_name']), $file), trim($body) . "\n");
 		}
-
-		$filesystem->dumpFile($ext_path . 'composer.json', $this->get_composer_json_from_data($data));
 	}
 
 	/**
@@ -186,58 +185,6 @@ class packager
 		$zip_archive->close();
 
 		return $zip_path;
-	}
-
-	/**
-	 * Get composer JSON info from extension data
-	 *
-	 * @param array $data Extension data
-	 *
-	 * @return string
-	 */
-	public function get_composer_json_from_data($data)
-	{
-		$composer = [
-			'name'        => "{$data['extension']['vendor_name']}/{$data['extension']['extension_name']}",
-			'type'        => 'phpbb-extension',
-			'description' => (string) $data['extension']['extension_description'],
-			'homepage'    => (string) $data['extension']['extension_homepage'],
-			'version'     => (string) $data['extension']['extension_version'],
-			'time'        => (string) $data['extension']['extension_time'],
-			'license'     => 'GPL-2.0-only',
-			'authors'     => [],
-			'require'     => [
-				'php'     => (string) $data['requirements']['php_version'],
-				'composer/installers' => '~1.0',
-			],
-			'extra'       => [
-				'display-name' => (string) $data['extension']['extension_display_name'],
-				'soft-require' => [
-					'phpbb/phpbb' => "{$data['requirements']['phpbb_version_min']},{$data['requirements']['phpbb_version_max']}",
-				],
-			],
-		];
-
-		if (!empty($data['components']['build']))
-		{
-			$composer['require-dev']['phing/phing'] = '2.4.*';
-		}
-
-		foreach ($data['authors'] as $i => $author_data)
-		{
-			$composer['authors'][] = [
-				'name'     => (string) $data['authors'][$i]['author_name'],
-				'email'    => (string) $data['authors'][$i]['author_email'],
-				'homepage' => (string) $data['authors'][$i]['author_homepage'],
-				'role'     => (string) $data['authors'][$i]['author_role'],
-			];
-		}
-
-		$body = json_encode($composer, JSON_PRETTY_PRINT + JSON_UNESCAPED_SLASHES + JSON_UNESCAPED_UNICODE);
-		$body = str_replace(['&lt;', '&gt;'], ['<', '>'], $body);
-		$body .= PHP_EOL;
-
-		return $body;
 	}
 
 	/**
