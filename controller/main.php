@@ -236,18 +236,11 @@ class main
 	 */
 	protected function get_user_input($value, $default, $array_key = null)
 	{
+		$return_value = $this->get_request_variable($value, $default, $array_key);
+
 		if (method_exists($this->validator, 'validate_' . $value))
 		{
-			$return_value = $this->get_request_variable($value, $default, $array_key);
 			$return_value = call_user_func([$this->validator, 'validate_' . $value], $return_value);
-		}
-		else if (is_bool($default))
-		{
-			$return_value = $this->get_request_variable($value, $default, $array_key);
-		}
-		else
-		{
-			$return_value = $this->get_request_variable($value, $default, $array_key);
 		}
 
 		return $return_value;
