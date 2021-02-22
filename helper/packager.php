@@ -75,7 +75,7 @@ class packager
 			'requirements' => [
 				'php_version'       => '>=5.4',
 				'phpbb_version_min' => '>=3.2.0',
-				'phpbb_version_max' => '<3.4.0@dev',
+				'phpbb_version_max' => '<4.0.0@dev',
 			],
 		];
 	}
