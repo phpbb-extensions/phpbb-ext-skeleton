@@ -200,20 +200,29 @@ class packager
 			'assets_version'  => null,
 		]);
 
+		$path_helper = $this->phpbb_container->get('path_helper');
+		$environment = new environment(
+			$config,
+			$this->phpbb_container->get('filesystem'),
+			$path_helper,
+			$this->phpbb_container->getParameter('core.cache_dir'),
+			$this->phpbb_container->get('ext.manager'),
+			new loader(
+				new \phpbb\filesystem\filesystem()
+			)
+		);
+
+		// Custom filter for use by packager to decode greater/less than symbols
+		$filter = new \Twig\TwigFilter('skeleton_decode', function ($string) {
+			return str_replace(['&lt;', '&gt;'], ['<', '>'], $string);
+		}, ['is_safe' => ['html']]);
+		$environment->addFilter($filter);
+
 		$template_engine = new twig(
-			$this->phpbb_container->get('path_helper'),
+			$path_helper,
 			$config,
 			new context(),
-			new environment(
-				$config,
-				$this->phpbb_container->get('filesystem'),
-				$this->phpbb_container->get('path_helper'),
-				$this->phpbb_container->getParameter('core.cache_dir'),
-				$this->phpbb_container->get('ext.manager'),
-				new loader(
-					new \phpbb\filesystem\filesystem()
-				)
-			),
+			$environment,
 			$this->phpbb_container->getParameter('core.cache_dir'),
 			$this->phpbb_container->get('user'),
 			[
