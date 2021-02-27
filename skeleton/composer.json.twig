@@ -14,8 +14,7 @@
             "email": "{{ AUTHOR.author_email }}",
             "homepage": "{{ AUTHOR.author_homepage }}",
             "role": "{{ AUTHOR.author_role }}"
-        }{% if not loop.last %},{% endif %}
-
+        }{{ not loop.last ? ',' }}
 {% endfor %}
     ],
     "require": {
