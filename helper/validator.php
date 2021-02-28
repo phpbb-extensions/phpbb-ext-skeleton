@@ -33,11 +33,11 @@ class validator
 
 	/**
 	 * Validate the number of authors
-	 * Should be between 0 and 20
+	 * Should be between 1 and 20
 	 *
 	 * @param string $value The value to validate
-	 * @throws runtime_exception
 	 * @return string The valid value
+	 * @throws runtime_exception
 	 */
 	public function validate_num_authors($value)
 	{
@@ -50,11 +50,11 @@ class validator
 	}
 
 	/**
-	 * Validate the extension name
+	 * Validate and require the extension name
 	 *
 	 * @param string $value The value to validate
-	 * @throws runtime_exception
 	 * @return string The valid value
+	 * @throws runtime_exception
 	 */
 	public function validate_extension_name($value)
 	{
@@ -67,15 +67,15 @@ class validator
 	}
 
 	/**
-	 * Validate the extension display name
+	 * Validate and require the extension display name
 	 *
 	 * @param string $value The value to validate
-	 * @throws runtime_exception
 	 * @return string The valid value
+	 * @throws runtime_exception
 	 */
 	public function validate_extension_display_name($value)
 	{
-		if ($value !== '' && strpos($value, '&quot;') === false)
+		if ((string) $value !== '' && strpos($value, '&quot;') === false)
 		{
 			return htmlspecialchars_decode($value, ENT_NOQUOTES);
 		}
@@ -84,11 +84,11 @@ class validator
 	}
 
 	/**
-	 * Validate the extension date/time
+	 * Validate and require the extension date/time
 	 *
 	 * @param string $value The value to validate
-	 * @throws runtime_exception
 	 * @return string The valid value
+	 * @throws runtime_exception
 	 */
 	public function validate_extension_time($value)
 	{
@@ -101,11 +101,11 @@ class validator
 	}
 
 	/**
-	 * Validate the extension version number
+	 * Validate and require the extension version number
 	 *
 	 * @param string $value The value to validate
-	 * @throws runtime_exception
 	 * @return string The valid value
+	 * @throws runtime_exception
 	 */
 	public function validate_extension_version($value)
 	{
@@ -118,11 +118,11 @@ class validator
 	}
 
 	/**
-	 * Validate the extension vendor name
+	 * Validate and require the extension vendor name
 	 *
 	 * @param string $value The value to validate
-	 * @throws runtime_exception
 	 * @return string The valid value
+	 * @throws runtime_exception
 	 */
 	public function validate_vendor_name($value)
 	{
@@ -132,5 +132,124 @@ class validator
 		}
 
 		throw new runtime_exception($this->language->lang('SKELETON_INVALID_VENDOR_NAME'));
+	}
+
+	/**
+	 * Validate the extension homepage URL
+	 *
+	 * @param string $value The value to validate
+	 * @return string The valid value
+	 * @throws runtime_exception
+	 */
+	public function validate_extension_homepage($value)
+	{
+		if ((string) $value !== '' && filter_var($value, FILTER_VALIDATE_URL) === false)
+		{
+			throw new runtime_exception($this->language->lang('SKELETON_INVALID_EXTENSION_URL'));
+		}
+
+		return $value;
+	}
+
+	/**
+	 * Validate the author homepage URL
+	 *
+	 * @param string $value The value to validate
+	 * @return string The valid value
+	 * @throws runtime_exception
+	 */
+	public function validate_author_homepage($value)
+	{
+		if ((string) $value !== '' && filter_var($value, FILTER_VALIDATE_URL) === false)
+		{
+			throw new runtime_exception($this->language->lang('SKELETON_INVALID_AUTHOR_URL'));
+		}
+
+		return $value;
+	}
+
+	/**
+	 * Validate the author email
+	 *
+	 * @param string $value The value to validate
+	 * @return string The valid value
+	 * @throws runtime_exception
+	 */
+	public function validate_author_email($value)
+	{
+		if ((string) $value !== '' && filter_var($value, FILTER_VALIDATE_EMAIL) === false)
+		{
+			throw new runtime_exception($this->language->lang('SKELETON_INVALID_AUTHOR_EMAIL'));
+		}
+
+		return $value;
+	}
+
+	/**
+	 * Validate and require the phpBB minimum version
+	 *
+	 * @param string $value The value to validate
+	 * @return string The valid value
+	 * @throws runtime_exception
+	 */
+	public function validate_phpbb_version_min($value)
+	{
+		if ($this->check_version($value))
+		{
+			return $value;
+		}
+
+		throw new runtime_exception($this->language->lang('SKELETON_INVALID_PHPBB_MIN_VERSION'));
+
+	}
+
+	/**
+	 * Validate and require the phpBB maximum version
+	 *
+	 * @param string $value The value to validate
+	 * @return string The valid value
+	 * @throws runtime_exception
+	 */
+	public function validate_phpbb_version_max($value)
+	{
+		if ($this->check_version($value))
+		{
+			return $value;
+		}
+
+		throw new runtime_exception($this->language->lang('SKELETON_INVALID_PHPBB_MAX_VERSION'));
+
+	}
+
+	/**
+	 * Validate and require the PHP version
+	 *
+	 * @param string $value The value to validate
+	 * @return string The valid value
+	 * @throws runtime_exception
+	 */
+	public function validate_php_version($value)
+	{
+		if ($this->check_version($value))
+		{
+			return $value;
+		}
+
+		throw new runtime_exception($this->language->lang('SKELETON_INVALID_PHP_VERSION'));
+
+	}
+
+	/**
+	 * Version value check. Checks for values like:
+	 *     1.0.0-RC1
+	 *     >=1.0.0
+	 *     <1.0@dev
+	 *
+	 * @param string $value The value to check
+	 * @return bool True if valid, false if not
+	 */
+	protected function check_version($value)
+	{
+		return (bool) preg_match('/^[<>=]*[\d+][\w.@-]+$/', $value);
 	}
 }

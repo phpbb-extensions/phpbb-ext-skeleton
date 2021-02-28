@@ -75,7 +75,7 @@ $lang = array_merge($lang, [
 	'SKELETON_QUESTION_PHPBB_VERSION_MIN_EXPLAIN'	=> 'default: &gt;=3.2.0',
 	'SKELETON_QUESTION_PHPBB_VERSION_MAX'			=> 'Please enter the maximum phpBB requirement of the extension',
 	'SKELETON_QUESTION_PHPBB_VERSION_MAX_UI'		=> 'Maximum phpBB requirement of the extension',
-	'SKELETON_QUESTION_PHPBB_VERSION_MAX_EXPLAIN'	=> 'default: &lt;3.4.0@dev',
+	'SKELETON_QUESTION_PHPBB_VERSION_MAX_EXPLAIN'	=> 'default: &lt;4.0.0@dev',
 
 	'SKELETON_QUESTION_COMPONENT_PHPLISTENER'		=> 'Create sample PHP event listeners?',
 	'SKELETON_QUESTION_COMPONENT_PHPLISTENER_UI'	=> 'PHP event listeners',
@@ -141,12 +141,18 @@ $lang = array_merge($lang, [
 	'SKELETON_TITLE_REQUIREMENT_INFO'	=> 'Requirements',
 	'SKELETON_TITLE_COMPONENT_INFO'		=> 'Components',
 
+	'SKELETON_INVALID_AUTHOR_EMAIL'		=> 'An author email is invalid',
+	'SKELETON_INVALID_AUTHOR_URL'		=> 'An author homepage URL is invalid',
 	'SKELETON_INVALID_DISPLAY_NAME'		=> 'The display name you provided is invalid',
 	'SKELETON_INVALID_EXTENSION_TIME'	=> 'The extension date you provided is invalid',
+	'SKELETON_INVALID_EXTENSION_URL'	=> 'The extension homepage URL is invalid',
 	'SKELETON_INVALID_EXTENSION_VERSION'=> 'The extension version you provided is invalid',
 	'SKELETON_INVALID_NUM_AUTHORS'		=> 'The number of authors you provided is invalid',
 	'SKELETON_INVALID_PACKAGE_NAME'		=> 'The package name you provided is invalid',
 	'SKELETON_INVALID_VENDOR_NAME'		=> 'The vendor name you provided is invalid',
+	'SKELETON_INVALID_PHP_VERSION'		=> 'The PHP version requirement is invalid.',
+	'SKELETON_INVALID_PHPBB_MIN_VERSION'=> 'The minimum phpBB version requirement is invalid.',
+	'SKELETON_INVALID_PHPBB_MAX_VERSION'=> 'The maximum phpBB version requirement is invalid.',
 
 	'NO_ZIPARCHIVE_ERROR'	=> 'The ZipArchive class is required, but was not found in your PHP configuration.',
 	'PHP_VERSION_ERROR'		=> 'PHP 5.4 or newer is required to use this extension.',

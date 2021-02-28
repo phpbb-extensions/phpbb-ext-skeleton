@@ -1,0 +1,36 @@
+{% apply skeleton_decode %}
+{
+    "name": "{{ EXTENSION.vendor_name }}/{{ EXTENSION.extension_name }}",
+    "type": "phpbb-extension",
+    "description": "{{ EXTENSION.extension_description }}",
+    "homepage": "{{ EXTENSION.extension_homepage }}",
+    "version": "{{ EXTENSION.extension_version }}",
+    "time": "{{ EXTENSION.extension_time }}",
+    "license": "GPL-2.0-only",
+    "authors": [
+{% for AUTHOR in AUTHORS %}
+        {
+            "name": "{{ AUTHOR.author_name }}",
+            "email": "{{ AUTHOR.author_email }}",
+            "homepage": "{{ AUTHOR.author_homepage }}",
+            "role": "{{ AUTHOR.author_role }}"
+        }{{ not loop.last ? ',' }}
+{% endfor %}
+    ],
+    "require": {
+        "php": "{{ REQUIREMENTS.php_version }}",
+        "composer/installers": "~1.0"
+    },
+{% if COMPONENT.build %}
+    "require-dev": {
+        "phing/phing": "2.4.*"
+    },
+{% endif %}
+    "extra": {
+        "display-name": "{{ EXTENSION.extension_display_name }}",
+        "soft-require": {
+            "phpbb/phpbb": "{{ REQUIREMENTS.phpbb_version_min }},{{ REQUIREMENTS.phpbb_version_max }}"
+        }
+    }
+}
+{% endapply %}
