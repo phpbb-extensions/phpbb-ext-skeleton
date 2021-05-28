@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.1.7 - 2021-05-28
+
+- Added validation on user input for homepage URLs, author email addresses, and version requirement patterns.
+- Fixed validation of extension display name when using the CLI.
+- Internally moved the creation of extension composer.json from PHP logic to a TWIG template.
+- Updated default phpBB version max requirement to <4.0.0@dev.
+
 ## 1.1.6 - 2020-12-28
 
 - Added option to generate Github Actions workflow for Continuous Integration testing.
