@@ -39,7 +39,7 @@ class main_test extends \phpbb_test_case
 			->disableOriginalConstructor()
 			->getMock();
 
-		/** @var {{ LANGUAGE.class }}|\PHPUnit_Framework_MockObject_MockObject ${{ LANGUAGE.object }} Mock the {{ LANGUAGE.object }} class */
+		/** @var {{ LANGUAGE.class }}|\PHPUnit\Framework\MockObject\MockObject ${{ LANGUAGE.object }} Mock the {{ LANGUAGE.object }} class */
 		${{ LANGUAGE.object }} = $this->getMockBuilder('{{ LANGUAGE.class }}')
 			->disableOriginalConstructor()
 			->getMock();
@@ -49,7 +49,7 @@ class main_test extends \phpbb_test_case
 			->method('lang')
 			->will(self::returnArgument(0));
 
-		/** @var \phpbb\controller\helper|\PHPUnit_Framework_MockObject_MockObject $controller_helper Mock the controller helper class */
+		/** @var \phpbb\controller\helper|\PHPUnit\Framework\MockObject\MockObject $controller_helper Mock the controller helper class */
 		$controller_helper = $this->getMockBuilder('\phpbb\controller\helper')
 			->disableOriginalConstructor()
 			->getMock();

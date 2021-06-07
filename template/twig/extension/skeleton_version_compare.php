@@ -13,7 +13,7 @@
 
 namespace phpbb\skeleton\template\twig\extension;
 
-class skeleton_version_compare extends \Twig_Extension
+class skeleton_version_compare extends \Twig\Extension\AbstractExtension
 {
 	/**
 	 * Get the name of this extension
@@ -33,7 +33,7 @@ class skeleton_version_compare extends \Twig_Extension
 	public function getFunctions()
 	{
 		return [
-			new \Twig_SimpleFunction('skeleton_version_compare', [$this, 'version_compare']),
+			new \Twig\TwigFunction('skeleton_version_compare', [$this, 'version_compare']),
 		];
 	}
 
