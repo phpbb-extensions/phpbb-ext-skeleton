@@ -1,0 +1,16 @@
+.icon-phpbb-skeleton svg {
+	position: relative;
+	top: 2px;
+	width: 13px;
+	height: 13px;
+	padding: 0 2px;
+	fill: currentColor;
+}
+
+.dropdown .icon-phpbb-skeleton svg {
+	padding: 0 5px 0 0;
+}
+
+.rtl .dropdown .icon-phpbb-skeleton svg {
+	padding: 0 0 0 5px;
+}
