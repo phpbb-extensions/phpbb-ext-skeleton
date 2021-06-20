@@ -36,13 +36,13 @@ class ext extends \phpbb\extension\base
 	}
 
 	/**
-	 * Check phpBB 3.2.0 minimum requirement.
+	 * Check phpBB 3.2.3 minimum requirement.
 	 *
 	 * @return void
 	 */
 	protected function phpbb_requirement()
 	{
-		if (phpbb_version_compare(PHPBB_VERSION, '3.2.0', '<'))
+		if (phpbb_version_compare(PHPBB_VERSION, '3.2.3', '<'))
 		{
 			$this->errors[] = 'PHPBB_VERSION_ERROR';
 		}
