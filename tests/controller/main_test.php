@@ -14,6 +14,7 @@
 namespace phpbb\skeleton\tests\controller;
 
 use phpbb\exception\http_exception;
+use phpbb\exception\runtime_exception;
 
 class main_test extends \phpbb_test_case
 {
@@ -209,10 +210,10 @@ class main_test extends \phpbb_test_case
 
 		$this->request->method('variable')
 			->willReturnMap([
-				['author_name', [''], false, \phpbb\request\request_interface::REQUEST, ['foo_auth']],
+				['author_name', [''], true, \phpbb\request\request_interface::REQUEST, ['foo_auth']],
 				['vendor_name', '', true, \phpbb\request\request_interface::REQUEST, 'foo_vendor'],
-				['php_version', '>=5.4', false, \phpbb\request\request_interface::REQUEST, '>=5.4'],
-				['component_phplistener', false, false, \phpbb\request\request_interface::REQUEST, ''],
+				['php_version', '>=5.4', true, \phpbb\request\request_interface::REQUEST, '>=5.4'],
+				['component_phplistener', true, false, \phpbb\request\request_interface::REQUEST, ''],
 			]);
 
 		$this->packager->expects(self::once())
@@ -253,6 +254,8 @@ class main_test extends \phpbb_test_case
 			->with(self::anything())
 			->willReturnMap([
 				['author_name', [''], true, \phpbb\request\request_interface::REQUEST, ['']],
+				['vendor_name', '', true, \phpbb\request\request_interface::REQUEST, 'foo_vendor'],
+				['php_version', '>=5.4', true, \phpbb\request\request_interface::REQUEST, '>=5.4'],
 			]);
 
 		$this->packager->expects(self::atLeastOnce())
@@ -263,10 +266,14 @@ class main_test extends \phpbb_test_case
 				'requirements' => ['php_version' => '>=5.4'],
 			]);
 
-		// this returning an empty array will cause the submit to error
 		$this->packager->expects(self::atLeastOnce())
 			->method('get_component_dialog_values')
 			->willReturn([]);
+
+		$this->validator->expects(self::once())
+			->method('validate_vendor_name')
+			->with('foo_vendor')
+			->willThrowException(new runtime_exception('SKELETON_INVALID_VENDOR_NAME'));
 
 		$this->packager->expects($this->never())
 			->method('create_extension');
