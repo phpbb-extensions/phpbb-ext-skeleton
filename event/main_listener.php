@@ -69,8 +69,6 @@ class main_listener implements EventSubscriberInterface
 	 */
 	public function add_page_header_link()
 	{
-		$this->template->assign_vars([
-			'U_PHPBB_SKELETON_EXT'	=> $this->helper->route('phpbb_skeleton_controller'),
-		]);
+		$this->template->assign_var('U_PHPBB_SKELETON_EXT', $this->helper->route('phpbb_skeleton_controller'));
 	}
 }

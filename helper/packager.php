@@ -218,7 +218,7 @@ class packager
 		}, ['is_safe' => ['html']]);
 		$environment->addFilter($filter);
 
-		$template_engine = new twig(
+		return new twig(
 			$path_helper,
 			$config,
 			new context(),
@@ -229,8 +229,6 @@ class packager
 				new skeleton_version_compare()
 			]
 		);
-
-		return $template_engine;
 	}
 
 	/**

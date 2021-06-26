@@ -189,7 +189,7 @@ class main
 			$this->data['extension'][$value] = $this->get_user_input($value, $default);
 		}
 
-		$num_authors = max(1, count($this->request->variable('author_name', [''])));
+		$num_authors = max(1, count($this->request->variable('author_name', [''], true)));
 		for ($i = 0; $i < $num_authors; $i++)
 		{
 			foreach ($dialog_questions['author'] as $value => $default)
