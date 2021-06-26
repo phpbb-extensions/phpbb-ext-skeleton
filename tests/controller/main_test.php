@@ -198,4 +198,86 @@ class main_test extends \phpbb_test_case
 
 		$this->get_controller()->handle();
 	}
+
+	public function test_submit_success()
+	{
+		$this->user->data['is_bot'] = false;
+
+		$this->request->expects(self::once())
+			->method('is_set_post')
+			->willReturn(true);
+
+		$this->request->method('variable')
+			->willReturnMap([
+				['author_name', [''], false, \phpbb\request\request_interface::REQUEST, ['foo_auth']],
+				['vendor_name', '', true, \phpbb\request\request_interface::REQUEST, 'foo_vendor'],
+				['php_version', '>=5.4', false, \phpbb\request\request_interface::REQUEST, '>=5.4'],
+				['component_phplistener', false, false, \phpbb\request\request_interface::REQUEST, ''],
+			]);
+
+		$this->packager->expects(self::once())
+			->method('get_composer_dialog_values')
+			->willReturn([
+				'author' => ['author_name' => null],
+				'extension' => ['vendor_name' => null],
+				'requirements' => ['php_version' => '>=5.4'],
+			]);
+
+		$this->packager->expects(self::once())
+			->method('get_component_dialog_values')
+			->willReturn([
+				'phplistener' => ['dependencies' => ['config/services.yml', 'event/main_listener.php', 'language/en/common.php']]
+			]);
+
+		$this->packager->expects($this->once())
+			->method('create_extension');
+
+		$this->packager->expects($this->once())
+			->method('create_zip')
+			->willReturn(__DIR__ . '/../fixtures/dummy.txt');
+
+		$response = $this->get_controller()->handle();
+
+		self::assertInstanceOf('\Symfony\Component\HttpFoundation\Response', $response);
+	}
+
+	public function test_submit_exception()
+	{
+		$this->user->data['is_bot'] = false;
+
+		$this->request->expects(self::once())
+			->method('is_set_post')
+			->willReturn(true);
+
+		$this->request->method('variable')
+			->with(self::anything())
+			->willReturnMap([
+				['author_name', [''], true, \phpbb\request\request_interface::REQUEST, ['']],
+			]);
+
+		$this->packager->expects(self::atLeastOnce())
+			->method('get_composer_dialog_values')
+			->willReturn([
+				'author' => ['author_name' => null],
+				'extension' => ['vendor_name' => null],
+				'requirements' => ['php_version' => '>=5.4'],
+			]);
+
+		// this returning an empty array will cause the submit to error
+		$this->packager->expects(self::atLeastOnce())
+			->method('get_component_dialog_values')
+			->willReturn([]);
+
+		$this->packager->expects($this->never())
+			->method('create_extension');
+
+		$this->packager->expects($this->never())
+			->method('create_zip');
+
+		$this->template->expects($this->at(0))
+			->method('assign_var')
+			->with('ERROR');
+
+		$this->get_controller()->handle();
+	}
 }
