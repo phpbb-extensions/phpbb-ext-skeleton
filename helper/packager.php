@@ -15,13 +15,13 @@ namespace phpbb\skeleton\helper;
 
 use phpbb\config\config;
 use phpbb\di\service_collection;
+use phpbb\filesystem\filesystem;
 use phpbb\skeleton\template\twig\extension\skeleton_version_compare;
 use phpbb\template\context;
 use phpbb\template\twig\environment;
 use phpbb\template\twig\loader;
 use phpbb\template\twig\twig;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 
 class packager
@@ -110,7 +110,7 @@ class packager
 	public function create_extension($data)
 	{
 		$ext_path = $this->root_path . 'store/tmp-ext/' . "{$data['extension']['vendor_name']}/{$data['extension']['extension_name']}/";
-		$filesystem = new Filesystem();
+		$filesystem = new filesystem();
 		$filesystem->remove($this->root_path . 'store/tmp-ext');
 		$filesystem->mkdir($ext_path);
 
@@ -148,7 +148,7 @@ class packager
 			$body = $template_engine
 				->set_filenames(['body' => $file . '.twig'])
 				->assign_display('body');
-			$filesystem->dumpFile($ext_path . str_replace('demo', strtolower($data['extension']['extension_name']), $file), trim($body) . "\n");
+			$filesystem->dump_file($ext_path . str_replace('demo', strtolower($data['extension']['extension_name']), $file), trim($body) . "\n");
 		}
 	}
 
@@ -208,7 +208,7 @@ class packager
 			$this->phpbb_container->getParameter('core.cache_dir'),
 			$this->phpbb_container->get('ext.manager'),
 			new loader(
-				new \phpbb\filesystem\filesystem()
+				new filesystem()
 			)
 		);
 
