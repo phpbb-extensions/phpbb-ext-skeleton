@@ -116,9 +116,9 @@ class packager
 
 		$phpbb31 = (bool) preg_match('/^[\D]*3\.1.*$/', $data['requirements']['phpbb_version_min']);
 
-		$template_engine = $this->get_template_engine();
-		$template_engine->set_custom_style('skeletonextension', $this->root_path . 'ext/phpbb/skeleton/skeleton');
-		$template_engine->assign_vars([
+		$template = $this->get_template_engine();
+		$template->set_custom_style('skeletonextension', $this->root_path . 'ext/phpbb/skeleton/skeleton');
+		$template->assign_vars([
 			'COMPONENT'    => $data['components'],
 			'EXTENSION'    => $data['extension'],
 			'REQUIREMENTS' => $data['requirements'],
@@ -141,11 +141,11 @@ class packager
 				$skeleton_files[] = $component_data[$component]['files'];
 			}
 		}
-		$skeleton_files = call_user_func_array('array_merge', $skeleton_files);
+		$skeleton_files = array_merge(...$skeleton_files);
 
 		foreach ($skeleton_files as $file)
 		{
-			$body = $template_engine
+			$body = $template
 				->set_filenames(['body' => $file . '.twig'])
 				->assign_display('body');
 			$filesystem->dump_file($ext_path . str_replace('demo', strtolower($data['extension']['extension_name']), $file), trim($body) . "\n");
