@@ -49,13 +49,13 @@ class ext extends \phpbb\extension\base
 	}
 
 	/**
-	 * Check PHP 5.4.0 minimum requirement.
+	 * Check PHP 5.6.0 minimum requirement.
 	 *
 	 * @return void
 	 */
 	protected function php_requirement()
 	{
-		if (phpbb_version_compare(PHP_VERSION, '5.4.0', '<'))
+		if (phpbb_version_compare(PHP_VERSION, '5.6.0', '<'))
 		{
 			$this->errors[] = 'PHP_VERSION_ERROR';
 		}

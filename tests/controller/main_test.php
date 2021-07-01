@@ -15,6 +15,7 @@ namespace phpbb\skeleton\tests\controller;
 
 use phpbb\exception\http_exception;
 use phpbb\exception\runtime_exception;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class main_test extends \phpbb_test_case
 {
@@ -33,62 +34,79 @@ class main_test extends \phpbb_test_case
 	/** @var \phpbb\controller\helper|\PHPUnit\Framework\MockObject\MockObject */
 	protected $controller_helper;
 
-	/** @var \phpbb\skeleton\helper\packager|\PHPUnit\Framework\MockObject\MockObject */
+	/** @var \phpbb\skeleton\helper\packager */
 	protected $packager;
+
+	/** @var \phpbb\skeleton\helper\packager|\PHPUnit\Framework\MockObject\MockObject */
+	protected $packager_mock;
 
 	/** @var \phpbb\skeleton\helper\validator|\PHPUnit\Framework\MockObject\MockObject */
 	protected $validator;
 
+	/** @var ContainerInterface */
+	protected $container;
+
 	protected function setUp(): void
 	{
+		global $phpbb_root_path;
+
 		// Mocks are dummy implementations that provide the API of components we depend on //
-		/** @var \phpbb\template\template|\PHPUnit_Framework_MockObject_MockObject $template Mock the template class */
 		$this->template = $this->getMockBuilder('\phpbb\template\template')
 			->disableOriginalConstructor()
 			->getMock();
 
-		/** @var \phpbb\language\language|\PHPUnit_Framework_MockObject_MockObject $language Mock the language class */
 		$this->language = $this->getMockBuilder('\phpbb\language\language')
 			->disableOriginalConstructor()
 			->getMock();
 
-		/** @var \phpbb\request\request|\PHPUnit_Framework_MockObject_MockObject $request */
 		$this->request = $this->getMockBuilder('\phpbb\request\request')
 			->disableOriginalConstructor()
 			->getMock();
 
-		/** @var \phpbb\user|\PHPUnit_Framework_MockObject_MockObject $user */
 		$this->user = $this->getMockBuilder('\phpbb\user')
 			->disableOriginalConstructor()
 			->getMock();
 
-		/** @var \phpbb\controller\helper|\PHPUnit_Framework_MockObject_MockObject $controller_helper Mock the controller helper class */
 		$this->controller_helper = $this->getMockBuilder('\phpbb\controller\helper')
 			->disableOriginalConstructor()
 			->getMock();
 
-		/** @var \phpbb\skeleton\helper\packager|\PHPUnit_Framework_MockObject_MockObject $packager */
-		$this->packager = $this->getMockBuilder('\phpbb\skeleton\helper\packager')
+		$this->packager_mock = $this->getMockBuilder('\phpbb\skeleton\helper\packager')
 			->disableOriginalConstructor()
 			->getMock();
 
-		/** @var \phpbb\skeleton\helper\validator $validator */
+		$phpbb_container = new \phpbb_mock_container_builder();
+		$skeletons = new \phpbb\di\service_collection($phpbb_container);
+		$skeletons->add('phpbb.skeleton.ext.skeleton.phplistener');
+		$phpbb_container->set(
+			'phpbb.skeleton.ext.skeleton.phplistener',
+			new \phpbb\skeleton\skeleton('phplistener',
+				false,
+				[],
+				['config/services.yml', 'event/main_listener.php', 'language/en/common.php'],
+				'BACK_END'
+			)
+		);
+
+		$this->packager = new \phpbb\skeleton\helper\packager($phpbb_container, $skeletons, $phpbb_root_path);
+
 		$this->validator = $this->getMockBuilder('\phpbb\skeleton\helper\validator')
 			->disableOriginalConstructor()
 			->getMock();
 	}
 
 	/**
+	 * @param \phpbb\skeleton\helper\packager|\PHPUnit\Framework\MockObject\MockObject $packager
 	 * @return \phpbb\skeleton\controller\main
 	 */
-	public function get_controller(): \phpbb\skeleton\controller\main
+	public function get_controller($packager): \phpbb\skeleton\controller\main
 	{
 		return new \phpbb\skeleton\controller\main(
 			new \phpbb\config\config([]),
 			$this->controller_helper,
 			$this->language,
 			$this->request,
-			$this->packager,
+			$packager,
 			$this->validator,
 			$this->template,
 			$this->user
@@ -124,10 +142,11 @@ class main_test extends \phpbb_test_case
 		$this->request->method('variable')
 			->with(self::anything())
 			->willReturnMap([
-				['author_name', [''], true, \phpbb\request\request_interface::REQUEST, [null]],
-				['vendor_name', '', true, \phpbb\request\request_interface::REQUEST, ''],
-				['php_version', '>=5.4', false, \phpbb\request\request_interface::REQUEST, ''],
-				['component_phplistener', false, false, \phpbb\request\request_interface::REQUEST, ''],
+				['vendor_name', '', true, \phpbb\request\request_interface::REQUEST, 'foo'],
+				['author_name', [''], true, \phpbb\request\request_interface::REQUEST, ['bar']],
+				['extension_version', '1.0.0-dev', true, \phpbb\request\request_interface::REQUEST, '1.0.0-dev'],
+				['php_version', '>=5.4', false, \phpbb\request\request_interface::REQUEST, '>=5.4'],
+				['component_phplistener', false, false, \phpbb\request\request_interface::REQUEST, true],
 			]);
 
 		$this->controller_helper->expects(self::once())
@@ -136,20 +155,6 @@ class main_test extends \phpbb_test_case
 				return new \Symfony\Component\HttpFoundation\Response($template_file, $status_code);
 			});
 
-		$this->packager->expects(self::once())
-			->method('get_composer_dialog_values')
-			->willReturn([
-				'author' => ['author_name' => null],
-				'extension' => ['vendor_name' => null],
-				'requirements' => ['php_version' => '>=5.4'],
-			]);
-
-		$this->packager->expects(self::once())
-			->method('get_component_dialog_values')
-			->willReturn([
-				'phplistener' => ['default' => false, 'group' => 'BACK_END']
-			]);
-
 		$this->template->expects(self::atLeastOnce())
 			->method('assign_block_vars')
 			->withConsecutive(
@@ -157,30 +162,96 @@ class main_test extends \phpbb_test_case
 					'NAME'         => 'vendor_name',
 					'DESC'         => 'SKELETON_QUESTION_VENDOR_NAME_UI',
 					'DESC_EXPLAIN' => 'SKELETON_QUESTION_VENDOR_NAME_EXPLAIN',
+					'VALUE'        => 'foo',
+				]],
+				['extension', [
+					'NAME'         => 'extension_name',
+					'DESC'         => 'SKELETON_QUESTION_EXTENSION_NAME_UI',
+					'DESC_EXPLAIN' => 'SKELETON_QUESTION_EXTENSION_NAME_EXPLAIN',
+					'VALUE'        => '',
+				]],
+				['extension', [
+					'NAME'         => 'extension_display_name',
+					'DESC'         => 'SKELETON_QUESTION_EXTENSION_DISPLAY_NAME_UI',
+					'DESC_EXPLAIN' => 'SKELETON_QUESTION_EXTENSION_DISPLAY_NAME_EXPLAIN',
+					'VALUE'        => '',
+				]],
+				['extension', [
+					'NAME'         => 'extension_description',
+					'DESC'         => 'SKELETON_QUESTION_EXTENSION_DESCRIPTION_UI',
+					'DESC_EXPLAIN' => 'SKELETON_QUESTION_EXTENSION_DESCRIPTION_EXPLAIN',
+					'VALUE'        => '',
+				]],
+				['extension', [
+					'NAME'         => 'extension_version',
+					'DESC'         => 'SKELETON_QUESTION_EXTENSION_VERSION_UI',
+					'DESC_EXPLAIN' => 'SKELETON_QUESTION_EXTENSION_VERSION_EXPLAIN',
+					'VALUE'        => '1.0.0-dev',
+				]],
+				['extension', [
+					'NAME'         => 'extension_time',
+					'DESC'         => 'SKELETON_QUESTION_EXTENSION_TIME_UI',
+					'DESC_EXPLAIN' => 'SKELETON_QUESTION_EXTENSION_TIME_EXPLAIN',
+					'VALUE'        => '',
+				]],
+				['extension', [
+					'NAME'         => 'extension_homepage',
+					'DESC'         => 'SKELETON_QUESTION_EXTENSION_HOMEPAGE_UI',
+					'DESC_EXPLAIN' => 'SKELETON_QUESTION_EXTENSION_HOMEPAGE_EXPLAIN',
 					'VALUE'        => '',
 				]],
 				['author', [
 					'NAME'         => 'author_name',
 					'DESC'         => 'SKELETON_QUESTION_AUTHOR_NAME_UI',
 					'DESC_EXPLAIN' => 'SKELETON_QUESTION_AUTHOR_NAME_EXPLAIN',
+					'VALUE'        => 'bar',
+				]],
+				['author', [
+					'NAME'         => 'author_email',
+					'DESC'         => 'SKELETON_QUESTION_AUTHOR_EMAIL_UI',
+					'DESC_EXPLAIN' => 'SKELETON_QUESTION_AUTHOR_EMAIL_EXPLAIN',
+					'VALUE'        => '',
+				]],
+				['author', [
+					'NAME'         => 'author_homepage',
+					'DESC'         => 'SKELETON_QUESTION_AUTHOR_HOMEPAGE_UI',
+					'DESC_EXPLAIN' => 'SKELETON_QUESTION_AUTHOR_HOMEPAGE_EXPLAIN',
+					'VALUE'        => '',
+				]],
+				['author', [
+					'NAME'         => 'author_role',
+					'DESC'         => 'SKELETON_QUESTION_AUTHOR_ROLE_UI',
+					'DESC_EXPLAIN' => 'SKELETON_QUESTION_AUTHOR_ROLE_EXPLAIN',
 					'VALUE'        => '',
 				]],
 				['requirement', [
 					'NAME'         => 'php_version',
 					'DESC'         => 'SKELETON_QUESTION_PHP_VERSION_UI',
 					'DESC_EXPLAIN' => 'SKELETON_QUESTION_PHP_VERSION_EXPLAIN',
+					'VALUE'        => '>=5.4',
+				]],
+				['requirement', [
+					'NAME'         => 'phpbb_version_min',
+					'DESC'         => 'SKELETON_QUESTION_PHPBB_VERSION_MIN_UI',
+					'DESC_EXPLAIN' => 'SKELETON_QUESTION_PHPBB_VERSION_MIN_EXPLAIN',
+					'VALUE'        => '',
+				]],
+				['requirement', [
+					'NAME'         => 'phpbb_version_max',
+					'DESC'         => 'SKELETON_QUESTION_PHPBB_VERSION_MAX_UI',
+					'DESC_EXPLAIN' => 'SKELETON_QUESTION_PHPBB_VERSION_MAX_EXPLAIN',
 					'VALUE'        => '',
 				]],
 				['component_BACK_END', [
 					'NAME'         => 'component_phplistener',
 					'DESC'         => 'SKELETON_QUESTION_COMPONENT_PHPLISTENER_UI',
 					'DESC_EXPLAIN' => 'SKELETON_QUESTION_COMPONENT_PHPLISTENER_EXPLAIN',
-					'VALUE'        => '',
+					'VALUE'        => true,
 				]]
 			)
 		;
 
-		$response = $this->get_controller()->handle();
+		$response = $this->get_controller($this->packager)->handle();
 
 		self::assertInstanceOf('\Symfony\Component\HttpFoundation\Response', $response);
 		self::assertEquals($status_code, $response->getStatusCode());
@@ -197,7 +268,7 @@ class main_test extends \phpbb_test_case
 		$this->expectException(http_exception::class);
 		$this->expectExceptionMessage('NOT_AUTHORISED');
 
-		$this->get_controller()->handle();
+		$this->get_controller($this->packager_mock)->handle();
 	}
 
 	public function test_submit_success()
@@ -213,10 +284,10 @@ class main_test extends \phpbb_test_case
 				['author_name', [''], true, \phpbb\request\request_interface::REQUEST, ['foo_auth']],
 				['vendor_name', '', true, \phpbb\request\request_interface::REQUEST, 'foo_vendor'],
 				['php_version', '>=5.4', true, \phpbb\request\request_interface::REQUEST, '>=5.4'],
-				['component_phplistener', true, false, \phpbb\request\request_interface::REQUEST, ''],
+				['component_phplistener', true, false, \phpbb\request\request_interface::REQUEST, true],
 			]);
 
-		$this->packager->expects(self::once())
+		$this->packager_mock->expects(self::once())
 			->method('get_composer_dialog_values')
 			->willReturn([
 				'author' => ['author_name' => null],
@@ -224,20 +295,20 @@ class main_test extends \phpbb_test_case
 				'requirements' => ['php_version' => '>=5.4'],
 			]);
 
-		$this->packager->expects(self::once())
+		$this->packager_mock->expects(self::once())
 			->method('get_component_dialog_values')
 			->willReturn([
 				'phplistener' => ['dependencies' => ['config/services.yml', 'event/main_listener.php', 'language/en/common.php']]
 			]);
 
-		$this->packager->expects($this->once())
+		$this->packager_mock->expects($this->once())
 			->method('create_extension');
 
-		$this->packager->expects($this->once())
+		$this->packager_mock->expects($this->once())
 			->method('create_zip')
 			->willReturn(__DIR__ . '/../fixtures/dummy.txt');
 
-		$response = $this->get_controller()->handle();
+		$response = $this->get_controller($this->packager_mock)->handle();
 
 		self::assertInstanceOf('\Symfony\Component\HttpFoundation\Response', $response);
 	}
@@ -258,7 +329,7 @@ class main_test extends \phpbb_test_case
 				['php_version', '>=5.4', true, \phpbb\request\request_interface::REQUEST, '>=5.4'],
 			]);
 
-		$this->packager->expects(self::atLeastOnce())
+		$this->packager_mock->expects(self::atLeastOnce())
 			->method('get_composer_dialog_values')
 			->willReturn([
 				'author' => ['author_name' => null],
@@ -266,7 +337,7 @@ class main_test extends \phpbb_test_case
 				'requirements' => ['php_version' => '>=5.4'],
 			]);
 
-		$this->packager->expects(self::atLeastOnce())
+		$this->packager_mock->expects(self::atLeastOnce())
 			->method('get_component_dialog_values')
 			->willReturn([]);
 
@@ -275,16 +346,16 @@ class main_test extends \phpbb_test_case
 			->with('foo_vendor')
 			->willThrowException(new runtime_exception('SKELETON_INVALID_VENDOR_NAME'));
 
-		$this->packager->expects($this->never())
+		$this->packager_mock->expects($this->never())
 			->method('create_extension');
 
-		$this->packager->expects($this->never())
+		$this->packager_mock->expects($this->never())
 			->method('create_zip');
 
 		$this->template->expects($this->at(0))
 			->method('assign_var')
 			->with('ERROR');
 
-		$this->get_controller()->handle();
+		$this->get_controller($this->packager_mock)->handle();
 	}
 }
