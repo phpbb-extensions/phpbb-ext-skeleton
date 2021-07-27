@@ -298,7 +298,12 @@ class main_test extends \phpbb_test_case
 		$this->packager_mock->expects(self::once())
 			->method('get_component_dialog_values')
 			->willReturn([
-				'phplistener' => ['dependencies' => ['config/services.yml', 'event/main_listener.php', 'language/en/common.php']]
+				'phplistener' => [
+					'default'      => false,
+					'dependencies' => [],
+					'files'        => ['config/services.yml', 'event/main_listener.php', 'language/en/common.php'],
+					'group'        => 'BACK_END',
+				],
 			]);
 
 		$this->packager_mock->expects($this->once())
@@ -319,6 +324,7 @@ class main_test extends \phpbb_test_case
 
 		$this->request->expects(self::once())
 			->method('is_set_post')
+			->with('submit')
 			->willReturn(true);
 
 		$this->request->method('variable')
@@ -339,7 +345,14 @@ class main_test extends \phpbb_test_case
 
 		$this->packager_mock->expects(self::atLeastOnce())
 			->method('get_component_dialog_values')
-			->willReturn([]);
+			->willReturn([
+				'phplistener' => [
+					'default'      => false,
+					'dependencies' => [],
+					'files'        => ['config/services.yml', 'event/main_listener.php', 'language/en/common.php'],
+					'group'        => 'BACK_END',
+				],
+			]);
 
 		$this->validator->expects(self::once())
 			->method('validate_vendor_name')
@@ -352,9 +365,12 @@ class main_test extends \phpbb_test_case
 		$this->packager_mock->expects($this->never())
 			->method('create_zip');
 
-		$this->template->expects($this->at(0))
+		$this->template->expects($this->exactly(2))
 			->method('assign_var')
-			->with('ERROR');
+			->withConsecutive(
+				['ERROR'],
+				['S_POST_ACTION']
+			);
 
 		$this->get_controller($this->packager_mock)->handle();
 	}
