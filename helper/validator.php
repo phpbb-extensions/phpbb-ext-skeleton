@@ -250,6 +250,6 @@ class validator
 	 */
 	protected function check_version($value)
 	{
-		return (bool) preg_match('/^[<>=]*[\d+][\w.@-]+$/', $value);
+		return (bool) preg_match('/^[<>=]*[\d+][\w.@-]+$/', htmlspecialchars_decode($value, ENT_NOQUOTES));
 	}
 }
