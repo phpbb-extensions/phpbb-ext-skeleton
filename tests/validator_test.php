@@ -81,6 +81,8 @@ class validator_test extends \phpbb_test_case
 			['phpbb_version_min', '<=1.0.0'],
 			['phpbb_version_min', '<=1.0.0@dev'],
 			['phpbb_version_min', '<=1.0.0-pl1'],
+			['phpbb_version_min', '&gt;1.0.0'],
+			['phpbb_version_min', '&lt;=1.0.0'],
 
 			['phpbb_version_max', '1.0.0'],
 			['phpbb_version_max', '>1.0.0'],
@@ -91,6 +93,8 @@ class validator_test extends \phpbb_test_case
 			['phpbb_version_max', '<=1.0.0'],
 			['phpbb_version_max', '<=1.0.0@dev'],
 			['phpbb_version_max', '<=1.0.0-pl1'],
+			['phpbb_version_max', '&gt;1.0.0'],
+			['phpbb_version_max', '&lt;=1.0.0'],
 
 			['php_version', '1.0.0'],
 			['php_version', '>1.0.0'],
@@ -101,6 +105,8 @@ class validator_test extends \phpbb_test_case
 			['php_version', '<=1.0.0'],
 			['php_version', '<=1.0.0@dev'],
 			['php_version', '<=1.0.0-pl1'],
+			['php_version', '&gt;1.0.0'],
+			['php_version', '&lt;=1.0.0'],
 		];
 	}
 
@@ -183,6 +189,7 @@ class validator_test extends \phpbb_test_case
 			['phpbb_version_min', '~1.0.0', 'SKELETON_INVALID_PHPBB_MIN_VERSION'],
 			['phpbb_version_min', '^1.0.0', 'SKELETON_INVALID_PHPBB_MIN_VERSION'],
 			['phpbb_version_min', '1.0.0 | 2.0.0', 'SKELETON_INVALID_PHPBB_MIN_VERSION'],
+			['phpbb_version_min', '&amp;gt;=5.4', 'SKELETON_INVALID_PHPBB_MIN_VERSION'],
 
 			['phpbb_version_max', '', 'SKELETON_INVALID_PHPBB_MAX_VERSION'],
 			['phpbb_version_max', null, 'SKELETON_INVALID_PHPBB_MAX_VERSION'],
@@ -190,6 +197,7 @@ class validator_test extends \phpbb_test_case
 			['phpbb_version_max', '~1.0.0', 'SKELETON_INVALID_PHPBB_MAX_VERSION'],
 			['phpbb_version_max', '^1.0.0', 'SKELETON_INVALID_PHPBB_MAX_VERSION'],
 			['phpbb_version_max', '1.0.0 | 2.0.0', 'SKELETON_INVALID_PHPBB_MAX_VERSION'],
+			['phpbb_version_max', '&amp;gt;=5.4', 'SKELETON_INVALID_PHPBB_MAX_VERSION'],
 
 			['php_version', '', 'SKELETON_INVALID_PHP_VERSION'],
 			['php_version', null, 'SKELETON_INVALID_PHP_VERSION'],
@@ -197,6 +205,7 @@ class validator_test extends \phpbb_test_case
 			['php_version', '~1.0.0', 'SKELETON_INVALID_PHP_VERSION'],
 			['php_version', '^1.0.0', 'SKELETON_INVALID_PHP_VERSION'],
 			['php_version', '1.0.0 | 2.0.0', 'SKELETON_INVALID_PHP_VERSION'],
+			['php_version', '&amp;gt;=5.4', 'SKELETON_INVALID_PHP_VERSION'],
 		];
 	}
 
