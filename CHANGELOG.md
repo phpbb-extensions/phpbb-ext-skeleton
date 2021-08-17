@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.1.8 - 2021-08-16
+
+- Updated minimum requirements: PHP 5.6 and phpBB 3.2.3.
+- Fixed unexpected errors for phpBB and PHP version constraints using ">" and "<" characters.
+- Internally, some minor code improvements.
+- Internally, switched to NPM to manage 3rd party package dependencies.
+- Internally, implemented unit and functional test coverage for code reliability.
+
 ## 1.1.7 - 2021-05-28
 
 - Added validation on user input for homepage URLs, author email addresses, and version requirement patterns.
