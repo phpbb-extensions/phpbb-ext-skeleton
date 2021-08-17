@@ -21,9 +21,9 @@ class ext extends \phpbb\extension\base
 	protected $errors = [];
 
 	/**
-	 * Check whether or not the extension can be enabled.
+	 * Check whether the extension can be enabled.
 	 *
-	 * @return bool|array True if can be enabled. False if not, or an array of error messages in phpBB 3.3.
+	 * @return bool|array True if it can be enabled. False if not, or an array of error messages in phpBB 3.3.
 	 */
 	public function is_enableable()
 	{
