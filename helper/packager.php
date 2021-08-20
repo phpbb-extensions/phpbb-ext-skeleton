@@ -207,9 +207,7 @@ class packager
 			$path_helper,
 			$this->phpbb_container->getParameter('core.cache_dir'),
 			$this->phpbb_container->get('ext.manager'),
-			new loader(
-				new filesystem()
-			)
+			new loader()
 		);
 
 		// Custom filter for use by packager to decode greater/less than symbols
