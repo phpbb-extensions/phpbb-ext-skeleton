@@ -18,6 +18,7 @@ use phpbb\language\language;
 use phpbb\skeleton\helper\packager;
 use phpbb\skeleton\helper\validator;
 use phpbb\user;
+use Symfony\Component\Console\Exception\LogicException;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -85,13 +86,18 @@ class create extends command
 	 * @param OutputInterface $output An OutputInterface instance
 	 *
 	 * @see \phpbb\config\config::delete()
-	 * @return void
+	 *
+	 * @return int 0 if everything went fine, or an exit code
+	 *
+	 * @throws LogicException When this abstract method is not implemented
 	 */
 	protected function execute(InputInterface $input, OutputInterface $output)
 	{
 		$this->packager->create_extension($this->data);
 
 		$output->writeln($this->language->lang('EXTENSION_CLI_SKELETON_SUCCESS'));
+
+		return 0;
 	}
 
 	/**
