@@ -78,6 +78,6 @@ class event_listener_test extends \phpbb_test_case
 		$dispatcher = new \phpbb\event\dispatcher();
 		$dispatcher->addListener('core.page_header', [$this->listener, 'add_page_header_link']);
 
-		$dispatcher->dispatch('core.page_header');
+		$dispatcher->trigger_event('core.page_header');
 	}
 }
