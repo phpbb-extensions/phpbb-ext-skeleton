@@ -1,9 +1,15 @@
 {% if skeleton_version_compare(REQUIREMENTS.phpbb_version_min, "3.2", "<") %}{# for phpBB 3.1.x #}
 <li class="small-icon icon-faq no-bulletin"><a href="{{ '{{' }} U_{{ EXTENSION.extension_name|upper }}_PAGE }}">{{ '{{' }} lang('{{ EXTENSION.extension_name|upper }}_PAGE') }}</a></li>
-{% else %}{# for phpBB > 3.2.x #}
+{% elseif skeleton_version_compare(REQUIREMENTS.phpbb_version_min, "4.0", "<") %}{# for phpBB 3.2.x - 3.3.x #}
 <li data-last-responsive="true">
 	<a href="{{ '{{' }} U_{{ EXTENSION.extension_name|upper }}_PAGE }}" title="{{ '{{' }} lang('{{ EXTENSION.extension_name|upper }}_PAGE') }}" role="menuitem">
 		<i class="icon fa-question-circle fa-fw" aria-hidden="true"></i><span>{{ '{{' }} lang('{{ EXTENSION.extension_name|upper }}_PAGE') }}</span>
+	</a>
+</li>
+{% else %}{# for phpBB > 4.0.x #}
+<li data-last-responsive="true">
+	<a href="{{ '{{' }} U_{{ EXTENSION.extension_name|upper }}_PAGE }}" title="{{ '{{' }} lang('{{ EXTENSION.extension_name|upper }}_PAGE') }}" role="menuitem">
+		{{ '{{' }} Icon('iconify', 'fa:question-circle', lang('{{ EXTENSION.extension_name|upper }}_PAGE'), false) }}
 	</a>
 </li>
 {% endif %}
