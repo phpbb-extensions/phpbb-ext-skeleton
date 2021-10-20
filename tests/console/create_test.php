@@ -138,7 +138,7 @@ class create_test extends \phpbb_test_case
 				return $response;
 			};
 			$helper = $this->getMockBuilder('\Symfony\Component\Console\Helper\QuestionHelper')
-				->setMethods(['ask'])
+				->onlyMethods(['ask'])
 				->disableOriginalConstructor()
 				->getMock();
 			$helper->method('ask')
