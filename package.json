@@ -1,13 +1,9 @@
 {
 	"name": "phpbb-skeleton",
-	"version": "1.1.8",
 	"author": "phpBB Limited",
 	"license": "GPL-2.0",
 	"scripts": {
-		"build": "sass --load-path=node_modules --style=compressed styles/prosilver/theme/skeleton.scss styles/prosilver/theme/skeleton.css",
-		"bump-major": "npm version major --git-tag-version=false",
-		"bump-minor": "npm version minor --git-tag-version=false",
-		"bump-patch": "npm version patch --git-tag-version=false"
+		"build": "sass --load-path=node_modules --style=compressed styles/prosilver/theme/skeleton.scss styles/prosilver/theme/skeleton.css"
 	},
 	"dependencies": {
 		"primer-tooltips": "^2.0.0"
