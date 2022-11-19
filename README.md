@@ -11,9 +11,7 @@ The Skeleton Extension is available from phpBB.com as an Official Tool [here](ht
 
 ## Contributing
 
-To install the source code from this repository, fork and clone this repository to `phpBB/ext/phpbb/skeleton`, then run Composer from the extension's directory:
-
-	$ php composer.phar install
+We welcome contributions to help make this extension even better. Please fork this repository, install it to a local development copy of phpBB, and send us a pull request with your bug fixes or feature improvements.
 
 ## License
 
