@@ -15,6 +15,10 @@ namespace phpbb\skeleton;
 
 class ext extends \phpbb\extension\base
 {
+	const DEFAULT_PHP = '7.1.3';
+	const DEFAULT_PHPBB_MIN = '3.3.0';
+	const DEFAULT_PHPBB_MAX = '4.0.0@dev';
+
 	/**
 	 * @var array An array of installation error messages
 	 */

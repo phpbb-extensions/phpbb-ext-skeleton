@@ -15,6 +15,7 @@ namespace phpbb\skeleton\tests\controller;
 
 use phpbb\exception\http_exception;
 use phpbb\exception\runtime_exception;
+use phpbb\skeleton\ext;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class main_test extends \phpbb_test_case
@@ -145,7 +146,7 @@ class main_test extends \phpbb_test_case
 				['vendor_name', '', true, \phpbb\request\request_interface::REQUEST, 'foo'],
 				['author_name', [''], true, \phpbb\request\request_interface::REQUEST, ['bar']],
 				['extension_version', '1.0.0-dev', true, \phpbb\request\request_interface::REQUEST, '1.0.0-dev'],
-				['php_version', '>=5.4', false, \phpbb\request\request_interface::REQUEST, '>=5.4'],
+				['php_version', '>=' . ext::DEFAULT_PHP, false, \phpbb\request\request_interface::REQUEST, '>=' . ext::DEFAULT_PHP],
 				['component_phplistener', false, false, \phpbb\request\request_interface::REQUEST, true],
 			]);
 
@@ -228,7 +229,7 @@ class main_test extends \phpbb_test_case
 					'NAME'         => 'php_version',
 					'DESC'         => 'SKELETON_QUESTION_PHP_VERSION_UI',
 					'DESC_EXPLAIN' => 'SKELETON_QUESTION_PHP_VERSION_EXPLAIN',
-					'VALUE'        => '>=5.4',
+					'VALUE'        => '>=' . ext::DEFAULT_PHP,
 				]],
 				['requirement', [
 					'NAME'         => 'phpbb_version_min',

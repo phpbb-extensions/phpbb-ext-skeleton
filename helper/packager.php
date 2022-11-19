@@ -16,6 +16,7 @@ namespace phpbb\skeleton\helper;
 use phpbb\config\config;
 use phpbb\di\service_collection;
 use phpbb\filesystem\filesystem;
+use phpbb\skeleton\ext;
 use phpbb\skeleton\template\twig\extension\skeleton_version_compare;
 use phpbb\template\context;
 use phpbb\template\twig\environment;
@@ -73,9 +74,9 @@ class packager
 				'extension_homepage'     => null,
 			],
 			'requirements' => [
-				'php_version'       => '>=5.4',
-				'phpbb_version_min' => '>=3.2.0',
-				'phpbb_version_max' => '<4.0.0@dev',
+				'php_version'       => '>=' . ext::DEFAULT_PHP,
+				'phpbb_version_min' => '>=' . ext::DEFAULT_PHPBB_MIN,
+				'phpbb_version_max' => '<' . ext::DEFAULT_PHPBB_MAX,
 			],
 		];
 	}
