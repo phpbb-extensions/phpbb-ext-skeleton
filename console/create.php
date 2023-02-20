@@ -18,6 +18,7 @@ use phpbb\language\language;
 use phpbb\skeleton\helper\packager;
 use phpbb\skeleton\helper\validator;
 use phpbb\user;
+use Symfony\Component\Console\Command\Command as SymfonyCommand;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -92,6 +93,8 @@ class create extends command
 		$this->packager->create_extension($this->data);
 
 		$output->writeln($this->language->lang('EXTENSION_CLI_SKELETON_SUCCESS'));
+
+		return SymfonyCommand::SUCCESS;
 	}
 
 	/**
