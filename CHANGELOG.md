@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.9 - 2022-06-17
+
+- Fixed cron task naming conventions.
+
 ## 1.1.8 - 2021-08-16
 
 - Updated minimum requirements: PHP 5.6 and phpBB 3.2.3.

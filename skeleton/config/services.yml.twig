@@ -89,7 +89,7 @@ services:
         arguments:
             - '@config'
         calls:
-            - [set_name, [{{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.cron.task.sample]]
+            - [set_name, [cron.task.{{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.sample]]
         tags:
             - { name: cron.task }
 
