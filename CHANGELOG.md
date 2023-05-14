@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.1.10 - 2023-05-13
+
+- Updated GitHub Action workflow files.
+- Removed translation of *CP module page titles as it's not necessary.
+- Updated the Skeleton icon.
+- Minor code improvements and clean up.
+
 ## 1.1.9 - 2022-06-17
 
 - Fixed cron task naming conventions.

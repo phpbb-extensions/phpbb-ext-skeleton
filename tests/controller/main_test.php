@@ -286,6 +286,7 @@ class main_test extends \phpbb_test_case
 				['vendor_name', '', true, \phpbb\request\request_interface::REQUEST, 'foo_vendor'],
 				['php_version', '>=5.4', true, \phpbb\request\request_interface::REQUEST, '>=5.4'],
 				['component_phplistener', true, false, \phpbb\request\request_interface::REQUEST, true],
+				['component_githubactions', true, false, \phpbb\request\request_interface::REQUEST, true],
 			]);
 
 		$this->packager_mock->expects(self::once())
@@ -304,6 +305,12 @@ class main_test extends \phpbb_test_case
 					'dependencies' => [],
 					'files'        => ['config/services.yml', 'event/main_listener.php', 'language/en/common.php'],
 					'group'        => 'BACK_END',
+				],
+				'githubactions' => [
+					'default'      => false,
+					'dependencies' => ['tests'],
+					'files'        => ['.github/workflows/tests.yml'],
+					'group'        => 'TEST_DEPLOY',
 				],
 			]);
 
