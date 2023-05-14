@@ -4,6 +4,7 @@
 
 - Updated GitHub Action workflow files.
 - Removed translation of *CP module page titles as it's not necessary.
+- Updated the Skeleton icon.
 - Minor code improvements and clean up.
 
 ## 1.1.9 - 2022-06-17
