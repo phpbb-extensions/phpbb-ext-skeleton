@@ -33,14 +33,11 @@ class main_module
 		/** @var \{{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\controller\acp_controller $acp_controller */
 		$acp_controller = $phpbb_container->get('{{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.controller.acp');
 
-		/** @var {{ LANGUAGE.class }} ${{ LANGUAGE.object }} */
-		${{ LANGUAGE.object }} = $phpbb_container->get('{{ LANGUAGE.object }}');
-
 		// Load a template from adm/style for our ACP page
 		$this->tpl_name = 'acp_{{ EXTENSION.extension_name|lower }}_body';
 
 		// Set the page title for our ACP page
-		$this->page_title = ${{ LANGUAGE.object }}->lang('ACP_{{ EXTENSION.extension_name|upper }}_TITLE');
+		$this->page_title = 'ACP_{{ EXTENSION.extension_name|upper }}_TITLE';
 
 		// Make the $u_action url available in our ACP controller
 		$acp_controller->set_page_url($this->u_action);

@@ -33,14 +33,11 @@ class main_module
 		/** @var \{{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\controller\ucp_controller $ucp_controller */
 		$ucp_controller = $phpbb_container->get('{{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.controller.ucp');
 
-		/** @var {{ LANGUAGE.class }} ${{ LANGUAGE.object }} */
-		${{ LANGUAGE.object }} = $phpbb_container->get('{{ LANGUAGE.object }}');
-
 		// Load a template for our UCP page
 		$this->tpl_name = 'ucp_{{ EXTENSION.extension_name|lower }}_body';
 
 		// Set the page title for our UCP page
-		$this->page_title = ${{ LANGUAGE.object }}->lang('UCP_{{ EXTENSION.extension_name|upper }}_TITLE');
+		$this->page_title = 'UCP_{{ EXTENSION.extension_name|upper }}_TITLE';
 
 		// Make the $u_action url available in our UCP controller
 		$ucp_controller->set_page_url($this->u_action);
