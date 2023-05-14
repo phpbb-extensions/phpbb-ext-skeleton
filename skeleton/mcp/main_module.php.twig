@@ -33,14 +33,11 @@ class main_module
 		/** @var \{{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\controller\mcp_controller $mcp_controller */
 		$mcp_controller = $phpbb_container->get('{{ EXTENSION.vendor_name }}.{{ EXTENSION.extension_name }}.controller.mcp');
 
-		/** @var {{ LANGUAGE.class }} ${{ LANGUAGE.object }} */
-		${{ LANGUAGE.object }} = $phpbb_container->get('{{ LANGUAGE.object }}');
-
 		// Load a template for our MCP page
 		$this->tpl_name = 'mcp_{{ EXTENSION.extension_name|lower }}_body';
 
 		// Set the page title for our MCP page
-		$this->page_title = ${{ LANGUAGE.object }}->lang('MCP_{{ EXTENSION.extension_name|upper }}_TITLE');
+		$this->page_title = 'MCP_{{ EXTENSION.extension_name|upper }}_TITLE';
 
 		// Make the $u_action url available in our MCP controller
 		$mcp_controller->set_page_url($this->u_action);
