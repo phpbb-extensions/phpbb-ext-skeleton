@@ -173,7 +173,15 @@ class main
 			$this->data['components'][$component] = $this->get_user_input('component_' . $component, $details['default']);
 		}
 
-		$this->template->assign_var('S_POST_ACTION', $this->helper->route('phpbb_skeleton_controller'));
+		$phpbb_skeleton_controller = $this->helper->route('phpbb_skeleton_controller');
+
+		$this->template->assign_var('S_POST_ACTION', $phpbb_skeleton_controller);
+
+		// Create breadcrumbs
+		$this->template->assign_block_vars('navlinks', [
+			'FORUM_NAME'	=> $this->language->lang('PHPBB_SKELETON_EXT'),
+			'U_VIEW_FORUM'	=> $phpbb_skeleton_controller,
+		]);
 
 		return $this->helper->render('@phpbb_skeleton/skeleton_body.html', $this->language->lang('PHPBB_CREATE_SKELETON_EXT'));
 	}
