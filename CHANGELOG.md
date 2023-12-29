@@ -1,8 +1,13 @@
 # Changelog
 
+## 1.1.11 - 2023-12-29
+
+- Updated GitHub Actions workflow to include "main" as a default repo branch to test.
+- Added support for breadcrumbs when viewing the Skeleton page in a forum.
+
 ## 1.1.10 - 2023-05-13
 
-- Updated GitHub Action workflow files.
+- Updated GitHub Actions workflow files.
 - Removed translation of *CP module page titles as it's not necessary.
 - Updated the Skeleton icon.
 - Minor code improvements and clean up.
@@ -28,7 +33,7 @@
 
 ## 1.1.6 - 2020-12-28
 
-- Added option to generate Github Actions workflow for Continuous Integration testing.
+- Added option to generate GitHub Actions workflow for Continuous Integration testing.
 - Fixed an issue that prevented dot-files and dot-directories from being generated.
 - Updated some syntax in the sample PHPUnit test files.
 
@@ -79,7 +84,7 @@
 	- Skeleton files have dropped the use of "Acme" and "Demo" in favor of your own vendor and extension names. 
 	- Skeleton template files now use TWIG syntax instead of old phpBB 3.0 style template syntax.
 	- Improved distinctions between skeletons designed to be compatible with phpBB >=3.1 vs >=3.2. For example, skeletons built to support 3.1 and above will still use the User object for language functions, while skeletons built for 3.2 and above will use the newer Language object for language functions.
-	- All skeleton files have been overhauled with improved Docblocks and sample code that exemplifies phpBB's coding guidelines and best practices.
+	- All skeleton files have been overhauled with improved DocBlock and sample code that exemplifies phpBB's coding guidelines and best practices.
 	- ACP, UCP and MCP modules have been updated to utilise controller classes.
 
 ## 1.0.7 - 2018-03-14
@@ -104,7 +109,7 @@
 
 ## 1.0.3 - 2017-01-12
 
-- Add support for UTF-8 characters in fields (extension full name, description, author info, etc).
+- Add support for UTF-8 characters in fields (extension full name, description, author info, etc.).
 - Only add information about unit testing to the README when testing components are selected.
 - Fix the extension name used in the generated build script component.
 - Fix undeclared class properties generated in the ACP module component.
@@ -128,12 +133,12 @@
 ## 1.0.1 - 2016-10-13
 
 - Fixed an issue where in phpBB 3.1 boards, the Command Line Interface would not work.
-- Skeleton files now have file docblocks uniquely named after the extension (was previously based on phpBB's own docblock). The current date and primary author name are also automatically added to the docblock's @copyright.
+- Skeleton files now have file DocBlocks uniquely named after the extension (was previously based on phpBB's own docblock). The current date and primary author name are also automatically added to the docblock's @copyright.
 - Skeleton ACP PHP files have correct visibility declarations for methods and properties now.
 - Skeleton config service files correctly encapsulate all strings in quotes that begin with @ and % per Symfony specifications.
-- Skeleton PHP files have all their docblocks updated to be consistent with PSR-5 recommendations.
+- Skeleton PHP files have all their DocBlocks updated to be consistent with PSR-5 recommendations.
 - Skeleton event class methods that do not use the $event variable do not have them defined as an argument (this is done to demonstrate that the $event argument is only needed if actually used in an event listener method).
-- Internal docblocks have been updated.
+- Internal DocBlocks have been updated.
 
 ## 1.0.0 - 2016-08-04
 
