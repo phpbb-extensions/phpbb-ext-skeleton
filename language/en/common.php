@@ -155,7 +155,6 @@ $lang = array_merge($lang, [
 	'SKELETON_INVALID_PHPBB_MAX_VERSION'=> 'The maximum phpBB version requirement is invalid.',
 
 	'NO_ZIPARCHIVE_ERROR'	=> 'The ZipArchive class is required, but was not found in your PHP configuration.',
-	'PHP_VERSION_ERROR'		=> 'PHP 5.6 or newer is required to use this extension.',
-	'PHPBB_VERSION_MIN_ERROR'	=> 'phpBB 3.2.3 or newer is required to use this extension.',
-	'PHPBB_VERSION_MAX_ERROR'	=> 'phpBB 4 is not supported with this version of the extension. Please check for a newer version of this extension.'
+	'PHP_VERSION_ERROR'		=> 'PHP 8.1 or newer is required to use this extension.',
+	'PHPBB_VERSION_ERROR'	=> 'phpBB 4.0.0-dev or newer is required to use this extension.',
 ]);

@@ -46,25 +46,20 @@ class ext extends \phpbb\extension\base
 	 */
 	protected function phpbb_requirement()
 	{
-		if (phpbb_version_compare(PHPBB_VERSION, '3.2.3', '<'))
+		if (phpbb_version_compare(PHPBB_VERSION, '4.0.0-dev', '<'))
 		{
-			$this->errors[] = 'PHPBB_VERSION_MIN_ERROR';
-		}
-
-		else if (phpbb_version_compare(PHPBB_VERSION, '4.0.0-dev', '>='))
-		{
-			$this->errors[] = 'PHPBB_VERSION_MAX_ERROR';
+			$this->errors[] = 'PHPBB_VERSION_ERROR';
 		}
 	}
 
 	/**
-	 * Check PHP 5.6.0 minimum requirement.
+	 * Check PHP 8.1 minimum requirement.
 	 *
 	 * @return void
 	 */
 	protected function php_requirement()
 	{
-		if (phpbb_version_compare(PHP_VERSION, '5.6.0', '<'))
+		if (PHP_VERSION_ID < 80100)
 		{
 			$this->errors[] = 'PHP_VERSION_ERROR';
 		}
