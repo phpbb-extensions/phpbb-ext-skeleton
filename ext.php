@@ -48,7 +48,12 @@ class ext extends \phpbb\extension\base
 	{
 		if (phpbb_version_compare(PHPBB_VERSION, '3.2.3', '<'))
 		{
-			$this->errors[] = 'PHPBB_VERSION_ERROR';
+			$this->errors[] = 'PHPBB_VERSION_MIN_ERROR';
+		}
+
+		else if (phpbb_version_compare(PHPBB_VERSION, '4.0.0-dev', '>='))
+		{
+			$this->errors[] = 'PHPBB_VERSION_MAX_ERROR';
 		}
 	}
 
