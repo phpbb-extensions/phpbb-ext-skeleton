@@ -64,7 +64,7 @@ class ext extends \phpbb\extension\base
 	 */
 	protected function php_requirement()
 	{
-		if (phpbb_version_compare(PHP_VERSION, '5.6.0', '<'))
+		if (PHP_VERSION_ID < 50600)
 		{
 			$this->errors[] = 'PHP_VERSION_ERROR';
 		}
