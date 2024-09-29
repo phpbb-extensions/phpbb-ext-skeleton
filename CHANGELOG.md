@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.1.12 - 2024-09-29
+
+- Updated GitHub action workflows to address compatibility and bug issues.
+- Added PHP 8.4 testing to GitHub action workflows.
+- Ensure Skeleton extension can only be installed on compatible versions of phpBB.
+- Minor code improvements and clean up.
+
 ## 1.1.11 - 2023-12-29
 
 - Updated GitHub Actions workflow to include "main" as a default repo branch to test.
