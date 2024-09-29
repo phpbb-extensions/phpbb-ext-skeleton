@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.1.12 - 2024-09-29
+
+- Updated GitHub action workflows to address compatibility and bug issues.
+- Added PHP 8.4 testing to GitHub action workflows.
+- Ensure Skeleton extension can only be installed on compatible versions of phpBB.
+- Minor code improvements and clean up.
+
 ## 1.1.11 - 2023-12-29
 
 - Updated GitHub Actions workflow to include "main" as a default repo branch to test.
@@ -137,7 +144,7 @@
 - Skeleton ACP PHP files have correct visibility declarations for methods and properties now.
 - Skeleton config service files correctly encapsulate all strings in quotes that begin with @ and % per Symfony specifications.
 - Skeleton PHP files have all their DocBlocks updated to be consistent with PSR-5 recommendations.
-- Skeleton event class methods that do not use the $event variable do not have them defined as an argument (this is done to demonstrate that the $event argument is only needed if actually used in an event listener method).
+- Skeleton event class methods that do not use the `$event` variable do not have them defined as an argument (this is done to demonstrate that the `$event` argument is only needed if actually used in an event listener method).
 - Internal DocBlocks have been updated.
 
 ## 1.0.0 - 2016-08-04
