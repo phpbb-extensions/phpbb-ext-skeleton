@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.13 - 2025-01-19
+
+- Fixed an issue where test suite files failed to be located and created.
+- Minor code improvements and clean up.
+
 ## 1.1.12 - 2024-09-29
 
 - Updated GitHub action workflows to address compatibility and bug issues.
