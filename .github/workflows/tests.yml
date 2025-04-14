@@ -226,10 +226,14 @@ jobs:
               env:
                   DB: ${{steps.database-type.outputs.db}}
                   COVERAGE: ${{ matrix.COVERAGE != 1 && '0' || '1' }}
+                  PHP_VERSION: ${{ matrix.php }}
               run: |
-                  if [ $COVERAGE == '1' ]
+                  if [ $COVERAGE = '1' ]
                   then
-                      phpBB/vendor/bin/phpunit --configuration phpBB/ext/$EXTNAME/.github/phpunit-$DB-github.xml --bootstrap ./tests/bootstrap.php --coverage-clover build/logs/clover.xml
+                      phpBB/vendor/bin/phpunit --configuration phpBB/ext/$EXTNAME/.github/phpunit-$DB-github.xml --bootstrap ./tests/bootstrap.php --coverage-clover build/logs/clover.xml --testsuite 'phpBB Test Suite'
+                  elif [ "$PHP_VERSION" = "8.4" ]
+                  then
+                      phpBB/vendor/bin/phpunit --configuration phpBB/ext/$EXTNAME/.github/phpunit-$DB-github.xml --bootstrap ./tests/bootstrap.php --testsuite 'phpBB Test Suite'
                   else
                       phpBB/vendor/bin/phpunit --configuration phpBB/ext/$EXTNAME/.github/phpunit-$DB-github.xml --bootstrap ./tests/bootstrap.php
                   fi
@@ -348,7 +352,14 @@ jobs:
             - name: Run unit tests
               env:
                   DB: ${{steps.database-type.outputs.db}}
-              run: phpBB/vendor/bin/phpunit --configuration phpBB/ext/$EXTNAME/.github/phpunit-$DB-github.xml --bootstrap ./tests/bootstrap.php
+                  PHP_VERSION: ${{ matrix.php }}
+              run: |
+                  if [ "$PHP_VERSION" = "8.4" ]
+                  then
+                      phpBB/vendor/bin/phpunit --configuration phpBB/ext/$EXTNAME/.github/phpunit-$DB-github.xml --bootstrap ./tests/bootstrap.php --testsuite 'phpBB Test Suite'
+                  else
+                      phpBB/vendor/bin/phpunit --configuration phpBB/ext/$EXTNAME/.github/phpunit-$DB-github.xml --bootstrap ./tests/bootstrap.php
+                  fi
               working-directory: ./phpBB3
     # END PostgreSQL Job
 
