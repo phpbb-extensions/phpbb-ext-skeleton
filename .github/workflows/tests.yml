@@ -6,7 +6,7 @@ env:
     IMAGE_ICC: 1         # Run icc profile sniffer on your images? 1 or 0
     EPV: 0               # Run EPV (Extension Pre Validator) on your code? 1 or 0
     EXECUTABLE_FILES: 1  # Run check for executable files? 1 or 0
-    PHPBB_BRANCH: master # The phpBB branch to run tests on
+    PHPBB_BRANCH: ticket/17496 # The phpBB branch to run tests on
 
 on:
     push:
@@ -37,7 +37,7 @@ jobs:
             - name: Checkout phpBB
               uses: actions/checkout@v4
               with:
-                  repository: phpbb/phpbb
+                  repository: rxu/phpbb3
                   ref: ${{ env.PHPBB_BRANCH }}
                   path: phpBB3
 
@@ -162,7 +162,7 @@ jobs:
             - name: Checkout phpBB
               uses: actions/checkout@v4
               with:
-                  repository: phpbb/phpbb
+                  repository: rxu/phpbb3
                   ref: ${{ env.PHPBB_BRANCH }}
                   path: phpBB3
 
@@ -231,9 +231,6 @@ jobs:
                   if [ $COVERAGE = '1' ]
                   then
                       phpBB/vendor/bin/phpunit --configuration phpBB/ext/$EXTNAME/.github/phpunit-$DB-github.xml --bootstrap ./tests/bootstrap.php --coverage-clover build/logs/clover.xml --testsuite 'phpBB Test Suite'
-                  elif [ "$PHP_VERSION" = "8.4" ]
-                  then
-                      phpBB/vendor/bin/phpunit --configuration phpBB/ext/$EXTNAME/.github/phpunit-$DB-github.xml --bootstrap ./tests/bootstrap.php --testsuite 'phpBB Test Suite'
                   else
                       phpBB/vendor/bin/phpunit --configuration phpBB/ext/$EXTNAME/.github/phpunit-$DB-github.xml --bootstrap ./tests/bootstrap.php
                   fi
@@ -307,7 +304,7 @@ jobs:
             - name: Checkout phpBB
               uses: actions/checkout@v4
               with:
-                  repository: phpbb/phpbb
+                  repository: rxu/phpbb3
                   ref: ${{ env.PHPBB_BRANCH }}
                   path: phpBB3
 
@@ -354,12 +351,7 @@ jobs:
                   DB: ${{steps.database-type.outputs.db}}
                   PHP_VERSION: ${{ matrix.php }}
               run: |
-                  if [ "$PHP_VERSION" = "8.4" ]
-                  then
-                      phpBB/vendor/bin/phpunit --configuration phpBB/ext/$EXTNAME/.github/phpunit-$DB-github.xml --bootstrap ./tests/bootstrap.php --testsuite 'phpBB Test Suite'
-                  else
                       phpBB/vendor/bin/phpunit --configuration phpBB/ext/$EXTNAME/.github/phpunit-$DB-github.xml --bootstrap ./tests/bootstrap.php
-                  fi
               working-directory: ./phpBB3
     # END PostgreSQL Job
 
@@ -412,7 +404,7 @@ jobs:
             - name: Checkout phpBB
               uses: actions/checkout@v4
               with:
-                  repository: phpbb/phpbb
+                  repository: rxu/phpbb3
                   ref: ${{ env.PHPBB_BRANCH }}
                   path: phpBB3
 
