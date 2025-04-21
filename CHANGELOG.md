@@ -1,16 +1,20 @@
 # Changelog
 
+## 1.1.14 - 2025-04-20
+
+- Updated GitHub action workflows to address compatibility and bug issues.
+
 ## 1.1.13 - 2025-01-19
 
 - Fixed an issue where test suite files failed to be located and created.
-- Minor code improvements and clean up.
+- Minor code improvements and cleanup.
 
 ## 1.1.12 - 2024-09-29
 
 - Updated GitHub action workflows to address compatibility and bug issues.
 - Added PHP 8.4 testing to GitHub action workflows.
 - Ensure Skeleton extension can only be installed on compatible versions of phpBB.
-- Minor code improvements and clean up.
+- Minor code improvements and cleanup.
 
 ## 1.1.11 - 2023-12-29
 
@@ -22,7 +26,7 @@
 - Updated GitHub Actions workflow files.
 - Removed translation of *CP module page titles as it's not necessary.
 - Updated the Skeleton icon.
-- Minor code improvements and clean up.
+- Minor code improvements and cleanup.
 
 ## 1.1.9 - 2022-06-17
 
@@ -39,19 +43,19 @@
 ## 1.1.7 - 2021-05-28
 
 - Added validation on user input for homepage URLs, author email addresses, and version requirement patterns.
-- Fixed validation of extension display name when using the CLI.
+- Fixed validation of the extension display name when using the CLI.
 - Internally moved the creation of extension composer.json from PHP logic to a TWIG template.
 - Updated default phpBB version max requirement to <4.0.0@dev.
 
 ## 1.1.6 - 2020-12-28
 
-- Added option to generate GitHub Actions workflow for Continuous Integration testing.
+- Added an option to generate GitHub Actions workflow for Continuous Integration testing.
 - Fixed an issue that prevented dot-files and dot-directories from being generated.
 - Updated some syntax in the sample PHPUnit test files.
 
 ## 1.1.5 - 2020-09-11
 
-- Make sure config created for cron by migration is dynamic.
+- Make sure the config created for cron by migration is dynamic.
 - Updated all PHP arrays to use modern shortened syntax.
 - Updated Travis config files.
 - Updated Read Me files.
@@ -70,7 +74,7 @@
 - Will now use Twig template namespaces for rendering template files in generated controller files.
 - Will now generate Travis-CI tests to run against phpBB 3.3.x (unless you specify an earlier version of phpBB as a maximum version constraint).
 - Will attempt to do a better job of creating the correct notification files, based on your phpBB version constraints.
-- Removed 3rd party Symfony components previously required in phpBB 3.1 installs, resulting in much faster performance.
+- Removed 3rd party Symfony components previously required in phpBB 3.1 installations, resulting in much faster performance.
 - Loads of additional little code inspection fixes.
 
 ## 1.1.2 - 2019-07-13
@@ -95,7 +99,7 @@
 - Skeleton updates:
 	- Skeleton files have dropped the use of "Acme" and "Demo" in favor of your own vendor and extension names. 
 	- Skeleton template files now use TWIG syntax instead of old phpBB 3.0 style template syntax.
-	- Improved distinctions between skeletons designed to be compatible with phpBB >=3.1 vs >=3.2. For example, skeletons built to support 3.1 and above will still use the User object for language functions, while skeletons built for 3.2 and above will use the newer Language object for language functions.
+	- Improved distinctions between skeletons designed to be compatible with phpBB >=3.1 vs. >=3.2. For example, skeletons built to support 3.1 and above will still use the User object for language functions, while skeletons built for 3.2 and above will use the newer Language object for language functions.
 	- All skeleton files have been overhauled with improved DocBlock and sample code that exemplifies phpBB's coding guidelines and best practices.
 	- ACP, UCP and MCP modules have been updated to utilise controller classes.
 
@@ -114,24 +118,24 @@
 
 ## 1.0.4 - 2017-05-04
 
-- Updated generated composer.json files to include the composer/installers requirement.
-- Updated generated acp_demo_body.html template to follow a more correct ACP layout configuration.
-- Updated generated acp main_module.php to generate use the correct error flags in trigger_errors.
-- Switched skeleton's nav-bar icon to an SVG image for better style & retina display compatibility.
+- Updated the generated composer.json files to include the composer/installers requirement.
+- Updated the generated acp_demo_body.html template to follow a more correct ACP layout configuration.
+- Updated the generated acp main_module.php to generate use the correct error flags in trigger_errors.
+- Switched skeleton's nav-bar icon to an SVG image for better style and retina display compatibility.
 
 ## 1.0.3 - 2017-01-12
 
 - Add support for UTF-8 characters in fields (extension full name, description, author info, etc.).
 - Only add information about unit testing to the README when testing components are selected.
-- Fix the extension name used in the generated build script component.
-- Fix undeclared class properties generated in the ACP module component.
-- Fix missing empty new line at the end of the generated composer.json file.
-- Increased minimum PHP requirement to PHP 5.4 to support proper JSON file generation (such as UTF-8 support).
+- Fixed the extension name used in the generated build script component.
+- Fixed undeclared class properties generated in the ACP module component.
+- Fixed the missing empty new line at the end of the generated composer.json file.
+- Increased the minimum PHP requirement to PHP 5.4 to support proper JSON file generation (such as UTF-8 support).
 
 ## 1.0.2 - 2016-11-19
 
 - Re-organized some of the "Extension packaging" fields with clearer names and ordering.
-- Shortened the name of the nav-bar link in the web interface to "Skeleton Extension".
+- Shortened the name of the nav-bar link in the web interface to Skeleton Extension.
 - Helpful tooltips have been added to each of the checkboxes in the "Components" section of the web interface.
 - Added a link to Skeleton Extension's Documentation in the web interface.
 - Added warnings when trying to use 'phpbb' or 'core' as vendor and extension names.
@@ -139,7 +143,7 @@
 - Added a missing migration file to generated UCP components.
 - Fixed an issue where the controller component did not generate a correct event listener.
 - Fixed an issue where the controller component did not generate a template event listener for the controller's nav-bar link.
-- Fixed an issue where the notifications component did not generate a valid ext.php (references to the notification services will now have the correct vendor and ext names instead of "dev.dev").
+- Fixed an issue where the notification component did not generate a valid ext.php (references to the notification services will now have the correct vendor and ext names instead of "dev.dev").
 - Use the correct Symfony syntax for non-shared services: `scope: prototype` in phpBB 3.1.x and `shared: false` in phpBB 3.2.
 
 ## 1.0.1 - 2016-10-13
