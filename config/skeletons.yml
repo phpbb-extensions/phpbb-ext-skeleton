@@ -171,17 +171,6 @@ services:
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
 
-    phpbb.skeleton.ext.skeleton.travis:
-        class: phpbb\skeleton\skeleton
-        arguments:
-            - 'travis'
-            - false
-            - ['tests']
-            - ['travis/prepare-phpbb.sh', '.travis.yml']
-            - 'TEST_DEPLOY'
-        tags:
-            - { name: phpbb.skeleton.ext.skeleton }
-
     phpbb.skeleton.ext.skeleton.build:
         class: phpbb\skeleton\skeleton
         arguments:
