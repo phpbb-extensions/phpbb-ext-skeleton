@@ -168,6 +168,7 @@ class main
 				'DESC'			=> $this->language->lang('SKELETON_QUESTION_COMPONENT_' . strtoupper($component) . '_UI'),
 				'DESC_EXPLAIN'	=> $this->language->is_set('SKELETON_QUESTION_COMPONENT_' . strtoupper($component) . '_EXPLAIN') ? $this->language->lang('SKELETON_QUESTION_COMPONENT_' . strtoupper($component) . '_EXPLAIN') : '',
 				'VALUE'			=> $this->request->variable('component_' . $component, $details['default']),
+				'DEPENDS'		=> $details['dependencies'],
 			]);
 
 			$this->data['components'][$component] = $this->get_user_input('component_' . $component, $details['default']);

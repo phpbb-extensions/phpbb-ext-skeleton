@@ -83,7 +83,19 @@
 				<h3 class="skeleton-components">{{ lang('SKELETON_COMPONENT_GROUP_' ~ group) }}</h3>
 				{% for component in loops['component_' ~ group] %}
 					<fieldset class="fields2">
-						<div><span aria-label="{{ component.DESC_EXPLAIN }}" class="tooltipped tooltipped-e tooltipped-multiline"><label for="{{ component.NAME }}"><input class="components" type="checkbox" name="{{ component.NAME }}" id="{{ component.NAME }}"{% if component.VALUE %} checked="checked"{% endif %} /> <strong>{{ component.DESC }}</strong></label></span></div>
+						<div>
+							<span aria-label="{{ component.DESC_EXPLAIN }}" class="tooltipped tooltipped-e tooltipped-multiline">
+								<label for="{{ component.NAME }}">
+									<input class="components"
+										   type="checkbox"
+										   name="{{ component.NAME }}"
+										   id="{{ component.NAME }}"
+										{% if component.VALUE %}checked="checked"{% endif %}
+										{% if component.DEPENDS %}data-depends="{{ component.DEPENDS | map(d => 'component_' ~ d) | join(',') }}"{% endif %} />
+									<strong>{{ component.DESC }}</strong>
+								</label>
+							</span>
+						</div>
 					</fieldset>
 				{% endfor %}
 			</div>
