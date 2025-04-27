@@ -171,6 +171,17 @@ services:
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
 
+    phpbb.skeleton.ext.skeleton.githubactions_custom:
+        class: phpbb\skeleton\skeleton
+        arguments:
+            - 'githubactions_custom'
+            - false
+            - ['tests']
+            - ['.github/workflows/tests.yml']
+            - 'TEST_DEPLOY'
+        tags:
+            - { name: phpbb.skeleton.ext.skeleton }
+
     phpbb.skeleton.ext.skeleton.build:
         class: phpbb\skeleton\skeleton
         arguments:

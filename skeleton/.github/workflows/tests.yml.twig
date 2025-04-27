@@ -1,5 +1,6 @@
 name: Tests
 
+{% if COMPONENT.githubactions_custom %}
 env:
     EXTNAME: {{ EXTENSION.vendor_name }}/{{ EXTENSION.extension_name }} # Your extension vendor/package name
     SNIFF: 1            # Run code sniffer on your code? 1 or 0
@@ -424,3 +425,34 @@ jobs:
               run: phpBB/vendor/bin/phpunit --configuration phpBB/ext/$EXTNAME/.github/phpunit-$DB-github.xml --bootstrap ./tests/bootstrap.php
               working-directory: ./phpBB3
     # END Other Tests Job
+{% else %}
+on:
+	push:
+		branches:        # Run tests when commits are pushed to these branches in your repo
+			- main
+			- master
+			- develop
+			- dev/*
+	pull_request:        # Run tests when pull requests are made on these branches in your repo
+		branches:
+			- main
+			- master
+			- develop
+			- dev/*
+
+jobs:
+	call-tests:
+		uses: phpbb-extensions/test-framework/.github/workflows/tests.yml@3.3.x
+		with:
+			EXTNAME: {{ EXTENSION.vendor_name }}/{{ EXTENSION.extension_name }} # Your extension vendor/package name
+			SNIFF: 1             # Run code sniffer on your code? 1 or 0
+			IMAGE_ICC: 1         # Run icc profile sniffer on your images? 1 or 0
+			EPV: 1               # Run EPV (Extension Pre Validator) on your code? 1 or 0
+			EXECUTABLE_FILES: 1  # Run check for executable files? 1 or 0
+			CODECOV: 0           # Run code coverage via codecov? 1 or 0
+			PHPBB_BRANCH: 3.3.x  # The phpBB branch to run tests on
+		secrets:
+			CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }} # Do not change this
+
+# See the README for full details and setup instructions: https://github.com/phpbb-extensions/test-framework
+{% endif %}
