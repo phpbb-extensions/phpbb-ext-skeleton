@@ -176,7 +176,7 @@ services:
         arguments:
             - 'githubactions_custom'
             - false
-            - ['tests']
+            - ['tests', 'githubactions']
             - ['.github/workflows/tests.yml']
             - 'TEST_DEPLOY'
         tags:
