@@ -26,6 +26,7 @@ $lang = array_merge($lang, [
 	'PHPBB_SKELETON_EXT'				=> 'Skeleton Extension',
 	'PHPBB_CREATE_SKELETON_EXT'			=> 'Create skeleton extension',
 	'PHPBB_SKELETON_EXT_DOCS'			=> 'Read the Documentation',
+	'PHPBB_SKELETON_EXT_HELP'			=> 'Learn More',
 
 	'EXTENSION_CLI_SKELETON_SUCCESS'	=> "<info>Extension created successfully.\nCopy the extension from `store/tmp-ext/` into the `ext/` folder.</info>",
 	'SKELETON_CLI_COMPOSER_QUESTIONS'	=> '<comment>Enter composer.json details (hit enter to leave an option empty)</comment>',
