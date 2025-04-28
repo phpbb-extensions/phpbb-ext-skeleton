@@ -248,6 +248,7 @@ class main_test extends \phpbb_test_case
 					'DESC'         => 'SKELETON_QUESTION_COMPONENT_PHPLISTENER_UI',
 					'DESC_EXPLAIN' => 'SKELETON_QUESTION_COMPONENT_PHPLISTENER_EXPLAIN',
 					'VALUE'        => true,
+					'DEPENDS'      => [],
 				]]
 			)
 		;
