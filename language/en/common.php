@@ -25,7 +25,7 @@ $lang = array_merge($lang, [
 	'CLI_DESCRIPTION_SKELETON_CREATE'	=> 'Create a basic skeleton extension',
 	'PHPBB_SKELETON_EXT'				=> 'Skeleton Extension',
 	'PHPBB_CREATE_SKELETON_EXT'			=> 'Create a Skeleton Extension',
-	'PHPBB_CREATE_SKELETON_EXPLAIN'		=> 'Generate your extension’s foundation in seconds. No more setting up files by hand — Skeleton builds it all for you, the right way. Jump straight into coding with clean, fully documented templates based on phpBB’s best practices. Before you begin, be sure to review the 📖 [<a href="%1$s" target="_blank">Skeleton Extension Documentation</a>], 🛡️ [<a href="%2$s" target="_blank">Extension Validation Rules</a>], and 🛠️ [<a href="%3$s" target="_blank">Coding Guidelines</a>].',
+	'PHPBB_CREATE_SKELETON_EXPLAIN'		=> 'Generate your extension’s foundation in seconds. No more setting up files by hand — Skeleton builds it all for you, with clean, fully documented templates based on phpBB’s best practices. Before you begin, be sure to review the 📖 [<a href="%1$s" target="_blank">Skeleton Extension Documentation</a>], 🛡️ [<a href="%2$s" target="_blank">Extension Validation Rules</a>], and 🛠️ [<a href="%3$s" target="_blank">Coding Guidelines</a>].',
 	'PHPBB_SKELETON_EXT_HELP'			=> 'Learn More',
 
 	'EXTENSION_CLI_SKELETON_SUCCESS'	=> "<info>Extension created successfully.\nCopy the extension from `store/tmp-ext/` into the `ext/` folder.</info>",
