@@ -155,7 +155,7 @@ services:
             - 'tests'
             - false
             - []
-            - ['tests/controller/main_test.php', 'tests/dbal/fixtures/config.xml', 'tests/dbal/simple_test.php', 'tests/functional/view_test.php', 'phpunit.xml.dist']
+            - ['tests/controller/main_test.php', 'tests/dbal/fixtures/config.xml', 'tests/dbal/simple_test.php', 'tests/functional/view_test.php', 'phpunit.xml.dist', '.github/workflows/tests.yml']
             - 'TEST_DEPLOY'
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
@@ -165,7 +165,7 @@ services:
         arguments:
             - 'githubactions'
             - false
-            - ['tests']
+            - []
             - ['.github/workflows/tests.yml']
             - 'TEST_DEPLOY'
         tags:
@@ -176,7 +176,7 @@ services:
         arguments:
             - 'githubactions_custom'
             - false
-            - ['tests', 'githubactions']
+            - []
             - ['.github/workflows/tests.yml']
             - 'TEST_DEPLOY'
         tags:
