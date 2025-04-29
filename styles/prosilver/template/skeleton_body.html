@@ -106,12 +106,7 @@
 						<div>
 							<span aria-label="{{ component.DESC_EXPLAIN }}" class="tooltipped tooltipped-e tooltipped-multiline">
 								<label for="{{ component.NAME }}">
-									<input class="components"
-										   type="checkbox"
-										   name="{{ component.NAME }}"
-										   id="{{ component.NAME }}"
-										{% if component.VALUE %}checked="checked"{% endif %}
-										{% if component.DEPENDS %}data-depends="{{ component.DEPENDS | map(d => 'component_' ~ d) | join(',') }}"{% endif %} />
+									<input class="components" type="checkbox" name="{{ component.NAME }}" id="{{ component.NAME }}"{% if component.VALUE %} checked="checked"{% endif %} />
 									<strong>{{ component.DESC }}</strong>
 								</label>
 							</span>

@@ -37,29 +37,6 @@
 		$elem.components.prop('checked', $(this).hasClass('markall'));
 	});
 
-	// Auto-mark components that are dependencies
-	$elem.components.each(function() {
-		const $component = $(this);
-		const depends = $component.data('depends');
-
-		if (!depends) {
-			return;
-		}
-
-		const dependIds = depends.split(',').map(id => id.trim());
-
-		$component.on('change', function() {
-			if (this.checked) {
-				dependIds.forEach(dependId => {
-					const $dependency = $('#' + dependId);
-					if ($dependency.length && !$dependency.prop('checked')) {
-						$dependency.prop('checked', true);
-					}
-				});
-			}
-		});
-	});
-
 	// Validate vendor/extension names on field blur
 	$elem.form.on('blur', '#vendor_name, #extension_name', function() {
 		$(this).checkNames();
