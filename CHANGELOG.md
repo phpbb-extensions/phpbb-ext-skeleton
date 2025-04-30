@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.1.15 - 2025-04-30
+
+- Added a header section to the Skeleton with key links to its documentation, phpBB’s coding guidelines, and extension policies.
+- Added direct documentation links to each section of the Skeleton’s interface for quicker access.
+- Updated GitHub Actions to generate a tests.yml using phpBB’s reusable test framework by default, while still supporting the original standalone tests.yml for custom setups.
+- Removed Travis CI, as it is no longer supported by phpBB and no longer free for open source projects.
+- Decoupled GitHub Actions workflow generation from PHPUnit test generation—each can now be created independently.
+
 ## 1.1.14 - 2025-04-20
 
 - Updated GitHub action workflows to address compatibility and bug issues.
