@@ -37,7 +37,7 @@
 - Updated minimum requirements: PHP 5.6 and phpBB 3.2.3.
 - Fixed unexpected errors for phpBB and PHP version constraints using ">" and "<" characters.
 - Internally, some minor code improvements.
-- Internally, switched to NPM to manage 3rd party package dependencies.
+- Internally, switched to NPM to manage third party package dependencies.
 - Internally, implemented unit and functional test coverage for code reliability.
 
 ## 1.1.7 - 2021-05-28
@@ -74,7 +74,7 @@
 - Will now use Twig template namespaces for rendering template files in generated controller files.
 - Will now generate Travis-CI tests to run against phpBB 3.3.x (unless you specify an earlier version of phpBB as a maximum version constraint).
 - Will attempt to do a better job of creating the correct notification files, based on your phpBB version constraints.
-- Removed 3rd party Symfony components previously required in phpBB 3.1 installations, resulting in much faster performance.
+- Removed third party Symfony components previously required in phpBB 3.1 installations, resulting in much faster performance.
 - Loads of additional little code inspection fixes.
 
 ## 1.1.2 - 2019-07-13
@@ -85,7 +85,7 @@
 
 - Added a new Permissions component to generate skeleton files that add and use permissions in an extension.
 - Improved the handling of special characters in the Display Name. Now &, < and > are displayed correctly, while double-quotes are strictly invalid.
-- Improved the generated sample migration file with a lot more documented examples of configs, config_text, permissions and custom functions.
+- Improved the generated sample migration file with a lot more documented examples of configs, config_text, permissions, and custom functions.
 - Improved the depends_on() values in generated migration files.
 - Improved the naming of generated control panel language variables.
 - Improved the generation of skeleton files so that only files for the selected components will be built.
@@ -101,7 +101,7 @@
 	- Skeleton template files now use TWIG syntax instead of old phpBB 3.0 style template syntax.
 	- Improved distinctions between skeletons designed to be compatible with phpBB >=3.1 vs. >=3.2. For example, skeletons built to support 3.1 and above will still use the User object for language functions, while skeletons built for 3.2 and above will use the newer Language object for language functions.
 	- All skeleton files have been overhauled with improved DocBlock and sample code that exemplifies phpBB's coding guidelines and best practices.
-	- ACP, UCP and MCP modules have been updated to utilise controller classes.
+	- ACP, UCP, and MCP modules have been updated to utilise controller classes.
 
 ## 1.0.7 - 2018-03-14
 
