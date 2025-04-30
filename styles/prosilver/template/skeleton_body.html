@@ -7,6 +7,7 @@
 </script>
 
 <h2>{{ lang('PHPBB_CREATE_SKELETON_EXT') }}</h2>
+<p>{{ lang('PHPBB_CREATE_SKELETON_EXPLAIN', 'https://area51.phpbb.com/docs/dev/3.3.x/extensions/skeleton_extension.html', 'https://www.phpbb.com/extensions/rules-and-policies/validation-policy/', 'https://area51.phpbb.com/docs/dev/master/development/index.html') }}</p>
 
 <form id="postform" method="post" action="{{ S_POST_ACTION }}">
 {% if ERROR %}
@@ -19,7 +20,11 @@
 
 <div class="panel bg1">
 	<div class="inner">
-		<p class="rightside"><a href="https://area51.phpbb.com/docs/dev/3.3.x/extensions/skeleton_extension.html" target="_blank"><i class="icon fa-book fa-fw" aria-hidden="true"></i><span>{{ lang('PHPBB_SKELETON_EXT_DOCS') }}</span></a></p>
+		<p class="rightside">
+			<a href="https://area51.phpbb.com/docs/dev/3.3.x/extensions/skeleton_extension.html#extension-packaging" target="_blank">
+				<i class="icon fa-book fa-fw" aria-hidden="true"></i><span>{{ lang('PHPBB_SKELETON_EXT_HELP') }}</span>
+			</a>
+		</p>
 		<h2 class="solo">{{ lang('SKELETON_TITLE_EXTENSION_INFO') }}</h2>
 		{% for extension in loops.extension %}
 			<div class="{% if loop.index is odd %}column1{% else %}column2{% endif %}">
@@ -36,6 +41,11 @@
 
 <div class="panel bg2">
 	<div class="inner">
+		<p class="rightside">
+			<a href="https://area51.phpbb.com/docs/dev/3.3.x/extensions/skeleton_extension.html#authors" target="_blank">
+				<i class="icon fa-book fa-fw" aria-hidden="true"></i><span>{{ lang('PHPBB_SKELETON_EXT_HELP') }}</span>
+			</a>
+		</p>
 		<h2 class="solo">{{ lang('SKELETON_TITLE_AUTHOR_INFO') }}</h2>
 		<div class="skeleton-author" style="overflow: hidden;">
 		{% for author in loops.author %}
@@ -61,6 +71,11 @@
 
 <div class="panel bg1">
 	<div class="inner">
+		<p class="rightside">
+			<a href="https://area51.phpbb.com/docs/dev/3.3.x/extensions/skeleton_extension.html#requirements" target="_blank">
+				<i class="icon fa-book fa-fw" aria-hidden="true"></i><span>{{ lang('PHPBB_SKELETON_EXT_HELP') }}</span>
+			</a>
+		</p>
 		<h2 class="solo">{{ lang('SKELETON_TITLE_REQUIREMENT_INFO') }}</h2>
 		{% for requirement in loops.requirement %}
 		<div class="{% if loop.index is odd %}column1{% else %}column2{% endif %}">
@@ -77,13 +92,25 @@
 
 <div class="panel bg2">
 	<div class="inner">
+		<p class="rightside">
+			<a href="https://area51.phpbb.com/docs/dev/3.3.x/extensions/skeleton_extension.html#components" target="_blank">
+				<i class="icon fa-book fa-fw" aria-hidden="true"></i><span>{{ lang('PHPBB_SKELETON_EXT_HELP') }}</span>
+			</a>
+		</p>
 		<h2 class="solo">{{ lang('SKELETON_TITLE_COMPONENT_INFO') }}</h2>
 		{% for group in ['DATABASE', 'FRONT_END', 'BACK_END', 'CONTROL_PANELS', 'OTHER', 'TEST_DEPLOY'] %}
 			<div class="{% if loop.index is odd %}column1{% else %}column2{% endif %}">
 				<h3 class="skeleton-components">{{ lang('SKELETON_COMPONENT_GROUP_' ~ group) }}</h3>
 				{% for component in loops['component_' ~ group] %}
 					<fieldset class="fields2">
-						<div><span aria-label="{{ component.DESC_EXPLAIN }}" class="tooltipped tooltipped-e tooltipped-multiline"><label for="{{ component.NAME }}"><input class="components" type="checkbox" name="{{ component.NAME }}" id="{{ component.NAME }}"{% if component.VALUE %} checked="checked"{% endif %} /> <strong>{{ component.DESC }}</strong></label></span></div>
+						<div>
+							<span aria-label="{{ component.DESC_EXPLAIN }}" class="tooltipped tooltipped-e tooltipped-multiline">
+								<label for="{{ component.NAME }}">
+									<input class="components" type="checkbox" name="{{ component.NAME }}" id="{{ component.NAME }}"{% if component.VALUE %} checked="checked"{% endif %} />
+									<strong>{{ component.DESC }}</strong>
+								</label>
+							</span>
+						</div>
 					</fieldset>
 				{% endfor %}
 			</div>
