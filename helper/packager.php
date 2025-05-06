@@ -95,7 +95,7 @@ class packager
 			$components[$service->get_name()] = [
 				'default'      => $service->get_default(),
 				'dependencies' => $service->get_dependencies(),
-				'files'        => $service->get_files(),
+				'files'         => $service->get_files(),
 				'group'        => $service->get_group(),
 			];
 		}
