@@ -22,6 +22,7 @@ use Symfony\Component\Console\Exception\LogicException;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 
@@ -167,6 +168,43 @@ class create extends command
 				}
 			}
 
+			// Special logic for GitHub Actions options
+			if ($component === 'githubactions')
+			{
+				$question = $this->language->lang('SKELETON_QUESTION_COMPONENT_GITHUBACTIONS') . $this->language->lang('COLON');
+				$choices = [
+					$this->language->lang('SKELETON_QUESTION_COMPONENT_GITHUBACTIONS_0'),
+					$this->language->lang('SKELETON_QUESTION_COMPONENT_GITHUBACTIONS_1'),
+					$this->language->lang('SKELETON_QUESTION_COMPONENT_GITHUBACTIONS_2'),
+				];
+
+				$question = new ChoiceQuestion($question, $choices, 0);
+
+				$choice = $this->helper->ask($this->input, $this->output, $question);
+				$index = array_search($choice, $choices, true);
+
+				$this->data['components']['githubactions'] = false;
+				$this->data['components']['githubactions_deprecated'] = false;
+
+				if ($index === 1)
+				{
+					$this->data['components']['githubactions'] = true;
+				}
+				else if ($index === 2)
+				{
+					$this->data['components']['githubactions_deprecated'] = true;
+				}
+
+				continue;
+			}
+
+			if ($component === 'githubactions_deprecated')
+			{
+				// Already handled via githubactions logic
+				continue;
+			}
+
+			// Default logic for all other components
 			$this->data['components'][$component] = $this->get_user_input('component_' . $component, $details['default']);
 		}
 	}
