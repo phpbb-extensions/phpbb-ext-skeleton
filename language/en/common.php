@@ -123,10 +123,10 @@ $lang = array_merge($lang, [
 	'SKELETON_QUESTION_COMPONENT_GITHUBACTIONS'		=> 'Create a GitHub Actions workflow to run tests in your repository?',
 	'SKELETON_QUESTION_COMPONENT_GITHUBACTIONS_UI'	=> 'GitHub Actions Workflow (Reusable – Recommended)',
 	'SKELETON_QUESTION_COMPONENT_GITHUBACTIONS_EXPLAIN'	=> 'Creates a GitHub Actions workflow that uses a reusable, phpBB-maintained framework to run PHPUnit tests on your repository. The workflow file is saved in .github/workflows and runs automatically on each commit and pull request.',
-	'SKELETON_QUESTION_COMPONENT_GITHUBACTIONS_CUSTOM'	=> 'Create a fully customisable GitHub Actions workflow? (Select this if you plan to modify jobs or steps.)',
-	'SKELETON_QUESTION_COMPONENT_GITHUBACTIONS_CUSTOM_UI'	=> 'GitHub Actions Workflow (Standalone – Deprecated)',
-	'SKELETON_QUESTION_COMPONENT_GITHUBACTIONS_CUSTOM_EXPLAIN'	=> 'Deprecated: Creates a fully standalone workflow to run PHPUnit tests without using the shared phpBB framework. This overrides the reusable workflow and is no longer recommended. The file is saved in .github/workflows and runs on each commit and pull request.',
 	'SKELETON_QUESTION_COMPONENT_BUILD'				=> 'Create a sample build script for phing?',
+	'SKELETON_QUESTION_COMPONENT_GITHUBACTIONS_DEPRECATED'	=> 'Create a standalone GitHub Actions workflow [Deprecated: not recommended unless you plan to modify jobs or steps]',
+	'SKELETON_QUESTION_COMPONENT_GITHUBACTIONS_DEPRECATED_UI'	=> 'GitHub Actions Workflow (Standalone – Deprecated)',
+	'SKELETON_QUESTION_COMPONENT_GITHUBACTIONS_DEPRECATED_EXPLAIN'	=> 'Deprecated: Creates a fully standalone workflow to run PHPUnit tests without using the shared phpBB framework. This overrides the reusable workflow and is no longer recommended. The file is saved in .github/workflows and runs on each commit and pull request.',
 	'SKELETON_QUESTION_COMPONENT_BUILD_UI'			=> 'Build script (phing)',
 	'SKELETON_QUESTION_COMPONENT_BUILD_EXPLAIN'		=> 'A phing build script is generated for your extension which can be used to generate build packages to help simplify the release or deployment processes.',
 

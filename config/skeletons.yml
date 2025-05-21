@@ -171,10 +171,10 @@ services:
         tags:
             - { name: phpbb.skeleton.ext.skeleton }
 
-    phpbb.skeleton.ext.skeleton.githubactions_custom:
+    phpbb.skeleton.ext.skeleton.githubactions_deprecated:
         class: phpbb\skeleton\skeleton
         arguments:
-            - 'githubactions_custom'
+            - 'githubactions_deprecated'
             - false
             - []
             - ['.github/workflows/tests.yml']
