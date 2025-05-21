@@ -160,7 +160,7 @@ class create extends command
 		foreach ($components as $component => $details)
 		{
 			// Skip early as it's handled elsewhere
-			if ($component === 'githubactions_deprecated')
+			if ($component === 'githubactions_custom')
 			{
 				continue;
 			}
@@ -254,14 +254,14 @@ class create extends command
 		$index = array_search($choice, $choices, true);
 
 		$this->data['components']['githubactions'] = false;
-		$this->data['components']['githubactions_deprecated'] = false;
+		$this->data['components']['githubactions_custom'] = false;
 
 		// Initialize both flags to false
 		$this->data['components'] = array_merge(
 			$this->data['components'],
 			[
 				'githubactions' => false,
-				'githubactions_deprecated' => false
+				'githubactions_custom' => false
 			]
 		);
 
@@ -271,7 +271,7 @@ class create extends command
 		}
 		else if ($index === 2)
 		{
-			$this->data['components']['githubactions_deprecated'] = true;
+			$this->data['components']['githubactions_custom'] = true;
 		}
 	}
 }
