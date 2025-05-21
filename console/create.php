@@ -256,15 +256,6 @@ class create extends command
 		$this->data['components']['githubactions'] = false;
 		$this->data['components']['githubactions_custom'] = false;
 
-		// Initialize both flags to false
-		$this->data['components'] = array_merge(
-			$this->data['components'],
-			[
-				'githubactions' => false,
-				'githubactions_custom' => false
-			]
-		);
-
 		if ($index === 1)
 		{
 			$this->data['components']['githubactions'] = true;

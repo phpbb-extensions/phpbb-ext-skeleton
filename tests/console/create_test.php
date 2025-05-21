@@ -93,7 +93,7 @@ class create_test extends \phpbb_test_case
 				],
 				'githubactions' => [
 					'default'      => false,
-					'dependencies' => ['tests'],
+					'dependencies' => [],
 					'files'        => ['.github/workflows/tests.yml'],
 					'group'        => 'TEST_DEPLOY',
 				],
@@ -184,7 +184,7 @@ class create_test extends \phpbb_test_case
 //			'SKELETON_QUESTION_COMPONENT_NOTIFICATION'	=> 'y',
 //			'SKELETON_QUESTION_COMPONENT_PERMISSIONS'	=> 'y',
 			'SKELETON_QUESTION_COMPONENT_TESTS'			=> 'y',
-			'SKELETON_QUESTION_COMPONENT_GITHUBACTIONS'	=> 2,
+			'SKELETON_QUESTION_COMPONENT_GITHUBACTIONS'	=> 0,
 //			'SKELETON_QUESTION_COMPONENT_BUILD'			=> 'y',
 		];
 	}
