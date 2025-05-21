@@ -159,53 +159,31 @@ class create extends command
 		$components = $this->packager->get_component_dialog_values();
 		foreach ($components as $component => $details)
 		{
-			foreach ($details['dependencies'] as $depends)
+			// Skip early as it's handled elsewhere
+			if ($component === 'githubactions_deprecated')
 			{
-				if (empty($this->data['components'][$depends]))
-				{
-					$this->data['components'][$component] = false;
-					continue 2;
-				}
-			}
-
-			// Special logic for GitHub Actions options
-			if ($component === 'githubactions')
-			{
-				$question = $this->language->lang('SKELETON_QUESTION_COMPONENT_GITHUBACTIONS') . $this->language->lang('COLON');
-				$choices = [
-					$this->language->lang('SKELETON_QUESTION_COMPONENT_GITHUBACTIONS_0'),
-					$this->language->lang('SKELETON_QUESTION_COMPONENT_GITHUBACTIONS_1'),
-					$this->language->lang('SKELETON_QUESTION_COMPONENT_GITHUBACTIONS_2'),
-				];
-
-				$question = new ChoiceQuestion($question, $choices, 0);
-
-				$choice = $this->helper->ask($this->input, $this->output, $question);
-				$index = array_search($choice, $choices, true);
-
-				$this->data['components']['githubactions'] = false;
-				$this->data['components']['githubactions_deprecated'] = false;
-
-				if ($index === 1)
-				{
-					$this->data['components']['githubactions'] = true;
-				}
-				else if ($index === 2)
-				{
-					$this->data['components']['githubactions_deprecated'] = true;
-				}
-
 				continue;
 			}
 
-			if ($component === 'githubactions_deprecated')
+			// Check dependencies
+			if (!$this->check_dependencies($details['dependencies']))
 			{
-				// Already handled via githubactions logic
+				$this->data['components'][$component] = false;
+				continue;
+			}
+
+			// Handle GitHub Actions
+			if ($component === 'githubactions')
+			{
+				$this->handle_github_actions();
 				continue;
 			}
 
 			// Default logic for all other components
-			$this->data['components'][$component] = $this->get_user_input('component_' . $component, $details['default']);
+			$this->data['components'][$component] = $this->get_user_input(
+				'component_' . $component,
+				$details['default']
+			);
 		}
 	}
 
@@ -238,5 +216,62 @@ class create extends command
 		}
 
 		return $return_value;
+	}
+
+	/**
+	 * Check if all dependencies are satisfied
+	 *
+	 * @param array $dependencies List of dependencies to check
+	 * @return bool
+	 */
+	private function check_dependencies(array $dependencies): bool
+	{
+		foreach ($dependencies as $depends)
+		{
+			if (empty($this->data['components'][$depends]))
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * Handle GitHub Actions specific logic
+	 */
+	private function handle_github_actions(): void
+	{
+		$question = $this->language->lang('SKELETON_QUESTION_COMPONENT_GITHUBACTIONS') . $this->language->lang('COLON');
+		$choices = [
+			$this->language->lang('SKELETON_QUESTION_COMPONENT_GITHUBACTIONS_CLI', 0),
+			$this->language->lang('SKELETON_QUESTION_COMPONENT_GITHUBACTIONS_CLI', 1),
+			$this->language->lang('SKELETON_QUESTION_COMPONENT_GITHUBACTIONS_CLI', 2),
+		];
+
+		$question = new ChoiceQuestion($question, $choices, 0);
+
+		$choice = $this->helper->ask($this->input, $this->output, $question);
+		$index = array_search($choice, $choices, true);
+
+		$this->data['components']['githubactions'] = false;
+		$this->data['components']['githubactions_deprecated'] = false;
+
+		// Initialize both flags to false
+		$this->data['components'] = array_merge(
+			$this->data['components'],
+			[
+				'githubactions' => false,
+				'githubactions_deprecated' => false
+			]
+		);
+
+		if ($index === 1)
+		{
+			$this->data['components']['githubactions'] = true;
+		}
+		else if ($index === 2)
+		{
+			$this->data['components']['githubactions_deprecated'] = true;
+		}
 	}
 }
