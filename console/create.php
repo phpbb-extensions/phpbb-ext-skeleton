@@ -236,33 +236,32 @@ class create extends command
 		return true;
 	}
 
+	private const GITHUB_ACTIONS_TYPES = [
+		0 => ['githubactions' => false, 'githubactions_custom' => false], // No
+		1 => ['githubactions' => true, 'githubactions_custom' => false], // Reusable
+		2 => ['githubactions' => false, 'githubactions_custom' => true], // Standalone
+	];
+
 	/**
 	 * Handle GitHub Actions specific logic
 	 */
 	private function handle_github_actions(): void
 	{
-		$question = $this->language->lang('SKELETON_QUESTION_COMPONENT_GITHUBACTIONS') . $this->language->lang('COLON');
-		$choices = [
-			$this->language->lang('SKELETON_QUESTION_COMPONENT_GITHUBACTIONS_CLI', 0),
-			$this->language->lang('SKELETON_QUESTION_COMPONENT_GITHUBACTIONS_CLI', 1),
-			$this->language->lang('SKELETON_QUESTION_COMPONENT_GITHUBACTIONS_CLI', 2),
-		];
+		$questionText = $this->language->lang('SKELETON_QUESTION_COMPONENT_GITHUBACTIONS') . $this->language->lang('COLON');
+		$choices = [];
+		foreach (array_keys(self::GITHUB_ACTIONS_TYPES) as $i)
+		{
+			$choices[] = $this->language->lang('SKELETON_QUESTION_COMPONENT_GITHUBACTIONS_CLI', $i);
+		}
 
-		$question = new ChoiceQuestion($question, $choices, 0);
-
+		$question = new ChoiceQuestion($questionText, $choices, 0);
 		$choice = $this->helper->ask($this->input, $this->output, $question);
 		$index = array_search($choice, $choices, true);
 
-		$this->data['components']['githubactions'] = false;
-		$this->data['components']['githubactions_custom'] = false;
-
-		if ($index === 1)
-		{
-			$this->data['components']['githubactions'] = true;
-		}
-		else if ($index === 2)
-		{
-			$this->data['components']['githubactions_custom'] = true;
-		}
+		$componentSettings = self::GITHUB_ACTIONS_TYPES[$index] ?? self::GITHUB_ACTIONS_TYPES[0];
+		$this->data['components'] = array_merge(
+			$this->data['components'] ?? [],
+			$componentSettings
+		);
 	}
 }
