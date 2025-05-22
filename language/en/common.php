@@ -123,7 +123,7 @@ $lang = array_merge($lang, [
 	'SKELETON_QUESTION_COMPONENT_GITHUBACTIONS'		=> 'Create a GitHub Actions workflow',
 	'SKELETON_QUESTION_COMPONENT_GITHUBACTIONS_CLI'	=> [
 		0	=> 'No (Default)',
-		1	=> 'Reusable (Recommended – uses phpBB’s maintained workflow)',
+		1	=> 'Reusable (Recommended - uses phpBB\'s maintained workflow)',
 		2	=> 'Standalone (Deprecated - customise and maintain your own workflow)',
 	],
 	'SKELETON_QUESTION_COMPONENT_GITHUBACTIONS_UI'	=> 'GitHub Actions Workflow (Reusable – Recommended)',
