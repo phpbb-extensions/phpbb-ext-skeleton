@@ -11,7 +11,7 @@
  *
  */
 
-namespace phpbb\skeleton\tests;
+namespace phpbb\skeleton\tests\helper;
 
 use phpbb\exception\runtime_exception;
 
