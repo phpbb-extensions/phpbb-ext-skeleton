@@ -1,10 +1,16 @@
 # Changelog
 
+## 1.1.16 - 2025-05-23
+
+- Deprecating the older standalone GitHub Actions workflow in favor of the newer, simpler, re-usable workflow maintained by phpBB.
+- Improved the documentation in the new re-usable GitHub Actions workflow.
+- Improved the CLI experience when choosing which GitHub Actions workflow to generate.
+
 ## 1.1.15 - 2025-04-30
 
 - Added a header section to the Skeleton with key links to its documentation, phpBB’s coding guidelines, and extension policies.
 - Added direct documentation links to each section of the Skeleton’s interface for quicker access.
-- Updated GitHub Actions to generate a tests.yml using phpBB’s reusable test framework by default, while still supporting the original standalone tests.yml for custom setups.
+- Updated GitHub Actions to generate a tests.yml using phpBB’s reusable GitHub Actions workflow by default, while still supporting the original standalone tests.yml for custom setups.
 - Removed Travis CI, as it is no longer supported by phpBB and no longer free for open source projects.
 - Decoupled GitHub Actions workflow generation from PHPUnit test generation—each can now be created independently.
 
