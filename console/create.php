@@ -23,6 +23,7 @@ use Symfony\Component\Console\Exception\LogicException;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 
@@ -159,16 +160,31 @@ class create extends command
 		$components = $this->packager->get_component_dialog_values();
 		foreach ($components as $component => $details)
 		{
-			foreach ($details['dependencies'] as $depends)
+			// Skip early as it's handled elsewhere
+			if ($component === 'githubactions_custom')
 			{
-				if (empty($this->data['components'][$depends]))
-				{
-					$this->data['components'][$component] = false;
-					continue 2;
-				}
+				continue;
 			}
 
-			$this->data['components'][$component] = $this->get_user_input('component_' . $component, $details['default']);
+			// Check dependencies
+			if (!$this->check_dependencies($details['dependencies']))
+			{
+				$this->data['components'][$component] = false;
+				continue;
+			}
+
+			// Handle GitHub Actions
+			if ($component === 'githubactions')
+			{
+				$this->handle_github_actions();
+				continue;
+			}
+
+			// Default logic for all other components
+			$this->data['components'][$component] = $this->get_user_input(
+				'component_' . $component,
+				$details['default']
+			);
 		}
 	}
 
@@ -201,5 +217,53 @@ class create extends command
 		}
 
 		return $return_value;
+	}
+
+	/**
+	 * Check if all dependencies are satisfied
+	 *
+	 * @param array $dependencies List of dependencies to check
+	 * @return bool
+	 */
+	private function check_dependencies(array $dependencies): bool
+	{
+		foreach ($dependencies as $depends)
+		{
+			if (empty($this->data['components'][$depends]))
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * Handle GitHub Actions specific logic
+	 */
+	private function handle_github_actions(): void
+	{
+		// Lookup table of GitHub Action component settings
+		$github_actions_types = [
+			0 => ['githubactions' => false, 'githubactions_custom' => false], // No (default)
+			1 => ['githubactions' => true, 'githubactions_custom' => false], // Reusable
+			2 => ['githubactions' => false, 'githubactions_custom' => true], // Standalone
+		];
+
+		$question_text = $this->language->lang('SKELETON_QUESTION_COMPONENT_GITHUBACTIONS') . $this->language->lang('COLON');
+		$choices = [];
+		foreach (array_keys($github_actions_types) as $i)
+		{
+			$choices[] = $this->language->lang('SKELETON_QUESTION_COMPONENT_GITHUBACTIONS_CLI', $i);
+		}
+
+		$question = new ChoiceQuestion($question_text, $choices, 0);
+		$choice = $this->helper->ask($this->input, $this->output, $question);
+		$index = array_search($choice, $choices, true);
+
+		$component_settings = $github_actions_types[$index] ?? $github_actions_types[0];
+		$this->data['components'] = array_merge(
+			$this->data['components'] ?? [],
+			$component_settings
+		);
 	}
 }
