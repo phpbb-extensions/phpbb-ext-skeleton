@@ -1,4 +1,5 @@
 {% if skeleton_version_compare(REQUIREMENTS.phpbb_version_max, "4.0", "<") %}
+{% set is_phpbb_pre_33 = skeleton_version_compare(REQUIREMENTS.phpbb_version_max, "3.3", "<") %}
 <?xml version="1.0" encoding="UTF-8"?>
 
 <phpunit backupGlobals="true"
@@ -9,7 +10,7 @@
          convertWarningsToExceptions="true"
          processIsolation="false"
          stopOnFailure="false"
-{% if skeleton_version_compare(REQUIREMENTS.phpbb_version_max, "3.3", "<") %}
+{% if is_phpbb_pre_33 %}
          syntaxCheck="false"
 {% endif %}
          verbose="true"
@@ -21,12 +22,12 @@
 			<exclude>./tests/functional</exclude>
 		</testsuite>
 		<testsuite name="Extension Functional Tests">
-			<directory suffix="_test.php"{% if skeleton_version_compare(REQUIREMENTS.phpbb_version_max, "3.3", "<") %} phpVersion="5.3.19" phpVersionOperator=">="{% endif %}>./tests/functional/</directory>
+			<directory suffix="_test.php"{% if is_phpbb_pre_33 %} phpVersion="5.3.19" phpVersionOperator=">="{% endif %}>./tests/functional/</directory>
 		</testsuite>
 	</testsuites>
 
 	<filter>
-{% if skeleton_version_compare(REQUIREMENTS.phpbb_version_max, "3.3", "<") %}
+{% if is_phpbb_pre_33 %}
 		<blacklist>
 			<directory>./tests/</directory>
 		</blacklist>
