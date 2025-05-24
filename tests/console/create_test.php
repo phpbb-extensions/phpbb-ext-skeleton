@@ -14,6 +14,8 @@
 namespace phpbb\skeleton\tests\console;
 
 use phpbb\exception\runtime_exception;
+use phpbb_test_case;
+use RuntimeException;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -26,39 +28,30 @@ use phpbb\skeleton\helper\validator;
 use phpbb\user;
 use PHPUnit\Framework\MockObject\MockObject;
 
-class create_test extends \phpbb_test_case
+class create_test extends phpbb_test_case
 {
-	/** @var language|MockObject */
-	protected $language;
-
-	/** @var user|MockObject */
-	protected $user;
-
-	/** @var packager|MockObject */
-	protected $packager;
-
-	/** @var validator|MockObject */
-	protected $validator;
-
-	/** @var string|null */
-	protected $command_name;
+	protected language|MockObject $language;
+	protected user|MockObject $user;
+	protected packager|MockObject $packager;
+	protected MockObject|validator $validator;
+	protected string|null $command_name;
 
 	public function setUp(): void
 	{
-		$this->language = $this->getMockBuilder('\phpbb\language\language')
+		$this->language = $this->getMockBuilder(language::class)
 			->disableOriginalConstructor()
 			->getMock();
 
 		$this->language->method('lang')
-			->will($this->returnArgument(0));
+			->willReturnArgument(0);
 
-		$this->user = $this->user = $this->getMockBuilder('\phpbb\user')
+		$this->user = $this->getMockBuilder(user::class)
 			->disableOriginalConstructor()
 			->getMock();
 
 		$this->validator = new validator($this->language);
 
-		$this->packager = $this->getMockBuilder('\phpbb\skeleton\helper\packager')
+		$this->packager = $this->getMockBuilder(packager::class)
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -127,7 +120,7 @@ class create_test extends \phpbb_test_case
 
 				foreach ($question_answers as $expected_question => $answer)
 				{
-					if (strpos($text, $expected_question) !== false)
+					if (str_contains($text, $expected_question))
 					{
 						$response = $answer;
 
@@ -140,7 +133,7 @@ class create_test extends \phpbb_test_case
 
 				if (!isset($response))
 				{
-					throw new \RuntimeException('Was asked for input on an unhandled question: ' . $text);
+					throw new RuntimeException('Was asked for input on an unhandled question: ' . $text);
 				}
 
 				$output->writeln(print_r($response, true));
@@ -158,7 +151,7 @@ class create_test extends \phpbb_test_case
 		return new CommandTester($command);
 	}
 
-	public function get_questions()
+	public function get_questions(): array
 	{
 		return [
 			'SKELETON_QUESTION_VENDOR_NAME'				=> 'foo',
@@ -211,7 +204,7 @@ class create_test extends \phpbb_test_case
 		$this->assertStringContainsString('EXTENSION_CLI_SKELETON_SUCCESS', $command_tester->getDisplay());
 	}
 
-	public function invalid_data()
+	public function invalid_data(): array
 	{
 		return [
 			[['SKELETON_QUESTION_VENDOR_NAME' => 'foo bar']],

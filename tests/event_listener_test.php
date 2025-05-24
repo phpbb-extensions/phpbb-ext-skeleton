@@ -13,27 +13,30 @@
 
 namespace phpbb\skeleton\tests;
 
-class event_listener_test extends \phpbb_test_case
+use phpbb\controller\helper;
+use phpbb\event\dispatcher;
+use phpbb\skeleton\event\main_listener;
+use phpbb\template\template;
+use phpbb_test_case;
+use PHPUnit\Framework\MockObject\MockObject;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+
+class event_listener_test extends phpbb_test_case
 {
-	/** @var \phpbb\controller\helper|\PHPUnit\Framework\MockObject\MockObject */
-	protected $controller_helper;
-
-	/** @var \phpbb\template\template|\PHPUnit\Framework\MockObject\MockObject */
-	protected $template;
-
-	/** @var \phpbb\skeleton\event\main_listener */
-	protected $listener;
+	protected helper|MockObject $controller_helper;
+	protected template|MockObject $template;
+	protected main_listener $listener;
 
 	public function setUp(): void
 	{
-		$this->template = $this->getMockBuilder('\phpbb\template\template')
+		$this->template = $this->getMockBuilder(template::class)
 			->disableOriginalConstructor()
 			->getMock();
-		$this->controller_helper = $this->controller_helper = $this->getMockBuilder('\phpbb\controller\helper')
+		$this->controller_helper = $this->getMockBuilder(helper::class)
 			->disableOriginalConstructor()
 			->getMock();
 
-		$this->listener = new \phpbb\skeleton\event\main_listener(
+		$this->listener = new main_listener(
 			$this->controller_helper,
 			$this->template
 		);
@@ -41,7 +44,7 @@ class event_listener_test extends \phpbb_test_case
 
 	public function test_construct()
 	{
-		self::assertInstanceOf('\Symfony\Component\EventDispatcher\EventSubscriberInterface', $this->listener);
+		self::assertInstanceOf(EventSubscriberInterface::class, $this->listener);
 	}
 
 	/**
@@ -52,18 +55,18 @@ class event_listener_test extends \phpbb_test_case
 		self::assertEquals(array(
 			'core.user_setup',
 			'core.page_header',
-		), array_keys(\phpbb\skeleton\event\main_listener::getSubscribedEvents()));
+		), array_keys(main_listener::getSubscribedEvents()));
 	}
 
 	public function test_load_language_on_setup()
 	{
-		$dispatcher = new \phpbb\event\dispatcher();
+		$dispatcher = new dispatcher();
 		$dispatcher->addListener('core.user_setup', [$this->listener, 'load_language_on_setup']);
 
 		$lang_set_ext = [];
 		$event_data = ['lang_set_ext'];
 		$event_data_after = $dispatcher->trigger_event('core.user_setup', compact($event_data));
-		extract($event_data_after, EXTR_OVERWRITE);
+		extract($event_data_after);
 
 		self::assertEquals([['ext_name' => 'phpbb/skeleton', 'lang_set' => 'common']], $lang_set_ext);
 	}
@@ -78,7 +81,7 @@ class event_listener_test extends \phpbb_test_case
 			->method('assign_var')
 			->with('U_PHPBB_SKELETON_EXT', 'phpbb_skeleton_controller');
 
-		$dispatcher = new \phpbb\event\dispatcher();
+		$dispatcher = new dispatcher();
 		$dispatcher->addListener('core.page_header', [$this->listener, 'add_page_header_link']);
 
 		$dispatcher->trigger_event('core.page_header');

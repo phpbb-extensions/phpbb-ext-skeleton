@@ -13,24 +13,27 @@
 
 namespace phpbb\skeleton\tests\helper;
 
+use ArrayIterator;
+use phpbb\extension\manager;
+use phpbb\filesystem\filesystem;
+use phpbb\path_helper;
 use phpbb\skeleton\helper\packager;
 use phpbb\di\service_collection;
+use phpbb\skeleton\skeleton;
+use phpbb\template\assets_bag;
+use phpbb\template\twig\twig;
+use phpbb\user;
+use phpbb_test_case;
 use PHPUnit\Framework\MockObject\MockObject;
+use ReflectionClass;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class packager_test extends \phpbb_test_case
+class packager_test extends phpbb_test_case
 {
-	/** @var ContainerInterface|MockObject */
-	protected $container;
-
-	/** @var service_collection|MockObject */
-	protected $collection;
-
-	/** @var packager */
-	protected $packager;
-
-	/** @var string */
-	protected $root_path = '/tmp/phpbb/';
+	protected ContainerInterface|MockObject $container;
+	protected MockObject|service_collection $collection;
+	protected packager $packager;
+	protected string $root_path = '/tmp/phpbb/';
 
 	/**
 	 * @return void
@@ -38,7 +41,7 @@ class packager_test extends \phpbb_test_case
 	public function setUpTheCollectionToReturnAFakeSkeletonClass(): void
 	{
 		// Set up the collection to return a fake skeleton class
-		$skeleton = $this->getMockBuilder(\phpbb\skeleton\skeleton::class)
+		$skeleton = $this->getMockBuilder(skeleton::class)
 			->disableOriginalConstructor()
 			->getMock();
 		$skeleton->method('get_name')->willReturn('phplistener');
@@ -47,7 +50,7 @@ class packager_test extends \phpbb_test_case
 		$skeleton->method('get_files')->willReturn(['test.php']);
 		$skeleton->method('get_group')->willReturn('BACK_END');
 
-		$this->collection->method('getIterator')->willReturn(new \ArrayIterator([$skeleton]));
+		$this->collection->method('getIterator')->willReturn(new ArrayIterator([$skeleton]));
 	}
 
 	protected function setUp(): void
@@ -85,11 +88,11 @@ class packager_test extends \phpbb_test_case
 		// Create a partial mock for packager, stubbing get_template_engine
 		$packager = $this->getMockBuilder(packager::class)
 			->setConstructorArgs([$this->container, $this->collection, $this->root_path])
-			->setMethods(['get_template_engine'])
+			->onlyMethods(['get_template_engine'])
 			->getMock();
 
 		// Mock the template engine
-		$templateMock = $this->createMock(\phpbb\template\twig\twig::class);
+		$templateMock = $this->createMock(twig::class);
 		$templateMock->method('set_custom_style')->willReturnSelf();
 		$templateMock->method('assign_vars')->willReturnSelf();
 		$templateMock->method('set_filenames')->willReturnSelf();
@@ -143,25 +146,36 @@ class packager_test extends \phpbb_test_case
 	public function test_get_template_engine_returns_twig_instance()
 	{
 		// Mock all required dependencies for the container
-		$filesystem = $this->createMock(\phpbb\filesystem\filesystem::class);
-		$path_helper = $this->createMock(\phpbb\path_helper::class);
-		$ext_manager = $this->createMock(\phpbb\extension\manager::class);
-		$user = $this->createMock(\phpbb\user::class);
+		$filesystem = $this->createMock(filesystem::class);
+		$path_helper = $this->createMock(path_helper::class);
+		$ext_manager = $this->createMock(manager::class);
+		$user = $this->createMock(user::class);
+		$assets_bag = $this->createMock(assets_bag::class);
 
-		$this->container->expects($this->exactly(4))
+		$callCount = 0;
+		$expectedArgs = [
+			['path_helper'],
+			['assets.bag'],
+			['filesystem'],
+			['ext.manager'],
+			['user']
+		];
+		$returnValues = [
+			$path_helper,
+			$assets_bag,
+			$filesystem,
+			$ext_manager,
+			$user
+		];
+
+		$this->container->expects($this->exactly(5))
 			->method('get')
-			->withConsecutive(
-				['path_helper'],
-				['filesystem'],
-				['ext.manager'],
-				['user']
-			)
-			->willReturnOnConsecutiveCalls(
-				$path_helper,
-				$filesystem,
-				$ext_manager,
-				$user
-			);
+			->willReturnCallback(function($arg) use (&$callCount, $expectedArgs, $returnValues) {
+				$this->assertSame($expectedArgs[$callCount][0], $arg);
+				$return = $returnValues[$callCount];
+				$callCount++;
+				return $return;
+			});
 
 		$this->container->expects($this->exactly(2))
 			->method('getParameter')
@@ -170,15 +184,13 @@ class packager_test extends \phpbb_test_case
 
 		// Call the protected method using your invokeMethod helper
 		$twig = $this->invokeMethod($this->packager, 'get_template_engine');
-		$this->assertInstanceOf(\phpbb\template\twig\twig::class, $twig);
+		$this->assertInstanceOf(twig::class, $twig);
 	}
 
 	// Helper for protected/private method invocation
 	protected function invokeMethod($object, $methodName, array $parameters = [])
 	{
-		$reflection = new \ReflectionClass(get_class($object));
-		$method = $reflection->getMethod($methodName);
-		$method->setAccessible(true);
-		return $method->invokeArgs($object, $parameters);
+		$reflection = new ReflectionClass(get_class($object));
+		return $reflection->getMethod($methodName)->invokeArgs($object, $parameters);
 	}
 }

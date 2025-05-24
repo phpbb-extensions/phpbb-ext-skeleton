@@ -13,15 +13,17 @@
 
 namespace phpbb\skeleton\tests\functional;
 
+use phpbb_functional_test_case;
+
 /**
  * @group functional
  */
-class view_test extends \phpbb_functional_test_case
+class view_test extends phpbb_functional_test_case
 {
 	/**
 	 * @inheritdoc
 	 */
-	protected static function setup_extensions()
+	protected static function setup_extensions(): array
 	{
 		return ['phpbb/skeleton'];
 	}

@@ -14,19 +14,23 @@
 namespace phpbb\skeleton\tests\helper;
 
 use phpbb\exception\runtime_exception;
+use phpbb\language\language;
+use phpbb\language\language_file_loader;
+use phpbb\skeleton\helper\validator;
+use phpbb_test_case;
 
-class validator_test extends \phpbb_test_case
+class validator_test extends phpbb_test_case
 {
-	/** @var \phpbb\skeleton\helper\validator */
-	protected $validator;
+	/** @var validator */
+	protected validator $validator;
 
 	public function setUp(): void
 	{
 		global $phpbb_root_path, $phpEx;
 
-		$this->validator = new \phpbb\skeleton\helper\validator(
-			new \phpbb\language\language(
-				new \phpbb\language\language_file_loader($phpbb_root_path, $phpEx)
+		$this->validator = new validator(
+			new language(
+				new language_file_loader($phpbb_root_path, $phpEx)
 			)
 		);
 	}
@@ -115,11 +119,11 @@ class validator_test extends \phpbb_test_case
 	 *
 	 * @dataProvider valid_data
 	 * @param string $validator Name of the validator method
-	 * @param string $value     Value to validate
+	 * @param string|null $value     Value to validate
 	 */
-	public function test_validator_valid($validator, $value)
+	public function test_validator_valid(string $validator, string|null $value)
 	{
-		self::assertEquals($value, call_user_func([$this->validator, "validate_{$validator}"], $value));
+		self::assertEquals($value, call_user_func([$this->validator, "validate_$validator"], $value));
 	}
 
 	public function invalid_data(): array
@@ -214,14 +218,14 @@ class validator_test extends \phpbb_test_case
 	 *
 	 * @dataProvider invalid_data
 	 * @param string $validator Name of the validator method
-	 * @param string $value     Value to validate
+	 * @param string|null $value     Value to validate
 	 * @param string $expected  Expected error message
 	 */
-	public function test_validator_invalid($validator, $value, $expected)
+	public function test_validator_invalid(string $validator, string|null $value, string $expected)
 	{
 		$this->expectException(runtime_exception::class);
 		$this->expectExceptionMessage($expected);
 
-		call_user_func([$this->validator, "validate_{$validator}"], $value);
+		call_user_func([$this->validator, "validate_$validator"], $value);
 	}
 }
