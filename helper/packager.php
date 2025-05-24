@@ -203,6 +203,7 @@ class packager
 
 		$path_helper = $this->phpbb_container->get('path_helper');
 		$environment = new environment(
+			$this->phpbb_container->get('assets.bag'),
 			$config,
 			$this->phpbb_container->get('filesystem'),
 			$path_helper,
