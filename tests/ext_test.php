@@ -14,14 +14,16 @@
 namespace phpbb\skeleton\tests;
 
 use phpbb\db\migrator;
-use phpbb\finder;
+use phpbb\finder\finder;
 use phpbb\language\language;
 use phpbb\skeleton\ext;
+use phpbb_test_case;
+use ReflectionClass;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class ext_test extends \phpbb_test_case
+class ext_test extends phpbb_test_case
 {
-	protected $ext;
+	protected ext $ext;
 
 	protected function setUp(): void
 	{
@@ -34,16 +36,11 @@ class ext_test extends \phpbb_test_case
 		);
 	}
 
-	public function test_ext_is_instance_of_base()
-	{
-		$this->assertInstanceOf(ext::class, $this->ext);
-	}
-
 	public function test_is_enableable_true()
 	{
 		$ext = $this->getMockBuilder(ext::class)
 			->disableOriginalConstructor()
-			->setMethods(['ziparchive_exists', 'phpbb_requirement', 'php_requirement'])
+			->onlyMethods(['ziparchive_exists', 'phpbb_requirement', 'php_requirement'])
 			->getMock();
 
 		$ext->method('ziparchive_exists')->willReturn(null);
@@ -58,7 +55,7 @@ class ext_test extends \phpbb_test_case
 	{
 		$ext = $this->getMockBuilder(ext::class)
 			->disableOriginalConstructor()
-			->setMethods(['ziparchive_exists', 'phpbb_requirement', 'php_requirement', 'enable_failed'])
+			->onlyMethods(['ziparchive_exists', 'phpbb_requirement', 'php_requirement', 'enable_failed'])
 			->getMock();
 
 		$ext->method('ziparchive_exists')->willReturnCallback(function () use ($ext) {
@@ -91,8 +88,7 @@ class ext_test extends \phpbb_test_case
 
 		$this->setProperty($ext, 'container', $containerMock);
 
-		$method = (new \ReflectionClass($ext))->getMethod('enable_failed');
-		$method->setAccessible(true);
+		$method = (new ReflectionClass($ext))->getMethod('enable_failed');
 
 		$this->assertEquals(['LANG: SOME_ERROR'], $method->invoke($ext));
 	}
@@ -101,14 +97,7 @@ class ext_test extends \phpbb_test_case
 	{
 		$this->setExtErrors($this->ext, []);
 		$this->invokeProtectedMethod($this->ext, 'phpbb_requirement', ['3.2.2']);
-		$this->assertContains('PHPBB_VERSION_MIN_ERROR', $this->getExtErrors($this->ext));
-	}
-
-	public function test_phpbb_requirement_max_error()
-	{
-		$this->setExtErrors($this->ext, []);
-		$this->invokeProtectedMethod($this->ext, 'phpbb_requirement', ['4.0.0-dev']);
-		$this->assertContains('PHPBB_VERSION_MAX_ERROR', $this->getExtErrors($this->ext));
+		$this->assertContains('PHPBB_VERSION_ERROR', $this->getExtErrors($this->ext));
 	}
 
 	public function test_php_requirement_error()
@@ -129,22 +118,17 @@ class ext_test extends \phpbb_test_case
 
 	protected function invokeProtectedMethod($object, string $methodName, array $args = [])
 	{
-		$method = (new \ReflectionClass($object))->getMethod($methodName);
-		$method->setAccessible(true);
-		return $method->invokeArgs($object, $args);
+		return (new ReflectionClass($object))->getMethod($methodName)->invokeArgs($object, $args);
 	}
 
 	protected function getExtErrors($ext): array
 	{
-		$prop = (new \ReflectionClass($ext))->getProperty('errors');
-		$prop->setAccessible(true);
-		return $prop->getValue($ext);
+		return (new ReflectionClass($ext))->getProperty('errors')->getValue($ext);
 	}
 
 	protected function setExtErrors($ext, array $errors): void
 	{
-		$prop = (new \ReflectionClass($ext))->getProperty('errors');
-		$prop->setAccessible(true);
+		$prop = (new ReflectionClass($ext))->getProperty('errors');
 		$prop->setValue($ext, $errors);
 	}
 
@@ -157,8 +141,7 @@ class ext_test extends \phpbb_test_case
 
 	protected function setProperty($object, string $property, $value): void
 	{
-		$prop = (new \ReflectionClass($object))->getProperty($property);
-		$prop->setAccessible(true);
+		$prop = (new ReflectionClass($object))->getProperty($property);
 		$prop->setValue($object, $value);
 	}
 }
