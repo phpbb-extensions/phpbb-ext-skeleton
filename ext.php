@@ -19,6 +19,10 @@ class ext extends \phpbb\extension\base
 	const DEFAULT_PHPBB_MIN = '3.3.0';
 	const DEFAULT_PHPBB_MAX = '4.0.0@dev';
 
+	const REQUIRE_PHPBB_MIN = '3.2.3';
+	const REQUIRE_PHPBB_MAX = '4.0.0-dev';
+	const REQUIRE_PHP = 50600;
+
 	/**
 	 * @var array An array of installation error messages
 	 */
@@ -40,31 +44,32 @@ class ext extends \phpbb\extension\base
 	}
 
 	/**
-	 * Check phpBB 3.2.3 minimum requirement.
+	 * Check phpBB requirements.
 	 *
+	 * @param string $phpBB_version
 	 * @return void
 	 */
-	protected function phpbb_requirement()
+	protected function phpbb_requirement($phpBB_version = PHPBB_VERSION)
 	{
-		if (phpbb_version_compare(PHPBB_VERSION, '3.2.3', '<'))
+		if (phpbb_version_compare($phpBB_version, self::REQUIRE_PHPBB_MIN, '<'))
 		{
 			$this->errors[] = 'PHPBB_VERSION_MIN_ERROR';
 		}
-
-		else if (phpbb_version_compare(PHPBB_VERSION, '4.0.0-dev', '>='))
+		else if (phpbb_version_compare($phpBB_version, self::REQUIRE_PHPBB_MAX, '>='))
 		{
 			$this->errors[] = 'PHPBB_VERSION_MAX_ERROR';
 		}
 	}
 
 	/**
-	 * Check PHP 5.6.0 minimum requirement.
+	 * Check PHP minimum requirement.
 	 *
+	 * @param int $php_version
 	 * @return void
 	 */
-	protected function php_requirement()
+	protected function php_requirement($php_version = PHP_VERSION_ID)
 	{
-		if (PHP_VERSION_ID < 50600)
+		if ($php_version < self::REQUIRE_PHP)
 		{
 			$this->errors[] = 'PHP_VERSION_ERROR';
 		}
@@ -73,11 +78,12 @@ class ext extends \phpbb\extension\base
 	/**
 	 * Check PHP ZipArchive binary requirement.
 	 *
+	 * @param string $zip_class
 	 * @return void
 	 */
-	protected function ziparchive_exists()
+	protected function ziparchive_exists($zip_class = 'ZipArchive')
 	{
-		if (!class_exists('ZipArchive'))
+		if (!class_exists($zip_class, false))
 		{
 			$this->errors[] = 'NO_ZIPARCHIVE_ERROR';
 		}
