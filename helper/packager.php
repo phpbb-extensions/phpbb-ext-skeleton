@@ -16,6 +16,7 @@ namespace phpbb\skeleton\helper;
 use phpbb\config\config;
 use phpbb\di\service_collection;
 use phpbb\filesystem\filesystem;
+use phpbb\path_helper;
 use phpbb\skeleton\ext;
 use phpbb\skeleton\template\twig\extension\skeleton_version_compare;
 use phpbb\template\context;
@@ -115,7 +116,7 @@ class packager
 		$filesystem->remove($this->root_path . 'store/tmp-ext');
 		$filesystem->mkdir($ext_path);
 
-		$phpbb31 = (bool) preg_match('/^[\D]*3\.1.*$/', $data['requirements']['phpbb_version_min']);
+		$phpbb_31 = (bool) preg_match('/^\D*3\.1.*$/', $data['requirements']['phpbb_version_min']);
 
 		$template = $this->get_template_engine();
 		$template->set_custom_style('skeletonextension', $this->root_path . 'ext/phpbb/skeleton/skeleton');
@@ -124,8 +125,7 @@ class packager
 			'EXTENSION'    => $data['extension'],
 			'REQUIREMENTS' => $data['requirements'],
 			'AUTHORS'      => $data['authors'],
-			'LANGUAGE'     => $this->get_language_version_data($phpbb31),
-			'S_PHPBB_31'   => $phpbb31,
+			'LANGUAGE'     => $this->get_language_version_data($phpbb_31),
 		]);
 
 		$component_data = $this->get_component_dialog_values();
@@ -201,10 +201,13 @@ class packager
 			'assets_version'  => null,
 		]);
 
+		/** @var path_helper $path_helper */
 		$path_helper = $this->phpbb_container->get('path_helper');
+		/** @var filesystem $filesystem */
+		$filesystem = $this->phpbb_container->get('filesystem');
 		$environment = new environment(
 			$config,
-			$this->phpbb_container->get('filesystem'),
+			$filesystem,
 			$path_helper,
 			$this->phpbb_container->getParameter('core.cache_dir'),
 			$this->phpbb_container->get('ext.manager'),
@@ -236,19 +239,19 @@ class packager
 	 * Get an array of language class and methods depending on 3.1 or 3.2
 	 * compatibility, for use in the skeleton twig templates.
 	 *
-	 * @param bool $phpbb31 Is phpBB 3.1 support requested?
+	 * @param bool $phpbb_31 Is phpBB 3.1 support requested?
 	 *
 	 * @return array An array of language data
 	 */
-	protected function get_language_version_data($phpbb31)
+	protected function get_language_version_data($phpbb_31)
 	{
 		return [
-			'class'		=> $phpbb31 ? '\phpbb\user' : '\phpbb\language\language',
-			'object'	=> $phpbb31 ? 'user' : 'language',
-			'function'	=> $phpbb31 ? 'add_lang_ext' : 'add_lang',
+			'class'		=> $phpbb_31 ? '\phpbb\user' : '\phpbb\language\language',
+			'object'	=> $phpbb_31 ? 'user' : 'language',
+			'function'	=> $phpbb_31 ? 'add_lang_ext' : 'add_lang',
 			'indent'	=> [
-				'class'		=> $phpbb31 ? "\t\t\t" : '',
-				'object'	=> $phpbb31 ? "\t" : '',
+				'class'		=> $phpbb_31 ? "\t\t\t" : '',
+				'object'	=> $phpbb_31 ? "\t" : '',
 			],
 		];
 	}
