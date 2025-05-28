@@ -20,6 +20,11 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  */
 class main_listener implements EventSubscriberInterface
 {
+	/**
+	 * Map phpBB core events to the listener methods that should handle those events
+	 *
+	 * @return array
+	 */
 	public static function getSubscribedEvents()
 	{
 		return [
@@ -34,7 +39,7 @@ class main_listener implements EventSubscriberInterface
 			'core.display_forums_modify_template_vars'	=> 'display_forums_modify_template_vars',
 {% endif %}
 {% if COMPONENT.permissions %}
-			'core.permissions'	=> 'add_permissions',
+			'core.permissions'							=> 'add_permissions',
 {% endif %}
 		];
 	}
