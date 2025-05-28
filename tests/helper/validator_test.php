@@ -119,7 +119,7 @@ class validator_test extends \phpbb_test_case
 	 */
 	public function test_validator_valid($validator, $value)
 	{
-		self::assertEquals($value, call_user_func([$this->validator, "validate_{$validator}"], $value));
+		$this->assertEquals($value, call_user_func([$this->validator, "validate_{$validator}"], $value));
 	}
 
 	public function invalid_data(): array

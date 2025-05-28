@@ -50,7 +50,7 @@ class create_test extends \phpbb_test_case
 			->getMock();
 
 		$this->language->method('lang')
-			->will($this->returnArgument(0));
+			->willReturnArgument(0);
 
 		$this->user = $this->user = $this->getMockBuilder('\phpbb\user')
 			->disableOriginalConstructor()
@@ -62,7 +62,7 @@ class create_test extends \phpbb_test_case
 			->disableOriginalConstructor()
 			->getMock();
 
-		$this->packager->expects(self::atMost(1))
+		$this->packager->expects($this->atMost(1))
 			->method('get_composer_dialog_values')
 			->willReturn([
 				'author' => ['author_name' => null],
@@ -70,7 +70,7 @@ class create_test extends \phpbb_test_case
 				'requirements' => ['php_version' => '>=5.4'],
 			]);
 
-		$this->packager->expects(self::atMost(1))
+		$this->packager->expects($this->atMost(1))
 			->method('get_component_dialog_values')
 			->willReturn([
 				'phplistener' => [
