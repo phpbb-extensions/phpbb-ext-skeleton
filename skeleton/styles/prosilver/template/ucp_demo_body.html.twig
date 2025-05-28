@@ -12,9 +12,11 @@
 				{{ '{' }}% endif %}
 
 				<dl>
-					<dt><label for="user_{{ EXTENSION.extension_name|lower }}0">{{ '{{' }} lang('UCP_{{ EXTENSION.extension_name|upper }}_USER') ~ lang('COLON') }}</label><br /><span>{{ '{{' }} lang('UCP_{{ EXTENSION.extension_name|upper }}_USER_EXPLAIN') }}</span></dt>
-					<dd><label for="user_{{ EXTENSION.extension_name|lower }}1"><input type="radio" name="user_{{ EXTENSION.extension_name|lower }}" id="user_{{ EXTENSION.extension_name|lower }}1" value="1"{{ '{' }}% if S_USER_{{ EXTENSION.extension_name|upper }} %} checked="checked"{{ '{' }}% endif %} /> {{ '{{' }} lang('YES') }}</label>
-						<label for="user_{{ EXTENSION.extension_name|lower }}0"><input type="radio" name="user_{{ EXTENSION.extension_name|lower }}" id="user_{{ EXTENSION.extension_name|lower }}0" value="0"{{ '{' }}% if not S_USER_{{ EXTENSION.extension_name|upper }} %} checked="checked"{{ '{' }}% endif %} /> {{ '{{' }} lang('NO') }}</label></dd>
+					<dt><label for="user_{{ EXTENSION.extension_name|lower }}0">{{ '{{' }} lang('UCP_{{ EXTENSION.extension_name|upper }}_USER') ~ lang('COLON') }}</label><br><span>{{ '{{' }} lang('UCP_{{ EXTENSION.extension_name|upper }}_USER_EXPLAIN') }}</span></dt>
+					<dd>
+						<label for="user_{{ EXTENSION.extension_name|lower }}1"><input type="radio" name="user_{{ EXTENSION.extension_name|lower }}" id="user_{{ EXTENSION.extension_name|lower }}1" value="1"{{ '{' }}% if S_USER_{{ EXTENSION.extension_name|upper }} %} checked="checked"{{ '{' }}% endif %}> {{ '{{' }} lang('YES') }}</label>
+						<label for="user_{{ EXTENSION.extension_name|lower }}0"><input type="radio" name="user_{{ EXTENSION.extension_name|lower }}" id="user_{{ EXTENSION.extension_name|lower }}0" value="0"{{ '{' }}% if not S_USER_{{ EXTENSION.extension_name|upper }} %} checked="checked"{{ '{' }}% endif %}> {{ '{{' }} lang('NO') }}</label>
+					</dd>
 				</dl>
 			</fieldset>
 		</div>
@@ -22,8 +24,10 @@
 	<fieldset>
 		<dl>
 			<dt>&nbsp;</dt>
-			<dd><input type="submit" name="submit" id="submit" class="button1" value="{{ '{{' }} lang('SUBMIT') }}" tabindex="2" />&nbsp;
-				<input type="reset" name="reset" class="button2" value="{{ '{{' }} lang('RESET') }}" /></dd>
+			<dd>
+				<input type="submit" name="submit" id="submit" class="button1" value="{{ '{{' }} lang('SUBMIT') }}" tabindex="2">&nbsp;
+				<input type="reset" name="reset" class="button2" value="{{ '{{' }} lang('RESET') }}">
+			</dd>
 		</dl>
 		{{ '{{' }} S_HIDDEN_FIELDS }}
 		{{ '{{' }} S_FORM_TOKEN }}

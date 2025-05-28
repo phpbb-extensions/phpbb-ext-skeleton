@@ -96,7 +96,7 @@ class ucp_controller
 				// Option settings have been updated
 				// Confirm this to the user and provide (automated) link back to previous page
 				meta_refresh(3, $this->u_action);
-				$message = $this->{{ LANGUAGE.object }}->lang('UCP_{{ EXTENSION.extension_name|upper }}_SAVED') . '<br /><br />' . $this->{{ LANGUAGE.object }}->lang('RETURN_UCP', '<a href="' . $this->u_action . '">', '</a>');
+				$message = $this->{{ LANGUAGE.object }}->lang('UCP_{{ EXTENSION.extension_name|upper }}_SAVED') . '<br><br>' . $this->{{ LANGUAGE.object }}->lang('RETURN_UCP', '<a href="' . $this->u_action . '">', '</a>');
 				trigger_error($message);
 			}
 		}
@@ -106,7 +106,7 @@ class ucp_controller
 		// Set output variables for display in the template
 		$this->template->assign_vars([
 			'S_ERROR'		=> $s_errors,
-			'ERROR_MSG'		=> $s_errors ? implode('<br />', $errors) : '',
+			'ERROR_MSG'		=> $s_errors ? implode('<br>', $errors) : '',
 
 			'U_UCP_ACTION'	=> $this->u_action,
 
