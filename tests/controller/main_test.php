@@ -136,12 +136,12 @@ class main_test extends phpbb_test_case
 		$this->language->method('is_set')
 			->willReturn(true);
 
-		$this->request->expects(self::once())
+		$this->request->expects($this->once())
 			->method('is_set_post')
 			->willReturn(false);
 
 		$this->request->method('variable')
-			->with(self::anything())
+			->with($this->anything())
 			->willReturnMap([
 				['vendor_name', '', true, request_interface::REQUEST, 'foo'],
 				['author_name', [''], true, request_interface::REQUEST, ['bar']],
@@ -150,14 +150,14 @@ class main_test extends phpbb_test_case
 				['component_phplistener', false, false, request_interface::REQUEST, true],
 			]);
 
-		$this->controller_helper->expects(self::once())
+		$this->controller_helper->expects($this->once())
 			->method('render')
 			->willReturnCallback(function ($template_file, $page_title = '', $status_code = 200) {
 				return new Response($template_file, $status_code);
 			});
 
 		$callCount = 0;
-		$this->template->expects(self::atLeastOnce())
+		$this->template->expects($this->atLeastOnce())
 			->method('assign_block_vars')
 			->willReturnCallback(function($blockName, $blockVars) use (&$callCount) {
 				$expectedCalls = [
@@ -267,9 +267,9 @@ class main_test extends phpbb_test_case
 
 		$response = $this->get_controller($this->packager)->handle();
 
-		self::assertInstanceOf(Response::class, $response);
-		self::assertEquals($status_code, $response->getStatusCode());
-		self::assertEquals($page_content, $response->getContent());
+		$this->assertInstanceOf(Response::class, $response);
+		$this->assertEquals($status_code, $response->getStatusCode());
+		$this->assertEquals($page_content, $response->getContent());
 	}
 
 	/**
@@ -289,7 +289,7 @@ class main_test extends phpbb_test_case
 	{
 		$this->user->data['is_bot'] = false;
 
-		$this->request->expects(self::once())
+		$this->request->expects($this->once())
 			->method('is_set_post')
 			->willReturn(true);
 
@@ -302,7 +302,7 @@ class main_test extends phpbb_test_case
 				['component_githubactions', true, false, request_interface::REQUEST, true],
 			]);
 
-		$this->packager_mock->expects(self::once())
+		$this->packager_mock->expects($this->once())
 			->method('get_composer_dialog_values')
 			->willReturn([
 				'author' => ['author_name' => null],
@@ -310,7 +310,7 @@ class main_test extends phpbb_test_case
 				'requirements' => ['php_version' => '>=5.4'],
 			]);
 
-		$this->packager_mock->expects(self::once())
+		$this->packager_mock->expects($this->once())
 			->method('get_component_dialog_values')
 			->willReturn([
 				'phplistener' => [
@@ -336,27 +336,27 @@ class main_test extends phpbb_test_case
 
 		$response = $this->get_controller($this->packager_mock)->handle();
 
-		self::assertInstanceOf(Response::class, $response);
+		$this->assertInstanceOf(Response::class, $response);
 	}
 
 	public function test_submit_exception()
 	{
 		$this->user->data['is_bot'] = false;
 
-		$this->request->expects(self::once())
+		$this->request->expects($this->once())
 			->method('is_set_post')
 			->with('submit')
 			->willReturn(true);
 
 		$this->request->method('variable')
-			->with(self::anything())
+			->with($this->anything())
 			->willReturnMap([
 				['author_name', [''], true, request_interface::REQUEST, ['']],
 				['vendor_name', '', true, request_interface::REQUEST, 'foo_vendor'],
 				['php_version', '>=5.4', true, request_interface::REQUEST, '>=5.4'],
 			]);
 
-		$this->packager_mock->expects(self::atLeastOnce())
+		$this->packager_mock->expects($this->atLeastOnce())
 			->method('get_composer_dialog_values')
 			->willReturn([
 				'author' => ['author_name' => null],
@@ -364,7 +364,7 @@ class main_test extends phpbb_test_case
 				'requirements' => ['php_version' => '>=5.4'],
 			]);
 
-		$this->packager_mock->expects(self::atLeastOnce())
+		$this->packager_mock->expects($this->atLeastOnce())
 			->method('get_component_dialog_values')
 			->willReturn([
 				'phplistener' => [
@@ -375,7 +375,7 @@ class main_test extends phpbb_test_case
 				],
 			]);
 
-		$this->validator->expects(self::once())
+		$this->validator->expects($this->once())
 			->method('validate_vendor_name')
 			->with('foo_vendor')
 			->willThrowException(new runtime_exception('SKELETON_INVALID_VENDOR_NAME'));

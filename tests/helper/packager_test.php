@@ -135,12 +135,66 @@ class packager_test extends phpbb_test_case
 		// Clean up or further assertions here
 	}
 
-	public function test_get_language_version_data_returns_expected()
+	/**
+	 * @dataProvider provide_language_version_data
+	 */
+	public function test_get_language_version_data_returns_expected($phpbb_version, $expected)
 	{
-		$data_31 = $this->invokeMethod($this->packager, 'get_language_version_data', [true]);
-		$data_32 = $this->invokeMethod($this->packager, 'get_language_version_data', [false]);
-		$this->assertArrayHasKey('class', $data_31);
-		$this->assertArrayHasKey('class', $data_32);
+		$data = [
+			'requirements' => [
+				'phpbb_version_min' => $phpbb_version
+			]
+		];
+
+		$result = $this->invokeMethod($this->packager, 'get_language_version_data', [$data]);
+
+		$this->assertSame($expected['class'], $result['class']);
+		$this->assertSame($expected['object'], $result['object']);
+		$this->assertSame($expected['function'], $result['function']);
+		$this->assertSame($expected['indent']['class'], $result['indent']['class']);
+		$this->assertSame($expected['indent']['object'], $result['indent']['object']);
+	}
+
+	public function provide_language_version_data()
+	{
+		return [
+			'3.1 version' => [
+				'3.1.0',
+				[
+					'class' => '\phpbb\user',
+					'object' => 'user',
+					'function' => 'add_lang_ext',
+					'indent' => [
+						'class' => "\t\t\t",
+						'object' => "\t"
+					]
+				]
+			],
+			'3.2 version' => [
+				'3.2.0',
+				[
+					'class' => '\phpbb\language\language',
+					'object' => 'language',
+					'function' => 'add_lang',
+					'indent' => [
+						'class' => '',
+						'object' => ''
+					]
+				]
+			],
+			'null version' => [
+				null,
+				[
+					'class' => '\phpbb\language\language',
+					'object' => 'language',
+					'function' => 'add_lang',
+					'indent' => [
+						'class' => '',
+						'object' => ''
+					]
+				]
+			]
+		];
 	}
 
 	public function test_get_template_engine_returns_twig_instance()

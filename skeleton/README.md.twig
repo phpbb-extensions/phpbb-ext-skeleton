@@ -1,29 +1,18 @@
 # {{ EXTENSION.extension_display_name }}
 
+This is a basic skeleton to help you start building a phpBB extension. Customise it as needed.
+
 ## Installation
 
-Copy the extension to phpBB/ext/{{ EXTENSION.vendor_name }}/{{ EXTENSION.extension_name }}
+1. Copy the extension to: `phpBB/ext/{{ EXTENSION.vendor_name }}/{{ EXTENSION.extension_name }}`
+2. In the ACP, go to: **Customise → Manage extensions**
+3. Enable the **{{ EXTENSION.extension_display_name }}** extension
 
-Go to "ACP" > "Customise" > "Extensions" and enable the "{{ EXTENSION.extension_display_name }}" extension.
+## Extension Development Guide
 
-{% if COMPONENT.tests %}
-## Tests and Continuous Integration
+New to phpBB extension development?
+Start here: [phpBB Extension Development Guide](https://area51.phpbb.com/docs/dev/3.3.x/extensions/index.html)
 
-{% if COMPONENT.githubactions %}We use GitHub Actions as a continuous integration server and phpunit for our unit testing..{% endif %}
-To run the tests locally, you need to install phpBB from its Git repository. Afterward run the following command from the phpBB Git repository's root:
-
-Windows:
-
-    phpBB\vendor\bin\phpunit.bat -c phpBB\ext\{{ EXTENSION.vendor_name }}\{{ EXTENSION.extension_name }}\phpunit.xml.dist
-
-others:
-
-    phpBB/vendor/bin/phpunit -c phpBB/ext/{{ EXTENSION.vendor_name }}/{{ EXTENSION.extension_name }}/phpunit.xml.dist
-
-
-See more information on the [phpBB Developer Docs](https://area51.phpbb.com/docs/dev/master/testing/index.html)
-
-{% endif %}
 ## License
 
-[GNU General Public License v2](license.txt)
+Licensed under the [GNU General Public License v2](license.txt)
