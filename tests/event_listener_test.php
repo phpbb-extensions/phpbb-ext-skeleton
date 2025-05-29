@@ -41,7 +41,7 @@ class event_listener_test extends \phpbb_test_case
 
 	public function test_construct()
 	{
-		self::assertInstanceOf('\Symfony\Component\EventDispatcher\EventSubscriberInterface', $this->listener);
+		$this->assertInstanceOf('\Symfony\Component\EventDispatcher\EventSubscriberInterface', $this->listener);
 	}
 
 	/**
@@ -49,7 +49,7 @@ class event_listener_test extends \phpbb_test_case
 	 */
 	public function test_getSubscribedEvents()
 	{
-		self::assertEquals(array(
+		$this->assertEquals(array(
 			'core.user_setup',
 			'core.page_header',
 		), array_keys(\phpbb\skeleton\event\main_listener::getSubscribedEvents()));
@@ -65,16 +65,16 @@ class event_listener_test extends \phpbb_test_case
 		$event_data_after = $dispatcher->trigger_event('core.user_setup', compact($event_data));
 		extract($event_data_after, EXTR_OVERWRITE);
 
-		self::assertEquals([['ext_name' => 'phpbb/skeleton', 'lang_set' => 'common']], $lang_set_ext);
+		$this->assertEquals([['ext_name' => 'phpbb/skeleton', 'lang_set' => 'common']], $lang_set_ext);
 	}
 
 	public function test_add_page_header_link()
 	{
-		$this->controller_helper->expects(self::once())
+		$this->controller_helper->expects($this->once())
 			->method('route')
 			->willReturnArgument(0);
 
-		$this->template->expects(self::once())
+		$this->template->expects($this->once())
 			->method('assign_var')
 			->with('U_PHPBB_SKELETON_EXT', 'phpbb_skeleton_controller');
 
