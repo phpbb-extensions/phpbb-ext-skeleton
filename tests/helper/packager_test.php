@@ -209,15 +209,15 @@ class packager_test extends phpbb_test_case
 		$callCount = 0;
 		$expectedArgs = [
 			['path_helper'],
-			['assets.bag'],
 			['filesystem'],
+			['assets.bag'],
 			['ext.manager'],
 			['user']
 		];
 		$returnValues = [
 			$path_helper,
-			$assets_bag,
 			$filesystem,
+			$assets_bag,
 			$ext_manager,
 			$user
 		];
