@@ -45,9 +45,8 @@ class main_test extends \phpbb_test_case
 			->getMock();
 
 		// Set {{ LANGUAGE.object }}->lang() to return any arguments sent to it
-		${{ LANGUAGE.object }}->expects(self::any())
-			->method('lang')
-			->will(self::returnArgument(0));
+		${{ LANGUAGE.object }}->method('lang')
+			->will($this->returnArgument(0));
 
 		/** @var \phpbb\controller\helper|\PHPUnit\Framework\MockObject\MockObject $controller_helper Mock the controller helper class */
 		$controller_helper = $this->getMockBuilder('\phpbb\controller\helper')
