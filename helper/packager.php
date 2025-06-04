@@ -16,7 +16,6 @@ namespace phpbb\skeleton\helper;
 use phpbb\config\config;
 use phpbb\di\service_collection;
 use phpbb\filesystem\filesystem;
-use phpbb\path_helper;
 use phpbb\skeleton\ext;
 use phpbb\skeleton\template\twig\extension\skeleton_version_compare;
 use phpbb\template\context;
@@ -75,9 +74,9 @@ class packager
 				'extension_homepage'     => null,
 			],
 			'requirements' => [
-				'php_version'       => '>=' . ext::DEFAULT_PHP,
-				'phpbb_version_min' => '>=' . ext::DEFAULT_PHPBB_MIN,
-				'phpbb_version_max' => '<' . ext::DEFAULT_PHPBB_MAX,
+				'php_version'       => '>=' . ext::DEFAULT_SKELETON_PHP,
+				'phpbb_version_min' => '>=' . ext::DEFAULT_SKELETON_PHPBB_MIN,
+				'phpbb_version_max' => '<' . ext::DEFAULT_SKELETON_PHPBB_MAX,
 			],
 		];
 	}
@@ -224,8 +223,8 @@ class packager
 			$config,
 			new context(),
 			$environment,
-			$this->phpbb_container->getParameter('core.cache_dir'),
-			$this->phpbb_container->get('user'),
+			$cache_dir,
+			$container->get('user'),
 			[
 				new skeleton_version_compare()
 			]

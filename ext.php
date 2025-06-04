@@ -15,12 +15,12 @@ namespace phpbb\skeleton;
 
 class ext extends \phpbb\extension\base
 {
-	const DEFAULT_PHP = '7.1.3';
-	const DEFAULT_PHPBB_MIN = '3.3.0';
-	const DEFAULT_PHPBB_MAX = '4.0.0@dev';
+	public const DEFAULT_SKELETON_PHP = '7.1.3';
+	public const DEFAULT_SKELETON_PHPBB_MIN = '3.3.0';
+	public const DEFAULT_SKELETON_PHPBB_MAX = '4.0.0@dev';
 
-	const REQUIRE_PHPBB_MIN = '4.0.0-dev';
-	const REQUIRE_PHP = 80100;
+	public const MIN_PHPBB_ALLOWED = '4.0.0-dev';
+	public const MIN_PHP_ALLOWED = 80100;
 
 	/**
 	 * @var array An array of installation error messages
@@ -50,7 +50,7 @@ class ext extends \phpbb\extension\base
 	 */
 	protected function phpbb_requirement($phpBB_version = PHPBB_VERSION)
 	{
-		if (phpbb_version_compare($phpBB_version, self::REQUIRE_PHPBB_MIN, '<'))
+		if (phpbb_version_compare($phpBB_version, self::MIN_PHPBB_ALLOWED, '<'))
 		{
 			$this->errors[] = 'PHPBB_VERSION_ERROR';
 		}
@@ -64,7 +64,7 @@ class ext extends \phpbb\extension\base
 	 */
 	protected function php_requirement($php_version = PHP_VERSION_ID)
 	{
-		if ($php_version < self::REQUIRE_PHP)
+		if ($php_version < self::MIN_PHP_ALLOWED)
 		{
 			$this->errors[] = 'PHP_VERSION_ERROR';
 		}
