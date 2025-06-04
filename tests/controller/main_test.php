@@ -146,7 +146,7 @@ class main_test extends \phpbb_test_case
 				['vendor_name', '', true, \phpbb\request\request_interface::REQUEST, 'foo'],
 				['author_name', [''], true, \phpbb\request\request_interface::REQUEST, ['bar']],
 				['extension_version', '1.0.0-dev', true, \phpbb\request\request_interface::REQUEST, '1.0.0-dev'],
-				['php_version', '>=' . ext::DEFAULT_PHP, false, \phpbb\request\request_interface::REQUEST, '>=' . ext::DEFAULT_PHP],
+				['php_version', '>=' . ext::DEFAULT_SKELETON_PHP, false, \phpbb\request\request_interface::REQUEST, '>=' . ext::DEFAULT_SKELETON_PHP],
 				['component_phplistener', false, false, \phpbb\request\request_interface::REQUEST, true],
 			]);
 
@@ -229,7 +229,7 @@ class main_test extends \phpbb_test_case
 					'NAME'         => 'php_version',
 					'DESC'         => 'SKELETON_QUESTION_PHP_VERSION_UI',
 					'DESC_EXPLAIN' => 'SKELETON_QUESTION_PHP_VERSION_EXPLAIN',
-					'VALUE'        => '>=' . ext::DEFAULT_PHP,
+					'VALUE'        => '>=' . ext::DEFAULT_SKELETON_PHP,
 				]],
 				['requirement', [
 					'NAME'         => 'phpbb_version_min',

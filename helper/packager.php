@@ -74,9 +74,9 @@ class packager
 				'extension_homepage'     => null,
 			],
 			'requirements' => [
-				'php_version'       => '>=' . ext::DEFAULT_PHP,
-				'phpbb_version_min' => '>=' . ext::DEFAULT_PHPBB_MIN,
-				'phpbb_version_max' => '<' . ext::DEFAULT_PHPBB_MAX,
+				'php_version'       => '>=' . ext::DEFAULT_SKELETON_PHP,
+				'phpbb_version_min' => '>=' . ext::DEFAULT_SKELETON_PHPBB_MIN,
+				'phpbb_version_max' => '<' . ext::DEFAULT_SKELETON_PHPBB_MAX,
 			],
 		];
 	}
