@@ -16,7 +16,6 @@ namespace phpbb\skeleton\helper;
 use phpbb\config\config;
 use phpbb\di\service_collection;
 use phpbb\filesystem\filesystem;
-use phpbb\path_helper;
 use phpbb\skeleton\ext;
 use phpbb\skeleton\template\twig\extension\skeleton_version_compare;
 use phpbb\template\context;
