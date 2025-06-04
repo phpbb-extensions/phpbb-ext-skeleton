@@ -15,13 +15,19 @@ namespace phpbb\skeleton;
 
 class ext extends \phpbb\extension\base
 {
+	/** @var string The default value for PHP to use in skeletons */
 	const DEFAULT_PHP = '7.1.3';
+	/** @var string The default value for minimum phpBB to use in skeletons */
 	const DEFAULT_PHPBB_MIN = '3.3.0';
+	/** @var string The default value for maximum phpBB to use in skeletons */
 	const DEFAULT_PHPBB_MAX = '4.0.0@dev';
 
-	const REQUIRE_PHPBB_MIN = '3.2.3';
+	/** @var string The minimum version of phpBB this skeleton extension supports */
+	const REQUIRE_PHPBB_MIN = '3.3.0';
+	/** @var string The maximum version of phpBB this skeleton extension supports */
 	const REQUIRE_PHPBB_MAX = '4.0.0-dev';
-	const REQUIRE_PHP = 50600;
+	/** @var string The minimum version of PHP this skeleton extension supports */
+	const REQUIRE_PHP = 70100;
 
 	/**
 	 * @var array An array of installation error messages
