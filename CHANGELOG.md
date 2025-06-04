@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.2.0 - 2025-06-04
+
+- Dropped support for phpBB 3.2.x. This version now requires at least phpBB 3.3.0 and PHP 7.1.
+- Enhanced the generated skeleton README with links to extension development documentation.
+- Removed remaining XHTML artifacts from the generated skeleton files.
+- Updated generated PHPUnit test files to follow more consistent and modern PHPUnit practices.
+- Set the reusable GitHub Actions workflow as the default, replacing the older standalone workflow (now deprecated).
+- Updated version constraints to prevent installation on phpBB4, while ensuring it doesn’t cause errors if run within phpBB4.
+- Performed various behind-the-scenes code optimizations.
+
 ## 1.1.16 - 2025-05-23
 
 - Deprecating the older standalone GitHub Actions workflow in favor of the newer, simpler, re-usable workflow maintained by phpBB.
