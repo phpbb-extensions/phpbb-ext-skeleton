@@ -16,7 +16,6 @@ namespace phpbb\skeleton\helper;
 use phpbb\config\config;
 use phpbb\di\service_collection;
 use phpbb\filesystem\filesystem;
-use phpbb\path_helper;
 use phpbb\skeleton\ext;
 use phpbb\skeleton\template\twig\extension\skeleton_version_compare;
 use phpbb\template\context;
@@ -75,9 +74,9 @@ class packager
 				'extension_homepage'     => null,
 			],
 			'requirements' => [
-				'php_version'       => '>=' . ext::DEFAULT_PHP,
-				'phpbb_version_min' => '>=' . ext::DEFAULT_PHPBB_MIN,
-				'phpbb_version_max' => '<' . ext::DEFAULT_PHPBB_MAX,
+				'php_version'       => '>=' . ext::DEFAULT_SKELETON_PHP,
+				'phpbb_version_min' => '>=' . ext::DEFAULT_SKELETON_PHPBB_MIN,
+				'phpbb_version_max' => '<' . ext::DEFAULT_SKELETON_PHPBB_MAX,
 			],
 		];
 	}
@@ -199,20 +198,35 @@ class packager
 			'assets_version'  => null,
 		]);
 
-		/** @var path_helper $path_helper */
-		$path_helper = $this->phpbb_container->get('path_helper');
-		/** @var filesystem $filesystem */
-		$filesystem = $this->phpbb_container->get('filesystem');
-		$environment = new environment(
-			$config,
-			$filesystem,
-			$path_helper,
-			$this->phpbb_container->getParameter('core.cache_dir'),
-			$this->phpbb_container->get('ext.manager'),
-			new loader(
-				new filesystem()
-			)
-		);
+		$container = $this->phpbb_container;
+		$path_helper = $container->get('path_helper');
+		$filesystem = $container->get('filesystem');
+		$cache_dir = $container->getParameter('core.cache_dir');
+		$ext_manager = $container->get('ext.manager');
+
+		$is_phpbb_4 = defined('PHPBB_VERSION') &&
+			phpbb_version_compare(PHPBB_VERSION, '4.0.0-dev', '>=');
+
+		$args = $is_phpbb_4
+			? [
+				$container->get('assets.bag'),
+				$config,
+				$filesystem,
+				$path_helper,
+				$cache_dir,
+				$ext_manager,
+				new loader()
+			]
+			: [
+				$config,
+				$filesystem,
+				$path_helper,
+				$cache_dir,
+				$ext_manager,
+				new loader(new filesystem())
+			];
+
+		$environment = new environment(...$args);
 
 		// Custom filter for use by packager to decode greater/less than symbols
 		$filter = new \Twig\TwigFilter('skeleton_decode', function ($string) {
@@ -225,8 +239,8 @@ class packager
 			$config,
 			new context(),
 			$environment,
-			$this->phpbb_container->getParameter('core.cache_dir'),
-			$this->phpbb_container->get('user'),
+			$cache_dir,
+			$container->get('user'),
 			[
 				new skeleton_version_compare()
 			]

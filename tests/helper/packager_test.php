@@ -217,7 +217,7 @@ class packager_test extends \phpbb_test_case
 				$user
 			);
 
-		$this->container->expects($this->exactly(2))
+		$this->container->expects($this->once())
 			->method('getParameter')
 			->with('core.cache_dir')
 			->willReturn(false);
