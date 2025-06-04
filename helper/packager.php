@@ -198,17 +198,21 @@ class packager
 			'assets_version'  => null,
 		]);
 
-		/** @var path_helper $path_helper */
-		$path_helper = $this->phpbb_container->get('path_helper');
-		/** @var filesystem $filesystem */
-		$filesystem = $this->phpbb_container->get('filesystem');
+		$container = $this->phpbb_container;
+		$path_helper = $container->get('path_helper');
+		$filesystem = $container->get('filesystem');
+		$assets_bag = $container->get('assets.bag');
+		$ext_manager = $container->get('ext.manager');
+		$user = $container->get('user');
+		$cache_dir = $container->getParameter('core.cache_dir');
+
 		$environment = new environment(
-			$this->phpbb_container->get('assets.bag'),
+			$assets_bag,
 			$config,
 			$filesystem,
 			$path_helper,
-			$this->phpbb_container->getParameter('core.cache_dir'),
-			$this->phpbb_container->get('ext.manager'),
+			$cache_dir,
+			$ext_manager,
 			new loader()
 		);
 
@@ -224,7 +228,7 @@ class packager
 			new context(),
 			$environment,
 			$cache_dir,
-			$container->get('user'),
+			$user,
 			[
 				new skeleton_version_compare()
 			]
