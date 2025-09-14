@@ -40,7 +40,7 @@ class template_test extends phpbb_template_template_test_case
 {
 	protected $test_path = __DIR__;
 
-	protected function setup_engine(array $new_config = array()): void
+	protected function setup_engine(array $new_config = array(), string $template_path = ''): void
 	{
 		global $phpbb_root_path, $phpEx;
 
