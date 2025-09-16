@@ -35,7 +35,7 @@ class validator_test extends phpbb_test_case
 		);
 	}
 
-	public function valid_data(): array
+	public static function valid_data(): array
 	{
 		return [
 			['num_authors', '1'],
@@ -126,7 +126,7 @@ class validator_test extends phpbb_test_case
 		$this->assertEquals($value, call_user_func([$this->validator, "validate_$validator"], $value));
 	}
 
-	public function invalid_data(): array
+	public static function invalid_data(): array
 	{
 		return [
 			['num_authors', '21', 'SKELETON_INVALID_NUM_AUTHORS'],

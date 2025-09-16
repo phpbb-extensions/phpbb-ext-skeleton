@@ -155,7 +155,7 @@ class packager_test extends phpbb_test_case
 		$this->assertSame($expected['indent']['object'], $result['indent']['object']);
 	}
 
-	public function provide_language_version_data()
+	public static function provide_language_version_data()
 	{
 		return [
 			'3.1 version' => [

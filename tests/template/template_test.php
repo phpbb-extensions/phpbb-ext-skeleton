@@ -100,7 +100,7 @@ class template_test extends phpbb_template_template_test_case
 		$this->template->set_custom_style('tests', $this->template_path);
 	}
 
-	public function data_template_version_check(): array
+	public static function data_template_version_check(): array
 	{
 		return [
 			[
@@ -142,7 +142,7 @@ class template_test extends phpbb_template_template_test_case
 			[
 				'skeleton_version_compare.html',
 				[
-					'ver1' => null,
+					'ver1' => '',
 					'ver2' => '3.3.0',
 					'operator' => '<',
 				],

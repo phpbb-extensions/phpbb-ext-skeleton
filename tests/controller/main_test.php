@@ -114,7 +114,7 @@ class main_test extends phpbb_test_case
 		);
 	}
 
-	public function handle_data(): array
+	public static function handle_data(): array
 	{
 		return [
 			[200, '@phpbb_skeleton/skeleton_body.html'],

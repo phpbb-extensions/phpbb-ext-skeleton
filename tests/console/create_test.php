@@ -204,7 +204,7 @@ class create_test extends phpbb_test_case
 		$this->assertStringContainsString('EXTENSION_CLI_SKELETON_SUCCESS', $command_tester->getDisplay());
 	}
 
-	public function invalid_data(): array
+	public static function invalid_data(): array
 	{
 		return [
 			[['SKELETON_QUESTION_VENDOR_NAME' => 'foo bar']],

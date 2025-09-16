@@ -41,7 +41,7 @@ class validator
 	 */
 	public function validate_num_authors($value)
 	{
-		if ($value > 0 && $value <= 20 && ctype_digit($value))
+		if ((int) $value > 0 && (int) $value <= 20 && ctype_digit($value))
 		{
 			return $value;
 		}
@@ -58,6 +58,8 @@ class validator
 	 */
 	public function validate_extension_name($value)
 	{
+		$value = (string) $value;
+
 		if (preg_match('#^[a-z][a-z0-9]*$#', $value))
 		{
 			return $value;
@@ -75,6 +77,8 @@ class validator
 	 */
 	public function validate_extension_display_name($value)
 	{
+		$value = (string) $value;
+
 		if ((string) $value !== '' && strpos($value, '&quot;') === false)
 		{
 			return htmlspecialchars_decode($value, ENT_NOQUOTES);
@@ -92,6 +96,8 @@ class validator
 	 */
 	public function validate_extension_time($value)
 	{
+		$value = (string) $value;
+
 		if (preg_match('#^\d{4}-\d{2}-\d{2}$#', $value))
 		{
 			return $value;
@@ -109,6 +115,8 @@ class validator
 	 */
 	public function validate_extension_version($value)
 	{
+		$value = (string) $value;
+
 		if (preg_match('#^\d+(\.\d){1,3}(-(((?:a|b|RC|pl)\d+)|dev))?$#', $value))
 		{
 			return $value;
@@ -126,6 +134,8 @@ class validator
 	 */
 	public function validate_vendor_name($value)
 	{
+		$value = (string) $value;
+
 		if ($value !== 'core' && preg_match('#^[a-z][a-z0-9]*$#', $value))
 		{
 			return $value;
@@ -143,7 +153,9 @@ class validator
 	 */
 	public function validate_extension_homepage($value)
 	{
-		if ((string) $value !== '' && filter_var($value, FILTER_VALIDATE_URL) === false)
+		$value = (string) $value;
+
+		if ( $value !== '' && filter_var($value, FILTER_VALIDATE_URL) === false)
 		{
 			throw new runtime_exception($this->language->lang('SKELETON_INVALID_EXTENSION_URL'));
 		}
@@ -160,7 +172,9 @@ class validator
 	 */
 	public function validate_author_homepage($value)
 	{
-		if ((string) $value !== '' && filter_var($value, FILTER_VALIDATE_URL) === false)
+		$value = (string) $value;
+
+		if ($value !== '' && filter_var($value, FILTER_VALIDATE_URL) === false)
 		{
 			throw new runtime_exception($this->language->lang('SKELETON_INVALID_AUTHOR_URL'));
 		}
@@ -177,7 +191,9 @@ class validator
 	 */
 	public function validate_author_email($value)
 	{
-		if ((string) $value !== '' && filter_var($value, FILTER_VALIDATE_EMAIL) === false)
+		$value = (string) $value;
+
+		if ($value !== '' && filter_var($value, FILTER_VALIDATE_EMAIL) === false)
 		{
 			throw new runtime_exception($this->language->lang('SKELETON_INVALID_AUTHOR_EMAIL'));
 		}
@@ -194,6 +210,8 @@ class validator
 	 */
 	public function validate_phpbb_version_min($value)
 	{
+		$value = (string) $value;
+
 		if ($this->check_version($value))
 		{
 			return $value;
@@ -212,6 +230,8 @@ class validator
 	 */
 	public function validate_phpbb_version_max($value)
 	{
+		$value = (string) $value;
+
 		if ($this->check_version($value))
 		{
 			return $value;
@@ -230,6 +250,8 @@ class validator
 	 */
 	public function validate_php_version($value)
 	{
+		$value = (string) $value;
+
 		if ($this->check_version($value))
 		{
 			return $value;
