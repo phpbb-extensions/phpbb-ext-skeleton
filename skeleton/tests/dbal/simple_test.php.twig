@@ -52,7 +52,7 @@ class simple_test extends \phpbb_database_test_case
 		{
 			// This is how to instantiate db_tools in phpBB 3.2
 			$factory = new \phpbb\db\tools\factory();
-			$db_tools = $factory->get($this->db);
+			$db_tools = $factory->get({% if skeleton_version_compare(REQUIREMENTS.phpbb_version_min, "4.0", "<") %}$this->db{% else %}$this->new_doctrine_dbal(){% endif %});
 		}
 
 		$this->assertTrue($db_tools->sql_column_exists(USERS_TABLE, 'user_{{ EXTENSION.extension_name|lower }}'), 'Asserting that column "user_{{ EXTENSION.extension_name|lower }}" exists');
