@@ -51,8 +51,10 @@ class sample extends \phpbb\console\command\command
 	 * @param InputInterface  $input  An InputInterface instance
 	 * @param OutputInterface $output An OutputInterface instance
 	 */
-	protected function execute(InputInterface $input, OutputInterface $output)
+	protected function execute(InputInterface $input, OutputInterface $output): int
 	{
 		$output->writeln($this->user->lang('CLI_{{ EXTENSION.extension_name|upper }}_HELLO'));
+
+		return SymfonyCommand::SUCCESS;
 	}
 }

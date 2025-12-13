@@ -30,25 +30,25 @@ use Symfony\Component\Console\Question\Question;
 class create extends command
 {
 	/** @var array user input data array */
-	protected $data = [];
+	protected array $data = [];
 
 	/** @var QuestionHelper $helper */
-	protected $helper;
+	protected QuestionHelper $helper;
 
 	/** @var InputInterface */
-	protected $input;
+	protected InputInterface $input;
 
 	/** @var OutputInterface */
-	protected $output;
+	protected OutputInterface $output;
 
 	/** @var language */
-	protected $language;
+	protected language $language;
 
 	/** @var packager */
-	protected $packager;
+	protected packager $packager;
 
 	/** @var validator */
-	protected $validator;
+	protected validator $validator;
 
 	/**
 	 * Constructor
@@ -71,7 +71,7 @@ class create extends command
 	/**
 	 * {@inheritdoc}
 	 */
-	protected function configure()
+	protected function configure(): void
 	{
 		$this
 			->setName('extension:create')
@@ -93,7 +93,7 @@ class create extends command
 	 *
 	 * @throws LogicException When this abstract method is not implemented
 	 */
-	protected function execute(InputInterface $input, OutputInterface $output)
+	protected function execute(InputInterface $input, OutputInterface $output): int
 	{
 		$this->packager->create_extension($this->data);
 
@@ -108,12 +108,17 @@ class create extends command
 	 * @param InputInterface  $input  An InputInterface instance
 	 * @param OutputInterface $output An OutputInterface instance
 	 */
-	protected function interact(InputInterface $input, OutputInterface $output)
+	protected function interact(InputInterface $input, OutputInterface $output): void
 	{
 		$this->input  = $input;
 		$this->output = $output;
 
-		$this->helper = $this->getHelper('question');
+		$helper = $this->getHelper('question');
+		if (!$helper instanceof QuestionHelper)
+		{
+			throw new LogicException('Question helper must be an instance of QuestionHelper');
+		}
+		$this->helper = $helper;
 
 		$output->writeln($this->language->lang('SKELETON_CLI_COMPOSER_QUESTIONS'));
 		$this->get_composer_data();
@@ -125,7 +130,7 @@ class create extends command
 	/**
 	 * Get composer data from the user
 	 */
-	protected function get_composer_data()
+	protected function get_composer_data(): void
 	{
 		$dialog_questions = $this->packager->get_composer_dialog_values();
 		foreach ($dialog_questions['extension'] as $value => $default)
@@ -155,7 +160,7 @@ class create extends command
 	/**
 	 * Get component data from the user
 	 */
-	protected function get_component_data()
+	protected function get_component_data(): void
 	{
 		$components = $this->packager->get_component_dialog_values();
 		foreach ($components as $component => $details)
@@ -193,9 +198,9 @@ class create extends command
 	 *
 	 * @param string $value
 	 * @param mixed  $default
-	 * @return mixed|string
+	 * @return mixed
 	 */
-	protected function get_user_input($value, $default)
+	protected function get_user_input(string $value, mixed $default): mixed
 	{
 		$dialog = $this->language->lang('SKELETON_QUESTION_' . strtoupper($value)) . $this->language->lang('COLON');
 
