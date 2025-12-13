@@ -99,7 +99,7 @@ jobs:
 
             - name: Setup EPV
               if: ${{ '{{' }} env.EPV != 0 }}
-              run: composer require phpbb/epv:dev-master --dev --no-interaction --ignore-platform-reqs
+              run: php ../composer.phar require phpbb/epv:dev-master --dev --no-interaction --ignore-platform-reqs
               working-directory: ./phpBB3/phpBB
 
             - name: Run code sniffer
