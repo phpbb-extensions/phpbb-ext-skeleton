@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.1 - 2026-01-03
+
+- Fixed potential future PHP errors when installed on a phpBB 4.0.0-a2 board.
+- Fixed potential future issues when trying to set up EPV in the GitHub actions workflows.
+
 ## 1.2.0 - 2025-06-04
 
 - Dropped support for phpBB 3.2.x. This version now requires at least phpBB 3.3.0 and PHP 7.1.
