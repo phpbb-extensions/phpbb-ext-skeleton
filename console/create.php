@@ -92,7 +92,7 @@ class create extends command
 	 *
 	 * @throws LogicException When this abstract method is not implemented
 	 */
-	protected function execute(InputInterface $input, OutputInterface $output)
+	protected function execute(InputInterface $input, OutputInterface $output): int
 	{
 		$this->packager->create_extension($this->data);
 
