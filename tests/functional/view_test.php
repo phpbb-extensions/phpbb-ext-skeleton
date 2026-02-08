@@ -31,7 +31,7 @@ class view_test extends phpbb_functional_test_case
 	public function test_view_skeleton()
 	{
 		$this->add_lang_ext('phpbb/skeleton', 'common');
-		$crawler = self::request('GET', 'app.php/skeleton');
+		$crawler = self::request('GET', 'index.php/skeleton');
 		$this->assertStringContainsString($this->lang('PHPBB_CREATE_SKELETON_EXT'), $crawler->filter('h2')->text());
 	}
 }
