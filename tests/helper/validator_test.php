@@ -121,7 +121,7 @@ class validator_test extends phpbb_test_case
 	 * @param string $validator Name of the validator method
 	 * @param string|null $value     Value to validate
 	 */
-	public function test_validator_valid(string $validator, string|null $value)
+	public function test_validator_valid(string $validator, string|null $value): void
 	{
 		$this->assertEquals($value, call_user_func([$this->validator, "validate_$validator"], $value));
 	}
@@ -221,7 +221,7 @@ class validator_test extends phpbb_test_case
 	 * @param string|null $value     Value to validate
 	 * @param string $expected  Expected error message
 	 */
-	public function test_validator_invalid(string $validator, string|null $value, string $expected)
+	public function test_validator_invalid(string $validator, string|null $value, string $expected): void
 	{
 		$this->expectException(runtime_exception::class);
 		$this->expectExceptionMessage($expected);

@@ -13,6 +13,7 @@
 
 namespace phpbb\skeleton\controller;
 
+use Exception;
 use phpbb\config\config;
 use phpbb\controller\helper;
 use phpbb\exception\http_exception;
@@ -23,35 +24,36 @@ use phpbb\skeleton\helper\validator;
 use phpbb\template\template;
 use phpbb\user;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class main
 {
 	/** @var array */
-	protected $data;
+	protected array $data;
 
 	/* @var config */
-	protected $config;
+	protected config $config;
 
 	/* @var helper */
-	protected $helper;
+	protected helper $helper;
 
 	/** @var language */
-	protected $language;
+	protected language $language;
 
 	/* @var request */
-	protected $request;
+	protected request $request;
 
 	/* @var packager */
-	protected $packager;
+	protected packager $packager;
 
 	/* @var validator */
-	protected $validator;
+	protected validator $validator;
 
 	/* @var template */
-	protected $template;
+	protected template $template;
 
 	/* @var user */
-	protected $user;
+	protected user $user;
 
 	/**
 	 * Constructor
@@ -83,11 +85,11 @@ class main
 	 * Controller for route /skeleton
 	 *
 	 * @throws http_exception
-	 * @throws \Exception
+	 * @throws Exception
 	 *
-	 * @return Response A Symfony Response object
+	 * @return Response|StreamedResponse A Symfony Response object
 	 */
-	public function handle()
+	public function handle(): Response|StreamedResponse
 	{
 		if ($this->user->data['is_bot'])
 		{
@@ -104,16 +106,16 @@ class main
 				$this->packager->create_extension($this->data);
 				$filename = $this->packager->create_zip($this->data);
 
-				$response = new Response($filename);
+				$response = new StreamedResponse(function() use ($filename) {
+					readfile($filename);
+				});
 				$response->headers->set('Content-type', 'application/octet-stream');
 				$response->headers->set('Content-Disposition', 'attachment; filename="' . basename($filename) . '";');
 				$response->headers->set('Content-length', filesize($filename));
-				$response->sendHeaders();
-				$response->setContent(readfile($filename));
 
 				return $response;
 			}
-			catch (\Exception $e)
+			catch (Exception $e)
 			{
 				$this->template->assign_var('ERROR', $e->getMessage());
 			}
@@ -145,7 +147,7 @@ class main
 					'NAME'			=> $value,
 					'DESC'			=> $this->language->lang('SKELETON_QUESTION_' . strtoupper($value) . '_UI'),
 					'DESC_EXPLAIN'	=> $this->language->is_set('SKELETON_QUESTION_' . strtoupper($value) . '_EXPLAIN') ? $this->language->lang('SKELETON_QUESTION_' . strtoupper($value) . '_EXPLAIN') : '',
-					'VALUE'			=> isset($author_values[$value][$i]) ? $author_values[$value][$i] : '',
+					'VALUE'			=> $author_values[$value][$i] ?? '',
 				]);
 			}
 		}
@@ -189,7 +191,7 @@ class main
 	/**
 	 * Get composer data
 	 */
-	protected function get_composer_data()
+	protected function get_composer_data(): void
 	{
 		$dialog_questions = $this->packager->get_composer_dialog_values();
 		foreach ($dialog_questions['extension'] as $value => $default)
@@ -215,7 +217,7 @@ class main
 	/**
 	 * Get components data
 	 */
-	protected function get_component_data()
+	protected function get_component_data(): void
 	{
 		$components = $this->packager->get_component_dialog_values();
 		foreach ($components as $component => $details)
@@ -236,13 +238,13 @@ class main
 	/**
 	 * Get user input values
 	 *
-	 * @param string   $value
+	 * @param string $value
 	 * @param mixed    $default
-	 * @param null|int $array_key for multi user support
+	 * @param int|null $array_key for multi user support
 	 *
-	 * @return mixed|string
+	 * @return mixed
 	 */
-	protected function get_user_input($value, $default, $array_key = null)
+	protected function get_user_input(string $value, mixed $default, int $array_key = null): mixed
 	{
 		$return_value = $this->get_request_variable($value, $default, $array_key);
 
@@ -257,20 +259,20 @@ class main
 	/**
 	 * Get request variables
 	 *
-	 * @param string   $value
-	 * @param mixed    $default
-	 * @param null|int $array_key for multi user support
+	 * @param string $value
+	 * @param mixed $default
+	 * @param int|null $array_key for multi user support
 	 *
-	 * @return mixed|string
+	 * @return mixed
 	 */
-	protected function get_request_variable($value, $default, $array_key = null)
+	protected function get_request_variable(string $value, mixed $default, int $array_key = null): mixed
 	{
 		if (is_bool($default))
 		{
 			if ($array_key !== null)
 			{
 				$return_value = $this->request->variable($value, [$default]);
-				return isset($return_value[$array_key]) ? $return_value[$array_key] : $default;
+				return $return_value[$array_key] ?? $default;
 			}
 
 			return $this->request->variable($value, $default);

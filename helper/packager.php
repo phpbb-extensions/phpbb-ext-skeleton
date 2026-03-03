@@ -16,34 +16,41 @@ namespace phpbb\skeleton\helper;
 use phpbb\config\config;
 use phpbb\di\service_collection;
 use phpbb\filesystem\filesystem;
+use phpbb\path_helper;
 use phpbb\skeleton\ext;
+use phpbb\skeleton\skeleton;
 use phpbb\skeleton\template\twig\extension\skeleton_version_compare;
+use phpbb\template\assets_bag;
 use phpbb\template\context;
 use phpbb\template\twig\environment;
 use phpbb\template\twig\loader;
 use phpbb\template\twig\twig;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Finder\Finder;
+use Twig\TwigFilter;
+use ZipArchive;
+use phpbb\user;
+use phpbb\language\language;
 
 class packager
 {
 	/** @var ContainerInterface */
-	protected $phpbb_container;
+	protected ContainerInterface $phpbb_container;
 
 	/** @var service_collection */
-	protected $collection;
+	protected service_collection $collection;
 
 	/** @var string */
-	protected $root_path;
+	protected string $root_path;
 
 	/**
 	 * Constructor
 	 *
 	 * @param ContainerInterface $phpbb_container Container
 	 * @param service_collection $collection      Service collection
-	 * @param string             $root_path       phpBB root path
+	 * @param string $root_path       phpBB root path
 	 */
-	public function __construct(ContainerInterface $phpbb_container, service_collection $collection, $root_path)
+	public function __construct(ContainerInterface $phpbb_container, service_collection $collection, string $root_path)
 	{
 		$this->phpbb_container = $phpbb_container;
 		$this->collection = $collection;
@@ -55,7 +62,7 @@ class packager
 	 *
 	 * @return array
 	 */
-	public function get_composer_dialog_values()
+	public function get_composer_dialog_values(): array
 	{
 		return [
 			'author'       => [
@@ -86,12 +93,12 @@ class packager
 	 *
 	 * @return array
 	 */
-	public function get_component_dialog_values()
+	public function get_component_dialog_values(): array
 	{
 		$components = [];
 		foreach ($this->collection as $service)
 		{
-			/** @var \phpbb\skeleton\skeleton $service */
+			/** @var skeleton $service */
 			$components[$service->get_name()] = [
 				'default'      => $service->get_default(),
 				'dependencies' => $service->get_dependencies(),
@@ -108,7 +115,7 @@ class packager
 	 *
 	 * @param array $data Extension data
 	 */
-	public function create_extension($data)
+	public function create_extension(array $data): void
 	{
 		$ext_path = $this->root_path . 'store/tmp-ext/' . "{$data['extension']['vendor_name']}/{$data['extension']['extension_name']}/";
 		$filesystem = new filesystem();
@@ -157,14 +164,14 @@ class packager
 	 *
 	 * @return string
 	 */
-	public function create_zip($data)
+	public function create_zip(array $data): string
 	{
 		$tmp_path = $this->root_path . 'store/tmp-ext/';
 		$ext_path = "{$data['extension']['vendor_name']}/{$data['extension']['extension_name']}/";
 		$zip_path = $tmp_path . "{$data['extension']['vendor_name']}_{$data['extension']['extension_name']}-{$data['extension']['extension_version']}.zip";
 
-		$zip_archive = new \ZipArchive();
-		$zip_archive->open($zip_path, \ZipArchive::CREATE | \ZipArchive::OVERWRITE);
+		$zip_archive = new ZipArchive();
+		$zip_archive->open($zip_path, ZipArchive::CREATE | ZipArchive::OVERWRITE);
 
 		$finder = new Finder();
 		$finder->ignoreDotFiles(false)
@@ -190,7 +197,7 @@ class packager
 	 *
 	 * @return twig Template object
 	 */
-	protected function get_template_engine()
+	protected function get_template_engine(): twig
 	{
 		$config = new config([
 			'load_tplcompile' => true,
@@ -199,8 +206,11 @@ class packager
 		]);
 
 		$container = $this->phpbb_container;
+		/** @var path_helper $path_helper */
 		$path_helper = $container->get('path_helper');
+		/** @var filesystem $filesystem */
 		$filesystem = $container->get('filesystem');
+		/** @var assets_bag $assets_bag */
 		$assets_bag = $container->get('assets.bag');
 		$ext_manager = $container->get('ext.manager');
 		$user = $container->get('user');
@@ -217,7 +227,7 @@ class packager
 		);
 
 		// Custom filter for use by packager to decode greater/less than symbols
-		$filter = new \Twig\TwigFilter('skeleton_decode', function ($string) {
+		$filter = new TwigFilter('skeleton_decode', function ($string) {
 			return str_replace(['&lt;', '&gt;'], ['<', '>'], $string);
 		}, ['is_safe' => ['html']]);
 		$environment->addFilter($filter);
@@ -243,7 +253,7 @@ class packager
 	 *
 	 * @return array An array of language data
 	 */
-	protected function get_language_version_data($data)
+	protected function get_language_version_data(array $data): array
 	{
 		$phpbb_31 = false;
 		if (isset($data['requirements']['phpbb_version_min']))
@@ -252,7 +262,7 @@ class packager
 		}
 
 		return [
-			'class'		=> $phpbb_31 ? '\phpbb\user' : '\phpbb\language\language',
+			'class'		=> $phpbb_31 ? user::class : language::class,
 			'object'	=> $phpbb_31 ? 'user' : 'language',
 			'function'	=> $phpbb_31 ? 'add_lang_ext' : 'add_lang',
 			'indent'	=> [

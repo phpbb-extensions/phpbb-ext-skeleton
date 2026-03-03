@@ -13,7 +13,9 @@
 
 namespace phpbb\skeleton;
 
-class ext extends \phpbb\extension\base
+use phpbb\extension\base;
+
+class ext extends base
 {
 	public const DEFAULT_SKELETON_PHP = '7.1.3';
 	public const DEFAULT_SKELETON_PHPBB_MIN = '3.3.0';
@@ -25,14 +27,14 @@ class ext extends \phpbb\extension\base
 	/**
 	 * @var array An array of installation error messages
 	 */
-	protected $errors = [];
+	protected array $errors = [];
 
 	/**
 	 * Check whether the extension can be enabled.
 	 *
-	 * @return bool|array True if it can be enabled. False if not, or an array of error messages in phpBB 3.3.
+	 * @return array|bool True if it can be enabled. False if not, or an array of error messages in phpBB 3.3.
 	 */
-	public function is_enableable()
+	public function is_enableable(): array|bool
 	{
 		// Check requirements
 		$this->phpbb_requirement();
@@ -48,7 +50,7 @@ class ext extends \phpbb\extension\base
 	 * @param string $phpBB_version
 	 * @return void
 	 */
-	protected function phpbb_requirement($phpBB_version = PHPBB_VERSION)
+	protected function phpbb_requirement(string $phpBB_version = PHPBB_VERSION): void
 	{
 		if (phpbb_version_compare($phpBB_version, self::MIN_PHPBB_ALLOWED, '<'))
 		{
@@ -62,7 +64,7 @@ class ext extends \phpbb\extension\base
 	 * @param int $php_version
 	 * @return void
 	 */
-	protected function php_requirement($php_version = PHP_VERSION_ID)
+	protected function php_requirement(int $php_version = PHP_VERSION_ID): void
 	{
 		if ($php_version < self::MIN_PHP_ALLOWED)
 		{
@@ -76,7 +78,7 @@ class ext extends \phpbb\extension\base
 	 * @param string $zip_class
 	 * @return void
 	 */
-	protected function ziparchive_exists($zip_class = 'ZipArchive')
+	protected function ziparchive_exists(string $zip_class = 'ZipArchive'): void
 	{
 		if (!class_exists($zip_class, false))
 		{
@@ -90,7 +92,7 @@ class ext extends \phpbb\extension\base
 	 *
 	 * @return array|bool
 	 */
-	protected function enable_failed()
+	protected function enable_failed(): array|bool
 	{
 		if (phpbb_version_compare(PHPBB_VERSION, '3.3.0-b1', '>='))
 		{

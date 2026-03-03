@@ -36,7 +36,7 @@ class ext_test extends phpbb_test_case
 		);
 	}
 
-	public function test_is_enableable_true()
+	public function test_is_enableable_true(): void
 	{
 		$ext = $this->getMockBuilder(ext::class)
 			->disableOriginalConstructor()
@@ -51,7 +51,7 @@ class ext_test extends phpbb_test_case
 		$this->assertTrue($ext->is_enableable());
 	}
 
-	public function test_is_enableable_with_errors()
+	public function test_is_enableable_with_errors(): void
 	{
 		$ext = $this->getMockBuilder(ext::class)
 			->disableOriginalConstructor()
@@ -69,7 +69,7 @@ class ext_test extends phpbb_test_case
 		$this->assertEquals(['NO_ZIPARCHIVE_ERROR'], $ext->is_enableable());
 	}
 
-	public function test_enable_failed_returns_expected()
+	public function test_enable_failed_returns_expected(): void
 	{
 		$ext = $this->getMockBuilder(ext::class)
 			->disableOriginalConstructor()
@@ -93,21 +93,21 @@ class ext_test extends phpbb_test_case
 		$this->assertEquals(['LANG: SOME_ERROR'], $method->invoke($ext));
 	}
 
-	public function test_phpbb_requirement_min_error()
+	public function test_phpbb_requirement_min_error(): void
 	{
 		$this->setExtErrors($this->ext, []);
 		$this->invokeProtectedMethod($this->ext, 'phpbb_requirement', ['3.2.2']);
 		$this->assertContains('PHPBB_VERSION_ERROR', $this->getExtErrors($this->ext));
 	}
 
-	public function test_php_requirement_error()
+	public function test_php_requirement_error(): void
 	{
 		$this->setExtErrors($this->ext, []);
 		$this->invokeProtectedMethod($this->ext, 'php_requirement', [50500]);
 		$this->assertContains('PHP_VERSION_ERROR', $this->getExtErrors($this->ext));
 	}
 
-	public function test_ziparchive_exists_error()
+	public function test_ziparchive_exists_error(): void
 	{
 		$this->setExtErrors($this->ext, []);
 		$this->invokeProtectedMethod($this->ext, 'ziparchive_exists', ['NotZipArchive']);

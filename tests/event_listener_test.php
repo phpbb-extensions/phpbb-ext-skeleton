@@ -23,8 +23,11 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class event_listener_test extends phpbb_test_case
 {
-	protected helper|MockObject $controller_helper;
-	protected template|MockObject $template;
+	/** @var MockObject|helper */
+	protected MockObject|helper $controller_helper;
+	/** @var MockObject|template */
+	protected MockObject|template $template;
+	/** @var main_listener */
 	protected main_listener $listener;
 
 	public function setUp(): void
@@ -42,7 +45,7 @@ class event_listener_test extends phpbb_test_case
 		);
 	}
 
-	public function test_construct()
+	public function test_construct(): void
 	{
 		$this->assertInstanceOf(EventSubscriberInterface::class, $this->listener);
 	}
@@ -50,7 +53,7 @@ class event_listener_test extends phpbb_test_case
 	/**
 	 * Test the event listener is subscribing events
 	 */
-	public function test_getSubscribedEvents()
+	public function test_getSubscribedEvents(): void
 	{
 		$this->assertEquals(array(
 			'core.user_setup',
@@ -58,7 +61,7 @@ class event_listener_test extends phpbb_test_case
 		), array_keys(main_listener::getSubscribedEvents()));
 	}
 
-	public function test_load_language_on_setup()
+	public function test_load_language_on_setup(): void
 	{
 		$dispatcher = new dispatcher();
 		$dispatcher->addListener('core.user_setup', [$this->listener, 'load_language_on_setup']);
@@ -71,7 +74,7 @@ class event_listener_test extends phpbb_test_case
 		$this->assertEquals([['ext_name' => 'phpbb/skeleton', 'lang_set' => 'common']], $lang_set_ext);
 	}
 
-	public function test_add_page_header_link()
+	public function test_add_page_header_link(): void
 	{
 		$this->controller_helper->expects($this->once())
 			->method('route')

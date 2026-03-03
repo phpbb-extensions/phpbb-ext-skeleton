@@ -37,14 +37,31 @@ use Symfony\Component\HttpFoundation\Response;
 
 class main_test extends phpbb_test_case
 {
-	protected template|MockObject $template;
-	protected language|MockObject $language;
+	/** @var MockObject|template */
+	protected MockObject|template $template;
+
+	/** @var MockObject|language */
+	protected MockObject|language $language;
+
+	/** @var MockObject|request */
 	protected MockObject|request $request;
-	protected user|MockObject $user;
-	protected helper|MockObject $controller_helper;
+
+	/** @var MockObject|user */
+	protected MockObject|user $user;
+
+	/** @var MockObject|helper */
+	protected MockObject|helper $controller_helper;
+
+	/** @var packager  */
 	protected packager $packager;
-	protected packager|MockObject $packager_mock;
-	protected validator|MockObject $validator;
+
+	/** @var MockObject|packager */
+	protected MockObject|packager $packager_mock;
+
+	/** @var MockObject|validator */
+	protected MockObject|validator $validator;
+
+	/** @var ContainerInterface */
 	protected ContainerInterface $container;
 
 	protected function setUp(): void
@@ -127,7 +144,7 @@ class main_test extends phpbb_test_case
 	 * @param string $page_content
 	 * @throws Exception
 	 */
-	public function test_handle(int $status_code, string $page_content)
+	public function test_handle(int $status_code, string $page_content): void
 	{
 		$this->user->data['is_bot'] = false;
 
@@ -275,7 +292,7 @@ class main_test extends phpbb_test_case
 	/**
 	 * @throws Exception
 	 */
-	public function test_handle_unauthorised()
+	public function test_handle_unauthorised(): void
 	{
 		$this->user->data['is_bot'] = true;
 
@@ -285,7 +302,7 @@ class main_test extends phpbb_test_case
 		$this->get_controller($this->packager_mock)->handle();
 	}
 
-	public function test_submit_success()
+	public function test_submit_success(): void
 	{
 		$this->user->data['is_bot'] = false;
 
@@ -339,7 +356,7 @@ class main_test extends phpbb_test_case
 		$this->assertInstanceOf(Response::class, $response);
 	}
 
-	public function test_submit_exception()
+	public function test_submit_exception(): void
 	{
 		$this->user->data['is_bot'] = false;
 

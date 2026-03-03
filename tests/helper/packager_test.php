@@ -27,12 +27,17 @@ use phpbb_test_case;
 use PHPUnit\Framework\MockObject\MockObject;
 use ReflectionClass;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use phpbb\language\language;
 
 class packager_test extends phpbb_test_case
 {
+	/** @var ContainerInterface|MockObject */
 	protected ContainerInterface|MockObject $container;
+	/** @var MockObject|service_collection */
 	protected MockObject|service_collection $collection;
+	/** @var packager */
 	protected packager $packager;
+	/** @var string */
 	protected string $root_path = '/tmp/phpbb/';
 
 	/**
@@ -61,7 +66,7 @@ class packager_test extends phpbb_test_case
 		$this->packager = new packager($this->container, $this->collection, $this->root_path);
 	}
 
-	public function test_get_composer_dialog_values_returns_expected_structure()
+	public function test_get_composer_dialog_values_returns_expected_structure(): void
 	{
 		$result = $this->packager->get_composer_dialog_values();
 		$this->assertArrayHasKey('author', $result);
@@ -69,7 +74,7 @@ class packager_test extends phpbb_test_case
 		$this->assertArrayHasKey('requirements', $result);
 	}
 
-	public function test_get_component_dialog_values_calls_collection()
+	public function test_get_component_dialog_values_calls_collection(): void
 	{
 		$this->setUpTheCollectionToReturnAFakeSkeletonClass();
 
@@ -83,7 +88,7 @@ class packager_test extends phpbb_test_case
 		], $result['phplistener']);
 	}
 
-	public function test_create_extension_runs_without_exception()
+	public function test_create_extension_runs_without_exception(): void
 	{
 		// Create a partial mock for packager, stubbing get_template_engine
 		$packager = $this->getMockBuilder(packager::class)
@@ -120,7 +125,7 @@ class packager_test extends phpbb_test_case
 		$this->assertTrue(true);
 	}
 
-	public function test_create_zip_creates_zip_file()
+	public function test_create_zip_creates_zip_file(): void
 	{
 		$data = [
 			'extension' => [
@@ -138,7 +143,7 @@ class packager_test extends phpbb_test_case
 	/**
 	 * @dataProvider provide_language_version_data
 	 */
-	public function test_get_language_version_data_returns_expected($phpbb_version, $expected)
+	public function test_get_language_version_data_returns_expected($phpbb_version, $expected): void
 	{
 		$data = [
 			'requirements' => [
@@ -155,13 +160,13 @@ class packager_test extends phpbb_test_case
 		$this->assertSame($expected['indent']['object'], $result['indent']['object']);
 	}
 
-	public static function provide_language_version_data()
+	public static function provide_language_version_data(): array
 	{
 		return [
 			'3.1 version' => [
 				'3.1.0',
 				[
-					'class' => '\phpbb\user',
+					'class' => user::class,
 					'object' => 'user',
 					'function' => 'add_lang_ext',
 					'indent' => [
@@ -173,7 +178,7 @@ class packager_test extends phpbb_test_case
 			'3.2 version' => [
 				'3.2.0',
 				[
-					'class' => '\phpbb\language\language',
+					'class' => language::class,
 					'object' => 'language',
 					'function' => 'add_lang',
 					'indent' => [
@@ -185,7 +190,7 @@ class packager_test extends phpbb_test_case
 			'null version' => [
 				null,
 				[
-					'class' => '\phpbb\language\language',
+					'class' => language::class,
 					'object' => 'language',
 					'function' => 'add_lang',
 					'indent' => [
@@ -197,7 +202,7 @@ class packager_test extends phpbb_test_case
 		];
 	}
 
-	public function test_get_template_engine_returns_twig_instance()
+	public function test_get_template_engine_returns_twig_instance(): void
 	{
 		// Mock all required dependencies for the container
 		$filesystem = $this->createMock(filesystem::class);

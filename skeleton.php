@@ -16,30 +16,30 @@ namespace phpbb\skeleton;
 class skeleton
 {
 	/** @var string */
-	protected $name;
+	protected string $name;
 
 	/** @var bool */
-	protected $default;
+	protected bool $default;
 
 	/** @var array */
-	protected $dependencies;
+	protected array $dependencies;
 
 	/** @var array */
-	protected $files;
+	protected array $files;
 
 	/** @var string */
-	protected $group;
+	protected string $group;
 
 	/**
 	 * Constructor
 	 *
 	 * @param string $name
-	 * @param bool   $default
+	 * @param bool $default
 	 * @param array  $dependencies
 	 * @param array  $files
 	 * @param string $group
 	 */
-	public function __construct($name, $default, array $dependencies, array $files, $group)
+	public function __construct(string $name, bool $default, array $dependencies, array $files, string $group)
 	{
 		$this->name = $name;
 		$this->default = $default;
@@ -53,7 +53,7 @@ class skeleton
 	 *
 	 * @return string
 	 */
-	public function get_name()
+	public function get_name(): string
 	{
 		return $this->name;
 	}
@@ -63,7 +63,7 @@ class skeleton
 	 *
 	 * @return bool
 	 */
-	public function get_default()
+	public function get_default(): bool
 	{
 		return $this->default;
 	}
@@ -73,7 +73,7 @@ class skeleton
 	 *
 	 * @return array
 	 */
-	public function get_dependencies()
+	public function get_dependencies(): array
 	{
 		return $this->dependencies;
 	}
@@ -83,7 +83,7 @@ class skeleton
 	 *
 	 * @return array
 	 */
-	public function get_files()
+	public function get_files(): array
 	{
 		return $this->files;
 	}
@@ -93,7 +93,7 @@ class skeleton
 	 *
 	 * @return string
 	 */
-	public function get_group()
+	public function get_group(): string
 	{
 		return $this->group;
 	}

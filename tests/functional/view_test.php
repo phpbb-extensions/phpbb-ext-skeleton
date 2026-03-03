@@ -28,10 +28,10 @@ class view_test extends phpbb_functional_test_case
 		return ['phpbb/skeleton'];
 	}
 
-	public function test_view_skeleton()
+	public function test_view_skeleton(): void
 	{
-		$this->add_lang_ext('phpbb/skeleton', 'common');
+		self::add_lang_ext('phpbb/skeleton', 'common');
 		$crawler = self::request('GET', 'index.php/skeleton');
-		$this->assertStringContainsString($this->lang('PHPBB_CREATE_SKELETON_EXT'), $crawler->filter('h2')->text());
+		$this->assertStringContainsString(self::lang('PHPBB_CREATE_SKELETON_EXT'), $crawler->filter('h2')->text());
 	}
 }

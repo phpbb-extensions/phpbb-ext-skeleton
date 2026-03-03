@@ -154,7 +154,7 @@ class template_test extends phpbb_template_template_test_case
 	/**
 	 * @dataProvider data_template_version_check
 	 */
-	public function test_skeleton_version_compare($file, $vars, $expected)
+	public function test_skeleton_version_compare($file, $vars, $expected): void
 	{
 		$this->run_template($file, $vars, [], [], $expected);
 	}

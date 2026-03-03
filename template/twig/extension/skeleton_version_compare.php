@@ -13,14 +13,17 @@
 
 namespace phpbb\skeleton\template\twig\extension;
 
-class skeleton_version_compare extends \Twig\Extension\AbstractExtension
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
+
+class skeleton_version_compare extends AbstractExtension
 {
 	/**
 	 * Get the name of this extension
 	 *
 	 * @return string
 	 */
-	public function getName()
+	public function getName(): string
 	{
 		return 'skeleton_version_compare';
 	}
@@ -30,10 +33,10 @@ class skeleton_version_compare extends \Twig\Extension\AbstractExtension
 	 *
 	 * @return array An array of global functions
 	 */
-	public function getFunctions()
+	public function getFunctions(): array
 	{
 		return [
-			new \Twig\TwigFunction('skeleton_version_compare', [$this, 'version_compare']),
+			new TwigFunction('skeleton_version_compare', [$this, 'version_compare']),
 		];
 	}
 
@@ -48,12 +51,12 @@ class skeleton_version_compare extends \Twig\Extension\AbstractExtension
 	 *
 	 * @return bool Result of version compare, or false if any version was invalid.
 	 */
-	public function version_compare()
+	public function version_compare(): bool
 	{
 		$args = func_get_args();
 
 		// Strip out any prefixed junk in front of a version number
-		$regex = '/^[\D]*(\d.*)$/';
+		$regex = '/^\D*(\d.*)$/';
 		preg_match($regex, $args[0], $ver1);
 		preg_match($regex, $args[1], $ver2);
 

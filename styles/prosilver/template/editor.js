@@ -2,7 +2,7 @@
 
 	'use strict';
 
-	var authorTpl,
+	let authorTpl,
 		$elem = {
 			form: $('#postform'),
 			author: $('.skeleton-author'),
@@ -17,15 +17,15 @@
 
 	// Add Authors button
 	$elem.addAuthor.on('click', function() {
-		var count = $elem.author.length,
+		const count = $elem.author.length,
 			$author = authorTpl.clone();
 
 		$author.find('label').each(function() {
-			var $this = $(this);
+			const $this = $(this);
 			$this.attr('for', $this.attr('for') + count);
 		});
 		$author.find('input').each(function() {
-			var $this = $(this);
+			const $this = $(this);
 			$this.attr('id', $this.attr('id') + count);
 		});
 		$(this).before($('<hr />')).before($author);
@@ -50,7 +50,7 @@
 	/*global warningMsg */
 	$.fn.checkNames = function() {
 		return this.each(function() {
-			var $value = $(this).val(),
+			const $value = $(this).val(),
 				$warning = $('<div/>').css('color', 'red').text(warningMsg);
 
 			$(this).next($warning).remove();

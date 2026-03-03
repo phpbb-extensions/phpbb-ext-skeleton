@@ -19,7 +19,7 @@ use phpbb\language\language;
 class validator
 {
 	/** @var language */
-	protected $language;
+	protected language $language;
 
 	/**
 	 * Constructor
@@ -39,7 +39,7 @@ class validator
 	 * @return string The valid value
 	 * @throws runtime_exception
 	 */
-	public function validate_num_authors($value)
+	public function validate_num_authors(string $value): string
 	{
 		if ((int) $value > 0 && (int) $value <= 20 && ctype_digit($value))
 		{
@@ -56,10 +56,8 @@ class validator
 	 * @return string The valid value
 	 * @throws runtime_exception
 	 */
-	public function validate_extension_name($value)
+	public function validate_extension_name(string $value): string
 	{
-		$value = (string) $value;
-
 		if (preg_match('#^[a-z][a-z0-9]*$#', $value))
 		{
 			return $value;
@@ -75,11 +73,9 @@ class validator
 	 * @return string The valid value
 	 * @throws runtime_exception
 	 */
-	public function validate_extension_display_name($value)
+	public function validate_extension_display_name(string $value): string
 	{
-		$value = (string) $value;
-
-		if ((string) $value !== '' && strpos($value, '&quot;') === false)
+		if ($value !== '' && !str_contains($value, '&quot;'))
 		{
 			return htmlspecialchars_decode($value, ENT_NOQUOTES);
 		}
@@ -94,10 +90,8 @@ class validator
 	 * @return string The valid value
 	 * @throws runtime_exception
 	 */
-	public function validate_extension_time($value)
+	public function validate_extension_time(string $value): string
 	{
-		$value = (string) $value;
-
 		if (preg_match('#^\d{4}-\d{2}-\d{2}$#', $value))
 		{
 			return $value;
@@ -113,10 +107,8 @@ class validator
 	 * @return string The valid value
 	 * @throws runtime_exception
 	 */
-	public function validate_extension_version($value)
+	public function validate_extension_version(string $value): string
 	{
-		$value = (string) $value;
-
 		if (preg_match('#^\d+(\.\d){1,3}(-(((?:a|b|RC|pl)\d+)|dev))?$#', $value))
 		{
 			return $value;
@@ -132,10 +124,8 @@ class validator
 	 * @return string The valid value
 	 * @throws runtime_exception
 	 */
-	public function validate_vendor_name($value)
+	public function validate_vendor_name(string $value): string
 	{
-		$value = (string) $value;
-
 		if ($value !== 'core' && preg_match('#^[a-z][a-z0-9]*$#', $value))
 		{
 			return $value;
@@ -151,10 +141,8 @@ class validator
 	 * @return string The valid value
 	 * @throws runtime_exception
 	 */
-	public function validate_extension_homepage($value)
+	public function validate_extension_homepage(string $value): string
 	{
-		$value = (string) $value;
-
 		if ( $value !== '' && filter_var($value, FILTER_VALIDATE_URL) === false)
 		{
 			throw new runtime_exception($this->language->lang('SKELETON_INVALID_EXTENSION_URL'));
@@ -170,10 +158,8 @@ class validator
 	 * @return string The valid value
 	 * @throws runtime_exception
 	 */
-	public function validate_author_homepage($value)
+	public function validate_author_homepage(string $value): string
 	{
-		$value = (string) $value;
-
 		if ($value !== '' && filter_var($value, FILTER_VALIDATE_URL) === false)
 		{
 			throw new runtime_exception($this->language->lang('SKELETON_INVALID_AUTHOR_URL'));
@@ -189,10 +175,8 @@ class validator
 	 * @return string The valid value
 	 * @throws runtime_exception
 	 */
-	public function validate_author_email($value)
+	public function validate_author_email(string $value): string
 	{
-		$value = (string) $value;
-
 		if ($value !== '' && filter_var($value, FILTER_VALIDATE_EMAIL) === false)
 		{
 			throw new runtime_exception($this->language->lang('SKELETON_INVALID_AUTHOR_EMAIL'));
@@ -208,10 +192,8 @@ class validator
 	 * @return string The valid value
 	 * @throws runtime_exception
 	 */
-	public function validate_phpbb_version_min($value)
+	public function validate_phpbb_version_min(string $value): string
 	{
-		$value = (string) $value;
-
 		if ($this->check_version($value))
 		{
 			return $value;
@@ -228,10 +210,8 @@ class validator
 	 * @return string The valid value
 	 * @throws runtime_exception
 	 */
-	public function validate_phpbb_version_max($value)
+	public function validate_phpbb_version_max(string $value): string
 	{
-		$value = (string) $value;
-
 		if ($this->check_version($value))
 		{
 			return $value;
@@ -248,10 +228,8 @@ class validator
 	 * @return string The valid value
 	 * @throws runtime_exception
 	 */
-	public function validate_php_version($value)
+	public function validate_php_version(string $value): string
 	{
-		$value = (string) $value;
-
 		if ($this->check_version($value))
 		{
 			return $value;
@@ -270,7 +248,7 @@ class validator
 	 * @param string $value The value to check
 	 * @return bool True if valid, false if not
 	 */
-	protected function check_version($value)
+	protected function check_version(string $value): bool
 	{
 		return (bool) preg_match('/^[<>=]*[\d+][\w.@-]+$/', htmlspecialchars_decode($value, ENT_NOQUOTES));
 	}

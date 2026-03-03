@@ -15,6 +15,7 @@ namespace phpbb\skeleton\tests\console;
 
 use phpbb\exception\runtime_exception;
 use phpbb_test_case;
+use PHPUnit\Framework\MockObject\MockObject;
 use RuntimeException;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\InputInterface;
@@ -26,13 +27,17 @@ use phpbb\skeleton\console\create;
 use phpbb\skeleton\helper\packager;
 use phpbb\skeleton\helper\validator;
 use phpbb\user;
-use PHPUnit\Framework\MockObject\MockObject;
+use Symfony\Component\Console\Helper\QuestionHelper;
 
 class create_test extends phpbb_test_case
 {
-	protected language|MockObject $language;
-	protected user|MockObject $user;
-	protected packager|MockObject $packager;
+	/** @var MockObject|language */
+	protected MockObject|language $language;
+	/** @var MockObject|user */
+	protected MockObject|user $user;
+	/** @var MockObject|packager */
+	protected MockObject|packager $packager;
+	/** @var MockObject|validator */
 	protected MockObject|validator $validator;
 	protected string|null $command_name;
 
@@ -102,7 +107,7 @@ class create_test extends phpbb_test_case
 	public function get_command_tester($question_answers = []): CommandTester
 	{
 		$application = new Application();
-		$application->add(new create(
+		$application->addCommand(new create(
 			$this->user,
 			$this->language,
 			$this->packager,
@@ -139,7 +144,7 @@ class create_test extends phpbb_test_case
 				$output->writeln(print_r($response, true));
 				return $response;
 			};
-			$helper = $this->getMockBuilder('\Symfony\Component\Console\Helper\QuestionHelper')
+			$helper = $this->getMockBuilder(QuestionHelper::class)
 				->onlyMethods(['ask'])
 				->disableOriginalConstructor()
 				->getMock();
@@ -189,7 +194,7 @@ class create_test extends phpbb_test_case
 		];
 	}
 
-	public function test_create()
+	public function test_create(): void
 	{
 		$questions = $this->get_questions();
 
@@ -217,7 +222,7 @@ class create_test extends phpbb_test_case
 	 * @dataProvider invalid_data
 	 * @param $response
 	 */
-	public function test_invalid_create($response)
+	public function test_invalid_create($response): void
 	{
 		$questions = array_merge($this->get_questions(), $response);
 
