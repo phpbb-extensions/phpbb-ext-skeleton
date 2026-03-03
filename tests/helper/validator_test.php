@@ -65,16 +65,16 @@ class validator_test extends phpbb_test_case
 			['extension_homepage', 'http://www.web.com'],
 			['extension_homepage', 'https://web.com'],
 			['extension_homepage', ''],
-			['extension_homepage', null],
+			['extension_homepage', ''],
 
 			['author_homepage', 'http://www.web.com'],
 			['author_homepage', 'https://web.com'],
 			['author_homepage', ''],
-			['author_homepage', null],
+			['author_homepage', ''],
 
 			['author_email', 'user@web.com'],
 			['author_email', ''],
-			['author_email', null],
+			['author_email', ''],
 
 			['phpbb_version_min', '1.0.0'],
 			['phpbb_version_min', '>1.0.0'],
@@ -133,7 +133,6 @@ class validator_test extends phpbb_test_case
 			['num_authors', '-1', 'SKELETON_INVALID_NUM_AUTHORS'],
 			['num_authors', '0', 'SKELETON_INVALID_NUM_AUTHORS'],
 			['num_authors', '', 'SKELETON_INVALID_NUM_AUTHORS'],
-			['num_authors', null, 'SKELETON_INVALID_NUM_AUTHORS'],
 			['num_authors', 'foo', 'SKELETON_INVALID_NUM_AUTHORS'],
 			['num_authors', '$foo', 'SKELETON_INVALID_NUM_AUTHORS'],
 
@@ -144,16 +143,13 @@ class validator_test extends phpbb_test_case
 			['extension_name', '01foo', 'SKELETON_INVALID_PACKAGE_NAME'],
 			['extension_name', 'foo$bar', 'SKELETON_INVALID_PACKAGE_NAME'],
 			['extension_name', '', 'SKELETON_INVALID_PACKAGE_NAME'],
-			['extension_name', null, 'SKELETON_INVALID_PACKAGE_NAME'],
 
 			['extension_display_name', '', 'SKELETON_INVALID_DISPLAY_NAME'],
-			['extension_display_name', null, 'SKELETON_INVALID_DISPLAY_NAME'],
 			['extension_display_name', 'Foo bar&quot;s world', 'SKELETON_INVALID_DISPLAY_NAME'],
 
 			['extension_time', '00-00-0000', 'SKELETON_INVALID_EXTENSION_TIME'],
 			['extension_time', 'FOO', 'SKELETON_INVALID_EXTENSION_TIME'],
 			['extension_time', '', 'SKELETON_INVALID_EXTENSION_TIME'],
-			['extension_time', null, 'SKELETON_INVALID_EXTENSION_TIME'],
 
 			['extension_version', '1', 'SKELETON_INVALID_EXTENSION_VERSION'],
 			['extension_version', '1.0.0-RC', 'SKELETON_INVALID_EXTENSION_VERSION'],
@@ -163,7 +159,6 @@ class validator_test extends phpbb_test_case
 			['extension_version', '1.0.0-foo', 'SKELETON_INVALID_EXTENSION_VERSION'],
 			['extension_version', '1.0.0-foo1', 'SKELETON_INVALID_EXTENSION_VERSION'],
 			['extension_version', '', 'SKELETON_INVALID_EXTENSION_VERSION'],
-			['extension_version', null, 'SKELETON_INVALID_EXTENSION_VERSION'],
 			['extension_version', 'foo', 'SKELETON_INVALID_EXTENSION_VERSION'],
 			['extension_version', '1.0.0.0.0', 'SKELETON_INVALID_EXTENSION_VERSION'],
 
@@ -175,7 +170,6 @@ class validator_test extends phpbb_test_case
 			['vendor_name', '01foo', 'SKELETON_INVALID_VENDOR_NAME'],
 			['vendor_name', 'foo$bar', 'SKELETON_INVALID_VENDOR_NAME'],
 			['vendor_name', '', 'SKELETON_INVALID_VENDOR_NAME'],
-			['vendor_name', null, 'SKELETON_INVALID_VENDOR_NAME'],
 
 			['extension_homepage', 'www.web.com', 'SKELETON_INVALID_EXTENSION_URL'],
 			['extension_homepage', 'foo', 'SKELETON_INVALID_EXTENSION_URL'],
@@ -188,7 +182,6 @@ class validator_test extends phpbb_test_case
 			['author_email', 'foo', 'SKELETON_INVALID_AUTHOR_EMAIL'],
 
 			['phpbb_version_min', '', 'SKELETON_INVALID_PHPBB_MIN_VERSION'],
-			['phpbb_version_min', null, 'SKELETON_INVALID_PHPBB_MIN_VERSION'],
 			['phpbb_version_min', 'foo', 'SKELETON_INVALID_PHPBB_MIN_VERSION'],
 			['phpbb_version_min', '~1.0.0', 'SKELETON_INVALID_PHPBB_MIN_VERSION'],
 			['phpbb_version_min', '^1.0.0', 'SKELETON_INVALID_PHPBB_MIN_VERSION'],
@@ -196,7 +189,6 @@ class validator_test extends phpbb_test_case
 			['phpbb_version_min', '&amp;gt;=5.4', 'SKELETON_INVALID_PHPBB_MIN_VERSION'],
 
 			['phpbb_version_max', '', 'SKELETON_INVALID_PHPBB_MAX_VERSION'],
-			['phpbb_version_max', null, 'SKELETON_INVALID_PHPBB_MAX_VERSION'],
 			['phpbb_version_max', 'foo', 'SKELETON_INVALID_PHPBB_MAX_VERSION'],
 			['phpbb_version_max', '~1.0.0', 'SKELETON_INVALID_PHPBB_MAX_VERSION'],
 			['phpbb_version_max', '^1.0.0', 'SKELETON_INVALID_PHPBB_MAX_VERSION'],
@@ -204,7 +196,6 @@ class validator_test extends phpbb_test_case
 			['phpbb_version_max', '&amp;gt;=5.4', 'SKELETON_INVALID_PHPBB_MAX_VERSION'],
 
 			['php_version', '', 'SKELETON_INVALID_PHP_VERSION'],
-			['php_version', null, 'SKELETON_INVALID_PHP_VERSION'],
 			['php_version', 'foo', 'SKELETON_INVALID_PHP_VERSION'],
 			['php_version', '~1.0.0', 'SKELETON_INVALID_PHP_VERSION'],
 			['php_version', '^1.0.0', 'SKELETON_INVALID_PHP_VERSION'],

@@ -43,10 +43,6 @@ class ext_test extends phpbb_test_case
 			->onlyMethods(['ziparchive_exists', 'phpbb_requirement', 'php_requirement'])
 			->getMock();
 
-		$ext->method('ziparchive_exists')->willReturn(null);
-		$ext->method('phpbb_requirement')->willReturn(null);
-		$ext->method('php_requirement')->willReturn(null);
-
 		$this->setExtErrors($ext, []);
 		$this->assertTrue($ext->is_enableable());
 	}
@@ -61,8 +57,6 @@ class ext_test extends phpbb_test_case
 		$ext->method('ziparchive_exists')->willReturnCallback(function () use ($ext) {
 			$this->appendExtError($ext, 'NO_ZIPARCHIVE_ERROR');
 		});
-		$ext->method('phpbb_requirement')->willReturn(null);
-		$ext->method('php_requirement')->willReturn(null);
 		$ext->method('enable_failed')->willReturn(['NO_ZIPARCHIVE_ERROR']);
 
 		$this->setExtErrors($ext, ['NO_ZIPARCHIVE_ERROR']);

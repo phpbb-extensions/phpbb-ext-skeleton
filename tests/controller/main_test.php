@@ -416,6 +416,12 @@ class main_test extends phpbb_test_case
 				return null;
 			});
 
-		$this->get_controller($this->packager_mock)->handle();
+		$this->controller_helper->expects($this->once())
+			->method('render')
+			->willReturn(new Response(''));
+
+		$response = $this->get_controller($this->packager_mock)->handle();
+
+		$this->assertInstanceOf(Response::class, $response);
 	}
 }
