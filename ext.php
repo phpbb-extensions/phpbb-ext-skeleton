@@ -15,7 +15,7 @@ namespace phpbb\skeleton;
 
 class ext extends \phpbb\extension\base
 {
-	public const DEFAULT_SKELETON_PHP = '7.1.3';
+	public const DEFAULT_SKELETON_PHP = '7.2';
 	public const DEFAULT_SKELETON_PHPBB_MIN = '3.3.0';
 	public const DEFAULT_SKELETON_PHPBB_MAX = '4.0.0@dev';
 
