@@ -138,7 +138,9 @@ class ext_test extends \phpbb_test_case
 	{
 		$prop = (new \ReflectionClass($ext))->getProperty('errors');
 		$prop->setAccessible(true);
-		return $prop->getValue($ext);
+		return array_map(static function ($e) {
+			return is_array($e) ? $e[0] : $e;
+		}, $prop->getValue($ext));
 	}
 
 	protected function setExtErrors($ext, array $errors): void

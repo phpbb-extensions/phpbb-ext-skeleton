@@ -53,11 +53,11 @@ class ext extends \phpbb\extension\base
 	{
 		if (phpbb_version_compare($phpBB_version, self::MIN_PHPBB_ALLOWED, '<'))
 		{
-			$this->errors[] = 'PHPBB_VERSION_MIN_ERROR';
+			$this->errors[] = ['PHPBB_VERSION_MIN_ERROR', self::MIN_PHPBB_ALLOWED, $phpBB_version];
 		}
 		else if (phpbb_version_compare($phpBB_version, self::MAX_PHPBB_ALLOWED, '>='))
 		{
-			$this->errors[] = 'PHPBB_VERSION_MAX_ERROR';
+			$this->errors[] = ['PHPBB_VERSION_MAX_ERROR', self::MAX_PHPBB_ALLOWED, $phpBB_version];
 		}
 	}
 
@@ -71,7 +71,7 @@ class ext extends \phpbb\extension\base
 	{
 		if ($php_version < self::MIN_PHP_ALLOWED)
 		{
-			$this->errors[] = 'PHP_VERSION_ERROR';
+			$this->errors[] = ['PHP_VERSION_ERROR', $this->version_parse(self::MIN_PHP_ALLOWED), $this->version_parse($php_version)];
 		}
 	}
 
@@ -101,9 +101,22 @@ class ext extends \phpbb\extension\base
 		{
 			$language = $this->container->get('language');
 			$language->add_lang('common', 'phpbb/skeleton');
-			return array_map([$language, 'lang'], $this->errors);
+			return array_map(static function($error) use ($language) {
+				return is_array($error) ? call_user_func_array([$language, 'lang'], $error) : $language->lang($error);
+			}, $this->errors);
 		}
 
 		return false;
+	}
+
+	/**
+	 * Convert a version id (70100) to a semantic version (7.1.0)
+	 *
+	 * @param int $version
+	 * @return string
+	 */
+	private function version_parse($version)
+	{
+		return sprintf('%d.%d.%d', $version / 10000, ($version / 100) % 100, $version % 100);
 	}
 }
