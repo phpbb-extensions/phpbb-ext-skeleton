@@ -101,7 +101,7 @@ class ext extends \phpbb\extension\base
 		{
 			$language = $this->container->get('language');
 			$language->add_lang('common', 'phpbb/skeleton');
-			return array_map(static function($error) use ($language) {
+			return array_map(static function ($error) use ($language) {
 				return is_array($error) ? call_user_func_array([$language, 'lang'], $error) : $language->lang($error);
 			}, $this->errors);
 		}
