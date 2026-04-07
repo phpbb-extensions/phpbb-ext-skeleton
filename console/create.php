@@ -129,14 +129,11 @@ class create extends command
 	protected function display_banner(): void
 	{
 		$title_lines = [
-			['   _____ __        __     __             ', 'cyan'],
-			['  / ___// /_____  / /__  / /_____  ____  ', 'cyan'],
-			['  \__ \/ //_/ _ \/ / _ \/ __/ __ \/ __ \ ', 'blue'],
-			[' ___/ / ,< /  __/ /  __/ /_/ /_/ / / / / ', 'blue'],
-			['/____/_/|_|\___/_/\___/\__/\____/_/ /_/  ', 'magenta'],
-		];
-
-		$sub_lines = [
+			['       _____ __        __     __                ', 'cyan'],
+			['      / ___// /_____  / /__  / /_____  ____     ', 'cyan'],
+			['      \__ \/ //_/ _ \/ / _ \/ __/ __ \/ __ \    ', 'blue'],
+			['     ___/ / ,< /  __/ /  __/ /_/ /_/ / / / /    ', 'blue'],
+			['    /____/_/|_|\___/_/\___/\__/\____/_/ /_/     ', 'magenta'],
 			['    ______     __                  _            ', 'magenta'],
 			['   / ____/  __/ /____  ____  _____(_)___  ____  ', 'red'],
 			['  / __/ | |/_/ __/ _ \/ __ \/ ___/ / __ \/ __ \ ', 'red'],
@@ -149,10 +146,6 @@ class create extends command
 
 		$this->output->writeln('');
 		foreach ($title_lines as [$text, $color])
-		{
-			$this->output->writeln("<fg=$color;options=bold>$text</>");
-		}
-		foreach ($sub_lines as [$text, $color])
 		{
 			$this->output->writeln("<fg=$color;options=bold>$text</>");
 		}
