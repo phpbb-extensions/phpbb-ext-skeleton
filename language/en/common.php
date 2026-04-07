@@ -28,6 +28,8 @@ $lang = array_merge($lang, [
 	'PHPBB_CREATE_SKELETON_EXPLAIN'		=> 'Generate your extension’s foundation in seconds. No more setting up files by hand — Skeleton builds it all for you, with clean, fully documented templates based on phpBB’s best practices. Before you begin, be sure to review the 📖 [<a href="%1$s" target="_blank">Skeleton Extension Documentation</a>], 🛡️ [<a href="%2$s" target="_blank">Extension Validation Rules</a>], and 🛠️ [<a href="%3$s" target="_blank">Coding Guidelines</a>].',
 	'PHPBB_SKELETON_EXT_HELP'			=> 'Learn More',
 
+	'SKELETON_CLI_BANNER_DESC'			=> 'The official phpBB skeleton extension generator',
+
 	'EXTENSION_CLI_SKELETON_SUCCESS'	=> "<info>Extension created successfully.\nCopy the extension from `store/tmp-ext/` into the `ext/` folder.</info>",
 	'SKELETON_CLI_COMPOSER_QUESTIONS'	=> '<comment>Enter composer.json details (hit enter to leave an option empty)</comment>',
 	'SKELETON_CLI_COMPONENT_QUESTIONS'	=> '<comment>Install optional components. Default: No; [y/n]</comment>',
