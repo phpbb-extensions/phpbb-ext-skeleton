@@ -103,7 +103,7 @@ class ext_test extends \phpbb_test_case
 			->disableOriginalConstructor()
 			->getMock();
 
-		$this->setExtErrors($ext, [['PHP_VERSION_ERROR', '7.1.0', '5.5.0']]);
+		$this->setExtErrors($ext, [['PHP_VERSION_MIN_ERROR', '7.1.0', '5.5.0']]);
 
 		$languageMock = $this->createMock(language::class);
 		$languageMock->method('add_lang')->willReturn(null);
@@ -119,7 +119,7 @@ class ext_test extends \phpbb_test_case
 		$method = (new \ReflectionClass($ext))->getMethod('enable_failed');
 		$method->setAccessible(true);
 
-		$this->assertEquals(['PHP_VERSION_ERROR:7.1.0:5.5.0'], $method->invoke($ext));
+		$this->assertEquals(['PHP_VERSION_MIN_ERROR:7.1.0:5.5.0'], $method->invoke($ext));
 	}
 
 	public function test_phpbb_requirement_min_error()
@@ -140,7 +140,7 @@ class ext_test extends \phpbb_test_case
 	{
 		$this->setExtErrors($this->ext, []);
 		$this->invokeProtectedMethod($this->ext, 'php_requirement', [50500]);
-		$this->assertContains('PHP_VERSION_ERROR', $this->getExtErrorKeys($this->ext));
+		$this->assertContains('PHP_VERSION_MIN_ERROR', $this->getExtErrorKeys($this->ext));
 	}
 
 	public function test_ziparchive_exists_error()

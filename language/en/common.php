@@ -162,8 +162,8 @@ $lang = array_merge($lang, [
 	'SKELETON_INVALID_PHPBB_MIN_VERSION'=> 'The minimum phpBB version requirement is invalid.',
 	'SKELETON_INVALID_PHPBB_MAX_VERSION'=> 'The maximum phpBB version requirement is invalid.',
 
-	'NO_ZIPARCHIVE_ERROR'	=> 'The ZipArchive class is required, but was not found in your PHP configuration.',
-	'PHP_VERSION_ERROR'		=> 'PHP %1$s or newer is required to install this version of the Skeleton Extension. You are using PHP %2$s.',
+	'NO_ZIPARCHIVE_ERROR'		=> 'The ZipArchive class is required, but was not found in your PHP configuration.',
+	'PHP_VERSION_MIN_ERROR'		=> 'PHP %1$s or newer is required to install this version of the Skeleton Extension. You are using PHP %2$s.',
 	'PHPBB_VERSION_MIN_ERROR'	=> 'phpBB %1$s or newer is required to install this version of the Skeleton Extension. You are using phpBB %2$s.',
 	'PHPBB_VERSION_MAX_ERROR'	=> 'phpBB %1$s or above is not supported by this version of the Skeleton Extension. You are using phpBB %2$s. Please check for a newer version of this extension.'
 ]);

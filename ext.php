@@ -21,7 +21,8 @@ class ext extends \phpbb\extension\base
 
 	public const MIN_PHPBB_ALLOWED = '3.3.0';
 	public const MAX_PHPBB_ALLOWED = '4.0.0-dev';
-	public const MIN_PHP_ALLOWED = 70100;
+	public const MIN_PHP_ALLOWED = '7.1.0';
+	public const MIN_PHP_ID_ALLOWED = 70100;
 
 	/**
 	 * @var array An array of installation error messages
@@ -69,9 +70,9 @@ class ext extends \phpbb\extension\base
 	 */
 	protected function php_requirement($php_version = PHP_VERSION_ID)
 	{
-		if ($php_version < self::MIN_PHP_ALLOWED)
+		if ($php_version < self::MIN_PHP_ID_ALLOWED)
 		{
-			$this->errors[] = ['PHP_VERSION_ERROR', $this->version_parse(self::MIN_PHP_ALLOWED), $this->version_parse($php_version)];
+			$this->errors[] = ['PHP_VERSION_MIN_ERROR', self::MIN_PHP_ALLOWED, PHP_VERSION];
 		}
 	}
 
@@ -107,16 +108,5 @@ class ext extends \phpbb\extension\base
 		}
 
 		return false;
-	}
-
-	/**
-	 * Convert a version id (70100) to a semantic version (7.1.0)
-	 *
-	 * @param int $version
-	 * @return string
-	 */
-	private function version_parse($version)
-	{
-		return sprintf('%d.%d.%d', $version / 10000, ($version / 100) % 100, $version % 100);
 	}
 }
