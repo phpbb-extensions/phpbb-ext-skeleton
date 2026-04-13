@@ -22,7 +22,9 @@ class ext extends base
 	public const DEFAULT_SKELETON_PHPBB_MAX = '4.0.0@dev';
 
 	public const MIN_PHPBB_ALLOWED = '4.0.0-dev';
-	public const MIN_PHP_ALLOWED = 80100;
+	public const MAX_PHPBB_ALLOWED = '5.0.0-dev';
+	public const MIN_PHP_ALLOWED = '8.1.0';
+	public const MIN_PHP_ID_ALLOWED = 80100;
 
 	/**
 	 * @var array An array of installation error messages
@@ -54,7 +56,11 @@ class ext extends base
 	{
 		if (phpbb_version_compare($phpBB_version, self::MIN_PHPBB_ALLOWED, '<'))
 		{
-			$this->errors[] = 'PHPBB_VERSION_ERROR';
+			$this->errors[] = ['PHPBB_VERSION_MIN_ERROR', self::MIN_PHPBB_ALLOWED, $phpBB_version];
+		}
+		else if (phpbb_version_compare($phpBB_version, self::MAX_PHPBB_ALLOWED, '>='))
+		{
+			$this->errors[] = ['PHPBB_VERSION_MAX_ERROR', self::MAX_PHPBB_ALLOWED, $phpBB_version];
 		}
 	}
 
@@ -66,9 +72,9 @@ class ext extends base
 	 */
 	protected function php_requirement(int $php_version = PHP_VERSION_ID): void
 	{
-		if ($php_version < self::MIN_PHP_ALLOWED)
+		if ($php_version < self::MIN_PHP_ID_ALLOWED)
 		{
-			$this->errors[] = 'PHP_VERSION_ERROR';
+			$this->errors[] = ['PHP_VERSION_MIN_ERROR', self::MIN_PHP_ALLOWED, PHP_VERSION];
 		}
 	}
 
@@ -98,7 +104,9 @@ class ext extends base
 		{
 			$language = $this->container->get('language');
 			$language->add_lang('common', 'phpbb/skeleton');
-			return array_map([$language, 'lang'], $this->errors);
+			return array_map(static function ($error) use ($language) {
+				return is_array($error) ? call_user_func_array([$language, 'lang'], $error) : $language->lang($error);
+			}, $this->errors);
 		}
 
 		return false;
