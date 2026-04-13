@@ -122,7 +122,7 @@ class ext_test extends phpbb_test_case
 	public function test_phpbb_requirement_max_error()
 	{
 		$this->setExtErrors($this->ext, []);
-		$this->invokeProtectedMethod($this->ext, 'phpbb_requirement', ['4.0.0-dev']);
+		$this->invokeProtectedMethod($this->ext, 'phpbb_requirement', ['5.0.0-dev']);
 		$this->assertContains('PHPBB_VERSION_MAX_ERROR', $this->getExtErrorKeys($this->ext));
 	}
 
