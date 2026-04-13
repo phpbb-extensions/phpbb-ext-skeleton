@@ -28,6 +28,8 @@ $lang = array_merge($lang, [
 	'PHPBB_CREATE_SKELETON_EXPLAIN'		=> 'Generate your extension’s foundation in seconds. No more setting up files by hand — Skeleton builds it all for you, with clean, fully documented templates based on phpBB’s best practices. Before you begin, be sure to review the 📖 [<a href="%1$s" target="_blank">Skeleton Extension Documentation</a>], 🛡️ [<a href="%2$s" target="_blank">Extension Validation Rules</a>], and 🛠️ [<a href="%3$s" target="_blank">Coding Guidelines</a>].',
 	'PHPBB_SKELETON_EXT_HELP'			=> 'Learn More',
 
+	'SKELETON_CLI_BANNER_DESC'			=> 'The official phpBB skeleton extension generator',
+
 	'EXTENSION_CLI_SKELETON_SUCCESS'	=> "<info>Extension created successfully.\nCopy the extension from `store/tmp-ext/` into the `ext/` folder.</info>",
 	'SKELETON_CLI_COMPOSER_QUESTIONS'	=> '<comment>Enter composer.json details (hit enter to leave an option empty)</comment>',
 	'SKELETON_CLI_COMPONENT_QUESTIONS'	=> '<comment>Install optional components. Default: No; [y/n]</comment>',
@@ -160,8 +162,8 @@ $lang = array_merge($lang, [
 	'SKELETON_INVALID_PHPBB_MIN_VERSION'=> 'The minimum phpBB version requirement is invalid.',
 	'SKELETON_INVALID_PHPBB_MAX_VERSION'=> 'The maximum phpBB version requirement is invalid.',
 
-	'NO_ZIPARCHIVE_ERROR'	=> 'The ZipArchive class is required, but was not found in your PHP configuration.',
-	'PHP_VERSION_ERROR'		=> 'PHP 5.6 or newer is required to use this extension.',
-	'PHPBB_VERSION_MIN_ERROR'	=> 'phpBB 3.2.3 or newer is required to use this extension.',
-	'PHPBB_VERSION_MAX_ERROR'	=> 'phpBB 4 is not supported with this version of the extension. Please check for a newer version of this extension.'
+	'NO_ZIPARCHIVE_ERROR'		=> 'The ZipArchive class is required, but was not found in your PHP configuration.',
+	'PHP_VERSION_MIN_ERROR'		=> 'PHP %1$s or newer is required to install this version of the Skeleton Extension. You are using PHP %2$s.',
+	'PHPBB_VERSION_MIN_ERROR'	=> 'phpBB %1$s or newer is required to install this version of the Skeleton Extension. You are using phpBB %2$s.',
+	'PHPBB_VERSION_MAX_ERROR'	=> 'phpBB %1$s or above is not supported by this version of the Skeleton Extension. You are using phpBB %2$s. Please check for a newer version of this extension.'
 ]);

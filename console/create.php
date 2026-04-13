@@ -114,11 +114,45 @@ class create extends command
 
 		$this->helper = $this->getHelper('question');
 
+		$this->display_banner();
+
 		$output->writeln($this->language->lang('SKELETON_CLI_COMPOSER_QUESTIONS'));
 		$this->get_composer_data();
 
 		$output->writeln($this->language->lang('SKELETON_CLI_COMPONENT_QUESTIONS'));
 		$this->get_component_data();
+	}
+
+	/**
+	 * Display a colorful ASCII art title banner.
+	 */
+	protected function display_banner(): void
+	{
+		$title_lines = [
+			['       _____ __        __     __                ', 'cyan'],
+			['      / ___// /_____  / /__  / /_____  ____     ', 'cyan'],
+			['      \__ \/ //_/ _ \/ / _ \/ __/ __ \/ __ \    ', 'blue'],
+			['     ___/ / ,< /  __/ /  __/ /_/ /_/ / / / /    ', 'blue'],
+			['    /____/_/|_|\___/_/\___/\__/\____/_/ /_/     ', 'magenta'],
+			['    ______     __                  _            ', 'magenta'],
+			['   / ____/  __/ /____  ____  _____(_)___  ____  ', 'red'],
+			['  / __/ | |/_/ __/ _ \/ __ \/ ___/ / __ \/ __ \ ', 'red'],
+			[' / /____>  </ /_/  __/ / / (__  ) / /_/ / / / / ', 'yellow'],
+			['/_____/_/|_|\__/\___/_/ /_/____/_/\____/_/ /_/  ', 'yellow'],
+		];
+
+		$desc = $this->language->lang('SKELETON_CLI_BANNER_DESC');
+		$line = str_repeat('─', 50);
+
+		$this->output->writeln('');
+		foreach ($title_lines as [$text, $color])
+		{
+			$this->output->writeln("<fg=$color;options=bold>$text</>");
+		}
+		$this->output->writeln('');
+		$this->output->writeln("<fg=cyan> $desc </>");
+		$this->output->writeln("<fg=white>$line</>");
+		$this->output->writeln('');
 	}
 
 	/**

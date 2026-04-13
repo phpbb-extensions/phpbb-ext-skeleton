@@ -97,32 +97,57 @@ class ext_test extends \phpbb_test_case
 		$this->assertEquals(['LANG: SOME_ERROR'], $method->invoke($ext));
 	}
 
+	public function test_enable_failed_returns_parameterized_error()
+	{
+		$ext = $this->getMockBuilder(ext::class)
+			->disableOriginalConstructor()
+			->getMock();
+
+		$this->setExtErrors($ext, [['PHP_VERSION_MIN_ERROR', '7.1.0', '5.5.0']]);
+
+		$languageMock = $this->createMock(language::class);
+		$languageMock->method('add_lang')->willReturn(null);
+		$languageMock->method('lang')->willReturnCallback(function (...$args) {
+			return implode(':', $args);
+		});
+
+		$containerMock = $this->createMock(ContainerInterface::class);
+		$containerMock->method('get')->with('language')->willReturn($languageMock);
+
+		$this->setProperty($ext, 'container', $containerMock);
+
+		$method = (new \ReflectionClass($ext))->getMethod('enable_failed');
+		$method->setAccessible(true);
+
+		$this->assertEquals(['PHP_VERSION_MIN_ERROR:7.1.0:5.5.0'], $method->invoke($ext));
+	}
+
 	public function test_phpbb_requirement_min_error()
 	{
 		$this->setExtErrors($this->ext, []);
 		$this->invokeProtectedMethod($this->ext, 'phpbb_requirement', ['3.2.2']);
-		$this->assertContains('PHPBB_VERSION_MIN_ERROR', $this->getExtErrors($this->ext));
+		$this->assertContains('PHPBB_VERSION_MIN_ERROR', $this->getExtErrorKeys($this->ext));
 	}
 
 	public function test_phpbb_requirement_max_error()
 	{
 		$this->setExtErrors($this->ext, []);
 		$this->invokeProtectedMethod($this->ext, 'phpbb_requirement', ['4.0.0-dev']);
-		$this->assertContains('PHPBB_VERSION_MAX_ERROR', $this->getExtErrors($this->ext));
+		$this->assertContains('PHPBB_VERSION_MAX_ERROR', $this->getExtErrorKeys($this->ext));
 	}
 
 	public function test_php_requirement_error()
 	{
 		$this->setExtErrors($this->ext, []);
 		$this->invokeProtectedMethod($this->ext, 'php_requirement', [50500]);
-		$this->assertContains('PHP_VERSION_ERROR', $this->getExtErrors($this->ext));
+		$this->assertContains('PHP_VERSION_MIN_ERROR', $this->getExtErrorKeys($this->ext));
 	}
 
 	public function test_ziparchive_exists_error()
 	{
 		$this->setExtErrors($this->ext, []);
 		$this->invokeProtectedMethod($this->ext, 'ziparchive_exists', ['NotZipArchive']);
-		$this->assertContains('NO_ZIPARCHIVE_ERROR', $this->getExtErrors($this->ext));
+		$this->assertContains('NO_ZIPARCHIVE_ERROR', $this->getExtErrorKeys($this->ext));
 	}
 
 	// --- Helpers ---
@@ -139,6 +164,13 @@ class ext_test extends \phpbb_test_case
 		$prop = (new \ReflectionClass($ext))->getProperty('errors');
 		$prop->setAccessible(true);
 		return $prop->getValue($ext);
+	}
+
+	protected function getExtErrorKeys($ext): array
+	{
+		return array_map(static function ($e) {
+			return is_array($e) ? $e[0] : $e;
+		}, $this->getExtErrors($ext));
 	}
 
 	protected function setExtErrors($ext, array $errors): void
