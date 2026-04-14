@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.2.2 - 2026-04-13
+
+- Added a startup banner to the skeleton extension generator CLI.
+- Improved installation error messages, including clearer PHP and phpBB minimum version requirements.
+- Removed outdated CSS classes from generated templates.
+- Updated generated phpBB 4.0.0-compatible skeletons to use revised `composer/installers` constraints in `composer.json`.
+- Raised the default minimum PHP version to 7.2 to align with phpBB 3.3.x.
+
 ## 1.2.1 - 2026-01-03
 
 - Fixed potential future PHP errors when installed on a phpBB 4.0.0-a2 board.
