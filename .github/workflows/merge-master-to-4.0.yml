@@ -20,7 +20,7 @@ concurrency:
 
 jobs:
     sync-dev-branch:
-        name: Merge ${{ env.SYNC_SOURCE_BRANCH }} into ${{ env.SYNC_TARGET_BRANCH }}
+        name: Merge master into dev/4.0
         # Keep this named after the GitHub repository.
         # GitHub Actions does not allow workflow env values in jobs.<job_id>.if.
         if: github.repository == 'phpbb-extensions/phpbb-ext-skeleton' && github.event.repository.fork == false
