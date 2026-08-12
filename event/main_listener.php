@@ -31,10 +31,10 @@ class main_listener implements EventSubscriberInterface
 		];
 	}
 
-	/* @var \phpbb\controller\helper */
+	/** @var \phpbb\controller\helper */
 	protected $helper;
 
-	/* @var \phpbb\template\template */
+	/** @var \phpbb\template\template */
 	protected $template;
 
 	/**

@@ -45,14 +45,14 @@ class main_listener implements EventSubscriberInterface
 	}
 {% if COMPONENT.controller or COMPONENT.phplistener %}
 
-	/* @var {{ LANGUAGE.class }} */
+	/** @var {{ LANGUAGE.class }} */
 	protected ${{ LANGUAGE.object }};
 
 {% if COMPONENT.controller %}
-	/* @var \phpbb\controller\helper */
+	/** @var \phpbb\controller\helper */
 	protected $helper;
 
-	/* @var \phpbb\template\template */
+	/** @var \phpbb\template\template */
 	protected $template;
 
 	/** @var string phpEx */
