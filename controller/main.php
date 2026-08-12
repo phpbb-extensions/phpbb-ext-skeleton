@@ -31,28 +31,28 @@ class main
 	/** @var array */
 	protected array $data;
 
-	/* @var config */
+	/** @var config */
 	protected config $config;
 
-	/* @var helper */
+	/** @var helper */
 	protected helper $helper;
 
 	/** @var language */
 	protected language $language;
 
-	/* @var request */
+	/** @var request */
 	protected request $request;
 
-	/* @var packager */
+	/** @var packager */
 	protected packager $packager;
 
-	/* @var validator */
+	/** @var validator */
 	protected validator $validator;
 
-	/* @var template */
+	/** @var template */
 	protected template $template;
 
-	/* @var user */
+	/** @var user */
 	protected user $user;
 
 	/**

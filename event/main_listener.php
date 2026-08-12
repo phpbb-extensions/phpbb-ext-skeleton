@@ -35,10 +35,10 @@ class main_listener implements EventSubscriberInterface
 		];
 	}
 
-	/* @var helper */
+	/** @var helper */
 	protected helper $helper;
 
-	/* @var template */
+	/** @var template */
 	protected template $template;
 
 	/**
