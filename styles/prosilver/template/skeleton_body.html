@@ -2,7 +2,7 @@
 	{% if constant('PHPBB_VERSION') starts with '4' %}
 		{{ include('@phpbb_skeleton/skeleton_help_icon_phpbb4.html') }}
 	{% else %}
-		<i class="icon fa-book fa-fw" aria-hidden="true"></i>
+		<i class="icon fa-book fa-fw" aria-hidden="true"></i><span>{{ lang('PHPBB_SKELETON_EXT_HELP') }}</span>
 	{% endif %}
 {% endmacro %}
 
@@ -31,7 +31,6 @@
 		<p class="rightside">
 			<a href="https://area51.phpbb.com/docs/dev/3.3.x/extensions/skeleton_extension.html#extension-packaging" target="_blank">
 				{{ _self.help_icon() }}
-				<span>{{ lang('PHPBB_SKELETON_EXT_HELP') }}</span>
 			</a>
 		</p>
 		<h2 class="solo">{{ lang('SKELETON_TITLE_EXTENSION_INFO') }}</h2>
@@ -53,7 +52,6 @@
 		<p class="rightside">
 			<a href="https://area51.phpbb.com/docs/dev/3.3.x/extensions/skeleton_extension.html#authors" target="_blank">
 				{{ _self.help_icon() }}
-				<span>{{ lang('PHPBB_SKELETON_EXT_HELP') }}</span>
 			</a>
 		</p>
 		<h2 class="solo">{{ lang('SKELETON_TITLE_AUTHOR_INFO') }}</h2>
@@ -84,7 +82,6 @@
 		<p class="rightside">
 			<a href="https://area51.phpbb.com/docs/dev/3.3.x/extensions/skeleton_extension.html#requirements" target="_blank">
 				{{ _self.help_icon() }}
-				<span>{{ lang('PHPBB_SKELETON_EXT_HELP') }}</span>
 			</a>
 		</p>
 		<h2 class="solo">{{ lang('SKELETON_TITLE_REQUIREMENT_INFO') }}</h2>
@@ -106,7 +103,6 @@
 		<p class="rightside">
 			<a href="https://area51.phpbb.com/docs/dev/3.3.x/extensions/skeleton_extension.html#components" target="_blank">
 				{{ _self.help_icon() }}
-				<span>{{ lang('PHPBB_SKELETON_EXT_HELP') }}</span>
 			</a>
 		</p>
 		<h2 class="solo">{{ lang('SKELETON_TITLE_COMPONENT_INFO') }}</h2>
