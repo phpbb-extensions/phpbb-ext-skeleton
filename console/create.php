@@ -283,11 +283,11 @@ class create extends command
 		];
 
 		$question_text = $this->language->lang('SKELETON_QUESTION_COMPONENT_GITHUBACTIONS') . $this->language->lang('COLON');
-		$choices = [];
-		foreach (array_keys($github_actions_types) as $i)
-		{
-			$choices[] = $this->language->lang('SKELETON_QUESTION_COMPONENT_GITHUBACTIONS_CLI', $i);
-		}
+		$choices = array_map([$this->language, 'lang'], [
+			'SKELETON_QUESTION_COMPONENT_GITHUBACTIONS_CLI_NONE',
+			'SKELETON_QUESTION_COMPONENT_GITHUBACTIONS_CLI_REUSABLE',
+			'SKELETON_QUESTION_COMPONENT_GITHUBACTIONS_CLI_STANDALONE',
+		]);
 
 		$question = new ChoiceQuestion($question_text, $choices, 0);
 		$choice = $this->helper->ask($this->input, $this->output, $question);
