@@ -104,12 +104,10 @@ class main
 				$this->packager->create_extension($this->data);
 				$filename = $this->packager->create_zip($this->data);
 
-				$response = new Response($filename);
+				$response = new Response(file_get_contents($filename));
 				$response->headers->set('Content-type', 'application/octet-stream');
 				$response->headers->set('Content-Disposition', 'attachment; filename="' . basename($filename) . '";');
 				$response->headers->set('Content-length', filesize($filename));
-				$response->sendHeaders();
-				$response->setContent(readfile($filename));
 
 				return $response;
 			}
