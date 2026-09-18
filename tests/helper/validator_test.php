@@ -46,6 +46,9 @@ class validator_test extends phpbb_test_case
 
 			['extension_display_name', 'Foo bar'],
 			['extension_display_name', 'Foo >bar\'s< & world'],
+			['extension_description', 'Foo >bar\'s< & world'],
+			['author_name', 'Foo Bar'],
+			['author_role', 'Developer'],
 
 			['extension_time', '0000-00-00'],
 
@@ -146,6 +149,13 @@ class validator_test extends phpbb_test_case
 
 			['extension_display_name', '', 'SKELETON_INVALID_DISPLAY_NAME'],
 			['extension_display_name', 'Foo bar&quot;s world', 'SKELETON_INVALID_DISPLAY_NAME'],
+			['extension_display_name', 'Foo */ bar', 'SKELETON_INVALID_DISPLAY_NAME'],
+			['extension_display_name', 'Foo \\ bar', 'SKELETON_INVALID_DISPLAY_NAME'],
+
+			['extension_description', 'Foo &quot;bar&quot;', 'SKELETON_INVALID_EXTENSION_DESCRIPTION'],
+			['extension_description', 'Foo \\ bar', 'SKELETON_INVALID_EXTENSION_DESCRIPTION'],
+			['extension_description', "Foo\nbar", 'SKELETON_INVALID_EXTENSION_DESCRIPTION'],
+			['extension_description', 'Foo */ bar', 'SKELETON_INVALID_EXTENSION_DESCRIPTION'],
 
 			['extension_time', '00-00-0000', 'SKELETON_INVALID_EXTENSION_TIME'],
 			['extension_time', 'FOO', 'SKELETON_INVALID_EXTENSION_TIME'],
@@ -173,13 +183,20 @@ class validator_test extends phpbb_test_case
 
 			['extension_homepage', 'www.web.com', 'SKELETON_INVALID_EXTENSION_URL'],
 			['extension_homepage', 'foo', 'SKELETON_INVALID_EXTENSION_URL'],
+			['extension_homepage', 'https://example.com/\\bad', 'SKELETON_INVALID_EXTENSION_URL'],
+
+			['author_name', 'Foo */ Bar', 'SKELETON_INVALID_AUTHOR_NAME'],
+			['author_name', 'Foo &quot;Bar&quot;', 'SKELETON_INVALID_AUTHOR_NAME'],
+			['author_role', 'Developer \\ Maintainer', 'SKELETON_INVALID_AUTHOR_ROLE'],
 
 			['author_homepage', 'www.web.com', 'SKELETON_INVALID_AUTHOR_URL'],
 			['author_homepage', 'foo', 'SKELETON_INVALID_AUTHOR_URL'],
+			['author_homepage', 'https://example.com/*/', 'SKELETON_INVALID_AUTHOR_URL'],
 
 			['author_email', 'mail.com', 'SKELETON_INVALID_AUTHOR_EMAIL'],
 			['author_email', 'user@mail', 'SKELETON_INVALID_AUTHOR_EMAIL'],
 			['author_email', 'foo', 'SKELETON_INVALID_AUTHOR_EMAIL'],
+			['author_email', 'foo&quot;@example.com', 'SKELETON_INVALID_AUTHOR_EMAIL'],
 
 			['phpbb_version_min', '', 'SKELETON_INVALID_PHPBB_MIN_VERSION'],
 			['phpbb_version_min', 'foo', 'SKELETON_INVALID_PHPBB_MIN_VERSION'],

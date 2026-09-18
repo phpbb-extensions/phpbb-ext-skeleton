@@ -107,7 +107,7 @@ class main
 				$filename = $this->packager->create_zip($this->data);
 
 				$response = new StreamedResponse(function() use ($filename) {
-					readfile($filename);
+					file_get_contents($filename);
 				});
 				$response->headers->set('Content-type', 'application/octet-stream');
 				$response->headers->set('Content-Disposition', 'attachment; filename="' . basename($filename) . '";');
