@@ -58,7 +58,6 @@ $lang = array_merge($lang, [
 	'SKELETON_QUESTION_EXTENSION_TIME_EXPLAIN'	=> 'YYYY-MM-DD, default: today',
 
 	'SKELETON_QUESTION_NUM_AUTHORS'				=> 'How many authors does the extension have',
-	'SKELETON_QUESTION_NUM_AUTHORS_EXPLAIN'		=> 'default: 1',
 
 	'SKELETON_QUESTION_AUTHOR_NAME'			=> 'Please enter the author name',
 	'SKELETON_QUESTION_AUTHOR_NAME_UI'		=> 'Author name',
@@ -148,8 +147,11 @@ $lang = array_merge($lang, [
 	'SKELETON_TITLE_COMPONENT_INFO'		=> 'Components',
 
 	'SKELETON_INVALID_AUTHOR_EMAIL'		=> 'An author email is invalid',
+	'SKELETON_INVALID_AUTHOR_NAME'		=> 'An author name is invalid',
+	'SKELETON_INVALID_AUTHOR_ROLE'		=> 'An author role is invalid',
 	'SKELETON_INVALID_AUTHOR_URL'		=> 'An author homepage URL is invalid',
 	'SKELETON_INVALID_DISPLAY_NAME'		=> 'The display name you provided is invalid',
+	'SKELETON_INVALID_EXTENSION_DESCRIPTION'=> 'The extension description you provided is invalid',
 	'SKELETON_INVALID_EXTENSION_TIME'	=> 'The extension date you provided is invalid',
 	'SKELETON_INVALID_EXTENSION_URL'	=> 'The extension homepage URL is invalid',
 	'SKELETON_INVALID_EXTENSION_VERSION'=> 'The extension version you provided is invalid',
