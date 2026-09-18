@@ -53,7 +53,7 @@ class skeleton_version_compare extends \Twig\Extension\AbstractExtension
 		$args = func_get_args();
 
 		// Strip out any prefixed junk in front of a version number
-		$regex = '/^[\D]*(\d.*)$/';
+		$regex = '/^\D*(\d.*)$/';
 		preg_match($regex, $args[0], $ver1);
 		preg_match($regex, $args[1], $ver2);
 
