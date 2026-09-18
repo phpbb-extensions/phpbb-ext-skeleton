@@ -75,12 +75,24 @@ class validator
 	 */
 	public function validate_extension_display_name($value)
 	{
-		if ((string) $value !== '' && strpos($value, '&quot;') === false)
+		if ((string) $value !== '')
 		{
-			return htmlspecialchars_decode($value, ENT_NOQUOTES);
+			return $this->validate_generated_string($value, 'SKELETON_INVALID_DISPLAY_NAME');
 		}
 
 		throw new runtime_exception($this->language->lang('SKELETON_INVALID_DISPLAY_NAME'));
+	}
+
+	/**
+	 * Validate the extension description for insertion into composer.json
+	 *
+	 * @param string $value The value to validate
+	 * @return string The valid value
+	 * @throws runtime_exception
+	 */
+	public function validate_extension_description($value)
+	{
+		return $this->validate_generated_string($value, 'SKELETON_INVALID_EXTENSION_DESCRIPTION');
 	}
 
 	/**
@@ -143,12 +155,49 @@ class validator
 	 */
 	public function validate_extension_homepage($value)
 	{
+		$value = $this->validate_generated_string($value, 'SKELETON_INVALID_EXTENSION_URL');
+
 		if ((string) $value !== '' && filter_var($value, FILTER_VALIDATE_URL) === false)
 		{
 			throw new runtime_exception($this->language->lang('SKELETON_INVALID_EXTENSION_URL'));
 		}
 
 		return $value;
+	}
+
+	/**
+	 * Validate a string inserted without escaping into generated files.
+	 * Values must be safe inside a JSON string and must not contain a PHP comment
+	 * terminator. Request values are HTML escaped, so inspect their decoded form
+	 * and return safe characters without HTML entities.
+	 *
+	 * @param string $value The value to validate
+	 * @param string $error Language key used for invalid input
+	 * @return string The valid value
+	 * @throws runtime_exception
+	 */
+	protected function validate_generated_string($value, $error)
+	{
+		$decoded_value = htmlspecialchars_decode((string) $value, ENT_QUOTES);
+
+		if (preg_match('/["\\\\\x00-\x1F]/', $decoded_value) || strpos($decoded_value, '*/') !== false)
+		{
+			throw new runtime_exception($this->language->lang($error));
+		}
+
+		return htmlspecialchars_decode((string) $value, ENT_NOQUOTES);
+	}
+
+	/**
+	 * Validate the author name
+	 *
+	 * @param string $value The value to validate
+	 * @return string The valid value
+	 * @throws runtime_exception
+	 */
+	public function validate_author_name($value)
+	{
+		return $this->validate_generated_string($value, 'SKELETON_INVALID_AUTHOR_NAME');
 	}
 
 	/**
@@ -160,6 +209,8 @@ class validator
 	 */
 	public function validate_author_homepage($value)
 	{
+		$value = $this->validate_generated_string($value, 'SKELETON_INVALID_AUTHOR_URL');
+
 		if ((string) $value !== '' && filter_var($value, FILTER_VALIDATE_URL) === false)
 		{
 			throw new runtime_exception($this->language->lang('SKELETON_INVALID_AUTHOR_URL'));
@@ -177,12 +228,26 @@ class validator
 	 */
 	public function validate_author_email($value)
 	{
+		$value = $this->validate_generated_string($value, 'SKELETON_INVALID_AUTHOR_EMAIL');
+
 		if ((string) $value !== '' && filter_var($value, FILTER_VALIDATE_EMAIL) === false)
 		{
 			throw new runtime_exception($this->language->lang('SKELETON_INVALID_AUTHOR_EMAIL'));
 		}
 
 		return $value;
+	}
+
+	/**
+	 * Validate the author role
+	 *
+	 * @param string $value The value to validate
+	 * @return string The valid value
+	 * @throws runtime_exception
+	 */
+	public function validate_author_role($value)
+	{
+		return $this->validate_generated_string($value, 'SKELETON_INVALID_AUTHOR_ROLE');
 	}
 
 	/**
