@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.2.3 - 2026-09-18
+
+- Improved validation of extension and author details to prevent characters that could break generated JSON or PHP files.
+- Fixed ZIP downloads from the web interface.
+- Fixed generated console commands to return a successful exit code.
+- Fixed generated notification URLs to pass route parameters correctly.
+- Added phpBB 4-compatible icons to the generator interface and generated navigation links while retaining phpBB 3 compatibility.
+- Fixed translation handling for GitHub Actions choices in the CLI.
+
 ## 1.2.2 - 2026-04-13
 
 - Added a startup banner to the skeleton extension generator CLI.
@@ -11,7 +20,7 @@
 ## 1.2.1 - 2026-01-03
 
 - Fixed potential future PHP errors when installed on a phpBB 4.0.0-a2 board.
-- Fixed potential future issues when trying to set up EPV in the GitHub actions workflows.
+- Fixed potential future issues when trying to set up EPV in the GitHub Actions workflows.
 
 ## 1.2.0 - 2025-06-04
 
@@ -39,7 +48,7 @@
 
 ## 1.1.14 - 2025-04-20
 
-- Updated GitHub action workflows to address compatibility and bug issues.
+- Updated GitHub Action workflows to address compatibility and bug issues.
 
 ## 1.1.13 - 2025-01-19
 
@@ -48,8 +57,8 @@
 
 ## 1.1.12 - 2024-09-29
 
-- Updated GitHub action workflows to address compatibility and bug issues.
-- Added PHP 8.4 testing to GitHub action workflows.
+- Updated GitHub Action workflows to address compatibility and bug issues.
+- Added PHP 8.4 testing to GitHub Action workflows.
 - Ensure Skeleton extension can only be installed on compatible versions of phpBB.
 - Minor code improvements and cleanup.
 
