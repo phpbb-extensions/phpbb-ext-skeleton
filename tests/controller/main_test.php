@@ -354,7 +354,7 @@ class main_test extends phpbb_test_case
 		$response = $this->get_controller($this->packager_mock)->handle();
 
 		$this->assertInstanceOf(Response::class, $response);
-		$this->assertSame('', $response->getContent());
+		$this->assertFalse($response->getContent());
 		$this->assertSame('0', $response->headers->get('Content-length'));
 	}
 
