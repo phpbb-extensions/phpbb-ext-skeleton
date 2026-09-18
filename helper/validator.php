@@ -157,7 +157,7 @@ class validator
 	{
 		$value = $this->validate_generated_string($value, 'SKELETON_INVALID_EXTENSION_URL');
 
-		if ((string) $value !== '' && filter_var($value, FILTER_VALIDATE_URL) === false)
+		if ($value !== '' && filter_var($value, FILTER_VALIDATE_URL) === false)
 		{
 			throw new runtime_exception($this->language->lang('SKELETON_INVALID_EXTENSION_URL'));
 		}
@@ -188,7 +188,7 @@ class validator
 	{
 		$value = $this->validate_generated_string($value, 'SKELETON_INVALID_AUTHOR_URL');
 
-		if ((string) $value !== '' && filter_var($value, FILTER_VALIDATE_URL) === false)
+		if ($value !== '' && filter_var($value, FILTER_VALIDATE_URL) === false)
 		{
 			throw new runtime_exception($this->language->lang('SKELETON_INVALID_AUTHOR_URL'));
 		}
@@ -207,7 +207,7 @@ class validator
 	{
 		$value = $this->validate_generated_string($value, 'SKELETON_INVALID_AUTHOR_EMAIL');
 
-		if ((string) $value !== '' && filter_var($value, FILTER_VALIDATE_EMAIL) === false)
+		if ($value !== '' && filter_var($value, FILTER_VALIDATE_EMAIL) === false)
 		{
 			throw new runtime_exception($this->language->lang('SKELETON_INVALID_AUTHOR_EMAIL'));
 		}

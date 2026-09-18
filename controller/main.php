@@ -143,7 +143,7 @@ class main
 					'NAME'			=> $value,
 					'DESC'			=> $this->language->lang('SKELETON_QUESTION_' . strtoupper($value) . '_UI'),
 					'DESC_EXPLAIN'	=> $this->language->is_set('SKELETON_QUESTION_' . strtoupper($value) . '_EXPLAIN') ? $this->language->lang('SKELETON_QUESTION_' . strtoupper($value) . '_EXPLAIN') : '',
-					'VALUE'			=> isset($author_values[$value][$i]) ? $author_values[$value][$i] : '',
+					'VALUE'			=> $author_values[$value][$i] ?? '',
 				]);
 			}
 		}
@@ -268,7 +268,7 @@ class main
 			if ($array_key !== null)
 			{
 				$return_value = $this->request->variable($value, [$default]);
-				return isset($return_value[$array_key]) ? $return_value[$array_key] : $default;
+				return $return_value[$array_key] ?? $default;
 			}
 
 			return $this->request->variable($value, $default);
