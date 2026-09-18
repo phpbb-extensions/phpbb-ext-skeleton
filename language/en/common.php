@@ -58,7 +58,6 @@ $lang = array_merge($lang, [
 	'SKELETON_QUESTION_EXTENSION_TIME_EXPLAIN'	=> 'YYYY-MM-DD, default: today',
 
 	'SKELETON_QUESTION_NUM_AUTHORS'				=> 'How many authors does the extension have',
-	'SKELETON_QUESTION_NUM_AUTHORS_EXPLAIN'		=> 'default: 1',
 
 	'SKELETON_QUESTION_AUTHOR_NAME'			=> 'Please enter the author name',
 	'SKELETON_QUESTION_AUTHOR_NAME_UI'		=> 'Author name',

@@ -166,29 +166,6 @@ class validator
 	}
 
 	/**
-	 * Validate a string inserted without escaping into generated files.
-	 * Values must be safe inside a JSON string and must not contain a PHP comment
-	 * terminator. Request values are HTML escaped, so inspect their decoded form
-	 * and return safe characters without HTML entities.
-	 *
-	 * @param string $value The value to validate
-	 * @param string $error Language key used for invalid input
-	 * @return string The valid value
-	 * @throws runtime_exception
-	 */
-	protected function validate_generated_string($value, $error)
-	{
-		$decoded_value = htmlspecialchars_decode((string) $value, ENT_QUOTES);
-
-		if (preg_match('/["\\\\\x00-\x1F]/', $decoded_value) || strpos($decoded_value, '*/') !== false)
-		{
-			throw new runtime_exception($this->language->lang($error));
-		}
-
-		return htmlspecialchars_decode((string) $value, ENT_NOQUOTES);
-	}
-
-	/**
 	 * Validate the author name
 	 *
 	 * @param string $value The value to validate
@@ -302,6 +279,29 @@ class validator
 
 		throw new runtime_exception($this->language->lang('SKELETON_INVALID_PHP_VERSION'));
 
+	}
+
+	/**
+	 * Validate a string inserted without escaping into generated files.
+	 * Values must be safe inside a JSON string and must not contain a PHP comment
+	 * terminator. Request values are HTML escaped, so inspect their decoded form
+	 * and return safe characters without HTML entities.
+	 *
+	 * @param string $value The value to validate
+	 * @param string $error Language key used for invalid input
+	 * @return string The valid value
+	 * @throws runtime_exception
+	 */
+	protected function validate_generated_string($value, $error)
+	{
+		$decoded_value = htmlspecialchars_decode((string) $value, ENT_QUOTES);
+
+		if (preg_match('/["\\\\\x00-\x1F]/', $decoded_value) || strpos($decoded_value, '*/') !== false)
+		{
+			throw new runtime_exception($this->language->lang($error));
+		}
+
+		return htmlspecialchars_decode((string) $value, ENT_NOQUOTES);
 	}
 
 	/**
