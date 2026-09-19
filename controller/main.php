@@ -96,8 +96,16 @@ class main
 			throw new http_exception(403, 'NOT_AUTHORISED');
 		}
 
+		$form_key = 'phpbb_skeleton';
+		add_form_key($form_key);
+
 		if ($this->request->is_set_post('submit'))
 		{
+			if (!check_form_key($form_key))
+			{
+				throw new http_exception(403, 'FORM_INVALID');
+			}
+
 			try
 			{
 				$this->get_composer_data();
