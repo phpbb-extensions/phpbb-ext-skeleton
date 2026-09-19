@@ -18,6 +18,8 @@ use phpbb\exception\runtime_exception;
 use phpbb\skeleton\ext;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
+require_once __DIR__ . '/test_helpers.php';
+
 class main_test extends \phpbb_test_case
 {
 	/** @var \phpbb\template\template|\PHPUnit\Framework\MockObject\MockObject */
@@ -50,6 +52,9 @@ class main_test extends \phpbb_test_case
 	protected function setUp(): void
 	{
 		global $phpbb_root_path;
+		global $phpbb_skeleton_form_key_valid;
+
+		$phpbb_skeleton_form_key_valid = true;
 
 		// Mocks are dummy implementations that provide the API of components we depend on //
 		$this->template = $this->getMockBuilder('\phpbb\template\template')
@@ -268,6 +273,30 @@ class main_test extends \phpbb_test_case
 
 		$this->expectException(http_exception::class);
 		$this->expectExceptionMessage('NOT_AUTHORISED');
+
+		$this->get_controller($this->packager_mock)->handle();
+	}
+
+	public function test_submit_invalid_form_key()
+	{
+		global $phpbb_skeleton_form_key_valid;
+
+		$this->user->data['is_bot'] = false;
+		$phpbb_skeleton_form_key_valid = false;
+
+		$this->request->expects($this->once())
+			->method('is_set_post')
+			->with('submit')
+			->willReturn(true);
+
+		$this->packager_mock->expects($this->never())
+			->method('create_extension');
+
+		$this->packager_mock->expects($this->never())
+			->method('create_zip');
+
+		$this->expectException(http_exception::class);
+		$this->expectExceptionMessage('FORM_INVALID');
 
 		$this->get_controller($this->packager_mock)->handle();
 	}
